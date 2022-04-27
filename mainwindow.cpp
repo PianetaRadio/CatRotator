@@ -51,16 +51,16 @@ MainWindow::MainWindow(QWidget *parent)
 
     //* Load settings from catrotator.ini
     QSettings configFile(QString("catrotator.ini"), QSettings::IniFormat);
-    rotCom.rotModel = configFile.value("rotModel", 0).toInt();
-    rotCom.rotPort = configFile.value("rotPort").toString();
-    rotCom.serialSpeed = configFile.value("serialSpeed", 9600).toInt();
-    rotCom.netRotctl = configFile.value("netRotctl", false).toBool();
+    rotCom.rotModel = configFile.value("Rotator1/rotModel", 0).toInt();
+    rotCom.rotPort = configFile.value("Rotator1/rotPort").toString();
+    rotCom.serialSpeed = configFile.value("Rotator1/serialSpeed", 9600).toInt();
+    rotCom.netRotctl = configFile.value("Rotator1/netRotctl", false).toBool();
+    rotSet.azPark = configFile.value("Rotator1/azPark", 0).toInt();
+    rotSet.elPark = configFile.value("Rotator1/elPark", 0).toInt();
     rotCom.rotRefresh = configFile.value("rotRefresh", 1).toInt();
-    rotSet.azPark = configFile.value("azPark", 0).toInt();
-    rotSet.elPark = configFile.value("elPark", 0).toInt();
     rotCfg.udp = configFile.value("udp", false).toBool();
     rotCfg.udpAddress = configFile.value("udpAddress", "127.0.0.1").toString();
-    rotCfg.udpPort = configFile.value("udpPort", 12040).toUInt();   //should be toUShort()
+    rotCfg.udpPort = configFile.value("udpPort", 12000).toUInt();   //should be toUShort()
 }
 
 MainWindow::~MainWindow()

@@ -65,8 +65,6 @@ DialogRotator::DialogRotator(QWidget *parent) :
     ui->comboBox_serialSpeed->addItem("9600");
     ui->comboBox_serialSpeed->addItem("19200");
     ui->comboBox_serialSpeed->addItem("38400");
-    ui->comboBox_serialSpeed->addItem("57600");
-    ui->comboBox_serialSpeed->addItem("115200");
 
     //* Update values in the GUI
     ui->comboBox_rotModel->setCurrentIndex(ui->comboBox_rotModel->findText(QString::number(rotCom.rotModel),Qt::MatchStartsWith));
@@ -149,13 +147,13 @@ void DialogRotator::on_buttonBox_accepted()
 
     //* Save settings in catrotator.ini
     QSettings configFile(QString("catrotator.ini"), QSettings::IniFormat);
-    configFile.setValue("rotModel", rotCom.rotModel);
-    configFile.setValue("rotPort", rotCom.rotPort);
-    configFile.setValue("serialSpeed", ui->comboBox_serialSpeed->currentText());
-    configFile.setValue("netRotctl", ui->checkBox_netRotctl->isChecked());
+    configFile.setValue("Rotator1/rotModel", rotCom.rotModel);
+    configFile.setValue("Rotator1/rotPort", rotCom.rotPort);
+    configFile.setValue("Rotator1/serialSpeed", ui->comboBox_serialSpeed->currentText());
+    configFile.setValue("Rotator1/netRotctl", ui->checkBox_netRotctl->isChecked());
+    configFile.setValue("Rotator1/azPark", rotSet.azPark);
+    configFile.setValue("Rotator1/elPark", rotSet.elPark);
     configFile.setValue("rotRefresh", ui->spinBox_refreshRate->value());
-    configFile.setValue("azPark", rotSet.azPark);
-    configFile.setValue("elPark", rotSet.elPark);
 }
 
 int printRotatorList(const struct rot_caps *rotCaps, void *data)    //Load rotators list from hamlib and save into file rotator.lst
