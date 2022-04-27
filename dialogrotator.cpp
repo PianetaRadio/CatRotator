@@ -37,13 +37,28 @@ DialogRotator::DialogRotator(QWidget *parent) :
     file.seek(0);
     ui->comboBox_rotModel->clear();
     ui->comboBox_rotModel->addItem("");
+    QRegularExpression regexp("[0-9]+");
     while(!file.atEnd())
     {
         QString line = file.readLine();
-        ui->comboBox_rotModel->addItem(line.trimmed());
+        int i = 1;
+        if (ui->comboBox_rotModel->count() == 1) ui->comboBox_rotModel->addItem(line.trimmed());    //first line
+        else while (i < ui->comboBox_rotModel->count()) //sort ascending by model number
+        {
+            QRegularExpressionMatch rotNumberNew = regexp.match(line);
+            ui->comboBox_rotModel->setCurrentIndex(i);
+            QString rotModel = ui->comboBox_rotModel->currentText();
+            QRegularExpressionMatch rotNumber = regexp.match(rotModel);
+            if (rotNumberNew.captured(0).toInt() < rotNumber.captured(0).toInt())
+            {
+                ui->comboBox_rotModel->insertItem(i,line.trimmed());
+                break;
+            }
+            else i++;
+        }
+        if (i == ui->comboBox_rotModel->count()) ui->comboBox_rotModel->addItem(line.trimmed());
     }
     file.close();
-    ui->comboBox_rotModel->model()->sort(0, Qt::AscendingOrder);
 
     //* COM port
     ui->comboBox_comPort->clear();
