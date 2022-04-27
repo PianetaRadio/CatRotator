@@ -186,8 +186,8 @@ void MainWindow::on_actionAbout_CatRotator_triggered()
     msgBox.setIcon(QMessageBox::NoIcon);
     msgBox.setStandardButtons(QMessageBox::Ok);
 
-    //QPixmap icon("catradio.png");
-    //msgBox.setIconPixmap(icon);
+    QPixmap icon("catrotator.png");
+    msgBox.setIconPixmap(icon);
 
     msgBox.exec();
 }

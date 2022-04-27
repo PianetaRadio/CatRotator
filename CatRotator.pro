@@ -42,4 +42,4 @@ INCLUDEPATH += $$PWD/hamlib
 
 VERSION = 0.1.0
 
-# RC_ICONS = catradio.ico
+RC_ICONS = catrotator.ico
