@@ -51,7 +51,7 @@ DialogRotator::DialogRotator(QWidget *parent) :
             QRegularExpressionMatch rotNumber = regexp.match(rotModel);
             if (rotNumberNew.captured(0).toInt() < rotNumber.captured(0).toInt())
             {
-                ui->comboBox_rotModel->insertItem(i,line.trimmed());
+                ui->comboBox_rotModel->insertItem(i, line.trimmed());
                 break;
             }
             else i++;
@@ -93,10 +93,11 @@ DialogRotator::DialogRotator(QWidget *parent) :
         ui->comboBox_comPort->setCurrentText(rotCom.rotPort);
         ui->comboBox_serialSpeed->setCurrentText(QString::number(rotCom.serialSpeed));
     }
-    ui->spinBox_refreshRate->setValue(rotCom.rotRefresh);
 
+    ui->lineEdit_name->setText(rotSet.nameLabel);
     ui->spinBox_azPark->setValue(rotSet.azPark);
     ui->spinBox_elPark->setValue(rotSet.elPark);
+    ui->spinBox_refreshRate->setValue(rotCom.rotRefresh);
 }
 
 DialogRotator::~DialogRotator()
@@ -156,9 +157,10 @@ void DialogRotator::on_buttonBox_accepted()
         }
     }
 
-    rotCom.rotRefresh = ui->spinBox_refreshRate->value();
+    rotSet.nameLabel = ui->lineEdit_name->text();
     rotSet.azPark = ui->spinBox_azPark->value();
     rotSet.elPark = ui->spinBox_elPark->value();
+    rotCom.rotRefresh = ui->spinBox_refreshRate->value();
 
     //* Save settings in catrotator.ini
     QSettings configFile(QString("catrotator.ini"), QSettings::IniFormat);
@@ -166,6 +168,7 @@ void DialogRotator::on_buttonBox_accepted()
     configFile.setValue("Rotator1/rotPort", rotCom.rotPort);
     configFile.setValue("Rotator1/serialSpeed", ui->comboBox_serialSpeed->currentText());
     configFile.setValue("Rotator1/netRotctl", ui->checkBox_netRotctl->isChecked());
+    configFile.setValue("Rotator1/nameLabel", rotSet.nameLabel);
     configFile.setValue("Rotator1/azPark", rotSet.azPark);
     configFile.setValue("Rotator1/elPark", rotSet.elPark);
     configFile.setValue("rotRefresh", ui->spinBox_refreshRate->value());

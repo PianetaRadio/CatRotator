@@ -47,6 +47,7 @@ private:
     Ui::MainWindow *ui;
     QTimer *timer;
 
+    void guiInit();
     void guiUpdate();
 };
 

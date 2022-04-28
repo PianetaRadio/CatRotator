@@ -33,6 +33,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    ui->tabWidget_rotator->setTabEnabled(1, false);
+
     timer = new QTimer(this);   //timer for rotDaemon thread call
 
     //* Debug
@@ -55,6 +57,7 @@ MainWindow::MainWindow(QWidget *parent)
     rotCom.rotPort = configFile.value("Rotator1/rotPort").toString();
     rotCom.serialSpeed = configFile.value("Rotator1/serialSpeed", 9600).toInt();
     rotCom.netRotctl = configFile.value("Rotator1/netRotctl", false).toBool();
+    rotSet.nameLabel = configFile.value("Rotator1/nameLabel", "Rotator 1").toString();
     rotSet.azPark = configFile.value("Rotator1/azPark", 0).toInt();
     rotSet.elPark = configFile.value("Rotator1/elPark", 0).toInt();
     rotCom.rotRefresh = configFile.value("rotRefresh", 1).toInt();
@@ -85,6 +88,12 @@ MainWindow::~MainWindow()
 void MainWindow::on_rotDaemonResultReady()
 {
     guiUpdate();
+}
+
+void MainWindow::guiInit()
+{
+    ui->tabWidget_rotator->setTabText(0, rotSet.nameLabel);
+
 }
 
 void MainWindow::guiUpdate()
@@ -120,7 +129,7 @@ void MainWindow::on_pushButton_connect_toggled(bool checked)
            rotCom.connected = 1;
            ui->statusbar->showMessage(my_rot->caps->model_name);
            timer->start(rotCom.rotRefresh*1000);
-           //guiInit();
+           guiInit();
        }
     }
     else if (rotCom.connected)   //Button unchecked

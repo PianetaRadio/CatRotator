@@ -17,6 +17,7 @@ typedef struct {
 
 
 typedef struct {
+    QString nameLabel;
     azimuth_t az, azPark;
     elevation_t el, elPark;
 } rotatorSettings;
