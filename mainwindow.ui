@@ -25,13 +25,6 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="1">
-     <widget class="QPushButton" name="pushButton_park">
-      <property name="text">
-       <string>Park</string>
-      </property>
-     </widget>
-    </item>
     <item row="3" column="0" colspan="2">
      <widget class="QTabWidget" name="tabWidget_rotator">
       <property name="enabled">
@@ -63,9 +56,9 @@
          <widget class="QLCDNumber" name="lcdNumber_posAz"/>
         </item>
         <item row="1" column="4">
-         <widget class="QPushButton" name="pushButton_stop">
+         <widget class="QPushButton" name="pushButton_park">
           <property name="text">
-           <string>STOP</string>
+           <string>Park</string>
           </property>
          </widget>
         </item>
@@ -76,6 +69,23 @@
         <string>Rotator 2</string>
        </attribute>
       </widget>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>Rotator 3</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tab_4">
+       <attribute name="title">
+        <string>Rotator 4</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QPushButton" name="pushButton_stop">
+      <property name="text">
+       <string>STOP</string>
+      </property>
      </widget>
     </item>
    </layout>

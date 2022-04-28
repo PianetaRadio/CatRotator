@@ -52,7 +52,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    ui->tabWidget_rotator->setTabEnabled(1, false);
+    ui->tabWidget_rotator->setTabVisible(1, false);
+    ui->tabWidget_rotator->setTabVisible(2, false);
+    ui->tabWidget_rotator->setTabVisible(3, false);
 
     timer = new QTimer(this);   //timer for rotDaemon thread call
 
