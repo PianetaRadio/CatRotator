@@ -24,7 +24,7 @@
 #include <QRegularExpression>
 
 
-extern rotatorConfig rotCfg;
+extern catRotatorConfig rotCfg;
 extern rotatorUdpEx rotUdpEx;
 
 

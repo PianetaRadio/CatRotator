@@ -34,6 +34,9 @@
 extern rotatorConnect rotCom;
 extern rotatorSettings rotSet;
 
+extern rotatorConnect rotCom2;
+extern rotatorSettings rotSet2;
+
 
 QString rotListFile = "rotator.lst";    //Text file containing the list of rotators supported by hamlib
 QFile file(rotListFile);
@@ -77,18 +80,46 @@ DialogRotator::DialogRotator(QWidget *parent) :
         }
         if (i == ui->comboBox_rotModel->count()) ui->comboBox_rotModel->addItem(line.trimmed());
     }
+
+    file.seek(0);
+    ui->comboBox_rotModel_2->clear();
+    ui->comboBox_rotModel_2->addItem("");
+    while(!file.atEnd())
+    {
+        QString line = file.readLine();
+        int i = 1;
+        if (ui->comboBox_rotModel_2->count() == 1) ui->comboBox_rotModel_2->addItem(line.trimmed());    //first line
+        else while (i < ui->comboBox_rotModel_2->count()) //sort ascending by model number
+        {
+            QRegularExpressionMatch rotNumberNew = regexp.match(line);
+            ui->comboBox_rotModel_2->setCurrentIndex(i);
+            QString rotModel = ui->comboBox_rotModel_2->currentText();
+            QRegularExpressionMatch rotNumber = regexp.match(rotModel);
+            if (rotNumberNew.captured(0).toInt() < rotNumber.captured(0).toInt())
+            {
+                ui->comboBox_rotModel_2->insertItem(i, line.trimmed());
+                break;
+            }
+            else i++;
+        }
+        if (i == ui->comboBox_rotModel_2->count()) ui->comboBox_rotModel_2->addItem(line.trimmed());
+    }
     file.close();
 
     //* COM port
     ui->comboBox_comPort->clear();
+    ui->comboBox_comPort_2->clear();
     ui->comboBox_comPort->addItem("");
+    ui->comboBox_comPort_2->addItem("");
     foreach (const QSerialPortInfo &comPort, QSerialPortInfo::availablePorts())  //search available COM port
     {
 #ifdef Q_OS_WIN
         ui->comboBox_comPort->addItem(comPort.portName());
+        ui->comboBox_comPort_2->addItem(comPort.portName());
 #endif
 #ifdef Q_OS_LINUX
         ui->comboBox_comPort->addItem("/dev/"+comPort.portName());
+        ui->comboBox_comPort_2->addItem("/dev/"+comPort.portName());
 #endif
     }
 
@@ -99,6 +130,13 @@ DialogRotator::DialogRotator(QWidget *parent) :
     ui->comboBox_serialSpeed->addItem("9600");
     ui->comboBox_serialSpeed->addItem("19200");
     ui->comboBox_serialSpeed->addItem("38400");
+
+    ui->comboBox_serialSpeed_2->clear();
+    ui->comboBox_serialSpeed_2->addItem("");
+    ui->comboBox_serialSpeed_2->addItem("4800");
+    ui->comboBox_serialSpeed_2->addItem("9600");
+    ui->comboBox_serialSpeed_2->addItem("19200");
+    ui->comboBox_serialSpeed_2->addItem("38400");
 
     //* Update values in the GUI
     ui->comboBox_rotModel->setCurrentIndex(ui->comboBox_rotModel->findText(QString::number(rotCom.rotModel),Qt::MatchStartsWith));
@@ -116,6 +154,23 @@ DialogRotator::DialogRotator(QWidget *parent) :
     ui->lineEdit_name->setText(rotSet.nameLabel);
     ui->spinBox_azPark->setValue(rotSet.azPark);
     ui->spinBox_elPark->setValue(rotSet.elPark);
+
+    ui->comboBox_rotModel_2->setCurrentIndex(ui->comboBox_rotModel_2->findText(QString::number(rotCom2.rotModel),Qt::MatchStartsWith));
+    if (rotCom2.netRotctl)
+    {
+        ui->checkBox_netRotctl_2->setChecked(rotCom2.netRotctl);
+        ui->lineEdit_ip_2->setText(rotCom2.rotPort);
+    }
+    else
+    {
+        ui->comboBox_comPort_2->setCurrentText(rotCom2.rotPort);
+        ui->comboBox_serialSpeed_2->setCurrentText(QString::number(rotCom2.serialSpeed));
+    }
+
+    ui->lineEdit_name_2->setText(rotSet2.nameLabel);
+    ui->spinBox_azPark_2->setValue(rotSet2.azPark);
+    ui->spinBox_elPark_2->setValue(rotSet2.elPark);
+
     ui->spinBox_refreshRate->setValue(rotCom.rotRefresh);
 }
 
@@ -164,7 +219,7 @@ void DialogRotator::on_buttonBox_accepted()
             rotCom.rotPort = ui->comboBox_comPort->currentText();
             rotCom.serialSpeed = ui->comboBox_serialSpeed->currentText().toInt();
 
-            if (rotCom.rotPort == "" && rotCom.rotModel != 1 && rotCom.rotModel != 6)
+            if (rotCom.rotPort == "" && rotCom.rotModel != 1)
             {
                 QMessageBox msgBox; //Show error MessageBox
                 msgBox.setWindowTitle("Warning");
@@ -179,6 +234,58 @@ void DialogRotator::on_buttonBox_accepted()
     rotSet.nameLabel = ui->lineEdit_name->text();
     rotSet.azPark = ui->spinBox_azPark->value();
     rotSet.elPark = ui->spinBox_elPark->value();
+
+
+    if (ui->comboBox_rotModel_2->currentText() == "") //No backend selected
+    {
+        rotSet2.enable = false;
+    }
+    else
+    {
+        rotSet2.enable = true;
+        QString rotModel = ui->comboBox_rotModel_2->currentText();
+        QRegularExpression regexp("[0-9]+");
+        QRegularExpressionMatch rotNumber = regexp.match(rotModel);
+        rotCom2.rotModel = rotNumber.captured(0).toInt();
+
+        if (ui->checkBox_netRotctl_2->isChecked())   //TCP port
+        {
+            rotCom2.netRotctl = true;
+            rotCom2.rotPort = ui->lineEdit_ip_2->text();
+
+            if (rotCom2.rotPort == "")
+            {
+                QMessageBox msgBox; //Show error MessageBox
+                msgBox.setWindowTitle("Warning");
+                msgBox.setText(rotModel + "\nIP address not valid");
+                msgBox.setIcon(QMessageBox::Warning);
+                msgBox.setStandardButtons(QMessageBox::Ok);
+                msgBox.exec();
+            }
+        }
+        else    //COM port
+        {
+            rotCom2.netRotctl = false;
+            rotCom2.rotPort = ui->comboBox_comPort_2->currentText();
+            rotCom2.serialSpeed = ui->comboBox_serialSpeed_2->currentText().toInt();
+
+            if (rotCom2.rotPort == "" && rotCom2.rotModel != 1)
+            {
+                QMessageBox msgBox; //Show error MessageBox
+                msgBox.setWindowTitle("Warning");
+                msgBox.setText(rotModel + "\nCOM port not valid");
+                msgBox.setIcon(QMessageBox::Warning);
+                msgBox.setStandardButtons(QMessageBox::Ok);
+                msgBox.exec();
+            }
+        }
+    }
+
+    rotSet2.nameLabel = ui->lineEdit_name_2->text();
+    rotSet2.azPark = ui->spinBox_azPark_2->value();
+    rotSet2.elPark = ui->spinBox_elPark_2->value();
+
+
     rotCom.rotRefresh = ui->spinBox_refreshRate->value();
 
     //* Save settings in catrotator.ini
@@ -190,6 +297,15 @@ void DialogRotator::on_buttonBox_accepted()
     configFile.setValue("Rotator1/nameLabel", rotSet.nameLabel);
     configFile.setValue("Rotator1/azPark", rotSet.azPark);
     configFile.setValue("Rotator1/elPark", rotSet.elPark);
+
+    configFile.setValue("Rotator2/rotModel", rotCom2.rotModel);
+    configFile.setValue("Rotator2/rotPort", rotCom2.rotPort);
+    configFile.setValue("Rotator2/serialSpeed", ui->comboBox_serialSpeed_2->currentText());
+    configFile.setValue("Rotator2/netRotctl", ui->checkBox_netRotctl_2->isChecked());
+    configFile.setValue("Rotator2/nameLabel", rotSet2.nameLabel);
+    configFile.setValue("Rotator2/azPark", rotSet2.azPark);
+    configFile.setValue("Rotator2/elPark", rotSet2.elPark);
+
     configFile.setValue("rotRefresh", ui->spinBox_refreshRate->value());
 }
 

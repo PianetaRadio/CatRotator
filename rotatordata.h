@@ -36,6 +36,7 @@ typedef struct {
 
 
 typedef struct {
+    bool enable;
     QString nameLabel;
     azimuth_t az, azPark;
     elevation_t el, elPark;
@@ -46,7 +47,8 @@ typedef struct {
     bool udp;   //UDP enable flag
     QString udpAddress;
     quint16 udpPort;
-} rotatorConfig;
+} catRotatorConfig;
+
 
 typedef struct {
     bool azUdpFlag;

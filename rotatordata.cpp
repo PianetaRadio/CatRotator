@@ -22,5 +22,10 @@
 rotatorConnect rotCom;
 rotatorSettings rotGet;
 rotatorSettings rotSet;
-rotatorConfig rotCfg;
+
+rotatorConnect rotCom2;
+rotatorSettings rotGet2;
+rotatorSettings rotSet2;
+
+catRotatorConfig rotCfg;
 rotatorUdpEx rotUdpEx;

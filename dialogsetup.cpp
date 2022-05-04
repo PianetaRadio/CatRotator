@@ -24,7 +24,7 @@
 #include <QSettings>
 #include <QFile>
 
-extern rotatorConfig rotCfg;
+extern catRotatorConfig rotCfg;
 
 
 DialogSetup::DialogSetup(QWidget *parent) :

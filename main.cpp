@@ -23,7 +23,7 @@
 
 #include <QApplication>
 
-extern rotatorConfig rotCfg;
+extern catRotatorConfig rotCfg;
 
 
 int main(int argc, char *argv[])

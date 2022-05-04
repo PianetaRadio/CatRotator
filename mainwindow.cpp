@@ -35,7 +35,12 @@ extern ROT *my_rot; //Defined in rotdaemon.cpp
 extern rotatorConnect rotCom;
 extern rotatorSettings rotGet;
 extern rotatorSettings rotSet;
-extern rotatorConfig rotCfg;
+
+extern rotatorConnect rotCom2;
+extern rotatorSettings rotGet2;
+extern rotatorSettings rotSet2;
+
+extern catRotatorConfig rotCfg;
 extern rotatorUdpEx rotUdpEx;
 
 int retcode;    //Return code from function
@@ -81,6 +86,15 @@ MainWindow::MainWindow(QWidget *parent)
     rotSet.nameLabel = configFile.value("Rotator1/nameLabel", "Rotator 1").toString();
     rotSet.azPark = configFile.value("Rotator1/azPark", 0).toInt();
     rotSet.elPark = configFile.value("Rotator1/elPark", 0).toInt();
+
+    rotCom2.rotModel = configFile.value("Rotator2/rotModel", 0).toInt();
+    rotCom2.rotPort = configFile.value("Rotator2/rotPort").toString();
+    rotCom2.serialSpeed = configFile.value("Rotator2/serialSpeed", 9600).toInt();
+    rotCom2.netRotctl = configFile.value("Rotator2/netRotctl", false).toBool();
+    rotSet2.nameLabel = configFile.value("Rotator2/nameLabel", "Rotator 2").toString();
+    rotSet2.azPark = configFile.value("Rotator2/azPark", 0).toInt();
+    rotSet2.elPark = configFile.value("Rotator2/elPark", 0).toInt();
+
     rotCom.rotRefresh = configFile.value("rotRefresh", 1).toInt();
     rotCfg.udp = configFile.value("udp", false).toBool();
     rotCfg.udpAddress = configFile.value("udpAddress", "127.0.0.1").toString();
@@ -114,7 +128,7 @@ void MainWindow::on_rotDaemonResultReady()
 void MainWindow::guiInit()
 {
     ui->tabWidget_rotator->setTabText(0, rotSet.nameLabel);
-
+    if (rotSet2.enable) ui->tabWidget_rotator->setTabText(1, rotSet2.nameLabel);
 }
 
 void MainWindow::guiUpdate()
