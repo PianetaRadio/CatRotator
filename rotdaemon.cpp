@@ -26,10 +26,14 @@
 
 #include <rotator.h>
 
-ROT *my_rot;
+extern ROT *my_rot;
+extern ROT *my_rot2;
 
 extern rotatorConnect rotCom;
 extern rotatorSettings rotGet;
+
+extern rotatorConnect rotCom2;
+extern rotatorSettings rotGet2;
 
 
 RotDaemon::RotDaemon(QObject *parent) : QObject(parent)
@@ -37,13 +41,14 @@ RotDaemon::RotDaemon(QObject *parent) : QObject(parent)
 
 }
 
-int RotDaemon::rotConnect()
+ROT *RotDaemon::rotConnect(rotatorConnect *rotCom)
 {
     int retcode;
 
-    my_rot = rot_init(rotCom.rotModel); //Allocate rig handle
+    ROT *rot = rot_init(rotCom->rotModel); //Allocate rotator handle
+    qDebug() << rot;
 
-    if (!my_rot)    //Wrong Rig number
+    if (!rot)    //Wrong Rotator number
     {
         QMessageBox msgBox; //Show error MessageBox
         msgBox.setWindowTitle("Warning");
@@ -52,26 +57,28 @@ int RotDaemon::rotConnect()
         msgBox.setStandardButtons(QMessageBox::Ok);
         msgBox.exec();
 
-        return -1;   //RIG_EINVAL, Invalid parameter
+        //return -1;   //RIG_EINVAL, Invalid parameter
+        return nullptr;
     }
     else
     {
-        if (rotCom.rotModel == 2)   //Rotctld
+        if (rotCom->rotModel == 2)   //Rotctld
         {
-            strncpy(my_rot->state.rotport.pathname, rotCom.rotPort.toLatin1(), HAMLIB_FILPATHLEN - 1);
+            strncpy(rot->state.rotport.pathname, rotCom->rotPort.toLatin1(), HAMLIB_FILPATHLEN - 1);
         }
         else
         {
-            strncpy(my_rot->state.rotport.pathname, rotCom.rotPort.toLatin1(), HAMLIB_FILPATHLEN - 1);
-            my_rot->state.rotport.parm.serial.rate = rotCom.serialSpeed;
+            strncpy(rot->state.rotport.pathname, rotCom->rotPort.toLatin1(), HAMLIB_FILPATHLEN - 1);
+            rot->state.rotport.parm.serial.rate = rotCom->serialSpeed;
         }
 
-        retcode = rot_open(my_rot);
+        retcode = rot_open(rot);
 
-        if (retcode != RIG_OK) return retcode;  //Rig not connected
-        else    //Rig connected
+        if (retcode != RIG_OK) return nullptr;//retcode;  //Rotator not connected
+        else    //Rotator connected
         {
-            return 0;
+            //return 0;
+            return rot;
         }
 
      }
@@ -82,6 +89,7 @@ void RotDaemon::rotUpdate()
     //int retcode;
 
     rot_get_position(my_rot, &rotGet.az, &rotGet.el);
+    if (rotCom2.connected) rot_get_position(my_rot2, &rotGet2.az, &rotGet2.el);
 
     emit resultReady();
 }

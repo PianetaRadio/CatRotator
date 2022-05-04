@@ -30,7 +30,8 @@
 
 #include <rotator.h>    //Hamlib
 
-extern ROT *my_rot; //Defined in rotdaemon.cpp
+ROT *my_rot; //Defined in rotdaemon.cpp
+ROT *my_rot2;
 
 extern rotatorConnect rotCom;
 extern rotatorSettings rotGet;
@@ -95,7 +96,7 @@ MainWindow::MainWindow(QWidget *parent)
     rotSet2.azPark = configFile.value("Rotator2/azPark", 0).toInt();
     rotSet2.elPark = configFile.value("Rotator2/elPark", 0).toInt();
 
-    rotCom.rotRefresh = configFile.value("rotRefresh", 1).toInt();
+    rotCfg.rotRefresh = configFile.value("rotRefresh", 1).toInt();
     rotCfg.udp = configFile.value("udp", false).toBool();
     rotCfg.udpAddress = configFile.value("udpAddress", "127.0.0.1").toString();
     rotCfg.udpPort = configFile.value("udpPort", 12000).toUInt();   //should be toUShort()
@@ -128,7 +129,12 @@ void MainWindow::on_rotDaemonResultReady()
 void MainWindow::guiInit()
 {
     ui->tabWidget_rotator->setTabText(0, rotSet.nameLabel);
-    if (rotSet2.enable) ui->tabWidget_rotator->setTabText(1, rotSet2.nameLabel);
+
+    if (rotSet2.enable)
+    {
+        ui->tabWidget_rotator->setTabVisible(1, true);
+        ui->tabWidget_rotator->setTabText(1, rotSet2.nameLabel);
+    }
 }
 
 void MainWindow::guiUpdate()
@@ -143,6 +149,11 @@ void MainWindow::guiUpdate()
         rot_set_position(my_rot, rotSet.az, rotSet.el);
     }
 
+    if (rotSet2.enable)
+    {
+        ui->lcdNumber_posAz_2->display(rotGet2.az);
+    }
+
 }
 
 
@@ -151,27 +162,34 @@ void MainWindow::on_pushButton_connect_toggled(bool checked)
 {
     if (checked && rotCom.connected == 0)
     {
-       retcode = rotDaemon->rotConnect();   //Open Rig connection
+       my_rot = rotDaemon->rotConnect(&rotCom);   //Open Rotator connection
+       if (rotSet2.enable) my_rot2 = rotDaemon->rotConnect(&rotCom2);
 
-       if (retcode != RIG_OK)   //Connection error
+       if (!my_rot)   //Connection error
        {
            rotCom.connected = 0;
-           ui->statusbar->showMessage(rigerror(retcode));
+           //ui->statusbar->showMessage(rigerror(retcode));
            ui->pushButton_connect->setChecked(false);  //Uncheck the button
        }
        else    //Rotator connected
        {
            rotCom.connected = 1;
            ui->statusbar->showMessage(my_rot->caps->model_name);
-           timer->start(rotCom.rotRefresh*1000);
+           timer->start(rotCfg.rotRefresh*1000);
            guiInit();
        }
+
+       if (!my_rot) rotCom2.connected = 0;
+       else rotCom2.connected = 1;
+
     }
     else if (rotCom.connected)   //Button unchecked
     {
         rotCom.connected = 0;
         timer->stop();
-        rot_close(my_rot);  //Close the communication to the rig
+        rot_close(my_rot);  //Close the communication to the rotator
+
+        if (rotSet2.enable) rot_close(my_rot2);
     }
 
 }
@@ -199,6 +217,11 @@ void MainWindow::on_pushButton_go_clicked()
     rot_set_position(my_rot, rotSet.az, rotSet.el);
 }
 
+void MainWindow::on_pushButton_go_2_clicked()
+{
+    rotSet2.az = ui->spinBox_posAz_2->value();
+    rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
+}
 
 //* Menu
 void MainWindow::on_actionRotator_triggered()
@@ -252,3 +275,4 @@ void MainWindow::on_actionAbout_Hamlib_triggered()
     msgBox.setStandardButtons(QMessageBox::Ok);
     msgBox.exec();
 }
+

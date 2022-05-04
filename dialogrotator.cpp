@@ -37,6 +37,8 @@ extern rotatorSettings rotSet;
 extern rotatorConnect rotCom2;
 extern rotatorSettings rotSet2;
 
+extern catRotatorConfig rotCfg;
+
 
 QString rotListFile = "rotator.lst";    //Text file containing the list of rotators supported by hamlib
 QFile file(rotListFile);
@@ -171,7 +173,7 @@ DialogRotator::DialogRotator(QWidget *parent) :
     ui->spinBox_azPark_2->setValue(rotSet2.azPark);
     ui->spinBox_elPark_2->setValue(rotSet2.elPark);
 
-    ui->spinBox_refreshRate->setValue(rotCom.rotRefresh);
+    ui->spinBox_refreshRate->setValue(rotCfg.rotRefresh);
 }
 
 DialogRotator::~DialogRotator()
@@ -286,7 +288,7 @@ void DialogRotator::on_buttonBox_accepted()
     rotSet2.elPark = ui->spinBox_elPark_2->value();
 
 
-    rotCom.rotRefresh = ui->spinBox_refreshRate->value();
+    rotCfg.rotRefresh = ui->spinBox_refreshRate->value();
 
     //* Save settings in catrotator.ini
     QSettings configFile(QString("catrotator.ini"), QSettings::IniFormat);

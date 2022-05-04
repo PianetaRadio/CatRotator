@@ -23,13 +23,16 @@
 #include <QObject>
 #include <rotator.h>
 
+#include "rotatordata.h"
+
+
 class RotDaemon : public QObject
 {
     Q_OBJECT
 
 public:
     explicit RotDaemon(QObject *parent = nullptr);
-    int rotConnect();
+    ROT *rotConnect(rotatorConnect *rotCom = nullptr);
 
 public slots:
     void rotUpdate();

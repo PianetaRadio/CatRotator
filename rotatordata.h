@@ -30,7 +30,6 @@ typedef struct {
     QString rotPort;    //COM port or IP address
     unsigned serialSpeed;   //Serial port baud rate
     bool netRotctl; //TCP NET Rotctl
-    unsigned rotRefresh;    //GUI refresh interval (ms)
     int connected;  //connected flag
 } rotatorConnect;
 
@@ -44,6 +43,7 @@ typedef struct {
 
 
 typedef struct {
+    unsigned rotRefresh;    //GUI refresh interval (ms)
     bool udp;   //UDP enable flag
     QString udpAddress;
     quint16 udpPort;
