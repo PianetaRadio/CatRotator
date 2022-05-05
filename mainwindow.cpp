@@ -74,7 +74,7 @@ MainWindow::MainWindow(QWidget *parent)
     //* Thread for RigDaemon
     rotDaemon->moveToThread(&workerThread); //
     connect(&workerThread, &QThread::finished, rotDaemon, &QObject::deleteLater);
-    connect(timer, &QTimer::timeout, rotDaemon, &RotDaemon::rotUpdate);
+    connect(timer, &QTimer::timeout, this, &MainWindow::rotUpdate);
     connect(rotDaemon, &RotDaemon::resultReady, this, &MainWindow::on_rotDaemonResultReady);
     workerThread.start();
 
@@ -84,6 +84,7 @@ MainWindow::MainWindow(QWidget *parent)
     rotCom.rotPort = configFile.value("Rotator1/rotPort").toString();
     rotCom.serialSpeed = configFile.value("Rotator1/serialSpeed", 9600).toInt();
     rotCom.netRotctl = configFile.value("Rotator1/netRotctl", false).toBool();
+    if (rotCom.rotModel) rotSet.enable = true;
     rotSet.nameLabel = configFile.value("Rotator1/nameLabel", "Rotator 1").toString();
     rotSet.azPark = configFile.value("Rotator1/azPark", 0).toInt();
     rotSet.elPark = configFile.value("Rotator1/elPark", 0).toInt();
@@ -92,6 +93,7 @@ MainWindow::MainWindow(QWidget *parent)
     rotCom2.rotPort = configFile.value("Rotator2/rotPort").toString();
     rotCom2.serialSpeed = configFile.value("Rotator2/serialSpeed", 9600).toInt();
     rotCom2.netRotctl = configFile.value("Rotator2/netRotctl", false).toBool();
+    if (rotCom2.rotModel) rotSet2.enable = true;
     rotSet2.nameLabel = configFile.value("Rotator2/nameLabel", "Rotator 2").toString();
     rotSet2.azPark = configFile.value("Rotator2/azPark", 0).toInt();
     rotSet2.elPark = configFile.value("Rotator2/elPark", 0).toInt();
@@ -119,6 +121,12 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+//* Get values
+void MainWindow::rotUpdate()
+{
+    rotDaemon->rotUpdate(my_rot, &rotGet);
+    if (rotSet2.enable) rotDaemon->rotUpdate(my_rot2, &rotGet2);
+}
 
 //* RotDaemon handle results
 void MainWindow::on_rotDaemonResultReady()
@@ -141,6 +149,11 @@ void MainWindow::guiUpdate()
 {
     ui->lcdNumber_posAz->display(rotGet.az);
 
+    if (rotSet2.enable)
+    {
+        ui->lcdNumber_posAz_2->display(rotGet2.az);
+    }
+
     if (rotUdpEx.azUdpFlag)
     {
         rotUdpEx.azUdpFlag = false;
@@ -148,12 +161,6 @@ void MainWindow::guiUpdate()
         ui->spinBox_posAz->setValue(rotSet.az);
         rot_set_position(my_rot, rotSet.az, rotSet.el);
     }
-
-    if (rotSet2.enable)
-    {
-        ui->lcdNumber_posAz_2->display(rotGet2.az);
-    }
-
 }
 
 

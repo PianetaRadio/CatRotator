@@ -26,15 +26,6 @@
 
 #include <rotator.h>
 
-extern ROT *my_rot;
-extern ROT *my_rot2;
-
-extern rotatorConnect rotCom;
-extern rotatorSettings rotGet;
-
-extern rotatorConnect rotCom2;
-extern rotatorSettings rotGet2;
-
 
 RotDaemon::RotDaemon(QObject *parent) : QObject(parent)
 {
@@ -46,7 +37,6 @@ ROT *RotDaemon::rotConnect(rotatorConnect *rotCom)
     int retcode;
 
     ROT *rot = rot_init(rotCom->rotModel); //Allocate rotator handle
-    qDebug() << rot;
 
     if (!rot)    //Wrong Rotator number
     {
@@ -84,12 +74,11 @@ ROT *RotDaemon::rotConnect(rotatorConnect *rotCom)
      }
 }
 
-void RotDaemon::rotUpdate()
+void RotDaemon::rotUpdate(ROT *rot, rotatorSettings *rotGet)
 {
     //int retcode;
 
-    rot_get_position(my_rot, &rotGet.az, &rotGet.el);
-    if (rotCom2.connected) rot_get_position(my_rot2, &rotGet2.az, &rotGet2.el);
+    rot_get_position(rot, &rotGet->az, &rotGet->el);
 
     emit resultReady();
 }

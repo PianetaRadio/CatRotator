@@ -41,6 +41,7 @@ public:
     ~MainWindow();
 
 public slots:
+    void rotUpdate();   //Slot fot QTimer
     void on_rotDaemonResultReady();    //Slot for rotDaemon resultReady
 
 private slots:
