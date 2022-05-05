@@ -65,6 +65,8 @@ private slots:
 
     void on_pushButton_go_2_clicked();
 
+    void on_pushButton_park_2_clicked();
+
 private:
     Ui::MainWindow *ui;
     QTimer *timer;

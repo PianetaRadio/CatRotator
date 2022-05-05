@@ -80,6 +80,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     //* Load settings from catrotator.ini
     QSettings configFile(QString("catrotator.ini"), QSettings::IniFormat);
+
     rotCom.rotModel = configFile.value("Rotator1/rotModel", 0).toInt();
     rotCom.rotPort = configFile.value("Rotator1/rotPort").toString();
     rotCom.serialSpeed = configFile.value("Rotator1/serialSpeed", 9600).toInt();
@@ -198,7 +199,18 @@ void MainWindow::on_pushButton_connect_toggled(bool checked)
 
         if (rotSet2.enable) rot_close(my_rot2);
     }
+}
 
+void MainWindow::on_pushButton_stop_clicked()
+{
+    rot_stop(my_rot);
+    if (rotSet2.enable) rot_stop(my_rot2);
+}
+
+void MainWindow::on_pushButton_go_clicked()
+{
+    rotSet.az = ui->spinBox_posAz->value();
+    rot_set_position(my_rot, rotSet.az, rotSet.el);
 }
 
 void MainWindow::on_pushButton_park_clicked()
@@ -213,21 +225,22 @@ void MainWindow::on_pushButton_park_clicked()
     }
 }
 
-void MainWindow::on_pushButton_stop_clicked()
-{
-    rot_stop(my_rot);
-}
-
-void MainWindow::on_pushButton_go_clicked()
-{
-    rotSet.az = ui->spinBox_posAz->value();
-    rot_set_position(my_rot, rotSet.az, rotSet.el);
-}
-
 void MainWindow::on_pushButton_go_2_clicked()
 {
     rotSet2.az = ui->spinBox_posAz_2->value();
     rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
+}
+
+void MainWindow::on_pushButton_park_2_clicked()
+{
+    if (my_rot2->caps->park) rot_park(my_rot2);
+    else
+    {
+        rotSet2.az = rotSet2.azPark;
+        rotSet2.el = rotSet2.elPark;
+        ui->spinBox_posAz_2->setValue(rotSet2.az);
+        rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
+    }
 }
 
 //* Menu
