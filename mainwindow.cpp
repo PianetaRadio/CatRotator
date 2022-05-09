@@ -30,7 +30,7 @@
 
 #include <rotator.h>    //Hamlib
 
-ROT *my_rot; //Defined in rotdaemon.cpp
+ROT *my_rot;
 ROT *my_rot2;
 
 extern rotatorConnect rotCom;
@@ -155,12 +155,38 @@ void MainWindow::guiUpdate()
         ui->lcdNumber_posAz_2->display(rotGet2.az);
     }
 
-    if (rotUdpEx.azUdpFlag)
+    if (rotUdpEx.azUdpFlag || rotUdpEx.elUdpFlag)
     {
         rotUdpEx.azUdpFlag = false;
-        rotSet.az = rotUdpEx.azUdp;
-        ui->spinBox_posAz->setValue(rotSet.az);
-        rot_set_position(my_rot, rotSet.az, rotSet.el);
+        rotUdpEx.elUdpFlag = false;
+
+        switch (ui->tabWidget_rotator->currentIndex())
+        {
+        case 0:
+            rotSet.az = rotUdpEx.azUdp;
+            rotSet.el = rotUdpEx.elUdp;
+            ui->spinBox_posAz->setValue(rotSet.az);
+            rot_set_position(my_rot, rotSet.az, rotSet.el);
+            break;
+        case 1:
+            rotSet2.az = rotUdpEx.azUdp;
+            rotSet2.el = rotUdpEx.elUdp;
+            ui->spinBox_posAz_2->setValue(rotSet2.az);
+            rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
+            break;
+        }
+    }
+
+    if (rotUdpEx.stopUdpFlag)
+    {
+        rotUdpEx.stopUdpFlag = false;
+        emit ui->pushButton_stop->clicked(true);
+    }
+
+    if (rotUdpEx.parkUdpFlag)
+    {
+        rotUdpEx.parkUdpFlag = false;
+        emit ui->pushButton_park->clicked(true);
     }
 }
 
@@ -182,12 +208,12 @@ void MainWindow::on_pushButton_connect_toggled(bool checked)
        else    //Rotator connected
        {
            rotCom.connected = 1;
-           ui->statusbar->showMessage(my_rot->caps->model_name);
+           //ui->statusbar->showMessage(my_rot->caps->model_name);
            timer->start(rotCfg.rotRefresh*1000);
            guiInit();
        }
 
-       if (!my_rot) rotCom2.connected = 0;
+       if (!my_rot2) rotCom2.connected = 0;
        else rotCom2.connected = 1;
 
     }
@@ -197,7 +223,11 @@ void MainWindow::on_pushButton_connect_toggled(bool checked)
         timer->stop();
         rot_close(my_rot);  //Close the communication to the rotator
 
-        if (rotSet2.enable) rot_close(my_rot2);
+        if (rotSet2.enable)
+        {
+            rotCom2.connected = 1;
+            rot_close(my_rot2);
+        }
     }
 }
 
@@ -215,13 +245,29 @@ void MainWindow::on_pushButton_go_clicked()
 
 void MainWindow::on_pushButton_park_clicked()
 {
-    if (my_rot->caps->park) rot_park(my_rot);
-    else
+    switch (ui->tabWidget_rotator->currentIndex())
     {
-        rotSet.az = rotSet.azPark;
-        rotSet.el = rotSet.elPark;
-        ui->spinBox_posAz->setValue(rotSet.az);
-        rot_set_position(my_rot, rotSet.az, rotSet.el);
+    case 0:
+        if (my_rot->caps->park) rot_park(my_rot);
+        else
+        {
+            rotSet.az = rotSet.azPark;
+            rotSet.el = rotSet.elPark;
+            ui->spinBox_posAz->setValue(rotSet.az);
+            rot_set_position(my_rot, rotSet.az, rotSet.el);
+        }
+        break;
+
+    case 1:
+        if (my_rot2->caps->park) rot_park(my_rot2);
+        else
+        {
+            rotSet2.az = rotSet2.azPark;
+            rotSet2.el = rotSet2.elPark;
+            ui->spinBox_posAz_2->setValue(rotSet2.az);
+            rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
+        }
+        break;
     }
 }
 
@@ -229,18 +275,6 @@ void MainWindow::on_pushButton_go_2_clicked()
 {
     rotSet2.az = ui->spinBox_posAz_2->value();
     rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
-}
-
-void MainWindow::on_pushButton_park_2_clicked()
-{
-    if (my_rot2->caps->park) rot_park(my_rot2);
-    else
-    {
-        rotSet2.az = rotSet2.azPark;
-        rotSet2.el = rotSet2.elPark;
-        ui->spinBox_posAz_2->setValue(rotSet2.az);
-        rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
-    }
 }
 
 //* Menu
@@ -295,4 +329,3 @@ void MainWindow::on_actionAbout_Hamlib_triggered()
     msgBox.setStandardButtons(QMessageBox::Ok);
     msgBox.exec();
 }
-

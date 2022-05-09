@@ -57,16 +57,41 @@ void rotUdp::readDatagrams()
 
         //qDebug() << "Message from: " << sender.toString();
         //qDebug() << "Message port: " << senderPort;
-        qDebug() << "Message: " << datagrams;
+        //qDebug() << "Message: " << datagrams;
 
         //QRegularExpression pstAzimuth("<PST><AZIMUTH>(\\d+)</AZIMUTH></PST>");
-        QRegularExpression pstAzimuth("<AZIMUTH>(\\d+)</AZIMUTH>");
-        QRegularExpressionMatch azMatch = pstAzimuth.match(datagrams);
-        if (azMatch.hasMatch())
+        QRegularExpression pstAzCmd("<AZIMUTH>(\\d+)</AZIMUTH>");
+        QRegularExpressionMatch pstMatch = pstAzCmd.match(datagrams);
+        if (pstMatch.hasMatch())
         {
-            QString az = azMatch.captured(1);
+            QString pstMatchString = pstMatch.captured(1);
             rotUdpEx.azUdpFlag = true;
-            rotUdpEx.azUdp = az.toInt();
+            rotUdpEx.azUdp = pstMatchString.toInt();
+        }
+
+        QRegularExpression pstElCmd("<ELEVATION>(\\d+)</ELEVATION>");
+        pstMatch = pstElCmd.match(datagrams);
+        if (pstMatch.hasMatch())
+        {
+            QString pstMatchString = pstMatch.captured(1);
+            rotUdpEx.elUdpFlag = true;
+            rotUdpEx.elUdp = pstMatchString.toInt();
+        }
+
+        QRegularExpression pstStopCmd("<STOP>(\\d)</STOP>");
+        pstMatch = pstStopCmd.match(datagrams);
+        if (pstMatch.hasMatch())
+        {
+            QString pstMatchString = pstMatch.captured(1);
+            rotUdpEx.stopUdpFlag = pstMatchString.toInt();
+        }
+
+        QRegularExpression pstParkCmd("<PARK>(\\d)</PARK>");
+        pstMatch = pstParkCmd.match(datagrams);
+        if (pstMatch.hasMatch())
+        {
+            QString pstMatchString = pstMatch.captured(1);
+            rotUdpEx.parkUdpFlag = pstMatchString.toInt();
         }
     }
 }

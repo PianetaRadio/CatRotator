@@ -6,15 +6,28 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>234</height>
+    <width>478</width>
+    <height>357</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>CatRotator</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="1">
+     <widget class="QPushButton" name="pushButton_stop">
+      <property name="text">
+       <string>STOP</string>
+      </property>
+     </widget>
+    </item>
     <item row="0" column="0">
      <widget class="QPushButton" name="pushButton_connect">
       <property name="text">
@@ -25,40 +38,119 @@
       </property>
      </widget>
     </item>
+    <item row="4" column="0" colspan="2">
+     <widget class="QGroupBox" name="groupBox_presets">
+      <property name="title">
+       <string>Presets</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="1" column="2">
+        <widget class="QPushButton" name="pushButton_p8">
+         <property name="text">
+          <string>315</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="pushButton_p2">
+         <property name="text">
+          <string>45</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="pushButton_p6">
+         <property name="text">
+          <string>225</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QPushButton" name="pushButton_p3">
+         <property name="text">
+          <string>90</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4">
+        <widget class="QPushButton" name="pushButton_park">
+         <property name="text">
+          <string>Park</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="pushButton_p7">
+         <property name="text">
+          <string>270</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QPushButton" name="pushButton_p1">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <widget class="QPushButton" name="pushButton_p5">
+         <property name="text">
+          <string>180</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QPushButton" name="pushButton_p4">
+         <property name="text">
+          <string>135</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QPushButton" name="pushButton_p9">
+         <property name="text">
+          <string>360</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
     <item row="3" column="0" colspan="2">
      <widget class="QTabWidget" name="tabWidget_rotator">
       <property name="enabled">
        <bool>true</bool>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
-      <widget class="QWidget" name="tab">
+      <widget class="QWidget" name="tab_1">
        <attribute name="title">
         <string>Rotator 1</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="4">
+       <layout class="QGridLayout" name="gridLayout_2" columnstretch="1,0" columnminimumwidth="0,0">
+        <item row="0" column="1">
+         <widget class="QSpinBox" name="spinBox_posAz">
+          <property name="alignment">
+           <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+          </property>
+          <property name="maximum">
+           <number>450</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
          <widget class="QPushButton" name="pushButton_go">
           <property name="text">
            <string>Go</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="1">
-         <widget class="QSpinBox" name="spinBox_posAz">
-          <property name="maximum">
-           <number>450</number>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <widget class="QLCDNumber" name="lcdNumber_posAz"/>
-        </item>
-        <item row="1" column="4">
-         <widget class="QPushButton" name="pushButton_park">
-          <property name="text">
-           <string>Park</string>
+        <item row="0" column="0" rowspan="2">
+         <widget class="QLCDNumber" name="lcdNumber_posAz">
+          <property name="digitCount">
+           <number>4</number>
           </property>
          </widget>
         </item>
@@ -68,10 +160,7 @@
        <attribute name="title">
         <string>Rotator 2</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_3">
-        <item row="0" column="0">
-         <widget class="QLCDNumber" name="lcdNumber_posAz_2"/>
-        </item>
+       <layout class="QGridLayout" name="gridLayout_3" columnstretch="1,0">
         <item row="0" column="1">
          <widget class="QSpinBox" name="spinBox_posAz_2">
           <property name="maximum">
@@ -79,17 +168,17 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="2">
+        <item row="1" column="1">
          <widget class="QPushButton" name="pushButton_go_2">
           <property name="text">
            <string>Go</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="2">
-         <widget class="QPushButton" name="pushButton_park_2">
-          <property name="text">
-           <string>Park</string>
+        <item row="0" column="0" rowspan="2">
+         <widget class="QLCDNumber" name="lcdNumber_posAz_2">
+          <property name="digitCount">
+           <number>4</number>
           </property>
          </widget>
         </item>
@@ -107,13 +196,6 @@
       </widget>
      </widget>
     </item>
-    <item row="0" column="1">
-     <widget class="QPushButton" name="pushButton_stop">
-      <property name="text">
-       <string>STOP</string>
-      </property>
-     </widget>
-    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -121,7 +203,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>400</width>
+     <width>478</width>
      <height>25</height>
     </rect>
    </property>

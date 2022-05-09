@@ -51,8 +51,8 @@ typedef struct {
 
 
 typedef struct {
-    bool azUdpFlag;
-    int azUdp;
+    bool azUdpFlag, elUdpFlag, stopUdpFlag, parkUdpFlag;
+    int azUdp, elUdp;
 } rotatorUdpEx;
 
 #endif // ROTATORDATA_H
