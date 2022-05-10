@@ -47,6 +47,7 @@ typedef struct {
     bool udp;   //UDP enable flag
     QString udpAddress;
     quint16 udpPort;
+    int preset[9];
 } catRotatorConfig;
 
 

@@ -45,6 +45,7 @@ extern catRotatorConfig rotCfg;
 extern rotatorUdpEx rotUdpEx;
 
 int retcode;    //Return code from function
+int defaultPreset[9] = {0, 45, 90, 135, 180, 225, 270, 315, 360};
 
 FILE* debugFile;
 
@@ -103,6 +104,8 @@ MainWindow::MainWindow(QWidget *parent)
     rotCfg.udp = configFile.value("udp", false).toBool();
     rotCfg.udpAddress = configFile.value("udpAddress", "127.0.0.1").toString();
     rotCfg.udpPort = configFile.value("udpPort", 12000).toUInt();   //should be toUShort()
+
+    std::copy(defaultPreset, defaultPreset+9, rotCfg.preset);
 }
 
 MainWindow::~MainWindow()
@@ -190,6 +193,22 @@ void MainWindow::guiUpdate()
     }
 }
 
+void MainWindow::presetGo(int presetNumber)
+{
+    switch (ui->tabWidget_rotator->currentIndex())
+    {
+    case 0:
+        rotSet.az = rotCfg.preset[presetNumber];
+        ui->spinBox_posAz->setValue(rotSet.az);
+        rot_set_position(my_rot, rotSet.az, rotSet.el);
+        break;
+    case 1:
+        rotSet2.az = rotCfg.preset[presetNumber];
+        ui->spinBox_posAz_2->setValue(rotSet2.az);
+        rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
+        break;
+    }
+}
 
 //* Buttons
 void MainWindow::on_pushButton_connect_toggled(bool checked)
@@ -243,6 +262,12 @@ void MainWindow::on_pushButton_go_clicked()
     rot_set_position(my_rot, rotSet.az, rotSet.el);
 }
 
+void MainWindow::on_pushButton_go_2_clicked()
+{
+    rotSet2.az = ui->spinBox_posAz_2->value();
+    rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
+}
+
 void MainWindow::on_pushButton_park_clicked()
 {
     switch (ui->tabWidget_rotator->currentIndex())
@@ -271,11 +296,53 @@ void MainWindow::on_pushButton_park_clicked()
     }
 }
 
-void MainWindow::on_pushButton_go_2_clicked()
+void MainWindow::on_pushButton_p0_clicked()
 {
-    rotSet2.az = ui->spinBox_posAz_2->value();
-    rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
+    presetGo(0);
 }
+
+
+void MainWindow::on_pushButton_p1_clicked()
+{
+    presetGo(1);
+}
+
+void MainWindow::on_pushButton_p2_clicked()
+{
+    presetGo(2);
+}
+
+void MainWindow::on_pushButton_p3_clicked()
+{
+    presetGo(3);
+}
+
+void MainWindow::on_pushButton_p4_clicked()
+{
+    presetGo(4);
+}
+
+
+void MainWindow::on_pushButton_p5_clicked()
+{
+    presetGo(5);
+}
+
+void MainWindow::on_pushButton_p6_clicked()
+{
+    presetGo(6);
+}
+
+void MainWindow::on_pushButton_p7_clicked()
+{
+    presetGo(7);
+}
+
+void MainWindow::on_pushButton_p8_clicked()
+{
+    presetGo(8);
+}
+
 
 //* Menu
 void MainWindow::on_actionRotator_triggered()
@@ -329,3 +396,4 @@ void MainWindow::on_actionAbout_Hamlib_triggered()
     msgBox.setStandardButtons(QMessageBox::Ok);
     msgBox.exec();
 }
+

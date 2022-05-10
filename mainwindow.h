@@ -65,7 +65,23 @@ private slots:
 
     void on_pushButton_go_2_clicked();
 
-    void on_pushButton_park_2_clicked();
+    void on_pushButton_p0_clicked();
+
+    void on_pushButton_p1_clicked();
+
+    void on_pushButton_p2_clicked();
+
+    void on_pushButton_p3_clicked();
+
+    void on_pushButton_p4_clicked();
+
+    void on_pushButton_p5_clicked();
+
+    void on_pushButton_p6_clicked();
+
+    void on_pushButton_p7_clicked();
+
+    void on_pushButton_p8_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -73,6 +89,7 @@ private:
 
     void guiInit();
     void guiUpdate();
+    void presetGo(int presetNumber);
 };
 
 #endif // MAINWINDOW_H
