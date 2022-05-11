@@ -61,9 +61,11 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     ui->tabWidget_rotator->setTabVisible(1, false);
     ui->tabWidget_rotator->setTabVisible(2, false);
     ui->tabWidget_rotator->setTabVisible(3, false);
+#endif
 
     timer = new QTimer(this);   //timer for rotDaemon thread call
 
@@ -148,11 +150,24 @@ void MainWindow::guiInit()
 
     if (rotSet2.enable)
     {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
         ui->tabWidget_rotator->setTabVisible(1, true);
+#endif
         ui->tabWidget_rotator->setTabText(1, rotSet2.nameLabel);
         ui->spinBox_posAz_2->setMaximum(my_rot2->caps->max_az);
         ui->spinBox_posAz_2->setMinimum(my_rot2->caps->min_az);
     }
+    else
+    {
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
+    ui->tabWidget_rotator->removeTab(1);
+#endif
+    }
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
+    ui->tabWidget_rotator->removeTab(2);
+    ui->tabWidget_rotator->removeTab(3);
+#endif
 }
 
 void MainWindow::guiUpdate()
