@@ -83,6 +83,8 @@ private slots:
 
     void on_pushButton_p8_clicked();
 
+    void on_actionCatRotator_homepage_triggered();
+
 private:
     Ui::MainWindow *ui;
     QTimer *timer;

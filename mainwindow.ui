@@ -218,6 +218,8 @@
     <property name="title">
      <string>Help</string>
     </property>
+    <addaction name="actionCatRotator_homepage"/>
+    <addaction name="separator"/>
     <addaction name="actionAbout_CatRotator"/>
     <addaction name="actionAbout_Qt"/>
     <addaction name="actionAbout_Hamlib"/>
@@ -249,6 +251,11 @@
   <action name="actionSetup">
    <property name="text">
     <string>Setup</string>
+   </property>
+  </action>
+  <action name="actionCatRotator_homepage">
+   <property name="text">
+    <string>CatRotator homepage</string>
    </property>
   </action>
  </widget>

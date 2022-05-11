@@ -27,6 +27,8 @@
 #include <QMessageBox>
 #include <QThread>
 #include <QSettings>
+#include <QDesktopServices>
+#include <QUrl>
 
 #include <rotator.h>    //Hamlib
 
@@ -363,6 +365,12 @@ void MainWindow::on_actionSetup_triggered()
     setup.exec();
 }
 
+void MainWindow::on_actionCatRotator_homepage_triggered()
+{
+    QUrl homepage("https://www.pianetaradio.it/blog/catrotator/");
+    QDesktopServices::openUrl(homepage);
+}
+
 void MainWindow::on_actionAbout_CatRotator_triggered()
 {
     QMessageBox msgBox;
@@ -400,4 +408,3 @@ void MainWindow::on_actionAbout_Hamlib_triggered()
     msgBox.setStandardButtons(QMessageBox::Ok);
     msgBox.exec();
 }
-
