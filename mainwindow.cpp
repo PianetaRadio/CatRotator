@@ -141,11 +141,15 @@ void MainWindow::on_rotDaemonResultReady()
 void MainWindow::guiInit()
 {
     ui->tabWidget_rotator->setTabText(0, rotSet.nameLabel);
+    ui->spinBox_posAz->setMaximum(my_rot->caps->max_az);
+    ui->spinBox_posAz->setMinimum(my_rot->caps->min_az);
 
     if (rotSet2.enable)
     {
         ui->tabWidget_rotator->setTabVisible(1, true);
         ui->tabWidget_rotator->setTabText(1, rotSet2.nameLabel);
+        ui->spinBox_posAz_2->setMaximum(my_rot2->caps->max_az);
+        ui->spinBox_posAz_2->setMinimum(my_rot2->caps->min_az);
     }
 }
 
