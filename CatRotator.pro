@@ -40,6 +40,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 LIBS += -L$$PWD/hamlib/ -lhamlib
 INCLUDEPATH += $$PWD/hamlib
 
-VERSION = 0.1.0
+VERSION = 1.0.0
 
 RC_ICONS = catrotator.ico
