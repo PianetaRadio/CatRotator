@@ -148,6 +148,11 @@ void MainWindow::guiInit()
     ui->spinBox_posAz->setMaximum(my_rot->caps->max_az);
     ui->spinBox_posAz->setMinimum(my_rot->caps->min_az);
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
+    ui->tabWidget_rotator->removeTab(3);
+    ui->tabWidget_rotator->removeTab(2);
+#endif
+
     if (rotSet2.enable)
     {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
@@ -163,11 +168,6 @@ void MainWindow::guiInit()
     ui->tabWidget_rotator->removeTab(1);
 #endif
     }
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-    ui->tabWidget_rotator->removeTab(2);
-    ui->tabWidget_rotator->removeTab(3);
-#endif
 }
 
 void MainWindow::guiUpdate()
