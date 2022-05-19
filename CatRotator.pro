@@ -43,3 +43,5 @@ INCLUDEPATH += $$PWD/hamlib
 VERSION = 1.0.0
 
 RC_ICONS = catrotator.ico
+
+QMAKE_LFLAGS += -no-pie
