@@ -105,6 +105,7 @@ MainWindow::MainWindow(QWidget *parent)
     rotSet2.elPark = configFile.value("Rotator2/elPark", 0).toInt();
 
     rotCfg.rotRefresh = configFile.value("rotRefresh", 1).toInt();
+    rotCfg.qthLocator = configFile.value("qthLocator", "").toString();
     rotCfg.udp = configFile.value("udp", false).toBool();
     rotCfg.udpAddress = configFile.value("udpAddress", "127.0.0.1").toString();
     rotCfg.udpPort = configFile.value("udpPort", 12000).toUInt();   //should be toUShort()

@@ -33,6 +33,7 @@ DialogSetup::DialogSetup(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    ui->lineEdit_qthLocator->setText(rotCfg.qthLocator);
     ui->checkBox_udp->setChecked(rotCfg.udp);
     ui->lineEdit_udpAddress->setText(rotCfg.udpAddress);
     ui->lineEdit_udpPort->setText(QString::number(rotCfg.udpPort));
@@ -45,12 +46,14 @@ DialogSetup::~DialogSetup()
 
 void DialogSetup::on_buttonBox_accepted()
 {
+    rotCfg.qthLocator = ui->lineEdit_qthLocator->text();
     rotCfg.udp = ui->checkBox_udp->checkState();
     rotCfg.udpAddress = ui->lineEdit_udpAddress->text();
     rotCfg.udpPort = ui->lineEdit_udpPort->text().toUShort();
 
     //* Save settings in catrotator.ini
     QSettings configFile(QString("catrotator.ini"), QSettings::IniFormat);
+    configFile.setValue("qthLocator", rotCfg.qthLocator);
     configFile.setValue("udp", rotCfg.udp);
     configFile.setValue("udpAddress", rotCfg.udpAddress);
     configFile.setValue("udpPort", rotCfg.udpPort);

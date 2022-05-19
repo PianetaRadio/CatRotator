@@ -44,10 +44,11 @@ typedef struct {
 
 typedef struct {
     unsigned rotRefresh;    //GUI refresh interval (ms)
+    QString qthLocator; //QTH WW Locator
     bool udp;   //UDP enable flag
-    QString udpAddress;
-    quint16 udpPort;
-    int preset[9];
+    QString udpAddress; //UDP address
+    quint16 udpPort;    //UDP port
+    int preset[9];  //Preset button array
 } catRotatorConfig;
 
 

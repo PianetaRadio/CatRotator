@@ -29,6 +29,9 @@
          <property name="text">
           <string>Model</string>
          </property>
+         <property name="buddy">
+          <cstring>comboBox_rotModel</cstring>
+         </property>
         </widget>
        </item>
        <item row="0" column="1">
@@ -49,6 +52,9 @@
              <property name="text">
               <string>COM Port</string>
              </property>
+             <property name="buddy">
+              <cstring>comboBox_comPort</cstring>
+             </property>
             </widget>
            </item>
            <item row="0" column="1">
@@ -58,6 +64,9 @@
             <widget class="QLabel" name="label_serialSpeed">
              <property name="text">
               <string>Speed</string>
+             </property>
+             <property name="buddy">
+              <cstring>comboBox_serialSpeed</cstring>
              </property>
             </widget>
            </item>
@@ -83,6 +92,9 @@
              <property name="text">
               <string>IP address</string>
              </property>
+             <property name="buddy">
+              <cstring>lineEdit_ip</cstring>
+             </property>
             </widget>
            </item>
            <item row="1" column="1">
@@ -106,12 +118,18 @@
             <property name="text">
              <string>El Park</string>
             </property>
+            <property name="buddy">
+             <cstring>spinBox_elPark</cstring>
+            </property>
            </widget>
           </item>
           <item row="1" column="0">
            <widget class="QLabel" name="label_azPark">
             <property name="text">
              <string>Az Park</string>
+            </property>
+            <property name="buddy">
+             <cstring>spinBox_azPark</cstring>
             </property>
            </widget>
           </item>
@@ -137,6 +155,9 @@
             <property name="text">
              <string>Label</string>
             </property>
+            <property name="buddy">
+             <cstring>lineEdit_name</cstring>
+            </property>
            </widget>
           </item>
           <item row="0" column="1" colspan="3">
@@ -161,6 +182,9 @@
          <property name="text">
           <string>Model</string>
          </property>
+         <property name="buddy">
+          <cstring>comboBox_rotModel_2</cstring>
+         </property>
         </widget>
        </item>
        <item row="0" column="1">
@@ -181,6 +205,9 @@
              <property name="text">
               <string>COM Port</string>
              </property>
+             <property name="buddy">
+              <cstring>comboBox_comPort_2</cstring>
+             </property>
             </widget>
            </item>
            <item row="0" column="1">
@@ -190,6 +217,9 @@
             <widget class="QLabel" name="label_serialSpeed_2">
              <property name="text">
               <string>Speed</string>
+             </property>
+             <property name="buddy">
+              <cstring>comboBox_serialSpeed_2</cstring>
              </property>
             </widget>
            </item>
@@ -215,6 +245,9 @@
              <property name="text">
               <string>IP address</string>
              </property>
+             <property name="buddy">
+              <cstring>lineEdit_ip_2</cstring>
+             </property>
             </widget>
            </item>
            <item row="1" column="1">
@@ -238,12 +271,18 @@
             <property name="text">
              <string>El Park</string>
             </property>
+            <property name="buddy">
+             <cstring>spinBox_elPark_2</cstring>
+            </property>
            </widget>
           </item>
           <item row="1" column="0">
            <widget class="QLabel" name="label_azPark_2">
             <property name="text">
              <string>Az Park</string>
+            </property>
+            <property name="buddy">
+             <cstring>spinBox_azPark_2</cstring>
             </property>
            </widget>
           </item>
@@ -268,6 +307,9 @@
            <widget class="QLabel" name="label_name_2">
             <property name="text">
              <string>Label</string>
+            </property>
+            <property name="buddy">
+             <cstring>lineEdit_name_2</cstring>
             </property>
            </widget>
           </item>
@@ -295,6 +337,9 @@
        <widget class="QLabel" name="label_refreshRate">
         <property name="text">
          <string>Refresh Rate (s)</string>
+        </property>
+        <property name="buddy">
+         <cstring>spinBox_refreshRate</cstring>
         </property>
        </widget>
       </item>
@@ -336,6 +381,28 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>tabWidget_dialogRotator</tabstop>
+  <tabstop>comboBox_rotModel</tabstop>
+  <tabstop>tabWidget_comms</tabstop>
+  <tabstop>comboBox_comPort</tabstop>
+  <tabstop>comboBox_serialSpeed</tabstop>
+  <tabstop>lineEdit_name</tabstop>
+  <tabstop>spinBox_azPark</tabstop>
+  <tabstop>spinBox_elPark</tabstop>
+  <tabstop>spinBox_refreshRate</tabstop>
+  <tabstop>lineEdit_ip</tabstop>
+  <tabstop>comboBox_rotModel_2</tabstop>
+  <tabstop>tabWidget_comms_2</tabstop>
+  <tabstop>comboBox_comPort_2</tabstop>
+  <tabstop>comboBox_serialSpeed_2</tabstop>
+  <tabstop>lineEdit_name_2</tabstop>
+  <tabstop>spinBox_azPark_2</tabstop>
+  <tabstop>spinBox_elPark_2</tabstop>
+  <tabstop>checkBox_netRotctl_2</tabstop>
+  <tabstop>lineEdit_ip_2</tabstop>
+  <tabstop>checkBox_netRotctl</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
