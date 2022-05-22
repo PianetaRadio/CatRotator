@@ -173,6 +173,7 @@ void MainWindow::guiInit()
 
 void MainWindow::guiUpdate()
 {
+    //Update current position
     ui->lcdNumber_posAz->display(rotGet.az);
 
     if (rotSet2.enable)
@@ -180,6 +181,9 @@ void MainWindow::guiUpdate()
         ui->lcdNumber_posAz_2->display(rotGet2.az);
     }
 
+    qDebug() << MainWindow::bearingAngle(rotCfg.qthLocator.toLatin1(), "JM88QQ");
+
+    //Parse UDP command
     if (rotUdpEx.azUdpFlag || rotUdpEx.elUdpFlag)
     {
         rotUdpEx.azUdpFlag = false;
@@ -230,6 +234,20 @@ void MainWindow::presetGo(int presetNumber)
         rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
         break;
     }
+}
+
+double MainWindow::bearingAngle(const char *locator1, const char *locator2)
+{
+    double lon1, lon2;
+    double lat1, lat2;
+    double beam, dist;
+
+    locator2longlat(&lon1, &lat1, locator1);
+    locator2longlat(&lon2, &lat2, locator2);
+
+    qrb(lon1, lat1, lon2, lat2, &dist, &beam);
+
+    return beam;
 }
 
 //* Buttons

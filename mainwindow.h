@@ -92,6 +92,7 @@ private:
     void guiInit();
     void guiUpdate();
     void presetGo(int presetNumber);
+    double bearingAngle(const char *locator1, const char *locator2);
 };
 
 #endif // MAINWINDOW_H
