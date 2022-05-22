@@ -92,6 +92,8 @@ private:
     void guiInit();
     void guiUpdate();
     void presetGo(int presetNumber);
+
+    bool azInput(QString value, double *azim);
     double bearingAngle(const char *locator1, const char *locator2);
 };
 

@@ -123,23 +123,13 @@
        <bool>true</bool>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_1">
        <attribute name="title">
         <string>Rotator 1</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2" columnstretch="1,0" columnminimumwidth="0,0">
-        <item row="0" column="1">
-         <widget class="QSpinBox" name="spinBox_posAz">
-          <property name="alignment">
-           <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
-          </property>
-          <property name="maximum">
-           <number>450</number>
-          </property>
-         </widget>
-        </item>
         <item row="1" column="1">
          <widget class="QPushButton" name="pushButton_go">
           <property name="text">
@@ -154,6 +144,9 @@
           </property>
          </widget>
         </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="lineEdit_posAz"/>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="tab_2">
@@ -161,13 +154,6 @@
         <string>Rotator 2</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3" columnstretch="1,0">
-        <item row="0" column="1">
-         <widget class="QSpinBox" name="spinBox_posAz_2">
-          <property name="maximum">
-           <number>450</number>
-          </property>
-         </widget>
-        </item>
         <item row="1" column="1">
          <widget class="QPushButton" name="pushButton_go_2">
           <property name="text">
@@ -181,6 +167,9 @@
            <number>4</number>
           </property>
          </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="lineEdit_posAz_2"/>
         </item>
        </layout>
       </widget>
@@ -204,7 +193,7 @@
      <x>0</x>
      <y>0</y>
      <width>478</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuConfig">
@@ -259,6 +248,24 @@
    </property>
   </action>
  </widget>
+ <tabstops>
+  <tabstop>pushButton_connect</tabstop>
+  <tabstop>pushButton_stop</tabstop>
+  <tabstop>tabWidget_rotator</tabstop>
+  <tabstop>lineEdit_posAz</tabstop>
+  <tabstop>pushButton_go</tabstop>
+  <tabstop>pushButton_p0</tabstop>
+  <tabstop>pushButton_p1</tabstop>
+  <tabstop>pushButton_p2</tabstop>
+  <tabstop>pushButton_p3</tabstop>
+  <tabstop>pushButton_p4</tabstop>
+  <tabstop>pushButton_p5</tabstop>
+  <tabstop>pushButton_p6</tabstop>
+  <tabstop>pushButton_p7</tabstop>
+  <tabstop>pushButton_p8</tabstop>
+  <tabstop>pushButton_park</tabstop>
+  <tabstop>pushButton_go_2</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

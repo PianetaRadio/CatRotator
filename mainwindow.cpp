@@ -29,6 +29,7 @@
 #include <QSettings>
 #include <QDesktopServices>
 #include <QUrl>
+#include <QRegularExpression>
 
 #include <rotator.h>    //Hamlib
 
@@ -146,8 +147,8 @@ void MainWindow::on_rotDaemonResultReady()
 void MainWindow::guiInit()
 {
     ui->tabWidget_rotator->setTabText(0, rotSet.nameLabel);
-    ui->spinBox_posAz->setMaximum(my_rot->caps->max_az);
-    ui->spinBox_posAz->setMinimum(my_rot->caps->min_az);
+    //ui->spinBox_posAz->setMaximum(my_rot->caps->max_az);
+    //ui->spinBox_posAz->setMinimum(my_rot->caps->min_az);
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
     ui->tabWidget_rotator->removeTab(3);
@@ -160,8 +161,8 @@ void MainWindow::guiInit()
         ui->tabWidget_rotator->setTabVisible(1, true);
 #endif
         ui->tabWidget_rotator->setTabText(1, rotSet2.nameLabel);
-        ui->spinBox_posAz_2->setMaximum(my_rot2->caps->max_az);
-        ui->spinBox_posAz_2->setMinimum(my_rot2->caps->min_az);
+        //ui->spinBox_posAz_2->setMaximum(my_rot2->caps->max_az);
+        //ui->spinBox_posAz_2->setMinimum(my_rot2->caps->min_az);
     }
     else
     {
@@ -181,8 +182,6 @@ void MainWindow::guiUpdate()
         ui->lcdNumber_posAz_2->display(rotGet2.az);
     }
 
-    qDebug() << MainWindow::bearingAngle(rotCfg.qthLocator.toLatin1(), "JM88QQ");
-
     //Parse UDP command
     if (rotUdpEx.azUdpFlag || rotUdpEx.elUdpFlag)
     {
@@ -194,13 +193,13 @@ void MainWindow::guiUpdate()
         case 0:
             rotSet.az = rotUdpEx.azUdp;
             rotSet.el = rotUdpEx.elUdp;
-            ui->spinBox_posAz->setValue(rotSet.az);
+            ui->lineEdit_posAz->setText(QString::number(rotSet.az));
             rot_set_position(my_rot, rotSet.az, rotSet.el);
             break;
         case 1:
             rotSet2.az = rotUdpEx.azUdp;
             rotSet2.el = rotUdpEx.elUdp;
-            ui->spinBox_posAz_2->setValue(rotSet2.az);
+            ui->lineEdit_posAz_2->setText(QString::number(rotSet2.az));
             rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
             break;
         }
@@ -225,15 +224,38 @@ void MainWindow::presetGo(int presetNumber)
     {
     case 0:
         rotSet.az = rotCfg.preset[presetNumber];
-        ui->spinBox_posAz->setValue(rotSet.az);
+        ui->lineEdit_posAz->setText(QString::number(rotSet.az));
         rot_set_position(my_rot, rotSet.az, rotSet.el);
         break;
     case 1:
         rotSet2.az = rotCfg.preset[presetNumber];
-        ui->spinBox_posAz_2->setValue(rotSet2.az);
+        ui->lineEdit_posAz_2->setText(QString::number(rotSet2.az));
         rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
         break;
     }
+}
+
+bool MainWindow::azInput(QString value, double *azim)
+{
+    QRegularExpression azCmdDeg("^\\d+");
+    QRegularExpressionMatch azCmdDegMatch = azCmdDeg.match(value);
+    if (azCmdDegMatch.hasMatch())
+    {
+        *azim = azCmdDegMatch.captured(0).toDouble();
+        return true;
+    }
+    else
+    {
+        QRegularExpression azCmdLoc("^..\\d{2}.?.?.?.?");
+        QRegularExpressionMatch azCmdLocMatch = azCmdLoc.match(value);
+        if (azCmdLocMatch.hasMatch())
+        {
+        *azim = MainWindow::bearingAngle(rotCfg.qthLocator.toLatin1(), azCmdLocMatch.captured(0).toLatin1());
+        return true;
+        }
+    }
+
+    return false;
 }
 
 double MainWindow::bearingAngle(const char *locator1, const char *locator2)
@@ -298,14 +320,22 @@ void MainWindow::on_pushButton_stop_clicked()
 
 void MainWindow::on_pushButton_go_clicked()
 {
-    rotSet.az = ui->spinBox_posAz->value();
-    rot_set_position(my_rot, rotSet.az, rotSet.el);
+   double tempAz;
+   if (MainWindow::azInput(ui->lineEdit_posAz->text(), &tempAz))
+   {
+       rotSet.az = tempAz;
+       rot_set_position(my_rot, rotSet.az, rotSet.el);
+   }
 }
 
 void MainWindow::on_pushButton_go_2_clicked()
 {
-    rotSet2.az = ui->spinBox_posAz_2->value();
-    rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
+    double tempAz;
+    if (MainWindow::azInput(ui->lineEdit_posAz_2->text(), &tempAz))
+    {
+        rotSet2.az = tempAz;
+        rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
+    }
 }
 
 void MainWindow::on_pushButton_park_clicked()
@@ -318,7 +348,7 @@ void MainWindow::on_pushButton_park_clicked()
         {
             rotSet.az = rotSet.azPark;
             rotSet.el = rotSet.elPark;
-            ui->spinBox_posAz->setValue(rotSet.az);
+            ui->lineEdit_posAz->setText(QString::number(rotSet.az));
             rot_set_position(my_rot, rotSet.az, rotSet.el);
         }
         break;
@@ -329,7 +359,7 @@ void MainWindow::on_pushButton_park_clicked()
         {
             rotSet2.az = rotSet2.azPark;
             rotSet2.el = rotSet2.elPark;
-            ui->spinBox_posAz_2->setValue(rotSet2.az);
+            ui->lineEdit_posAz_2->setText(QString::number(rotSet2.az));
             rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
         }
         break;
