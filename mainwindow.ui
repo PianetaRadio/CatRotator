@@ -123,7 +123,7 @@
        <bool>true</bool>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_1">
        <attribute name="title">
@@ -145,7 +145,20 @@
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QLineEdit" name="lineEdit_posAz"/>
+         <widget class="QLineEdit" name="lineEdit_posAz">
+          <property name="toolTip">
+           <string>Azimuth angle or QRA locator</string>
+          </property>
+          <property name="inputMask">
+           <string/>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="placeholderText">
+           <string/>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -169,7 +182,11 @@
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QLineEdit" name="lineEdit_posAz_2"/>
+         <widget class="QLineEdit" name="lineEdit_posAz_2">
+          <property name="toolTip">
+           <string>Azimuth angle or QRA locator</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
