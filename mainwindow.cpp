@@ -237,39 +237,64 @@ void MainWindow::presetGo(int presetNumber)
 
 bool MainWindow::azInput(QString value, double *azim)
 {
-    QRegularExpression azCmdDeg("^\\d+");
+    QRegularExpression azCmdDeg("^\\d\\d?\\d?");    //Match 0, 00, 000
     QRegularExpressionMatch azCmdDegMatch = azCmdDeg.match(value);
+    QRegularExpression azCmdLoc("^[a-rA-R][a-rA-R]\\d{2}([a-xA-X][a-xA-X])?(\\d{2})?"); //Match AA00, AA00AA, AA00AA00
+    QRegularExpressionMatch azCmdLocMatch = azCmdLoc.match(value);
+
+    double dist = 0;
+    double tempAz;
+
     if (azCmdDegMatch.hasMatch())
     {
         *azim = azCmdDegMatch.captured(0).toDouble();
+        ui->statusbar->clearMessage();
         return true;
+    }
+    else if (azCmdLocMatch.hasMatch() && rotCfg.qthLocator != "")
+    {
+        if (MainWindow::bearingAngle(rotCfg.qthLocator.toLatin1(), azCmdLocMatch.captured(0).toLatin1(), &tempAz, &dist))
+        {
+            *azim = tempAz;
+            ui->statusbar->showMessage("Bearing SP "+QString::number(*azim,'f',1)+" deg, Distance "+QString::number(dist,'f',0)+" km");
+            return true;
+        }
+        else return false;
     }
     else
     {
-        QRegularExpression azCmdLoc("^..\\d{2}.?.?.?.?");
-        QRegularExpressionMatch azCmdLocMatch = azCmdLoc.match(value);
-        if (azCmdLocMatch.hasMatch())
-        {
-        *azim = MainWindow::bearingAngle(rotCfg.qthLocator.toLatin1(), azCmdLocMatch.captured(0).toLatin1());
-        return true;
-        }
+        *azim = 0;
+        return false;
     }
-
-    return false;
 }
 
-double MainWindow::bearingAngle(const char *locator1, const char *locator2)
+bool MainWindow::bearingAngle(const char *locator1, const char *locator2, double *azim, double *dist)
 {
     double lon1, lon2;
     double lat1, lat2;
-    double beam, dist;
 
-    locator2longlat(&lon1, &lat1, locator1);
-    locator2longlat(&lon2, &lat2, locator2);
+    if (locator2longlat(&lon1, &lat1, locator1) == RIG_OK && locator2longlat(&lon2, &lat2, locator2) == RIG_OK)
+    {
+        qrb(lon1, lat1, lon2, lat2, dist, azim);
+        return true;
+    }
+    else return false;
+}
 
-    qrb(lon1, lat1, lon2, lat2, &dist, &beam);
+bool MainWindow::bearingAngleLP(const char *locator1, const char *locator2, double *azim, double *dist)
+{
+    double lon1, lon2;
+    double lat1, lat2;
+    double tempAz, tempDist;
 
-    return beam;
+    if (locator2longlat(&lon1, &lat1, locator1) == RIG_OK && locator2longlat(&lon2, &lat2, locator2) == RIG_OK)
+    {
+        qrb(lon1, lat1, lon2, lat2, &tempDist, &tempAz);
+        *azim = azimuth_long_path(tempAz);
+        *dist = distance_long_path(tempDist);
+        return true;
+    }
+    else return false;
 }
 
 //* Buttons
@@ -306,7 +331,7 @@ void MainWindow::on_pushButton_connect_toggled(bool checked)
 
         if (rotSet2.enable)
         {
-            rotCom2.connected = 1;
+            rotCom2.connected = 0;
             rot_close(my_rot2);
         }
     }
