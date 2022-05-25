@@ -111,7 +111,12 @@ MainWindow::MainWindow(QWidget *parent)
     rotCfg.udpAddress = configFile.value("udpAddress", "127.0.0.1").toString();
     rotCfg.udpPort = configFile.value("udpPort", 12000).toUInt();   //should be toUShort()
 
+    //Presets
     std::copy(defaultPreset, defaultPreset+9, rotCfg.preset);
+
+    //Window settings
+    restoreGeometry(configFile.value("WindowSettings/geometry").toByteArray());
+    restoreState(configFile.value("WindowSettings/state").toByteArray());
 }
 
 MainWindow::~MainWindow()
@@ -127,6 +132,11 @@ MainWindow::~MainWindow()
         rot_close(my_rot);  //Close the communication to the rotator
     }
     rot_cleanup(my_rot);    //Release rot handle and free associated memory
+
+    //* Save window settings
+    QSettings configFile(QString("catrotator.ini"), QSettings::IniFormat);
+    configFile.setValue("WindowSettings/geometry", saveGeometry());
+    configFile.setValue("WindowSettings/state", saveState());
 
     delete ui;
 }
