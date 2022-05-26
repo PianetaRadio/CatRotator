@@ -85,6 +85,8 @@ private slots:
 
     void on_actionCatRotator_homepage_triggered();
 
+    void on_actionPresets_triggered();
+
 private:
     Ui::MainWindow *ui;
     QTimer *timer;
@@ -92,6 +94,7 @@ private:
     void guiInit();
     void guiUpdate();
     void presetGo(int presetNumber);
+    void presetInit();
 
     bool azInput(QString value, double *azim);  //Convert pointing value input, from format degree or QTH locator, into azimuth bearing angle
     bool bearingAngle(const char *locator1, const char *locator2, double *azim, double *dist);  //Calculate Short Path bearing angle and distance between two locators

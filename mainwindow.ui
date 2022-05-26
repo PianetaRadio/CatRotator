@@ -210,7 +210,7 @@
      <x>0</x>
      <y>0</y>
      <width>478</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuConfig">
@@ -219,6 +219,7 @@
     </property>
     <addaction name="actionRotator"/>
     <addaction name="actionSetup"/>
+    <addaction name="actionPresets"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -262,6 +263,11 @@
   <action name="actionCatRotator_homepage">
    <property name="text">
     <string>CatRotator homepage</string>
+   </property>
+  </action>
+  <action name="actionPresets">
+   <property name="text">
+    <string>Presets</string>
    </property>
   </action>
  </widget>

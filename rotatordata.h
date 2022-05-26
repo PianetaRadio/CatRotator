@@ -48,7 +48,8 @@ typedef struct {
     bool udp;   //UDP enable flag
     QString udpAddress; //UDP address
     quint16 udpPort;    //UDP port
-    int preset[9];  //Preset button array
+    QString presetLabel[9]; //Preset button array label
+    int presetAz[9];  //Preset button array azimuth
 } catRotatorConfig;
 
 

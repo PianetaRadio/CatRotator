@@ -11,6 +11,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    dialogpreset.cpp \
     dialogrotator.cpp \
     dialogsetup.cpp \
     main.cpp \
@@ -20,6 +21,7 @@ SOURCES += \
     rotudp.cpp
 
 HEADERS += \
+    dialogpreset.h \
     dialogrotator.h \
     dialogsetup.h \
     mainwindow.h \
@@ -28,6 +30,7 @@ HEADERS += \
     rotudp.h
 
 FORMS += \
+    dialogpreset.ui \
     dialogrotator.ui \
     dialogsetup.ui \
     mainwindow.ui

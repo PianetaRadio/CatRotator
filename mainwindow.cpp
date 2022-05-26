@@ -21,6 +21,7 @@
 #include "ui_mainwindow.h"
 #include "dialogrotator.h"
 #include "dialogsetup.h"
+#include "dialogpreset.h"
 #include "rotatordata.h"
 #include "rotdaemon.h"
 
@@ -112,7 +113,8 @@ MainWindow::MainWindow(QWidget *parent)
     rotCfg.udpPort = configFile.value("udpPort", 12000).toUInt();   //should be toUShort()
 
     //Presets
-    std::copy(defaultPreset, defaultPreset+9, rotCfg.preset);
+    //std::copy(defaultPreset, defaultPreset+9, rotCfg.preset);
+    MainWindow::presetInit();
 
     //Window settings
     restoreGeometry(configFile.value("WindowSettings/geometry").toByteArray());
@@ -233,16 +235,40 @@ void MainWindow::presetGo(int presetNumber)
     switch (ui->tabWidget_rotator->currentIndex())
     {
     case 0:
-        rotSet.az = rotCfg.preset[presetNumber];
+        rotSet.az = rotCfg.presetAz[presetNumber];
         ui->lineEdit_posAz->setText(QString::number(rotSet.az));
         rot_set_position(my_rot, rotSet.az, rotSet.el);
         break;
     case 1:
-        rotSet2.az = rotCfg.preset[presetNumber];
+        rotSet2.az = rotCfg.presetAz[presetNumber];
         ui->lineEdit_posAz_2->setText(QString::number(rotSet2.az));
         rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
         break;
     }
+}
+
+void MainWindow::presetInit()
+{
+    QSettings configFile(QString("catrotator.ini"), QSettings::IniFormat);
+
+    configFile.beginReadArray("Preset");
+    for (int i = 0; i < 9; i++)
+    {
+        configFile.setArrayIndex(i);
+        rotCfg.presetLabel[i] = configFile.value("presetLabel", defaultPreset[i]).toString();
+        rotCfg.presetAz[i] = configFile.value("presetAz", defaultPreset[i]).toInt();
+    }
+    configFile.endArray();
+
+    ui->pushButton_p0->setText(rotCfg.presetLabel[0]);
+    ui->pushButton_p1->setText(rotCfg.presetLabel[1]);
+    ui->pushButton_p2->setText(rotCfg.presetLabel[2]);
+    ui->pushButton_p3->setText(rotCfg.presetLabel[3]);
+    ui->pushButton_p4->setText(rotCfg.presetLabel[4]);
+    ui->pushButton_p5->setText(rotCfg.presetLabel[5]);
+    ui->pushButton_p6->setText(rotCfg.presetLabel[6]);
+    ui->pushButton_p7->setText(rotCfg.presetLabel[7]);
+    ui->pushButton_p8->setText(rotCfg.presetLabel[8]);
 }
 
 bool MainWindow::azInput(QString value, double *azim)
@@ -462,6 +488,14 @@ void MainWindow::on_actionSetup_triggered()
     DialogSetup setup;
     setup.setModal(true);
     setup.exec();
+}
+
+void MainWindow::on_actionPresets_triggered()
+{
+    DialogPreset preset;
+    connect(&preset, &DialogPreset::configDone, this, &MainWindow::presetInit);
+    preset.setModal(true);
+    preset.exec();
 }
 
 void MainWindow::on_actionCatRotator_homepage_triggered()
