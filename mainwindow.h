@@ -87,6 +87,10 @@ private slots:
 
     void on_actionPresets_triggered();
 
+    void on_toolButton_pathSL_toggled(bool checked);
+
+    void on_toolButton_pathSL_2_toggled(bool checked);
+
 private:
     Ui::MainWindow *ui;
     QTimer *timer;
@@ -96,7 +100,7 @@ private:
     void presetGo(int presetNumber);
     void presetInit();
 
-    bool azInput(QString value, double *azim);  //Convert pointing value input, from format degree or QTH locator, into azimuth bearing angle
+    bool azInput(QString value, bool lPath, double *azim);  //Convert pointing value input, from format degree or QTH locator, into azimuth bearing angle
     bool bearingAngle(const char *locator1, const char *locator2, double *azim, double *dist);  //Calculate Short Path bearing angle and distance between two locators
     bool bearingAngleLP(const char *locator1, const char *locator2, double *azim, double *dist);    //Calculate Long Path bearing angle and distance between two locators
 };

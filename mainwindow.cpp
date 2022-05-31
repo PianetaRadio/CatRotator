@@ -271,7 +271,7 @@ void MainWindow::presetInit()
     ui->pushButton_p8->setText(rotCfg.presetLabel[8]);
 }
 
-bool MainWindow::azInput(QString value, double *azim)
+bool MainWindow::azInput(QString value, bool lPath, double *azim)
 {
     QRegularExpression azCmdDeg("^\\d\\d?\\d?");    //Match 0, 00, 000
     QRegularExpressionMatch azCmdDegMatch = azCmdDeg.match(value);
@@ -283,13 +283,26 @@ bool MainWindow::azInput(QString value, double *azim)
 
     if (azCmdDegMatch.hasMatch())
     {
-        *azim = azCmdDegMatch.captured(0).toDouble();
+        tempAz = azCmdDegMatch.captured(0).toDouble();
+        if (lPath) *azim = azimuth_long_path(tempAz);
+        else *azim = tempAz;
         ui->statusbar->clearMessage();
         return true;
     }
     else if (azCmdLocMatch.hasMatch() && rotCfg.qthLocator != "")
     {
-        if (MainWindow::bearingAngle(rotCfg.qthLocator.toLatin1(), azCmdLocMatch.captured(0).toLatin1(), &tempAz, &dist))
+        if (lPath)  //Long Path
+        {
+            if (MainWindow::bearingAngleLP(rotCfg.qthLocator.toLatin1(), azCmdLocMatch.captured(0).toLatin1(), &tempAz, &dist))
+            {
+                *azim = tempAz;
+                ui->statusbar->showMessage("Bearing LP "+QString::number(*azim,'f',1)+" deg, Distance "+QString::number(dist,'f',0)+" km");
+                return true;
+            }
+            else return false;
+        }
+        //Short Path
+        else if (MainWindow::bearingAngle(rotCfg.qthLocator.toLatin1(), azCmdLocMatch.captured(0).toLatin1(), &tempAz, &dist))
         {
             *azim = tempAz;
             ui->statusbar->showMessage("Bearing SP "+QString::number(*azim,'f',1)+" deg, Distance "+QString::number(dist,'f',0)+" km");
@@ -382,21 +395,51 @@ void MainWindow::on_pushButton_stop_clicked()
 void MainWindow::on_pushButton_go_clicked()
 {
    double tempAz;
-   if (MainWindow::azInput(ui->lineEdit_posAz->text(), &tempAz))
+   if (MainWindow::azInput(ui->lineEdit_posAz->text(), rotSet.lPathFlag, &tempAz))
    {
        rotSet.az = tempAz;
        rot_set_position(my_rot, rotSet.az, rotSet.el);
    }
 }
 
+void MainWindow::on_toolButton_pathSL_toggled(bool checked)
+{
+    if (checked)
+    {
+        ui->toolButton_pathSL->setText("LP");
+        rotSet.lPathFlag = true;
+    }
+    else
+    {
+        ui->toolButton_pathSL->setText("SP");
+        rotSet.lPathFlag = false;
+    }
+    emit ui->pushButton_go->clicked(true);
+}
+
 void MainWindow::on_pushButton_go_2_clicked()
 {
     double tempAz;
-    if (MainWindow::azInput(ui->lineEdit_posAz_2->text(), &tempAz))
+    if (MainWindow::azInput(ui->lineEdit_posAz_2->text(), rotSet2.lPathFlag, &tempAz))
     {
         rotSet2.az = tempAz;
         rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
     }
+}
+
+void MainWindow::on_toolButton_pathSL_2_toggled(bool checked)
+{
+    if (checked)
+    {
+        ui->toolButton_pathSL_2->setText("LP");
+        rotSet2.lPathFlag = true;
+    }
+    else
+    {
+        ui->toolButton_pathSL_2->setText("SP");
+        rotSet2.lPathFlag = false;
+    }
+    emit ui->pushButton_go_2->clicked(true);
 }
 
 void MainWindow::on_pushButton_park_clicked()

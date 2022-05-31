@@ -35,10 +35,11 @@ typedef struct {
 
 
 typedef struct {
-    bool enable;
-    QString nameLabel;
+    bool enable;    //Rotor enabled
+    QString nameLabel;  //Rotor name
     azimuth_t az, azPark;
     elevation_t el, elPark;
+    bool lPathFlag;    //Long Path
 } rotatorSettings;
 
 
@@ -54,7 +55,7 @@ typedef struct {
 
 
 typedef struct {
-    bool azUdpFlag, elUdpFlag, stopUdpFlag, parkUdpFlag;
+    bool azUdpFlag, elUdpFlag, stopUdpFlag, parkUdpFlag;    //UDP received command
     int azUdp, elUdp;
 } rotatorUdpEx;
 
