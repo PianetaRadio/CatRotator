@@ -3,10 +3,11 @@ CatRotator
 (+ New, * Updated, - Removed)
 
 1.1.0 - 2022-xx-xx
-	+ Short / long path selection
+	+ Az/El rotator
+	+ Short/long path selection
 	+ Presets configuration
 	+ Point with QTH locator input
-	* Save / restore window settings
+	+ Save/restore window settings
 
 1.0.0 - 2022-05-17
 	First release
