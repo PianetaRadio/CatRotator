@@ -367,39 +367,44 @@ bool MainWindow::bearingAngleLP(const char *locator1, const char *locator2, doub
 //* Buttons
 void MainWindow::on_pushButton_connect_toggled(bool checked)
 {
-    if (checked && rotCom.connected == 0)
+    if (checked)
     {
        my_rot = rotDaemon->rotConnect(&rotCom);   //Open Rotator connection
-       if (rotSet2.enable) my_rot2 = rotDaemon->rotConnect(&rotCom2);
+       if (!my_rot) rotCom.connected = 0;
+       else rotCom.connected = 1;
 
-       if (!my_rot)   //Connection error
+       if (rotSet2.enable)
        {
-           rotCom.connected = 0;
-           //ui->statusbar->showMessage(rigerror(retcode));
+           my_rot2 = rotDaemon->rotConnect(&rotCom2);
+           if (!my_rot2) rotCom2.connected = 0;
+           else rotCom2.connected = 1;
+       }
+
+       if (rotCom.connected == 0 && (rotSet2.enable && rotCom2.connected == 0))   //Connection error
+       {
+           ui->statusbar->showMessage("Connection error!");
            ui->pushButton_connect->setChecked(false);  //Uncheck the button
        }
        else    //Rotator connected
        {
-           rotCom.connected = 1;
-           //ui->statusbar->showMessage(my_rot->caps->model_name);
            timer->start(rotCfg.rotRefresh*1000);
            guiInit();
        }
-
-       if (!my_rot2) rotCom2.connected = 0;
-       else rotCom2.connected = 1;
-
     }
-    else if (rotCom.connected)   //Button unchecked
+    else   //Button unchecked
     {
-        rotCom.connected = 0;
         timer->stop();
-        rot_close(my_rot);  //Close the communication to the rotator
 
-        if (rotSet2.enable)
+        if (rotCom.connected)
         {
-            rotCom2.connected = 0;
+            rot_close(my_rot);  //Close the communication to the rotator
+            rotCom.connected = 0;
+        }
+
+        if (rotSet2.enable && rotCom2.connected)
+        {
             rot_close(my_rot2);
+            rotCom2.connected = 0;
         }
     }
 }
