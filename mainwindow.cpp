@@ -159,6 +159,7 @@ void MainWindow::on_rotDaemonResultReady()
 void MainWindow::guiInit()
 {
     ui->tabWidget_rotator->setTabText(0, rotSet.nameLabel);
+    if (my_rot->caps->rot_type == ROT_TYPE_AZIMUTH) ui->lcdNumber_posEl->setVisible(false);
     //ui->spinBox_posAz->setMaximum(my_rot->caps->max_az);
     //ui->spinBox_posAz->setMinimum(my_rot->caps->min_az);
 
@@ -173,6 +174,7 @@ void MainWindow::guiInit()
         ui->tabWidget_rotator->setTabVisible(1, true);
 #endif
         ui->tabWidget_rotator->setTabText(1, rotSet2.nameLabel);
+        if (my_rot2->caps->rot_type == ROT_TYPE_AZIMUTH) ui->lcdNumber_posEl_2->setVisible(false);
         //ui->spinBox_posAz_2->setMaximum(my_rot2->caps->max_az);
         //ui->spinBox_posAz_2->setMinimum(my_rot2->caps->min_az);
     }
@@ -188,10 +190,12 @@ void MainWindow::guiUpdate()
 {
     //Update current position
     ui->lcdNumber_posAz->display(rotGet.az);
+    ui->lcdNumber_posEl->display(rotGet.el);
 
     if (rotSet2.enable)
     {
         ui->lcdNumber_posAz_2->display(rotGet2.az);
+        ui->lcdNumber_posEl_2->display(rotGet2.el);
     }
 
     //Parse UDP command
@@ -271,17 +275,31 @@ void MainWindow::presetInit()
     ui->pushButton_p8->setText(rotCfg.presetLabel[8]);
 }
 
-bool MainWindow::azInput(QString value, bool lPath, double *azim)
+bool MainWindow::azElInput(QString value, bool lPath, double *azim, double *elev)
 {
-    QRegularExpression azCmdDeg("^\\d\\d?\\d?");    //Match 0, 00, 000
+    QRegularExpression azCmdDeg("^-?\\d\\d?\\d?");    //Match 0, 00, 000 with or w/o -
     QRegularExpressionMatch azCmdDegMatch = azCmdDeg.match(value);
+    QRegularExpression azElCmdDeg("^(-?\\d\\d?\\d?) (-?\\d\\d?\\d?)");
+    QRegularExpressionMatch azElCmdDegMatch = azElCmdDeg.match(value);
     QRegularExpression azCmdLoc("^[a-rA-R][a-rA-R]\\d{2}([a-xA-X][a-xA-X])?(\\d{2})?"); //Match AA00, AA00AA, AA00AA00
     QRegularExpressionMatch azCmdLocMatch = azCmdLoc.match(value);
 
     double dist = 0;
-    double tempAz;
+    double tempAz, tempEl;
 
-    if (azCmdDegMatch.hasMatch())
+    *elev = 0;
+
+    if (azElCmdDegMatch.hasMatch())
+    {
+        tempAz = azElCmdDegMatch.captured(1).toDouble();
+        if (lPath) *azim = azimuth_long_path(tempAz);
+        else *azim = tempAz;
+        tempEl = azElCmdDegMatch.captured(2).toDouble();
+        *elev = tempEl;
+        ui->statusbar->clearMessage();
+        return true;
+    }
+    else if (azCmdDegMatch.hasMatch())
     {
         tempAz = azCmdDegMatch.captured(0).toDouble();
         if (lPath) *azim = azimuth_long_path(tempAz);
@@ -394,10 +412,11 @@ void MainWindow::on_pushButton_stop_clicked()
 
 void MainWindow::on_pushButton_go_clicked()
 {
-   double tempAz;
-   if (MainWindow::azInput(ui->lineEdit_posAz->text(), rotSet.lPathFlag, &tempAz))
+   double tempAz, tempEl;
+   if (MainWindow::azElInput(ui->lineEdit_posAz->text(), rotSet.lPathFlag, &tempAz, &tempEl))
    {
        rotSet.az = tempAz;
+       rotSet.el = tempEl;
        rot_set_position(my_rot, rotSet.az, rotSet.el);
    }
 }
@@ -419,10 +438,11 @@ void MainWindow::on_toolButton_pathSL_toggled(bool checked)
 
 void MainWindow::on_pushButton_go_2_clicked()
 {
-    double tempAz;
-    if (MainWindow::azInput(ui->lineEdit_posAz_2->text(), rotSet2.lPathFlag, &tempAz))
+    double tempAz, tempEl;
+    if (MainWindow::azElInput(ui->lineEdit_posAz_2->text(), rotSet2.lPathFlag, &tempAz, &tempEl))
     {
         rotSet2.az = tempAz;
+        rotSet2.el = tempEl;
         rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
     }
 }

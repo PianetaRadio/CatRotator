@@ -100,7 +100,7 @@ private:
     void presetGo(int presetNumber);
     void presetInit();
 
-    bool azInput(QString value, bool lPath, double *azim);  //Convert pointing value input, from format degree or QTH locator, into azimuth bearing angle
+    bool azElInput(QString value, bool lPath, double *azim, double *elev);  //Convert pointing value input, from format degree or QTH locator, into azimuth bearing angle and elevation
     bool bearingAngle(const char *locator1, const char *locator2, double *azim, double *dist);  //Calculate Short Path bearing angle and distance between two locators
     bool bearingAngleLP(const char *locator1, const char *locator2, double *azim, double *dist);    //Calculate Long Path bearing angle and distance between two locators
 };

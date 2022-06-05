@@ -113,7 +113,7 @@
           <item row="1" column="2">
            <widget class="QLabel" name="label_elPark">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string>El Park</string>
@@ -136,7 +136,7 @@
           <item row="1" column="3">
            <widget class="QSpinBox" name="spinBox_elPark">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="maximum">
              <number>90</number>
@@ -266,7 +266,7 @@
           <item row="1" column="2">
            <widget class="QLabel" name="label_elPark_2">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string>El Park</string>
@@ -289,7 +289,7 @@
           <item row="1" column="3">
            <widget class="QSpinBox" name="spinBox_elPark_2">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="maximum">
              <number>90</number>
@@ -412,8 +412,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
+     <x>259</x>
+     <y>488</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -428,8 +428,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
+     <x>327</x>
+     <y>488</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>
