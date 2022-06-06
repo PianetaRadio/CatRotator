@@ -163,7 +163,7 @@
         <item row="0" column="3">
          <widget class="QLineEdit" name="lineEdit_posAz">
           <property name="toolTip">
-           <string>Azimuth angle or QRA locator</string>
+           <string>Az (El) angle or QRA loc</string>
           </property>
           <property name="inputMask">
            <string/>
@@ -216,7 +216,7 @@
         <item row="0" column="3">
          <widget class="QLineEdit" name="lineEdit_posAz_2">
           <property name="toolTip">
-           <string>Azimuth angle or QRA locator</string>
+           <string>Az (El) angle or QRA loc</string>
           </property>
          </widget>
         </item>

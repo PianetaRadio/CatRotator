@@ -160,6 +160,7 @@ void MainWindow::guiInit()
 {
     ui->tabWidget_rotator->setTabText(0, rotSet.nameLabel);
     if (my_rot->caps->rot_type == ROT_TYPE_AZIMUTH) ui->lcdNumber_posEl->setVisible(false);
+    if (my_rot->caps->rot_type == ROT_TYPE_ELEVATION) ui->toolButton_pathSL->setVisible(false);
     //ui->spinBox_posAz->setMaximum(my_rot->caps->max_az);
     //ui->spinBox_posAz->setMinimum(my_rot->caps->min_az);
 
@@ -175,6 +176,7 @@ void MainWindow::guiInit()
 #endif
         ui->tabWidget_rotator->setTabText(1, rotSet2.nameLabel);
         if (my_rot2->caps->rot_type == ROT_TYPE_AZIMUTH) ui->lcdNumber_posEl_2->setVisible(false);
+        if (my_rot2->caps->rot_type == ROT_TYPE_ELEVATION) ui->toolButton_pathSL_2->setVisible(false);
         //ui->spinBox_posAz_2->setMaximum(my_rot2->caps->max_az);
         //ui->spinBox_posAz_2->setMinimum(my_rot2->caps->min_az);
     }
@@ -287,7 +289,7 @@ bool MainWindow::azElInput(QString value, bool lPath, double *azim, double *elev
     double dist = 0;
     double tempAz, tempEl;
 
-    *elev = 0;
+    *elev = -1; //Used for no elevation input
 
     if (azElCmdDegMatch.hasMatch())
     {
@@ -420,8 +422,16 @@ void MainWindow::on_pushButton_go_clicked()
    double tempAz, tempEl;
    if (MainWindow::azElInput(ui->lineEdit_posAz->text(), rotSet.lPathFlag, &tempAz, &tempEl))
    {
-       rotSet.az = tempAz;
-       rotSet.el = tempEl;
+       if (my_rot->caps->rot_type == ROT_TYPE_ELEVATION)    //Elevation only rotator
+       {
+           rotSet.az = 0;
+           rotSet.el = tempAz;
+       }
+       else //Azimuth or Az/El rotator
+       {
+           rotSet.az = tempAz;
+           if (tempEl >= 0) rotSet.el = tempEl;
+       }
        rot_set_position(my_rot, rotSet.az, rotSet.el);
    }
 }
@@ -446,8 +456,16 @@ void MainWindow::on_pushButton_go_2_clicked()
     double tempAz, tempEl;
     if (MainWindow::azElInput(ui->lineEdit_posAz_2->text(), rotSet2.lPathFlag, &tempAz, &tempEl))
     {
-        rotSet2.az = tempAz;
-        rotSet2.el = tempEl;
+        if (my_rot2->caps->rot_type == ROT_TYPE_ELEVATION)
+        {
+            rotSet2.az = 0;
+            rotSet2.el = tempAz;
+        }
+        else
+        {
+            rotSet2.az = tempAz;
+            if (tempEl >= 0) rotSet2.el = tempEl;
+        }
         rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
     }
 }
