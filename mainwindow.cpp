@@ -369,6 +369,8 @@ bool MainWindow::bearingAngleLP(const char *locator1, const char *locator2, doub
 //* Buttons
 void MainWindow::on_pushButton_connect_toggled(bool checked)
 {
+    QString connectMsg;
+
     if (checked)
     {
        my_rot = rotDaemon->rotConnect(&rotCom);   //Open Rotator connection
@@ -384,13 +386,17 @@ void MainWindow::on_pushButton_connect_toggled(bool checked)
 
        if (rotCom.connected == 0 && (rotSet2.enable && rotCom2.connected == 0))   //Connection error
        {
-           ui->statusbar->showMessage("Connection error!");
+           connectMsg = "Connection error!";
            ui->pushButton_connect->setChecked(false);  //Uncheck the button
        }
        else    //Rotator connected
        {
            timer->start(rotCfg.rotRefresh*1000);
            guiInit();
+
+           connectMsg = "Connected";
+           if (rotCom.connected) connectMsg = connectMsg + " " + rotSet.nameLabel;
+           if (rotCom2.connected) connectMsg = connectMsg + " " + rotSet2.nameLabel;
        }
     }
     else   //Button unchecked
@@ -408,7 +414,10 @@ void MainWindow::on_pushButton_connect_toggled(bool checked)
             rot_close(my_rot2);
             rotCom2.connected = 0;
         }
+        connectMsg = "Disconnected";
     }
+
+    ui->statusbar->showMessage(connectMsg);
 }
 
 void MainWindow::on_pushButton_stop_clicked()
