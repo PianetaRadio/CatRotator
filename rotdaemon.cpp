@@ -47,7 +47,6 @@ ROT *RotDaemon::rotConnect(rotatorConnect *rotCom)
         msgBox.setStandardButtons(QMessageBox::Ok);
         msgBox.exec();
 
-        //return -1;   //RIG_EINVAL, Invalid parameter
         return nullptr;
     }
     else
@@ -64,13 +63,8 @@ ROT *RotDaemon::rotConnect(rotatorConnect *rotCom)
 
         retcode = rot_open(rot);
 
-        if (retcode != RIG_OK) return nullptr;//retcode;  //Rotator not connected
-        else    //Rotator connected
-        {
-            //return 0;
-            return rot;
-        }
-
+        if (retcode != RIG_OK) return nullptr;  //Rotator not connected
+        else return rot;    //Rotator connected
      }
 }
 

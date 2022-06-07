@@ -146,8 +146,8 @@ MainWindow::~MainWindow()
 //* Get values
 void MainWindow::rotUpdate()
 {
-    rotDaemon->rotUpdate(my_rot, &rotGet);
-    if (rotSet2.enable) rotDaemon->rotUpdate(my_rot2, &rotGet2);
+    if (rotCom.connected) rotDaemon->rotUpdate(my_rot, &rotGet);
+    if (rotSet2.enable && rotCom2.connected) rotDaemon->rotUpdate(my_rot2, &rotGet2);
 }
 
 //* RotDaemon handle results
@@ -158,18 +158,12 @@ void MainWindow::on_rotDaemonResultReady()
 
 void MainWindow::guiInit()
 {
-    ui->tabWidget_rotator->setTabText(0, rotSet.nameLabel);
-    if (my_rot->caps->rot_type == ROT_TYPE_AZIMUTH) ui->lcdNumber_posEl->setVisible(false);
-    if (my_rot->caps->rot_type == ROT_TYPE_ELEVATION) ui->toolButton_pathSL->setVisible(false);
-    //ui->spinBox_posAz->setMaximum(my_rot->caps->max_az);
-    //ui->spinBox_posAz->setMinimum(my_rot->caps->min_az);
-
 #if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
     ui->tabWidget_rotator->removeTab(3);
     ui->tabWidget_rotator->removeTab(2);
 #endif
 
-    if (rotSet2.enable)
+    if (rotSet2.enable && rotCom2.connected)
     {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
         ui->tabWidget_rotator->setTabVisible(1, true);
@@ -182,8 +176,30 @@ void MainWindow::guiInit()
     }
     else
     {
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+        ui->tabWidget_rotator->setTabVisible(1, false);
+#else
     ui->tabWidget_rotator->removeTab(1);
+#endif
+    }
+
+    if (rotCom.connected)
+    {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+        ui->tabWidget_rotator->setTabVisible(0, true);
+#endif
+        ui->tabWidget_rotator->setTabText(0, rotSet.nameLabel);
+        if (my_rot->caps->rot_type == ROT_TYPE_AZIMUTH) ui->lcdNumber_posEl->setVisible(false);
+        if (my_rot->caps->rot_type == ROT_TYPE_ELEVATION) ui->toolButton_pathSL->setVisible(false);
+        //ui->spinBox_posAz->setMaximum(my_rot->caps->max_az);
+        //ui->spinBox_posAz->setMinimum(my_rot->caps->min_az);
+    }
+    else
+    {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+        ui->tabWidget_rotator->setTabVisible(0, false);
+#else
+        ui->tabWidget_rotator->removeTab(0);
 #endif
     }
 }
@@ -373,7 +389,7 @@ void MainWindow::on_pushButton_connect_toggled(bool checked)
 
     if (checked)
     {
-       my_rot = rotDaemon->rotConnect(&rotCom);   //Open Rotator connection
+       my_rot = rotDaemon->rotConnect(&rotCom);   //Open Rotator connectio
        if (!my_rot) rotCom.connected = 0;
        else rotCom.connected = 1;
 
@@ -384,7 +400,7 @@ void MainWindow::on_pushButton_connect_toggled(bool checked)
            else rotCom2.connected = 1;
        }
 
-       if (rotCom.connected == 0 && (rotSet2.enable && rotCom2.connected == 0))   //Connection error
+       if (!rotCom.connected && (rotSet2.enable && !rotCom2.connected))   //Connection error
        {
            connectMsg = "Connection error!";
            ui->pushButton_connect->setChecked(false);  //Uncheck the button
