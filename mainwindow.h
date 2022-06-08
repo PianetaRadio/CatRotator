@@ -91,6 +91,10 @@ private slots:
 
     void on_toolButton_pathSL_2_toggled(bool checked);
 
+    void on_pushButton_go_3_clicked();
+
+    void on_toolButton_pathSL_3_toggled(bool checked);
+
 private:
     Ui::MainWindow *ui;
     QTimer *timer;

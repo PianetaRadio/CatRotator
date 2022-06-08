@@ -325,6 +325,159 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="tab_rotator3">
+      <attribute name="title">
+       <string>Rotator 3</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_13">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_rotModel_3">
+         <property name="text">
+          <string>Model</string>
+         </property>
+         <property name="buddy">
+          <cstring>comboBox_rotModel_2</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QComboBox" name="comboBox_rotModel_3"/>
+       </item>
+       <item row="1" column="0" colspan="2">
+        <widget class="QTabWidget" name="tabWidget_comms_3">
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <widget class="QWidget" name="tab_com_3">
+          <attribute name="title">
+           <string>COM</string>
+          </attribute>
+          <layout class="QFormLayout" name="formLayout_11">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_comPort_3">
+             <property name="text">
+              <string>COM Port</string>
+             </property>
+             <property name="buddy">
+              <cstring>comboBox_comPort_2</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="comboBox_comPort_3"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_serialSpeed_3">
+             <property name="text">
+              <string>Speed</string>
+             </property>
+             <property name="buddy">
+              <cstring>comboBox_serialSpeed_2</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QComboBox" name="comboBox_serialSpeed_3"/>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="tab_tcp_3">
+          <attribute name="title">
+           <string>TCP</string>
+          </attribute>
+          <layout class="QFormLayout" name="formLayout_12">
+           <item row="0" column="0">
+            <widget class="QCheckBox" name="checkBox_netRotctl_3">
+             <property name="text">
+              <string>NET Rotctl</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_ip_3">
+             <property name="text">
+              <string>IP address</string>
+             </property>
+             <property name="buddy">
+              <cstring>lineEdit_ip_2</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLineEdit" name="lineEdit_ip_3"/>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="2">
+        <widget class="QGroupBox" name="groupBox_settings_3">
+         <property name="title">
+          <string>Settings</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_12">
+          <item row="1" column="2">
+           <widget class="QLabel" name="label_elPark_3">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="text">
+             <string>El Park</string>
+            </property>
+            <property name="buddy">
+             <cstring>spinBox_elPark_2</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_azPark_3">
+            <property name="text">
+             <string>Az Park</string>
+            </property>
+            <property name="buddy">
+             <cstring>spinBox_azPark_2</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QSpinBox" name="spinBox_elPark_3">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="maximum">
+             <number>90</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QSpinBox" name="spinBox_azPark_3">
+            <property name="maximum">
+             <number>450</number>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_name_3">
+            <property name="text">
+             <string>Label</string>
+            </property>
+            <property name="buddy">
+             <cstring>lineEdit_name_2</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" colspan="3">
+           <widget class="QLineEdit" name="lineEdit_name_3">
+            <property name="text">
+             <string>Rotator 3</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
    <item row="2" column="0" colspan="2">

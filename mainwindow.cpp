@@ -36,6 +36,7 @@
 
 ROT *my_rot;
 ROT *my_rot2;
+ROT *my_rot3;
 
 extern rotatorConnect rotCom;
 extern rotatorSettings rotGet;
@@ -44,6 +45,10 @@ extern rotatorSettings rotSet;
 extern rotatorConnect rotCom2;
 extern rotatorSettings rotGet2;
 extern rotatorSettings rotSet2;
+
+extern rotatorConnect rotCom3;
+extern rotatorSettings rotGet3;
+extern rotatorSettings rotSet3;
 
 extern catRotatorConfig rotCfg;
 extern rotatorUdpEx rotUdpEx;
@@ -106,6 +111,15 @@ MainWindow::MainWindow(QWidget *parent)
     rotSet2.azPark = configFile.value("Rotator2/azPark", 0).toInt();
     rotSet2.elPark = configFile.value("Rotator2/elPark", 0).toInt();
 
+    rotCom3.rotModel = configFile.value("Rotator3/rotModel", 0).toInt();
+    rotCom3.rotPort = configFile.value("Rotator3/rotPort").toString();
+    rotCom3.serialSpeed = configFile.value("Rotator3/serialSpeed", 9600).toInt();
+    rotCom3.netRotctl = configFile.value("Rotator3/netRotctl", false).toBool();
+    if (rotCom3.rotModel) rotSet3.enable = true;
+    rotSet3.nameLabel = configFile.value("Rotator3/nameLabel", "Rotator 3").toString();
+    rotSet3.azPark = configFile.value("Rotator3/azPark", 0).toInt();
+    rotSet3.elPark = configFile.value("Rotator3/elPark", 0).toInt();
+
     rotCfg.rotRefresh = configFile.value("rotRefresh", 1).toInt();
     rotCfg.qthLocator = configFile.value("qthLocator", "").toString();
     rotCfg.udp = configFile.value("udp", false).toBool();
@@ -148,6 +162,7 @@ void MainWindow::rotUpdate()
 {
     if (rotCom.connected) rotDaemon->rotUpdate(my_rot, &rotGet);
     if (rotSet2.enable && rotCom2.connected) rotDaemon->rotUpdate(my_rot2, &rotGet2);
+    if (rotSet3.enable && rotCom3.connected) rotDaemon->rotUpdate(my_rot3, &rotGet3);
 }
 
 //* RotDaemon handle results
@@ -160,8 +175,30 @@ void MainWindow::guiInit()
 {
 #if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
     ui->tabWidget_rotator->removeTab(3);
+#endif
+
+    if (rotSet3.enable)
+    {
+        ui->tabWidget_rotator->setTabText(2, rotSet3.nameLabel);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+        ui->tabWidget_rotator->setTabVisible(2, true);
+#endif
+        if (rotCom3.connected)
+        {
+            ui->tabWidget_rotator->setTabEnabled(2, true);
+            if (my_rot3->caps->rot_type == ROT_TYPE_AZIMUTH) ui->lcdNumber_posEl_3->setVisible(false);
+            if (my_rot3->caps->rot_type == ROT_TYPE_ELEVATION) ui->toolButton_pathSL_3->setVisible(false);
+        }
+        else ui->tabWidget_rotator->setTabEnabled(2, false);
+    }
+    else
+    {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+        ui->tabWidget_rotator->setTabVisible(2, false);
+#else
     ui->tabWidget_rotator->removeTab(2);
 #endif
+    }
 
     if (rotSet2.enable)
     {
@@ -174,8 +211,6 @@ void MainWindow::guiInit()
             ui->tabWidget_rotator->setTabEnabled(1, true);
             if (my_rot2->caps->rot_type == ROT_TYPE_AZIMUTH) ui->lcdNumber_posEl_2->setVisible(false);
             if (my_rot2->caps->rot_type == ROT_TYPE_ELEVATION) ui->toolButton_pathSL_2->setVisible(false);
-            //ui->spinBox_posAz_2->setMaximum(my_rot2->caps->max_az);
-            //ui->spinBox_posAz_2->setMinimum(my_rot2->caps->min_az);
         }
         else ui->tabWidget_rotator->setTabEnabled(1, false);
     }
@@ -212,6 +247,12 @@ void MainWindow::guiUpdate()
         ui->lcdNumber_posEl_2->display(rotGet2.el);
     }
 
+    if (rotSet3.enable)
+    {
+        ui->lcdNumber_posAz_3->display(rotGet3.az);
+        ui->lcdNumber_posEl_3->display(rotGet3.el);
+    }
+
     //Parse UDP command
     if (rotUdpEx.azUdpFlag || rotUdpEx.elUdpFlag)
     {
@@ -231,6 +272,12 @@ void MainWindow::guiUpdate()
             rotSet2.el = rotUdpEx.elUdp;
             ui->lineEdit_posAz_2->setText(QString::number(rotSet2.az));
             rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
+            break;
+        case 2:
+            rotSet3.az = rotUdpEx.azUdp;
+            rotSet3.el = rotUdpEx.elUdp;
+            ui->lineEdit_posAz_3->setText(QString::number(rotSet3.az));
+            rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
             break;
         }
     }
@@ -261,6 +308,11 @@ void MainWindow::presetGo(int presetNumber)
         rotSet2.az = rotCfg.presetAz[presetNumber];
         ui->lineEdit_posAz_2->setText(QString::number(rotSet2.az));
         rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
+        break;
+    case 2:
+        rotSet3.az = rotCfg.presetAz[presetNumber];
+        ui->lineEdit_posAz_3->setText(QString::number(rotSet3.az));
+        rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
         break;
     }
 }
@@ -385,7 +437,7 @@ void MainWindow::on_pushButton_connect_toggled(bool checked)
 
     if (checked)
     {
-       my_rot = rotDaemon->rotConnect(&rotCom);   //Open Rotator connectio
+       my_rot = rotDaemon->rotConnect(&rotCom);   //Open Rotator connection
        if (!my_rot) rotCom.connected = 0;
        else rotCom.connected = 1;
 
@@ -396,7 +448,14 @@ void MainWindow::on_pushButton_connect_toggled(bool checked)
            else rotCom2.connected = 1;
        }
 
-       if (!rotCom.connected && (rotSet2.enable && !rotCom2.connected))   //Connection error
+       if (rotSet3.enable)
+       {
+           my_rot3 = rotDaemon->rotConnect(&rotCom3);
+           if (!my_rot3) rotCom3.connected = 0;
+           else rotCom3.connected = 1;
+       }
+
+       if (!rotCom.connected && (rotSet2.enable && !rotCom2.connected) && (rotSet3.enable && !rotCom3.connected))   //Connection error
        {
            connectMsg = "Connection error!";
            ui->pushButton_connect->setChecked(false);  //Uncheck the button
@@ -409,6 +468,7 @@ void MainWindow::on_pushButton_connect_toggled(bool checked)
            connectMsg = "Connected";
            if (rotCom.connected) connectMsg = connectMsg + " " + rotSet.nameLabel;
            if (rotCom2.connected) connectMsg = connectMsg + " " + rotSet2.nameLabel;
+           if (rotCom3.connected) connectMsg = connectMsg + " " + rotSet3.nameLabel;
        }
     }
     else   //Button unchecked
@@ -426,6 +486,12 @@ void MainWindow::on_pushButton_connect_toggled(bool checked)
             rot_close(my_rot2);
             rotCom2.connected = 0;
         }
+
+        if (rotSet3.enable && rotCom3.connected)
+        {
+            rot_close(my_rot3);
+            rotCom3.connected = 0;
+        }
         connectMsg = "Disconnected";
     }
 
@@ -436,6 +502,7 @@ void MainWindow::on_pushButton_stop_clicked()
 {
     rot_stop(my_rot);
     if (rotSet2.enable) rot_stop(my_rot2);
+    if (rotSet3.enable) rot_stop(my_rot3);
 }
 
 void MainWindow::on_pushButton_go_clicked()
@@ -506,6 +573,40 @@ void MainWindow::on_toolButton_pathSL_2_toggled(bool checked)
     emit ui->pushButton_go_2->clicked(true);
 }
 
+void MainWindow::on_pushButton_go_3_clicked()
+{
+    double tempAz, tempEl;
+    if (MainWindow::azElInput(ui->lineEdit_posAz_3->text(), rotSet3.lPathFlag, &tempAz, &tempEl))
+    {
+        if (my_rot3->caps->rot_type == ROT_TYPE_ELEVATION)
+        {
+            rotSet3.az = 0;
+            rotSet3.el = tempAz;
+        }
+        else
+        {
+            rotSet3.az = tempAz;
+            if (tempEl >= 0) rotSet3.el = tempEl;
+        }
+        rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
+    }
+}
+
+void MainWindow::on_toolButton_pathSL_3_toggled(bool checked)
+{
+    if (checked)
+    {
+        ui->toolButton_pathSL_3->setText("LP");
+        rotSet3.lPathFlag = true;
+    }
+    else
+    {
+        ui->toolButton_pathSL_3->setText("SP");
+        rotSet3.lPathFlag = false;
+    }
+    emit ui->pushButton_go_3->clicked(true);
+}
+
 void MainWindow::on_pushButton_park_clicked()
 {
     switch (ui->tabWidget_rotator->currentIndex())
@@ -529,6 +630,17 @@ void MainWindow::on_pushButton_park_clicked()
             rotSet2.el = rotSet2.elPark;
             ui->lineEdit_posAz_2->setText(QString::number(rotSet2.az));
             rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
+        }
+        break;
+
+    case 2:
+        if (my_rot3->caps->park) rot_park(my_rot3);
+        else
+        {
+            rotSet3.az = rotSet3.azPark;
+            rotSet3.el = rotSet3.elPark;
+            ui->lineEdit_posAz_3->setText(QString::number(rotSet3.az));
+            rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
         }
         break;
     }
