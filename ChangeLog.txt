@@ -2,7 +2,7 @@ CatRotator
 
 (+ New, * Updated, - Removed)
 
-1.1.0 - 2022-xx-xx
+1.1.0 - 2022-06-08
 	* Up to three rotators
 	* Connection logic and messages
 	+ Elevation rotator
