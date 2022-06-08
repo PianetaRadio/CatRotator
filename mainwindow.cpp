@@ -163,16 +163,21 @@ void MainWindow::guiInit()
     ui->tabWidget_rotator->removeTab(2);
 #endif
 
-    if (rotSet2.enable && rotCom2.connected)
+    if (rotSet2.enable)
     {
+        ui->tabWidget_rotator->setTabText(1, rotSet2.nameLabel);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
         ui->tabWidget_rotator->setTabVisible(1, true);
 #endif
-        ui->tabWidget_rotator->setTabText(1, rotSet2.nameLabel);
-        if (my_rot2->caps->rot_type == ROT_TYPE_AZIMUTH) ui->lcdNumber_posEl_2->setVisible(false);
-        if (my_rot2->caps->rot_type == ROT_TYPE_ELEVATION) ui->toolButton_pathSL_2->setVisible(false);
-        //ui->spinBox_posAz_2->setMaximum(my_rot2->caps->max_az);
-        //ui->spinBox_posAz_2->setMinimum(my_rot2->caps->min_az);
+        if (rotCom2.connected)
+        {
+            ui->tabWidget_rotator->setTabEnabled(1, true);
+            if (my_rot2->caps->rot_type == ROT_TYPE_AZIMUTH) ui->lcdNumber_posEl_2->setVisible(false);
+            if (my_rot2->caps->rot_type == ROT_TYPE_ELEVATION) ui->toolButton_pathSL_2->setVisible(false);
+            //ui->spinBox_posAz_2->setMaximum(my_rot2->caps->max_az);
+            //ui->spinBox_posAz_2->setMinimum(my_rot2->caps->min_az);
+        }
+        else ui->tabWidget_rotator->setTabEnabled(1, false);
     }
     else
     {
@@ -183,25 +188,16 @@ void MainWindow::guiInit()
 #endif
     }
 
+    ui->tabWidget_rotator->setTabText(0, rotSet.nameLabel);
     if (rotCom.connected)
     {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
-        ui->tabWidget_rotator->setTabVisible(0, true);
-#endif
-        ui->tabWidget_rotator->setTabText(0, rotSet.nameLabel);
+        ui->tabWidget_rotator->setTabEnabled(0, true);
         if (my_rot->caps->rot_type == ROT_TYPE_AZIMUTH) ui->lcdNumber_posEl->setVisible(false);
         if (my_rot->caps->rot_type == ROT_TYPE_ELEVATION) ui->toolButton_pathSL->setVisible(false);
         //ui->spinBox_posAz->setMaximum(my_rot->caps->max_az);
         //ui->spinBox_posAz->setMinimum(my_rot->caps->min_az);
     }
-    else
-    {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
-        ui->tabWidget_rotator->setTabVisible(0, false);
-#else
-        ui->tabWidget_rotator->removeTab(0);
-#endif
-    }
+    else ui->tabWidget_rotator->setTabEnabled(0, false);
 }
 
 void MainWindow::guiUpdate()
