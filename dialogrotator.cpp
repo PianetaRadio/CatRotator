@@ -228,6 +228,7 @@ DialogRotator::DialogRotator(QWidget *parent) :
     ui->spinBox_elPark_3->setValue(rotSet3.elPark);
 
     ui->spinBox_refreshRate->setValue(rotCfg.rotRefresh);
+    ui->spinBox_incrementAz->setValue(rotCfg.incrementAz);
 }
 
 DialogRotator::~DialogRotator()
@@ -394,6 +395,7 @@ void DialogRotator::on_buttonBox_accepted()
     rotSet3.elPark = ui->spinBox_elPark_3->value();
 
     rotCfg.rotRefresh = ui->spinBox_refreshRate->value();   //Refresh
+    rotCfg.incrementAz = ui->spinBox_incrementAz->value();  //Increment
 
     //* Save settings in catrotator.ini
     QSettings configFile(QString("catrotator.ini"), QSettings::IniFormat);
@@ -422,6 +424,7 @@ void DialogRotator::on_buttonBox_accepted()
     configFile.setValue("Rotator3/elPark", rotSet3.elPark);
 
     configFile.setValue("rotRefresh", ui->spinBox_refreshRate->value());
+    configFile.setValue("rotIncrementAz", ui->spinBox_incrementAz->value());
 }
 
 int printRotatorList(const struct rot_caps *rotCaps, void *data)    //Load rotators list from hamlib and save into file rotator.lst

@@ -132,30 +132,7 @@
        <attribute name="title">
         <string>Rotator 1</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_2" columnstretch="1,0,0,0">
-        <item row="0" column="2">
-         <widget class="QToolButton" name="toolButton_pathSL">
-          <property name="minimumSize">
-           <size>
-            <width>35</width>
-            <height>25</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>SP</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="3">
-         <widget class="QPushButton" name="pushButton_go">
-          <property name="text">
-           <string>Go</string>
-          </property>
-         </widget>
-        </item>
+       <layout class="QGridLayout" name="gridLayout_2" columnstretch="2,1,0,0,0,0">
         <item row="0" column="0" rowspan="2">
          <widget class="QLCDNumber" name="lcdNumber_posAz">
           <property name="digitCount">
@@ -179,10 +156,47 @@
           </property>
          </widget>
         </item>
+        <item row="0" column="4">
+         <widget class="QToolButton" name="toolButton_minus">
+          <property name="text">
+           <string>-</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QToolButton" name="toolButton_pathSL">
+          <property name="minimumSize">
+           <size>
+            <width>35</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>SP</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
         <item row="0" column="1" rowspan="2">
          <widget class="QLCDNumber" name="lcdNumber_posEl">
           <property name="digitCount">
            <number>3</number>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="5">
+         <widget class="QToolButton" name="toolButton_plus">
+          <property name="text">
+           <string>+</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3" colspan="3">
+         <widget class="QPushButton" name="pushButton_go">
+          <property name="text">
+           <string>Go</string>
           </property>
          </widget>
         </item>

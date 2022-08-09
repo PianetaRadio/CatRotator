@@ -25,7 +25,7 @@
 
 #define RELEASE_DATE __DATE__
 #define VERSION_MAJ 1
-#define VERSION_MIN 1
+#define VERSION_MIN 2
 #define VERSION_MIC 0
 
 QT_BEGIN_NAMESPACE
@@ -94,6 +94,10 @@ private slots:
     void on_pushButton_go_3_clicked();
 
     void on_toolButton_pathSL_3_toggled(bool checked);
+
+    void on_toolButton_minus_clicked();
+
+    void on_toolButton_plus_clicked();
 
 private:
     Ui::MainWindow *ui;

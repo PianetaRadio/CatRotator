@@ -121,6 +121,7 @@ MainWindow::MainWindow(QWidget *parent)
     rotSet3.elPark = configFile.value("Rotator3/elPark", 0).toInt();
 
     rotCfg.rotRefresh = configFile.value("rotRefresh", 1).toInt();
+    rotCfg.incrementAz = configFile.value("rotIncrementAz", 10).toInt();
     rotCfg.qthLocator = configFile.value("qthLocator", "").toString();
     rotCfg.udp = configFile.value("udp", false).toBool();
     rotCfg.udpAddress = configFile.value("udpAddress", "127.0.0.1").toString();
@@ -505,6 +506,8 @@ void MainWindow::on_pushButton_stop_clicked()
     if (rotSet3.enable) rot_stop(my_rot3);
 }
 
+
+//Rotor 1
 void MainWindow::on_pushButton_go_clicked()
 {
    double tempAz, tempEl;
@@ -524,6 +527,19 @@ void MainWindow::on_pushButton_go_clicked()
    }
 }
 
+void MainWindow::on_toolButton_minus_clicked()
+{
+    rotSet.az = rotSet.az - rotCfg.incrementAz;
+    ui->lineEdit_posAz->setText(QString::number(rotSet.az));
+}
+
+
+void MainWindow::on_toolButton_plus_clicked()
+{
+    rotSet.az = rotSet.az + rotCfg.incrementAz;
+    ui->lineEdit_posAz->setText(QString::number(rotSet.az));
+}
+
 void MainWindow::on_toolButton_pathSL_toggled(bool checked)
 {
     if (checked)
@@ -539,6 +555,7 @@ void MainWindow::on_toolButton_pathSL_toggled(bool checked)
     emit ui->pushButton_go->clicked(true);
 }
 
+//Rotor 2
 void MainWindow::on_pushButton_go_2_clicked()
 {
     double tempAz, tempEl;
@@ -573,6 +590,7 @@ void MainWindow::on_toolButton_pathSL_2_toggled(bool checked)
     emit ui->pushButton_go_2->clicked(true);
 }
 
+//Rotor 3
 void MainWindow::on_pushButton_go_3_clicked()
 {
     double tempAz, tempEl;
@@ -646,11 +664,11 @@ void MainWindow::on_pushButton_park_clicked()
     }
 }
 
+//Presets
 void MainWindow::on_pushButton_p0_clicked()
 {
     presetGo(0);
 }
-
 
 void MainWindow::on_pushButton_p1_clicked()
 {

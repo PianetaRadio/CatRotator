@@ -2,6 +2,10 @@ CatRotator
 
 (+ New, * Updated, - Removed)
 
+1.2.0 - 2022
+	+ Plus/Minus buttons for step increment
+
+
 1.1.0 - 2022-06-08
 	* Up to three rotators
 	* Connection logic and messages

@@ -51,6 +51,7 @@ typedef struct {
     quint16 udpPort;    //UDP port
     QString presetLabel[9]; //Preset button array label
     int presetAz[9];  //Preset button array azimuth
+    int incrementAz; //Increment interval for plus/minus buttons;
 } catRotatorConfig;
 
 
