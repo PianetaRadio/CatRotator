@@ -575,6 +575,18 @@ void MainWindow::on_pushButton_go_2_clicked()
     }
 }
 
+void MainWindow::on_toolButton_minus_2_clicked()
+{
+    rotSet2.az = rotSet2.az - rotCfg.incrementAz;
+    ui->lineEdit_posAz_2->setText(QString::number(rotSet2.az));
+}
+
+void MainWindow::on_toolButton_plus_2_clicked()
+{
+    rotSet2.az = rotSet2.az + rotCfg.incrementAz;
+    ui->lineEdit_posAz_2->setText(QString::number(rotSet2.az));
+}
+
 void MainWindow::on_toolButton_pathSL_2_toggled(bool checked)
 {
     if (checked)
@@ -608,6 +620,18 @@ void MainWindow::on_pushButton_go_3_clicked()
         }
         rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
     }
+}
+
+void MainWindow::on_toolButton_minus_3_clicked()
+{
+    rotSet3.az = rotSet3.az - rotCfg.incrementAz;
+    ui->lineEdit_posAz_3->setText(QString::number(rotSet3.az));
+}
+
+void MainWindow::on_toolButton_plus_3_clicked()
+{
+    rotSet3.az = rotSet3.az + rotCfg.incrementAz;
+    ui->lineEdit_posAz_3->setText(QString::number(rotSet3.az));
 }
 
 void MainWindow::on_toolButton_pathSL_3_toggled(bool checked)

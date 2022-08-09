@@ -99,6 +99,14 @@ private slots:
 
     void on_toolButton_plus_clicked();
 
+    void on_toolButton_minus_2_clicked();
+
+    void on_toolButton_plus_2_clicked();
+
+    void on_toolButton_minus_3_clicked();
+
+    void on_toolButton_plus_3_clicked();
+
 private:
     Ui::MainWindow *ui;
     QTimer *timer;
