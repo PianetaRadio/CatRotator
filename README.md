@@ -4,4 +4,4 @@
 Rotator Control Software<br/>
 More info https://www.pianetaradio.it/blog/catrotator/
 
-![CatRotator](https://www.pianetaradio.it/wp-content/uploads/2022/05/catrotator_01.png)
+![CatRotator](https://www.pianetaradio.it/wp-content/uploads/2022/06/catrotator_1.1.0_01.png)
