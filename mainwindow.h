@@ -107,6 +107,12 @@ private slots:
 
     void on_toolButton_plus_3_clicked();
 
+    void on_toolButton_track_toggled(bool checked);
+
+    void on_toolButton_track_2_toggled(bool checked);
+
+    void on_toolButton_track_3_toggled(bool checked);
+
 private:
     Ui::MainWindow *ui;
     QTimer *timer;
@@ -115,6 +121,9 @@ private:
     void guiUpdate();
     void presetGo(int presetNumber);
     void presetInit();
+
+    void parseWSJTX(double *azim, double *elev);    //Read WSJT-X azel.dat tracking data
+    void parseAirScout(double *azim, double *elev); //Read AirScout azel.dat tracking data
 
     bool azElInput(QString value, bool lPath, double *azim, double *elev);  //Convert pointing value input, from format degree or QTH locator, into azimuth bearing angle and elevation
     bool bearingAngle(const char *locator1, const char *locator2, double *azim, double *dist);  //Calculate Short Path bearing angle and distance between two locators

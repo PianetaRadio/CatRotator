@@ -135,6 +135,9 @@
        <layout class="QGridLayout" name="gridLayout_2" columnstretch="2,1,0,0,0,0">
         <item row="0" column="0" rowspan="2">
          <widget class="QLCDNumber" name="lcdNumber_posAz">
+          <property name="smallDecimalPoint">
+           <bool>true</bool>
+          </property>
           <property name="digitCount">
            <number>4</number>
           </property>
@@ -181,6 +184,9 @@
         </item>
         <item row="0" column="1" rowspan="2">
          <widget class="QLCDNumber" name="lcdNumber_posEl">
+          <property name="smallDecimalPoint">
+           <bool>true</bool>
+          </property>
           <property name="digitCount">
            <number>3</number>
           </property>
@@ -197,6 +203,22 @@
          <widget class="QPushButton" name="pushButton_go">
           <property name="text">
            <string>Go</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QToolButton" name="toolButton_track">
+          <property name="minimumSize">
+           <size>
+            <width>35</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>TRK</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -223,6 +245,9 @@
         </item>
         <item row="0" column="0" rowspan="2">
          <widget class="QLCDNumber" name="lcdNumber_posAz_2">
+          <property name="smallDecimalPoint">
+           <bool>true</bool>
+          </property>
           <property name="digitCount">
            <number>4</number>
           </property>
@@ -230,6 +255,9 @@
         </item>
         <item row="0" column="1" rowspan="2">
          <widget class="QLCDNumber" name="lcdNumber_posEl_2">
+          <property name="smallDecimalPoint">
+           <bool>true</bool>
+          </property>
           <property name="digitCount">
            <number>3</number>
           </property>
@@ -265,6 +293,22 @@
           </property>
          </widget>
         </item>
+        <item row="1" column="2">
+         <widget class="QToolButton" name="toolButton_track_2">
+          <property name="minimumSize">
+           <size>
+            <width>35</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>TRK</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="tab_3">
@@ -274,6 +318,9 @@
        <layout class="QGridLayout" name="gridLayout_5" columnstretch="2,1,0,0,0,0">
         <item row="0" column="0" rowspan="2">
          <widget class="QLCDNumber" name="lcdNumber_posAz_3">
+          <property name="smallDecimalPoint">
+           <bool>true</bool>
+          </property>
           <property name="digitCount">
            <number>4</number>
           </property>
@@ -311,6 +358,9 @@
         </item>
         <item row="0" column="1" rowspan="2">
          <widget class="QLCDNumber" name="lcdNumber_posEl_3">
+          <property name="smallDecimalPoint">
+           <bool>true</bool>
+          </property>
           <property name="digitCount">
            <number>3</number>
           </property>
@@ -327,6 +377,22 @@
          <widget class="QPushButton" name="pushButton_go_3">
           <property name="text">
            <string>Go</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QToolButton" name="toolButton_track_3">
+          <property name="minimumSize">
+           <size>
+            <width>35</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>TRK</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
           </property>
          </widget>
         </item>

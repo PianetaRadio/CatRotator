@@ -31,6 +31,8 @@
 #include <QDesktopServices>
 #include <QUrl>
 #include <QRegularExpression>
+#include <QDir>
+#include <QFile>
 
 #include <rotator.h>    //Hamlib
 
@@ -101,6 +103,9 @@ MainWindow::MainWindow(QWidget *parent)
     rotSet.nameLabel = configFile.value("Rotator1/nameLabel", "Rotator 1").toString();
     rotSet.azPark = configFile.value("Rotator1/azPark", 0).toInt();
     rotSet.elPark = configFile.value("Rotator1/elPark", 0).toInt();
+    rotSet.trackTolerance = configFile.value("Rotator1/trackTolerance", 5.0).toDouble();
+    rotSet.trackWSJTX = configFile.value("Rotator1/trackWSJTX", false).toBool();
+    rotSet.trackAirScout = configFile.value("Rotator1/trackAirScout", false).toBool();
 
     rotCom2.rotModel = configFile.value("Rotator2/rotModel", 0).toInt();
     rotCom2.rotPort = configFile.value("Rotator2/rotPort").toString();
@@ -110,6 +115,9 @@ MainWindow::MainWindow(QWidget *parent)
     rotSet2.nameLabel = configFile.value("Rotator2/nameLabel", "Rotator 2").toString();
     rotSet2.azPark = configFile.value("Rotator2/azPark", 0).toInt();
     rotSet2.elPark = configFile.value("Rotator2/elPark", 0).toInt();
+    rotSet2.trackTolerance = configFile.value("Rotator2/trackTolerance", 5.0).toDouble();
+    rotSet2.trackWSJTX = configFile.value("Rotator2/trackWSJTX", false).toBool();
+    rotSet2.trackAirScout = configFile.value("Rotator2/trackAirScout", false).toBool();
 
     rotCom3.rotModel = configFile.value("Rotator3/rotModel", 0).toInt();
     rotCom3.rotPort = configFile.value("Rotator3/rotPort").toString();
@@ -119,6 +127,9 @@ MainWindow::MainWindow(QWidget *parent)
     rotSet3.nameLabel = configFile.value("Rotator3/nameLabel", "Rotator 3").toString();
     rotSet3.azPark = configFile.value("Rotator3/azPark", 0).toInt();
     rotSet3.elPark = configFile.value("Rotator3/elPark", 0).toInt();
+    rotSet3.trackTolerance = configFile.value("Rotator3/trackTolerance", 5.0).toDouble();
+    rotSet3.trackWSJTX = configFile.value("Rotator3/trackWSJTX", false).toBool();
+    rotSet3.trackAirScout = configFile.value("Rotator3/trackAirScout", false).toBool();
 
     rotCfg.rotRefresh = configFile.value("rotRefresh", 1).toInt();
     rotCfg.incrementAz = configFile.value("rotIncrementAz", 10).toInt();
@@ -126,6 +137,9 @@ MainWindow::MainWindow(QWidget *parent)
     rotCfg.udp = configFile.value("udp", false).toBool();
     rotCfg.udpAddress = configFile.value("udpAddress", "127.0.0.1").toString();
     rotCfg.udpPort = configFile.value("udpPort", 12000).toUInt();   //should be toUShort()
+    rotCfg.pathTrackWSJTX = QDir::homePath() + "/AppData/Local/WSJT-X";
+                                                    //RPi /home/pi/.local/share/WSJT-X
+    rotCfg.pathTrackAirScout = configFile.value("pathTrackAirScout", QDir::homePath() + "/AppData/Local/DL2ALF/AirScout/Tmp").toString();
 
     //Presets
     //std::copy(defaultPreset, defaultPreset+9, rotCfg.preset);
@@ -239,19 +253,19 @@ void MainWindow::guiInit()
 void MainWindow::guiUpdate()
 {
     //Update current position
-    ui->lcdNumber_posAz->display(rotGet.az);
-    ui->lcdNumber_posEl->display(rotGet.el);
+    ui->lcdNumber_posAz->display(QString::number(rotGet.az, 'f', 1));
+    ui->lcdNumber_posEl->display(QString::number(rotGet.el, 'f', 1));
 
     if (rotSet2.enable)
     {
-        ui->lcdNumber_posAz_2->display(rotGet2.az);
-        ui->lcdNumber_posEl_2->display(rotGet2.el);
+        ui->lcdNumber_posAz_2->display(QString::number(rotGet2.az, 'f', 1));
+        ui->lcdNumber_posEl_2->display(QString::number(rotGet2.el, 'f', 1));
     }
 
     if (rotSet3.enable)
     {
-        ui->lcdNumber_posAz_3->display(rotGet3.az);
-        ui->lcdNumber_posEl_3->display(rotGet3.el);
+        ui->lcdNumber_posAz_3->display(QString::number(rotGet3.az, 'f', 1));
+        ui->lcdNumber_posEl_3->display(QString::number(rotGet3.el, 'f', 1));
     }
 
     //Parse UDP command
@@ -265,19 +279,19 @@ void MainWindow::guiUpdate()
         case 0:
             rotSet.az = rotUdpEx.azUdp;
             rotSet.el = rotUdpEx.elUdp;
-            ui->lineEdit_posAz->setText(QString::number(rotSet.az));
+            ui->lineEdit_posAz->setText(QString::number(rotSet.az) + " " + QString::number(rotSet.el));
             rot_set_position(my_rot, rotSet.az, rotSet.el);
             break;
         case 1:
             rotSet2.az = rotUdpEx.azUdp;
             rotSet2.el = rotUdpEx.elUdp;
-            ui->lineEdit_posAz_2->setText(QString::number(rotSet2.az));
+            ui->lineEdit_posAz_2->setText(QString::number(rotSet2.az) + " " + QString::number(rotSet2.el));
             rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
             break;
         case 2:
             rotSet3.az = rotUdpEx.azUdp;
             rotSet3.el = rotUdpEx.elUdp;
-            ui->lineEdit_posAz_3->setText(QString::number(rotSet3.az));
+            ui->lineEdit_posAz_3->setText(QString::number(rotSet3.az) + " " + QString::number(rotSet3.el));
             rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
             break;
         }
@@ -293,6 +307,58 @@ void MainWindow::guiUpdate()
     {
         rotUdpEx.parkUdpFlag = false;
         emit ui->pushButton_park->clicked(true);
+    }
+
+    //Tracking
+    if (rotSet.trackFlag)
+    {
+        double tempAz=0, tempEl=0;
+        if (rotSet.trackWSJTX) parseWSJTX(&tempAz, &tempEl);
+        else if (rotSet.trackAirScout) parseAirScout(&tempAz, &tempEl);
+        if (tempEl != -1)   //No tracking dat error
+        {
+            if (((abs(tempAz - rotSet.az) > rotSet.trackTolerance) || (abs(tempEl - rotSet.el) > rotSet.trackTolerance)) && ((tempAz != rotSet.az) || (tempEl != rotSet.el)))
+            {
+                rotSet.az = tempAz;
+                rotSet.el = tempEl;
+                ui->lineEdit_posAz->setText(QString::number(rotSet.az) + " " + QString::number(rotSet.el));
+                rot_set_position(my_rot, rotSet.az, rotSet.el);
+            }
+        }
+    }
+
+    if (rotSet2.trackFlag)
+    {
+        double tempAz=0, tempEl=0;
+        if (rotSet2.trackWSJTX) parseWSJTX(&tempAz, &tempEl);
+        else if (rotSet2.trackAirScout) parseAirScout(&tempAz, &tempEl);
+        if (tempEl != -1)   //No tracking dat error
+        {
+            if (((abs(tempAz - rotSet2.az) > rotSet2.trackTolerance) || (abs(tempEl - rotSet2.el) > rotSet2.trackTolerance)) && ((tempAz != rotSet2.az) || (tempEl != rotSet2.el)))
+            {
+                rotSet2.az = tempAz;
+                rotSet2.el = tempEl;
+                ui->lineEdit_posAz_2->setText(QString::number(rotSet2.az) + " " + QString::number(rotSet2.el));
+                rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
+            }
+        }
+    }
+
+    if (rotSet3.trackFlag)
+    {
+        double tempAz=0, tempEl=0;
+        if (rotSet3.trackWSJTX) parseWSJTX(&tempAz, &tempEl);
+        else if (rotSet3.trackAirScout) parseAirScout(&tempAz, &tempEl);
+        if (tempEl != -1)   //No tracking dat error
+        {
+            if (((abs(tempAz - rotSet3.az) > rotSet3.trackTolerance) || (abs(tempEl - rotSet3.el) > rotSet3.trackTolerance)) && ((tempAz != rotSet3.az) || (tempEl != rotSet3.el)))
+            {
+                rotSet3.az = tempAz;
+                rotSet3.el = tempEl;
+                ui->lineEdit_posAz_3->setText(QString::number(rotSet3.az) + " " + QString::number(rotSet3.el));
+                rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
+            }
+        }
     }
 }
 
@@ -340,6 +406,38 @@ void MainWindow::presetInit()
     ui->pushButton_p6->setText(rotCfg.presetLabel[6]);
     ui->pushButton_p7->setText(rotCfg.presetLabel[7]);
     ui->pushButton_p8->setText(rotCfg.presetLabel[8]);
+}
+
+void MainWindow::parseWSJTX(double *azim, double *elev)
+{
+    *azim = 0;
+    *elev = -1;
+    return;
+
+}
+
+void MainWindow::parseAirScout(double *azim, double *elev)
+{
+    QFile azelDatAirScout(rotCfg.pathTrackAirScout + "/azel.dat");
+    if (!azelDatAirScout.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        *elev = -1; //Used for error
+        return;
+    }
+    QString datAirScout = azelDatAirScout.readLine(0);
+
+    QRegularExpression azelDat("^(\\d+\\.?\\d*),(\\d+\\.?\\d*)");   //Match x.x,x.x
+    QRegularExpressionMatch azelDatMatch = azelDat.match(datAirScout);
+
+    if (azelDatMatch.hasMatch())
+    {
+        *azim = azelDatMatch.captured(1).toDouble();
+        *elev = azelDatMatch.captured(2).toDouble();
+    }
+    else *elev = -1;    //Used for error
+
+    azelDatAirScout.close();
+    return;
 }
 
 bool MainWindow::azElInput(QString value, bool lPath, double *azim, double *elev)
@@ -555,6 +653,35 @@ void MainWindow::on_toolButton_pathSL_toggled(bool checked)
     emit ui->pushButton_go->clicked(true);
 }
 
+void MainWindow::on_toolButton_track_toggled(bool checked)
+{
+    if (checked)
+    {
+        if (rotSet.trackWSJTX)
+        {
+            ui->toolButton_track->setText("WSJ");
+            ui->statusbar->showMessage("Tracking WSJT-X (Moon) " + rotSet.nameLabel);
+        }
+        else if (rotSet.trackAirScout)
+        {
+            ui->toolButton_track->setText("AS");
+            ui->statusbar->showMessage("Tracking AirScout " + rotSet.nameLabel);
+        }
+        else
+        {
+            ui->toolButton_track->setChecked(false);
+            return;
+        }
+        rotSet.trackFlag = true;
+    }
+    else
+    {
+        ui->toolButton_track->setText("TRK");
+        ui->statusbar->showMessage("Tracking off " + rotSet.nameLabel);
+        rotSet.trackFlag = false;
+    }
+}
+
 //Rotor 2
 void MainWindow::on_pushButton_go_2_clicked()
 {
@@ -600,6 +727,35 @@ void MainWindow::on_toolButton_pathSL_2_toggled(bool checked)
         rotSet2.lPathFlag = false;
     }
     emit ui->pushButton_go_2->clicked(true);
+}
+
+void MainWindow::on_toolButton_track_2_toggled(bool checked)
+{
+    if (checked)
+    {
+        if (rotSet2.trackWSJTX)
+        {
+            ui->toolButton_track_2->setText("WSJ");
+            ui->statusbar->showMessage("Tracking WSJT-X (Moon) " + rotSet2.nameLabel);
+        }
+        else if (rotSet2.trackAirScout)
+        {
+            ui->toolButton_track_2->setText("AS");
+            ui->statusbar->showMessage("Tracking AirScout " + rotSet2.nameLabel);
+        }
+        else
+        {
+            ui->toolButton_track_2->setChecked(false);
+            return;
+        }
+        rotSet2.trackFlag = true;
+    }
+    else
+    {
+        ui->toolButton_track_2->setText("TRK");
+        ui->statusbar->showMessage("Tracking off " + rotSet2.nameLabel);
+        rotSet2.trackFlag = false;
+    }
 }
 
 //Rotor 3
@@ -649,6 +805,36 @@ void MainWindow::on_toolButton_pathSL_3_toggled(bool checked)
     emit ui->pushButton_go_3->clicked(true);
 }
 
+void MainWindow::on_toolButton_track_3_toggled(bool checked)
+{
+    if (checked)
+    {
+        if (rotSet3.trackWSJTX)
+        {
+            ui->toolButton_track_3->setText("WSJ");
+            ui->statusbar->showMessage("Tracking WSJT-X (Moon) " + rotSet3.nameLabel);
+        }
+        else if (rotSet3.trackAirScout)
+        {
+            ui->toolButton_track_3->setText("AS");
+            ui->statusbar->showMessage("Tracking AirScout " + rotSet3.nameLabel);
+        }
+        else
+        {
+            ui->toolButton_track_3->setChecked(false);
+            return;
+        }
+        rotSet3.trackFlag = true;
+    }
+    else
+    {
+        ui->toolButton_track_3->setText("TRK");
+        ui->statusbar->showMessage("Tracking off " + rotSet3.nameLabel);
+        rotSet3.trackFlag = false;
+    }
+}
+
+//Park
 void MainWindow::on_pushButton_park_clicked()
 {
     switch (ui->tabWidget_rotator->currentIndex())

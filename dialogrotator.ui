@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>440</width>
-    <height>500</height>
+    <height>544</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,19 +24,6 @@
        <string>Rotator 1</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_4">
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_rotModel">
-         <property name="text">
-          <string>Model</string>
-         </property>
-         <property name="buddy">
-          <cstring>comboBox_rotModel</cstring>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QComboBox" name="comboBox_rotModel"/>
-       </item>
        <item row="2" column="0" colspan="2">
         <widget class="QTabWidget" name="tabWidget_comms">
          <property name="currentIndex">
@@ -170,6 +157,74 @@
          </layout>
         </widget>
        </item>
+       <item row="0" column="1">
+        <widget class="QComboBox" name="comboBox_rotModel"/>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_rotModel">
+         <property name="text">
+          <string>Model</string>
+         </property>
+         <property name="buddy">
+          <cstring>comboBox_rotModel</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0" colspan="2">
+        <widget class="QGroupBox" name="groupBox_tracking">
+         <property name="title">
+          <string>Tracking</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_7">
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="checkBox_WSJTX">
+            <property name="text">
+             <string>WSJT-X</string>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QCheckBox" name="checkBox_AirScout">
+            <property name="text">
+             <string>AirScout</string>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
+            </property>
+            <property name="tristate">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_tolerance">
+            <property name="text">
+             <string>Tolerance (+/- deg)</string>
+            </property>
+            <property name="buddy">
+             <cstring>doubleSpinBox_tolerance</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBox_tolerance">
+            <property name="decimals">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <double>90.000000000000000</double>
+            </property>
+            <property name="value">
+             <double>5.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="tab_rotator2">
@@ -177,19 +232,6 @@
        <string>Rotator 2</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_6">
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_rotModel_2">
-         <property name="text">
-          <string>Model</string>
-         </property>
-         <property name="buddy">
-          <cstring>comboBox_rotModel_2</cstring>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QComboBox" name="comboBox_rotModel_2"/>
-       </item>
        <item row="2" column="0" colspan="2">
         <widget class="QTabWidget" name="tabWidget_comms_2">
          <property name="currentIndex">
@@ -323,15 +365,8 @@
          </layout>
         </widget>
        </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="tab_rotator3">
-      <attribute name="title">
-       <string>Rotator 3</string>
-      </attribute>
-      <layout class="QGridLayout" name="gridLayout_13">
        <item row="0" column="0">
-        <widget class="QLabel" name="label_rotModel_3">
+        <widget class="QLabel" name="label_rotModel_2">
          <property name="text">
           <string>Model</string>
          </property>
@@ -341,7 +376,145 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QComboBox" name="comboBox_rotModel_3"/>
+        <widget class="QComboBox" name="comboBox_rotModel_2"/>
+       </item>
+       <item row="4" column="0" colspan="2">
+        <widget class="QGroupBox" name="groupBox_tracking_2">
+         <property name="title">
+          <string>Tracking</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_8">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_tolerance_2">
+            <property name="text">
+             <string>Tolerance (+/- deg)</string>
+            </property>
+            <property name="buddy">
+             <cstring>doubleSpinBox_tolerance_2</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBox_tolerance_2">
+            <property name="decimals">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <double>90.000000000000000</double>
+            </property>
+            <property name="value">
+             <double>5.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="checkBox_WSJTX_2">
+            <property name="text">
+             <string>WSJT-X</string>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QCheckBox" name="checkBox_AirScout_2">
+            <property name="text">
+             <string>AirScout</string>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
+            </property>
+            <property name="tristate">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_rotator3">
+      <attribute name="title">
+       <string>Rotator 3</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_13">
+       <item row="2" column="0" colspan="2">
+        <widget class="QGroupBox" name="groupBox_settings_3">
+         <property name="title">
+          <string>Settings</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_12">
+          <item row="1" column="2">
+           <widget class="QLabel" name="label_elPark_3">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="text">
+             <string>El Park</string>
+            </property>
+            <property name="buddy">
+             <cstring>spinBox_elPark_2</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_azPark_3">
+            <property name="text">
+             <string>Az Park</string>
+            </property>
+            <property name="buddy">
+             <cstring>spinBox_azPark_2</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QSpinBox" name="spinBox_elPark_3">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="maximum">
+             <number>90</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QSpinBox" name="spinBox_azPark_3">
+            <property name="maximum">
+             <number>450</number>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_name_3">
+            <property name="text">
+             <string>Label</string>
+            </property>
+            <property name="buddy">
+             <cstring>lineEdit_name_2</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" colspan="3">
+           <widget class="QLineEdit" name="lineEdit_name_3">
+            <property name="text">
+             <string>Rotator 3</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_rotModel_3">
+         <property name="text">
+          <string>Model</string>
+         </property>
+         <property name="buddy">
+          <cstring>comboBox_rotModel_2</cstring>
+         </property>
+        </widget>
        </item>
        <item row="1" column="0" colspan="2">
         <widget class="QTabWidget" name="tabWidget_comms_3">
@@ -410,66 +583,58 @@
          </widget>
         </widget>
        </item>
-       <item row="2" column="0" colspan="2">
-        <widget class="QGroupBox" name="groupBox_settings_3">
+       <item row="0" column="1">
+        <widget class="QComboBox" name="comboBox_rotModel_3"/>
+       </item>
+       <item row="3" column="0" colspan="2">
+        <widget class="QGroupBox" name="groupBox_tracking_3">
          <property name="title">
-          <string>Settings</string>
+          <string>Tracking</string>
          </property>
-         <layout class="QGridLayout" name="gridLayout_12">
-          <item row="1" column="2">
-           <widget class="QLabel" name="label_elPark_3">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
+         <layout class="QGridLayout" name="gridLayout_9">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_tolerance_3">
             <property name="text">
-             <string>El Park</string>
+             <string>Tolerance (+/- deg)</string>
             </property>
             <property name="buddy">
-             <cstring>spinBox_elPark_2</cstring>
+             <cstring>doubleSpinBox_tolerance_3</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBox_tolerance_3">
+            <property name="decimals">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <double>90.000000000000000</double>
+            </property>
+            <property name="value">
+             <double>5.000000000000000</double>
             </property>
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QLabel" name="label_azPark_3">
+           <widget class="QCheckBox" name="checkBox_WSJTX_3">
             <property name="text">
-             <string>Az Park</string>
+             <string>WSJT-X</string>
             </property>
-            <property name="buddy">
-             <cstring>spinBox_azPark_2</cstring>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="3">
-           <widget class="QSpinBox" name="spinBox_elPark_3">
-            <property name="enabled">
+            <property name="autoExclusive">
              <bool>true</bool>
-            </property>
-            <property name="maximum">
-             <number>90</number>
             </property>
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QSpinBox" name="spinBox_azPark_3">
-            <property name="maximum">
-             <number>450</number>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_name_3">
+           <widget class="QCheckBox" name="checkBox_AirScout_3">
             <property name="text">
-             <string>Label</string>
+             <string>AirScout</string>
             </property>
-            <property name="buddy">
-             <cstring>lineEdit_name_2</cstring>
+            <property name="autoExclusive">
+             <bool>true</bool>
             </property>
-           </widget>
-          </item>
-          <item row="0" column="1" colspan="3">
-           <widget class="QLineEdit" name="lineEdit_name_3">
-            <property name="text">
-             <string>Rotator 3</string>
+            <property name="tristate">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -611,8 +776,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>259</x>
-     <y>488</y>
+     <x>270</x>
+     <y>532</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -627,8 +792,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>327</x>
-     <y>488</y>
+     <x>338</x>
+     <y>532</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>

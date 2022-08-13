@@ -40,6 +40,8 @@ typedef struct {
     azimuth_t az, azPark;
     elevation_t el, elPark;
     bool lPathFlag;    //Long Path
+    bool trackFlag, trackWSJTX, trackAirScout; //Tracking
+    float trackTolerance;    //Tracking tolerance
 } rotatorSettings;
 
 
@@ -52,6 +54,8 @@ typedef struct {
     QString presetLabel[9]; //Preset button array label
     int presetAz[9];  //Preset button array azimuth
     int incrementAz; //Increment interval for plus/minus buttons;
+    QString pathTrackWSJTX; //Path for WSJT-X tracking file;
+    QString pathTrackAirScout;  //Path for AirScout tracking file;
 } catRotatorConfig;
 
 

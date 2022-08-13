@@ -23,6 +23,8 @@
 
 #include <QSettings>
 #include <QFile>
+#include <QFileDialog>
+#include <QDir>
 
 extern catRotatorConfig rotCfg;
 
@@ -37,11 +39,20 @@ DialogSetup::DialogSetup(QWidget *parent) :
     ui->checkBox_udp->setChecked(rotCfg.udp);
     ui->lineEdit_udpAddress->setText(rotCfg.udpAddress);
     ui->lineEdit_udpPort->setText(QString::number(rotCfg.udpPort));
+    ui->lineEdit_AirScout->setText(rotCfg.pathTrackAirScout);
 }
 
 DialogSetup::~DialogSetup()
 {
     delete ui;
+}
+
+void DialogSetup::on_pushButton_AirScout_clicked()
+{
+    //QString fileTrackAirScout = QFileDialog::getOpenFileName(this, "Set file", rotCfg.pathTrackAirScout);
+    rotCfg.pathTrackAirScout = QFileDialog::getExistingDirectory(this, "Set path", rotCfg.pathTrackAirScout);
+    //fileTrackAirScout = fileTrackAirScout + "/azel.dat";
+    ui->lineEdit_AirScout->setText(rotCfg.pathTrackAirScout);
 }
 
 void DialogSetup::on_buttonBox_accepted()
@@ -50,6 +61,7 @@ void DialogSetup::on_buttonBox_accepted()
     rotCfg.udp = ui->checkBox_udp->checkState();
     rotCfg.udpAddress = ui->lineEdit_udpAddress->text();
     rotCfg.udpPort = ui->lineEdit_udpPort->text().toUShort();
+    rotCfg.pathTrackAirScout = ui->lineEdit_AirScout->text();
 
     //* Save settings in catrotator.ini
     QSettings configFile(QString("catrotator.ini"), QSettings::IniFormat);
@@ -57,4 +69,5 @@ void DialogSetup::on_buttonBox_accepted()
     configFile.setValue("udp", rotCfg.udp);
     configFile.setValue("udpAddress", rotCfg.udpAddress);
     configFile.setValue("udpPort", rotCfg.udpPort);
+    configFile.setValue("pathTrackAirScout", rotCfg.pathTrackAirScout);
 }

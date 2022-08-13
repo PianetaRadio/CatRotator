@@ -194,6 +194,9 @@ DialogRotator::DialogRotator(QWidget *parent) :
     ui->lineEdit_name->setText(rotSet.nameLabel);
     ui->spinBox_azPark->setValue(rotSet.azPark);
     ui->spinBox_elPark->setValue(rotSet.elPark);
+    ui->doubleSpinBox_tolerance->setValue(rotSet.trackTolerance);
+    ui->checkBox_WSJTX->setChecked(rotSet.trackWSJTX);
+    ui->checkBox_AirScout->setChecked(rotSet.trackAirScout);
 
     ui->comboBox_rotModel_2->setCurrentIndex(ui->comboBox_rotModel_2->findText(QString::number(rotCom2.rotModel),Qt::MatchStartsWith));
     if (rotCom2.netRotctl)
@@ -210,6 +213,9 @@ DialogRotator::DialogRotator(QWidget *parent) :
     ui->lineEdit_name_2->setText(rotSet2.nameLabel);
     ui->spinBox_azPark_2->setValue(rotSet2.azPark);
     ui->spinBox_elPark_2->setValue(rotSet2.elPark);
+    ui->doubleSpinBox_tolerance_2->setValue(rotSet2.trackTolerance);
+    ui->checkBox_WSJTX_2->setChecked(rotSet2.trackWSJTX);
+    ui->checkBox_AirScout_2->setChecked(rotSet2.trackAirScout);
 
     ui->comboBox_rotModel_3->setCurrentIndex(ui->comboBox_rotModel_3->findText(QString::number(rotCom3.rotModel),Qt::MatchStartsWith));
     if (rotCom3.netRotctl)
@@ -226,6 +232,9 @@ DialogRotator::DialogRotator(QWidget *parent) :
     ui->lineEdit_name_3->setText(rotSet3.nameLabel);
     ui->spinBox_azPark_3->setValue(rotSet3.azPark);
     ui->spinBox_elPark_3->setValue(rotSet3.elPark);
+    ui->doubleSpinBox_tolerance_3->setValue(rotSet3.trackTolerance);
+    ui->checkBox_WSJTX_3->setChecked(rotSet3.trackWSJTX);
+    ui->checkBox_AirScout_3->setChecked(rotSet3.trackAirScout);
 
     ui->spinBox_refreshRate->setValue(rotCfg.rotRefresh);
     ui->spinBox_incrementAz->setValue(rotCfg.incrementAz);
@@ -291,6 +300,9 @@ void DialogRotator::on_buttonBox_accepted()
     rotSet.nameLabel = ui->lineEdit_name->text();
     rotSet.azPark = ui->spinBox_azPark->value();
     rotSet.elPark = ui->spinBox_elPark->value();
+    rotSet.trackTolerance = ui->doubleSpinBox_tolerance->value();
+    rotSet.trackWSJTX = ui->checkBox_WSJTX->isChecked();
+    rotSet.trackAirScout = ui->checkBox_AirScout->isChecked();
 
     //Rotator 2
     if (ui->comboBox_rotModel_2->currentText() == "") //No backend selected
@@ -342,6 +354,9 @@ void DialogRotator::on_buttonBox_accepted()
     rotSet2.nameLabel = ui->lineEdit_name_2->text();
     rotSet2.azPark = ui->spinBox_azPark_2->value();
     rotSet2.elPark = ui->spinBox_elPark_2->value();
+    rotSet2.trackTolerance = ui->doubleSpinBox_tolerance_2->value();
+    rotSet2.trackWSJTX = ui->checkBox_WSJTX_2->isChecked();
+    rotSet2.trackAirScout = ui->checkBox_AirScout_2->isChecked();
 
     //Rotator 3
     if (ui->comboBox_rotModel_3->currentText() == "") //No backend selected
@@ -393,6 +408,9 @@ void DialogRotator::on_buttonBox_accepted()
     rotSet3.nameLabel = ui->lineEdit_name_3->text();
     rotSet3.azPark = ui->spinBox_azPark_3->value();
     rotSet3.elPark = ui->spinBox_elPark_3->value();
+    rotSet3.trackTolerance = ui->doubleSpinBox_tolerance_3->value();
+    rotSet3.trackWSJTX = ui->checkBox_WSJTX_3->isChecked();
+    rotSet3.trackAirScout = ui->checkBox_AirScout_3->isChecked();
 
     rotCfg.rotRefresh = ui->spinBox_refreshRate->value();   //Refresh
     rotCfg.incrementAz = ui->spinBox_incrementAz->value();  //Increment
@@ -406,6 +424,9 @@ void DialogRotator::on_buttonBox_accepted()
     configFile.setValue("Rotator1/nameLabel", rotSet.nameLabel);
     configFile.setValue("Rotator1/azPark", rotSet.azPark);
     configFile.setValue("Rotator1/elPark", rotSet.elPark);
+    configFile.setValue("Rotator1/trackTolerance", rotSet.trackTolerance);
+    configFile.setValue("Rotator1/trackWSJTX", rotSet.trackWSJTX);
+    configFile.setValue("Rotator1/trackAirScout", rotSet.trackAirScout);
 
     configFile.setValue("Rotator2/rotModel", rotCom2.rotModel);
     configFile.setValue("Rotator2/rotPort", rotCom2.rotPort);
@@ -414,6 +435,9 @@ void DialogRotator::on_buttonBox_accepted()
     configFile.setValue("Rotator2/nameLabel", rotSet2.nameLabel);
     configFile.setValue("Rotator2/azPark", rotSet2.azPark);
     configFile.setValue("Rotator2/elPark", rotSet2.elPark);
+    configFile.setValue("Rotator2/trackTolerance", rotSet2.trackTolerance);
+    configFile.setValue("Rotator2/trackWSJTX", rotSet2.trackWSJTX);
+    configFile.setValue("Rotator2/trackAirScout", rotSet2.trackAirScout);
 
     configFile.setValue("Rotator3/rotModel", rotCom3.rotModel);
     configFile.setValue("Rotator3/rotPort", rotCom3.rotPort);
@@ -422,6 +446,9 @@ void DialogRotator::on_buttonBox_accepted()
     configFile.setValue("Rotator3/nameLabel", rotSet3.nameLabel);
     configFile.setValue("Rotator3/azPark", rotSet3.azPark);
     configFile.setValue("Rotator3/elPark", rotSet3.elPark);
+    configFile.setValue("Rotator3/trackTolerance", rotSet3.trackTolerance);
+    configFile.setValue("Rotator3/trackWSJTX", rotSet3.trackWSJTX);
+    configFile.setValue("Rotator3/trackAirScout", rotSet3.trackAirScout);
 
     configFile.setValue("rotRefresh", ui->spinBox_refreshRate->value());
     configFile.setValue("rotIncrementAz", ui->spinBox_incrementAz->value());

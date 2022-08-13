@@ -37,6 +37,8 @@ public:
 private slots:
     void on_buttonBox_accepted();
 
+    void on_pushButton_AirScout_clicked();
+
 private:
     Ui::DialogSetup *ui;
 };
