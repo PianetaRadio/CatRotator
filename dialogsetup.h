@@ -39,6 +39,8 @@ private slots:
 
     void on_pushButton_AirScout_clicked();
 
+    void on_pushButton_WSJTX_clicked();
+
 private:
     Ui::DialogSetup *ui;
 };

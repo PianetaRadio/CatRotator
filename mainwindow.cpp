@@ -137,7 +137,7 @@ MainWindow::MainWindow(QWidget *parent)
     rotCfg.udp = configFile.value("udp", false).toBool();
     rotCfg.udpAddress = configFile.value("udpAddress", "127.0.0.1").toString();
     rotCfg.udpPort = configFile.value("udpPort", 12000).toUInt();   //should be toUShort()
-    rotCfg.pathTrackWSJTX = QDir::homePath() + "/AppData/Local/WSJT-X";
+    rotCfg.pathTrackWSJTX = configFile.value("pathTrackWSJTX", QDir::homePath() + "/AppData/Local/WSJT-X").toString();
                                                     //RPi /home/pi/.local/share/WSJT-X
     rotCfg.pathTrackAirScout = configFile.value("pathTrackAirScout", QDir::homePath() + "/AppData/Local/DL2ALF/AirScout/Tmp").toString();
 
@@ -410,10 +410,34 @@ void MainWindow::presetInit()
 
 void MainWindow::parseWSJTX(double *azim, double *elev)
 {
-    *azim = 0;
-    *elev = -1;
-    return;
+    QFile azelDatWSJTX(rotCfg.pathTrackWSJTX + "/azel.dat");
+    if (!azelDatWSJTX.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
 
+        *elev = -1; //Used for error
+        return;
+    }
+
+    QString datWSJTX = azelDatWSJTX.readLine(0);
+    qDebug()<<datWSJTX;
+    QRegularExpression azelMoonDat("Moon"); //Find Moon line
+    QRegularExpressionMatch azelMoonDatMatch = azelMoonDat.match(datWSJTX);
+
+    if (azelMoonDatMatch.hasMatch())
+    {
+        QRegularExpression azelDat(",?\\s*(\\d+\\.?\\d*),?\\s*(\\d+\\.?\\d*),Moon");   //Match x.x,x.x
+        QRegularExpressionMatch azelDatMatch = azelDat.match(datWSJTX);
+
+        if (azelDatMatch.hasMatch())
+        {
+            *azim = azelDatMatch.captured(1).toDouble();
+            *elev = azelDatMatch.captured(2).toDouble();
+        }
+        else *elev = -1;    //Used for error
+    }
+
+    azelDatWSJTX.close();
+    return;
 }
 
 void MainWindow::parseAirScout(double *azim, double *elev)

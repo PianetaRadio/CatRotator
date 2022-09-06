@@ -39,6 +39,7 @@ DialogSetup::DialogSetup(QWidget *parent) :
     ui->checkBox_udp->setChecked(rotCfg.udp);
     ui->lineEdit_udpAddress->setText(rotCfg.udpAddress);
     ui->lineEdit_udpPort->setText(QString::number(rotCfg.udpPort));
+    ui->lineEdit_WSJTX->setText(rotCfg.pathTrackWSJTX);
     ui->lineEdit_AirScout->setText(rotCfg.pathTrackAirScout);
 }
 
@@ -55,12 +56,19 @@ void DialogSetup::on_pushButton_AirScout_clicked()
     ui->lineEdit_AirScout->setText(rotCfg.pathTrackAirScout);
 }
 
+void DialogSetup::on_pushButton_WSJTX_clicked()
+{
+    rotCfg.pathTrackWSJTX = QFileDialog::getExistingDirectory(this, "Set path", rotCfg.pathTrackWSJTX);
+    ui->lineEdit_WSJTX->setText(rotCfg.pathTrackWSJTX);
+}
+
 void DialogSetup::on_buttonBox_accepted()
 {
     rotCfg.qthLocator = ui->lineEdit_qthLocator->text();
     rotCfg.udp = ui->checkBox_udp->checkState();
     rotCfg.udpAddress = ui->lineEdit_udpAddress->text();
     rotCfg.udpPort = ui->lineEdit_udpPort->text().toUShort();
+    rotCfg.pathTrackWSJTX = ui->lineEdit_WSJTX->text();
     rotCfg.pathTrackAirScout = ui->lineEdit_AirScout->text();
 
     //* Save settings in catrotator.ini
@@ -69,5 +77,6 @@ void DialogSetup::on_buttonBox_accepted()
     configFile.setValue("udp", rotCfg.udp);
     configFile.setValue("udpAddress", rotCfg.udpAddress);
     configFile.setValue("udpPort", rotCfg.udpPort);
+    configFile.setValue("pathTrackWSJTX", rotCfg.pathTrackWSJTX);
     configFile.setValue("pathTrackAirScout", rotCfg.pathTrackAirScout);
 }

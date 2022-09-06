@@ -132,6 +132,19 @@
         <property name="text">
          <string>WSJT-X</string>
         </property>
+        <property name="buddy">
+         <cstring>lineEdit_WSJTX</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEdit_WSJTX"/>
+      </item>
+      <item row="0" column="2">
+       <widget class="QPushButton" name="pushButton_WSJTX">
+        <property name="text">
+         <string>Set</string>
+        </property>
        </widget>
       </item>
      </layout>
@@ -144,6 +157,10 @@
   <tabstop>checkBox_udp</tabstop>
   <tabstop>lineEdit_udpAddress</tabstop>
   <tabstop>lineEdit_udpPort</tabstop>
+  <tabstop>lineEdit_WSJTX</tabstop>
+  <tabstop>pushButton_WSJTX</tabstop>
+  <tabstop>lineEdit_AirScout</tabstop>
+  <tabstop>pushButton_AirScout</tabstop>
  </tabstops>
  <resources/>
  <connections>
