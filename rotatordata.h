@@ -39,6 +39,7 @@ typedef struct {
     QString nameLabel;  //Rotor name
     azimuth_t az, azPark;
     elevation_t el, elPark;
+    bool overlap;   //Overlap capacity
     bool lPathFlag;    //Long Path
     bool trackFlag, trackWSJTX, trackAirScout; //Tracking
     float trackTolerance;    //Tracking tolerance

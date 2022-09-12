@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>440</width>
-    <height>544</height>
+    <height>573</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -97,6 +97,16 @@
           <string>Settings</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_azPark">
+            <property name="text">
+             <string>Az Park</string>
+            </property>
+            <property name="buddy">
+             <cstring>spinBox_azPark</cstring>
+            </property>
+           </widget>
+          </item>
           <item row="1" column="2">
            <widget class="QLabel" name="label_elPark">
             <property name="enabled">
@@ -110,13 +120,10 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_azPark">
+          <item row="0" column="1" colspan="3">
+           <widget class="QLineEdit" name="lineEdit_name">
             <property name="text">
-             <string>Az Park</string>
-            </property>
-            <property name="buddy">
-             <cstring>spinBox_azPark</cstring>
+             <string>Rotator 1</string>
             </property>
            </widget>
           </item>
@@ -147,10 +154,10 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="1" colspan="3">
-           <widget class="QLineEdit" name="lineEdit_name">
+          <item row="2" column="0">
+           <widget class="QCheckBox" name="checkBox_overlap">
             <property name="text">
-             <string>Rotator 1</string>
+             <string>Overlap</string>
             </property>
            </widget>
           </item>
@@ -305,29 +312,6 @@
           <string>Settings</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_5">
-          <item row="1" column="2">
-           <widget class="QLabel" name="label_elPark_2">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="text">
-             <string>El Park</string>
-            </property>
-            <property name="buddy">
-             <cstring>spinBox_elPark_2</cstring>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_azPark_2">
-            <property name="text">
-             <string>Az Park</string>
-            </property>
-            <property name="buddy">
-             <cstring>spinBox_azPark_2</cstring>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="3">
            <widget class="QSpinBox" name="spinBox_elPark_2">
             <property name="enabled">
@@ -338,10 +322,13 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
-           <widget class="QSpinBox" name="spinBox_azPark_2">
-            <property name="maximum">
-             <number>450</number>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_azPark_2">
+            <property name="text">
+             <string>Az Park</string>
+            </property>
+            <property name="buddy">
+             <cstring>spinBox_azPark_2</cstring>
             </property>
            </widget>
           </item>
@@ -359,6 +346,33 @@
            <widget class="QLineEdit" name="lineEdit_name_2">
             <property name="text">
              <string>Rotator 2</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLabel" name="label_elPark_2">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="text">
+             <string>El Park</string>
+            </property>
+            <property name="buddy">
+             <cstring>spinBox_elPark_2</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QSpinBox" name="spinBox_azPark_2">
+            <property name="maximum">
+             <number>450</number>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QCheckBox" name="checkBox_overlap_2">
+            <property name="text">
+             <string>Overlap</string>
             </property>
            </widget>
           </item>
@@ -446,43 +460,10 @@
           <string>Settings</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_12">
-          <item row="1" column="2">
-           <widget class="QLabel" name="label_elPark_3">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
+          <item row="0" column="1" colspan="3">
+           <widget class="QLineEdit" name="lineEdit_name_3">
             <property name="text">
-             <string>El Park</string>
-            </property>
-            <property name="buddy">
-             <cstring>spinBox_elPark_2</cstring>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_azPark_3">
-            <property name="text">
-             <string>Az Park</string>
-            </property>
-            <property name="buddy">
-             <cstring>spinBox_azPark_2</cstring>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="3">
-           <widget class="QSpinBox" name="spinBox_elPark_3">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="maximum">
-             <number>90</number>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QSpinBox" name="spinBox_azPark_3">
-            <property name="maximum">
-             <number>450</number>
+             <string>Rotator 3</string>
             </property>
            </widget>
           </item>
@@ -496,10 +477,50 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="1" colspan="3">
-           <widget class="QLineEdit" name="lineEdit_name_3">
+          <item row="1" column="3">
+           <widget class="QSpinBox" name="spinBox_elPark_3">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="maximum">
+             <number>90</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_azPark_3">
             <property name="text">
-             <string>Rotator 3</string>
+             <string>Az Park</string>
+            </property>
+            <property name="buddy">
+             <cstring>spinBox_azPark_2</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLabel" name="label_elPark_3">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="text">
+             <string>El Park</string>
+            </property>
+            <property name="buddy">
+             <cstring>spinBox_elPark_2</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QSpinBox" name="spinBox_azPark_3">
+            <property name="maximum">
+             <number>450</number>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QCheckBox" name="checkBox_overlap_3">
+            <property name="text">
+             <string>Overlap</string>
             </property>
            </widget>
           </item>
@@ -744,9 +765,12 @@
   <tabstop>lineEdit_name</tabstop>
   <tabstop>spinBox_azPark</tabstop>
   <tabstop>spinBox_elPark</tabstop>
+  <tabstop>checkBox_overlap</tabstop>
+  <tabstop>doubleSpinBox_tolerance</tabstop>
+  <tabstop>checkBox_WSJTX</tabstop>
+  <tabstop>checkBox_AirScout</tabstop>
   <tabstop>spinBox_refreshRate</tabstop>
   <tabstop>spinBox_incrementAz</tabstop>
-  <tabstop>lineEdit_ip</tabstop>
   <tabstop>comboBox_rotModel_2</tabstop>
   <tabstop>tabWidget_comms_2</tabstop>
   <tabstop>comboBox_comPort_2</tabstop>
@@ -754,18 +778,27 @@
   <tabstop>lineEdit_name_2</tabstop>
   <tabstop>spinBox_azPark_2</tabstop>
   <tabstop>spinBox_elPark_2</tabstop>
-  <tabstop>checkBox_netRotctl_2</tabstop>
-  <tabstop>lineEdit_ip_2</tabstop>
-  <tabstop>checkBox_netRotctl</tabstop>
+  <tabstop>checkBox_overlap_2</tabstop>
+  <tabstop>doubleSpinBox_tolerance_2</tabstop>
+  <tabstop>checkBox_WSJTX_2</tabstop>
+  <tabstop>checkBox_AirScout_2</tabstop>
   <tabstop>comboBox_rotModel_3</tabstop>
   <tabstop>tabWidget_comms_3</tabstop>
   <tabstop>comboBox_comPort_3</tabstop>
   <tabstop>comboBox_serialSpeed_3</tabstop>
-  <tabstop>checkBox_netRotctl_3</tabstop>
-  <tabstop>lineEdit_ip_3</tabstop>
-  <tabstop>spinBox_elPark_3</tabstop>
-  <tabstop>spinBox_azPark_3</tabstop>
   <tabstop>lineEdit_name_3</tabstop>
+  <tabstop>spinBox_azPark_3</tabstop>
+  <tabstop>spinBox_elPark_3</tabstop>
+  <tabstop>checkBox_overlap_3</tabstop>
+  <tabstop>doubleSpinBox_tolerance_3</tabstop>
+  <tabstop>checkBox_WSJTX_3</tabstop>
+  <tabstop>checkBox_AirScout_3</tabstop>
+  <tabstop>checkBox_netRotctl_2</tabstop>
+  <tabstop>lineEdit_ip_2</tabstop>
+  <tabstop>lineEdit_ip_3</tabstop>
+  <tabstop>lineEdit_ip</tabstop>
+  <tabstop>checkBox_netRotctl_3</tabstop>
+  <tabstop>checkBox_netRotctl</tabstop>
  </tabstops>
  <resources/>
  <connections>
@@ -776,8 +809,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>270</x>
-     <y>532</y>
+     <x>281</x>
+     <y>561</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -792,8 +825,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>338</x>
-     <y>532</y>
+     <x>349</x>
+     <y>561</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>

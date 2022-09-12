@@ -23,6 +23,7 @@
 #include <QMainWindow>
 #include <QTimer>
 
+
 #define RELEASE_DATE __DATE__
 #define VERSION_MAJ 1
 #define VERSION_MIN 2
@@ -121,6 +122,7 @@ private:
     void guiUpdate();
     void presetGo(int presetNumber);
     void presetInit();
+    void setPosition(int rot, double azim, double elev);
 
     void parseWSJTX(double *azim, double *elev);    //Read WSJT-X azel.dat tracking data
     void parseAirScout(double *azim, double *elev); //Read AirScout azel.dat tracking data

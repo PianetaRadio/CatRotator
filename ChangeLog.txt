@@ -3,6 +3,7 @@ CatRotator
 (+ New, * Updated, - Removed)
 
 1.2.0 - 2022
+	+ Manage rotators with overlap 450deg
 	+ Plus/Minus buttons for step increment
 	+ Tracking AirScout aircraft
 	+ Tracking WSJT-X moon

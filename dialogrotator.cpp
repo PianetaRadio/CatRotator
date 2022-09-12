@@ -194,6 +194,7 @@ DialogRotator::DialogRotator(QWidget *parent) :
     ui->lineEdit_name->setText(rotSet.nameLabel);
     ui->spinBox_azPark->setValue(rotSet.azPark);
     ui->spinBox_elPark->setValue(rotSet.elPark);
+    ui->checkBox_overlap->setChecked(rotSet.overlap);
     ui->doubleSpinBox_tolerance->setValue(rotSet.trackTolerance);
     ui->checkBox_WSJTX->setChecked(rotSet.trackWSJTX);
     ui->checkBox_AirScout->setChecked(rotSet.trackAirScout);
@@ -213,6 +214,7 @@ DialogRotator::DialogRotator(QWidget *parent) :
     ui->lineEdit_name_2->setText(rotSet2.nameLabel);
     ui->spinBox_azPark_2->setValue(rotSet2.azPark);
     ui->spinBox_elPark_2->setValue(rotSet2.elPark);
+    ui->checkBox_overlap_2->setChecked(rotSet2.overlap);
     ui->doubleSpinBox_tolerance_2->setValue(rotSet2.trackTolerance);
     ui->checkBox_WSJTX_2->setChecked(rotSet2.trackWSJTX);
     ui->checkBox_AirScout_2->setChecked(rotSet2.trackAirScout);
@@ -232,6 +234,7 @@ DialogRotator::DialogRotator(QWidget *parent) :
     ui->lineEdit_name_3->setText(rotSet3.nameLabel);
     ui->spinBox_azPark_3->setValue(rotSet3.azPark);
     ui->spinBox_elPark_3->setValue(rotSet3.elPark);
+    ui->checkBox_overlap_3->setChecked(rotSet3.overlap);
     ui->doubleSpinBox_tolerance_3->setValue(rotSet3.trackTolerance);
     ui->checkBox_WSJTX_3->setChecked(rotSet3.trackWSJTX);
     ui->checkBox_AirScout_3->setChecked(rotSet3.trackAirScout);
@@ -300,6 +303,7 @@ void DialogRotator::on_buttonBox_accepted()
     rotSet.nameLabel = ui->lineEdit_name->text();
     rotSet.azPark = ui->spinBox_azPark->value();
     rotSet.elPark = ui->spinBox_elPark->value();
+    rotSet.overlap = ui->checkBox_overlap->isChecked();
     rotSet.trackTolerance = ui->doubleSpinBox_tolerance->value();
     rotSet.trackWSJTX = ui->checkBox_WSJTX->isChecked();
     rotSet.trackAirScout = ui->checkBox_AirScout->isChecked();
@@ -354,6 +358,7 @@ void DialogRotator::on_buttonBox_accepted()
     rotSet2.nameLabel = ui->lineEdit_name_2->text();
     rotSet2.azPark = ui->spinBox_azPark_2->value();
     rotSet2.elPark = ui->spinBox_elPark_2->value();
+    rotSet2.overlap = ui->checkBox_overlap_2->isChecked();
     rotSet2.trackTolerance = ui->doubleSpinBox_tolerance_2->value();
     rotSet2.trackWSJTX = ui->checkBox_WSJTX_2->isChecked();
     rotSet2.trackAirScout = ui->checkBox_AirScout_2->isChecked();
@@ -408,6 +413,7 @@ void DialogRotator::on_buttonBox_accepted()
     rotSet3.nameLabel = ui->lineEdit_name_3->text();
     rotSet3.azPark = ui->spinBox_azPark_3->value();
     rotSet3.elPark = ui->spinBox_elPark_3->value();
+    rotSet3.overlap = ui->checkBox_overlap_3->isChecked();
     rotSet3.trackTolerance = ui->doubleSpinBox_tolerance_3->value();
     rotSet3.trackWSJTX = ui->checkBox_WSJTX_3->isChecked();
     rotSet3.trackAirScout = ui->checkBox_AirScout_3->isChecked();
@@ -424,6 +430,7 @@ void DialogRotator::on_buttonBox_accepted()
     configFile.setValue("Rotator1/nameLabel", rotSet.nameLabel);
     configFile.setValue("Rotator1/azPark", rotSet.azPark);
     configFile.setValue("Rotator1/elPark", rotSet.elPark);
+    configFile.setValue("Rotator1/overlap", rotSet.overlap);
     configFile.setValue("Rotator1/trackTolerance", rotSet.trackTolerance);
     configFile.setValue("Rotator1/trackWSJTX", rotSet.trackWSJTX);
     configFile.setValue("Rotator1/trackAirScout", rotSet.trackAirScout);
@@ -435,6 +442,7 @@ void DialogRotator::on_buttonBox_accepted()
     configFile.setValue("Rotator2/nameLabel", rotSet2.nameLabel);
     configFile.setValue("Rotator2/azPark", rotSet2.azPark);
     configFile.setValue("Rotator2/elPark", rotSet2.elPark);
+    configFile.setValue("Rotator2/overlap", rotSet2.overlap);
     configFile.setValue("Rotator2/trackTolerance", rotSet2.trackTolerance);
     configFile.setValue("Rotator2/trackWSJTX", rotSet2.trackWSJTX);
     configFile.setValue("Rotator2/trackAirScout", rotSet2.trackAirScout);
@@ -446,6 +454,7 @@ void DialogRotator::on_buttonBox_accepted()
     configFile.setValue("Rotator3/nameLabel", rotSet3.nameLabel);
     configFile.setValue("Rotator3/azPark", rotSet3.azPark);
     configFile.setValue("Rotator3/elPark", rotSet3.elPark);
+    configFile.setValue("Rotator3/overlap", rotSet3.overlap);
     configFile.setValue("Rotator3/trackTolerance", rotSet3.trackTolerance);
     configFile.setValue("Rotator3/trackWSJTX", rotSet3.trackWSJTX);
     configFile.setValue("Rotator3/trackAirScout", rotSet3.trackAirScout);

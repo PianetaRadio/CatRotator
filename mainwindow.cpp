@@ -103,6 +103,7 @@ MainWindow::MainWindow(QWidget *parent)
     rotSet.nameLabel = configFile.value("Rotator1/nameLabel", "Rotator 1").toString();
     rotSet.azPark = configFile.value("Rotator1/azPark", 0).toInt();
     rotSet.elPark = configFile.value("Rotator1/elPark", 0).toInt();
+    rotSet.overlap = configFile.value("Rotator1/overlap", false).toBool();
     rotSet.trackTolerance = configFile.value("Rotator1/trackTolerance", 5.0).toDouble();
     rotSet.trackWSJTX = configFile.value("Rotator1/trackWSJTX", false).toBool();
     rotSet.trackAirScout = configFile.value("Rotator1/trackAirScout", false).toBool();
@@ -115,6 +116,7 @@ MainWindow::MainWindow(QWidget *parent)
     rotSet2.nameLabel = configFile.value("Rotator2/nameLabel", "Rotator 2").toString();
     rotSet2.azPark = configFile.value("Rotator2/azPark", 0).toInt();
     rotSet2.elPark = configFile.value("Rotator2/elPark", 0).toInt();
+    rotSet2.overlap = configFile.value("Rotator2/overlap", false).toBool();
     rotSet2.trackTolerance = configFile.value("Rotator2/trackTolerance", 5.0).toDouble();
     rotSet2.trackWSJTX = configFile.value("Rotator2/trackWSJTX", false).toBool();
     rotSet2.trackAirScout = configFile.value("Rotator2/trackAirScout", false).toBool();
@@ -127,6 +129,7 @@ MainWindow::MainWindow(QWidget *parent)
     rotSet3.nameLabel = configFile.value("Rotator3/nameLabel", "Rotator 3").toString();
     rotSet3.azPark = configFile.value("Rotator3/azPark", 0).toInt();
     rotSet3.elPark = configFile.value("Rotator3/elPark", 0).toInt();
+    rotSet3.overlap = configFile.value("Rotator3/overlap", false).toBool();
     rotSet3.trackTolerance = configFile.value("Rotator3/trackTolerance", 5.0).toDouble();
     rotSet3.trackWSJTX = configFile.value("Rotator3/trackWSJTX", false).toBool();
     rotSet3.trackAirScout = configFile.value("Rotator3/trackAirScout", false).toBool();
@@ -277,22 +280,25 @@ void MainWindow::guiUpdate()
         switch (ui->tabWidget_rotator->currentIndex())
         {
         case 0:
-            rotSet.az = rotUdpEx.azUdp;
-            rotSet.el = rotUdpEx.elUdp;
+            //rotSet.az = rotUdpEx.azUdp;
+            //rotSet.el = rotUdpEx.elUdp;
+            setPosition(0, rotUdpEx.azUdp, rotUdpEx.elUdp);
             ui->lineEdit_posAz->setText(QString::number(rotSet.az) + " " + QString::number(rotSet.el));
-            rot_set_position(my_rot, rotSet.az, rotSet.el);
+            //rot_set_position(my_rot, rotSet.az, rotSet.el);
             break;
         case 1:
-            rotSet2.az = rotUdpEx.azUdp;
-            rotSet2.el = rotUdpEx.elUdp;
+            //rotSet2.az = rotUdpEx.azUdp;
+            //rotSet2.el = rotUdpEx.elUdp;
+            setPosition(1, rotUdpEx.azUdp, rotUdpEx.elUdp);
             ui->lineEdit_posAz_2->setText(QString::number(rotSet2.az) + " " + QString::number(rotSet2.el));
-            rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
+            //rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
             break;
         case 2:
-            rotSet3.az = rotUdpEx.azUdp;
-            rotSet3.el = rotUdpEx.elUdp;
+            //rotSet3.az = rotUdpEx.azUdp;
+            //rotSet3.el = rotUdpEx.elUdp;
+            setPosition(2, rotUdpEx.azUdp, rotUdpEx.elUdp);
             ui->lineEdit_posAz_3->setText(QString::number(rotSet3.az) + " " + QString::number(rotSet3.el));
-            rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
+            //rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
             break;
         }
     }
@@ -319,10 +325,11 @@ void MainWindow::guiUpdate()
         {
             if (((abs(tempAz - rotSet.az) > rotSet.trackTolerance) || (abs(tempEl - rotSet.el) > rotSet.trackTolerance)) && ((tempAz != rotSet.az) || (tempEl != rotSet.el)))
             {
-                rotSet.az = tempAz;
-                rotSet.el = tempEl;
+                //rotSet.az = tempAz;
+                //rotSet.el = tempEl;
+                setPosition(0, tempAz, tempEl);
                 ui->lineEdit_posAz->setText(QString::number(rotSet.az) + " " + QString::number(rotSet.el));
-                rot_set_position(my_rot, rotSet.az, rotSet.el);
+                //rot_set_position(my_rot, rotSet.az, rotSet.el);
             }
         }
     }
@@ -336,10 +343,11 @@ void MainWindow::guiUpdate()
         {
             if (((abs(tempAz - rotSet2.az) > rotSet2.trackTolerance) || (abs(tempEl - rotSet2.el) > rotSet2.trackTolerance)) && ((tempAz != rotSet2.az) || (tempEl != rotSet2.el)))
             {
-                rotSet2.az = tempAz;
-                rotSet2.el = tempEl;
+                //rotSet2.az = tempAz;
+                //rotSet2.el = tempEl;
+                setPosition(1, tempAz, tempEl);
                 ui->lineEdit_posAz_2->setText(QString::number(rotSet2.az) + " " + QString::number(rotSet2.el));
-                rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
+                //rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
             }
         }
     }
@@ -353,10 +361,11 @@ void MainWindow::guiUpdate()
         {
             if (((abs(tempAz - rotSet3.az) > rotSet3.trackTolerance) || (abs(tempEl - rotSet3.el) > rotSet3.trackTolerance)) && ((tempAz != rotSet3.az) || (tempEl != rotSet3.el)))
             {
-                rotSet3.az = tempAz;
-                rotSet3.el = tempEl;
+                //rotSet3.az = tempAz;
+                //rotSet3.el = tempEl;
+                setPosition(2, tempAz, tempEl);
                 ui->lineEdit_posAz_3->setText(QString::number(rotSet3.az) + " " + QString::number(rotSet3.el));
-                rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
+                //rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
             }
         }
     }
@@ -368,18 +377,21 @@ void MainWindow::presetGo(int presetNumber)
     {
     case 0:
         rotSet.az = rotCfg.presetAz[presetNumber];
+        setPosition(0, rotSet.az, rotSet.el);
         ui->lineEdit_posAz->setText(QString::number(rotSet.az));
-        rot_set_position(my_rot, rotSet.az, rotSet.el);
+        //rot_set_position(my_rot, rotSet.az, rotSet.el);
         break;
     case 1:
         rotSet2.az = rotCfg.presetAz[presetNumber];
+        setPosition(1, rotSet2.az, rotSet2.el);
         ui->lineEdit_posAz_2->setText(QString::number(rotSet2.az));
-        rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
+        //rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
         break;
     case 2:
         rotSet3.az = rotCfg.presetAz[presetNumber];
+        setPosition(2, rotSet3.az, rotSet3.el);
         ui->lineEdit_posAz_3->setText(QString::number(rotSet3.az));
-        rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
+        //rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
         break;
     }
 }
@@ -406,6 +418,33 @@ void MainWindow::presetInit()
     ui->pushButton_p6->setText(rotCfg.presetLabel[6]);
     ui->pushButton_p7->setText(rotCfg.presetLabel[7]);
     ui->pushButton_p8->setText(rotCfg.presetLabel[8]);
+}
+
+void MainWindow::setPosition(int rot, double azim, double elev)
+{
+    switch (rot)
+    {
+    case 0:
+        if (rotSet.overlap && rotGet.az>270 && azim>0 && azim<90) rotSet.az = 360 + azim;
+        else rotSet.az = azim;
+        rotSet.el = elev;
+        rot_set_position(my_rot, rotSet.az, rotSet.el);
+        break;
+    case 1:
+        if (rotSet2.overlap && rotGet2.az>270 && azim>0 && azim<90) rotSet2.az = 360 + azim;
+        else rotSet2.az = azim;
+        rotSet2.el = elev;
+        rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
+        break;
+    case 2:
+        if (rotSet3.overlap && rotGet3.az>270 && azim>0 && azim<90) rotSet3.az = 360 + azim;
+        else rotSet3.az = azim;
+        rotSet3.el = elev;
+        rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
+        break;
+    }
+
+    return;
 }
 
 void MainWindow::parseWSJTX(double *azim, double *elev)
