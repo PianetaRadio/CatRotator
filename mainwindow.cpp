@@ -425,21 +425,48 @@ void MainWindow::setPosition(int rot, double azim, double elev)
     switch (rot)
     {
     case 0:
-        if (rotSet.overlap && rotGet.az>270 && azim>=0 && azim<=90 && my_rot->caps->max_az>360) rotSet.az = 360 + azim;
-        else rotSet.az = azim;
-        rotSet.el = elev;
+        if (my_rot->caps->rot_type == ROT_TYPE_ELEVATION)    //Elevation only rotator
+        {
+            rotSet.az = 0;
+            rotSet.el = elev;
+        }
+        else //Azimuth or Az/El rotator
+        {
+            if (rotSet.overlap && rotGet.az>270 && azim>=0 && azim<=90 && my_rot->caps->max_az>360) rotSet.az = 360 + azim;
+            else rotSet.az = azim;
+            if (elev >= 0 && my_rot->caps->rot_type == ROT_TYPE_AZEL) rotSet.el = elev;
+            else rotSet.el = 0;
+        }
         rot_set_position(my_rot, rotSet.az, rotSet.el);
         break;
     case 1:
-        if (rotSet2.overlap && rotGet2.az>270 && azim>=0 && azim<=90 && my_rot2->caps->max_az>360) rotSet2.az = 360 + azim;
-        else rotSet2.az = azim;
-        rotSet2.el = elev;
+        if (my_rot2->caps->rot_type == ROT_TYPE_ELEVATION)
+        {
+            rotSet2.az = 0;
+            rotSet2.el = elev;
+        }
+        else
+        {
+            if (rotSet2.overlap && rotGet2.az>270 && azim>=0 && azim<=90 && my_rot2->caps->max_az>360) rotSet2.az = 360 + azim;
+            else rotSet2.az = azim;
+            if (elev >= 0 && my_rot2->caps->rot_type == ROT_TYPE_AZEL) rotSet2.el = elev;
+            else rotSet2.el = 0;
+        }
         rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
         break;
     case 2:
-        if (rotSet3.overlap && rotGet3.az>270 && azim>=0 && azim<=90 && my_rot3->caps->max_az>360) rotSet3.az = 360 + azim;
-        else rotSet3.az = azim;
-        rotSet3.el = elev;
+        if (my_rot3->caps->rot_type == ROT_TYPE_ELEVATION)
+        {
+            rotSet3.az = 0;
+            rotSet3.el = elev;
+        }
+        else
+        {
+            if (rotSet3.overlap && rotGet3.az>270 && azim>=0 && azim<=90 && my_rot3->caps->max_az>360) rotSet3.az = 360 + azim;
+            else rotSet3.az = azim;
+            if (elev >= 0 && my_rot3->caps->rot_type == ROT_TYPE_AZEL) rotSet3.el = elev;
+            else rotSet3.el = 0;
+        }
         rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
         break;
     }
@@ -517,7 +544,7 @@ bool MainWindow::azElInput(QString value, bool lPath, double *azim, double *elev
 
     *elev = -1; //Used for no elevation input
 
-    if (azElCmdDegMatch.hasMatch())
+    if (azElCmdDegMatch.hasMatch()) //Az && El
     {
         tempAz = azElCmdDegMatch.captured(1).toDouble();
         if (lPath) *azim = azimuth_long_path(tempAz);
@@ -527,7 +554,7 @@ bool MainWindow::azElInput(QString value, bool lPath, double *azim, double *elev
         ui->statusbar->clearMessage();
         return true;
     }
-    else if (azCmdDegMatch.hasMatch())
+    else if (azCmdDegMatch.hasMatch())  //Az or El
     {
         tempAz = azCmdDegMatch.captured(0).toDouble();
         if (lPath) *azim = azimuth_long_path(tempAz);
@@ -535,7 +562,7 @@ bool MainWindow::azElInput(QString value, bool lPath, double *azim, double *elev
         ui->statusbar->clearMessage();
         return true;
     }
-    else if (azCmdLocMatch.hasMatch() && rotCfg.qthLocator != "")
+    else if (azCmdLocMatch.hasMatch() && rotCfg.qthLocator != "")   //Locator
     {
         if (lPath)  //Long Path
         {
@@ -674,18 +701,8 @@ void MainWindow::on_pushButton_go_clicked()
    double tempAz, tempEl;
    if (MainWindow::azElInput(ui->lineEdit_posAz->text(), rotSet.lPathFlag, &tempAz, &tempEl))
    {
-       if (my_rot->caps->rot_type == ROT_TYPE_ELEVATION)    //Elevation only rotator
-       {
-           rotSet.az = 0;
-           rotSet.el = tempAz;
-       }
-       else //Azimuth or Az/El rotator
-       {
-           rotSet.az = tempAz;
-           if (tempEl >= 0) rotSet.el = tempEl;
-       }
        //rot_set_position(my_rot, rotSet.az, rotSet.el);
-       setPosition(0, rotSet.az, rotSet.el);
+       setPosition(0, tempAz, tempEl);
    }
 }
 
@@ -752,18 +769,8 @@ void MainWindow::on_pushButton_go_2_clicked()
     double tempAz, tempEl;
     if (MainWindow::azElInput(ui->lineEdit_posAz_2->text(), rotSet2.lPathFlag, &tempAz, &tempEl))
     {
-        if (my_rot2->caps->rot_type == ROT_TYPE_ELEVATION)
-        {
-            rotSet2.az = 0;
-            rotSet2.el = tempAz;
-        }
-        else
-        {
-            rotSet2.az = tempAz;
-            if (tempEl >= 0) rotSet2.el = tempEl;
-        }
         //rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
-        setPosition(1, rotSet.az, rotSet.el);
+        setPosition(1, tempAz, tempEl);
     }
 }
 
@@ -829,18 +836,8 @@ void MainWindow::on_pushButton_go_3_clicked()
     double tempAz, tempEl;
     if (MainWindow::azElInput(ui->lineEdit_posAz_3->text(), rotSet3.lPathFlag, &tempAz, &tempEl))
     {
-        if (my_rot3->caps->rot_type == ROT_TYPE_ELEVATION)
-        {
-            rotSet3.az = 0;
-            rotSet3.el = tempAz;
-        }
-        else
-        {
-            rotSet3.az = tempAz;
-            if (tempEl >= 0) rotSet3.el = tempEl;
-        }
         //rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
-        setPosition(2, rotSet.az, rotSet.el);
+        setPosition(3, tempAz, tempEl);
     }
 }
 
