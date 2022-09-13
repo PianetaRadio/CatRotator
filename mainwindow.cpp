@@ -479,27 +479,30 @@ void MainWindow::parseWSJTX(double *azim, double *elev)
     QFile azelDatWSJTX(rotCfg.pathTrackWSJTX + "/azel.dat");
     if (!azelDatWSJTX.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-
         *elev = -1; //Used for error
         return;
     }
 
-    QString datWSJTX = azelDatWSJTX.readLine(0);
-    qDebug()<<datWSJTX;
-    QRegularExpression azelMoonDat("Moon"); //Find Moon line
-    QRegularExpressionMatch azelMoonDatMatch = azelMoonDat.match(datWSJTX);
-
-    if (azelMoonDatMatch.hasMatch())
+    while (!azelDatWSJTX.atEnd())
     {
-        QRegularExpression azelDat(",?\\s*(\\d+\\.?\\d*),?\\s*(\\d+\\.?\\d*),Moon");   //Match x.x,x.x
-        QRegularExpressionMatch azelDatMatch = azelDat.match(datWSJTX);
+        QString datWSJTX = azelDatWSJTX.readLine();
+        //QRegularExpression azelMoonDat("Moon"); //Find Moon line
+        //QRegularExpressionMatch azelMoonDatMatch = azelMoonDat.match(datWSJTX);
 
-        if (azelDatMatch.hasMatch())
-        {
-            *azim = azelDatMatch.captured(1).toDouble();
-            *elev = azelDatMatch.captured(2).toDouble();
-        }
-        else *elev = -1;    //Used for error
+        //if (azelMoonDatMatch.hasMatch())
+        //{
+            QRegularExpression azelDat(",?\\s*(\\d+\\.?\\d*),?\\s*(\\d+\\.?\\d*),Moon");   //Match x.x,x.x
+            QRegularExpressionMatch azelDatMatch = azelDat.match(datWSJTX);
+
+            if (azelDatMatch.hasMatch())
+            {
+                *azim = azelDatMatch.captured(1).toDouble();
+                *elev = azelDatMatch.captured(2).toDouble();
+
+                break;
+            }
+            else *elev = -1;    //Used for error
+        //}
     }
 
     azelDatWSJTX.close();
