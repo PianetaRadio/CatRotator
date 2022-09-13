@@ -425,19 +425,19 @@ void MainWindow::setPosition(int rot, double azim, double elev)
     switch (rot)
     {
     case 0:
-        if (rotSet.overlap && rotGet.az>270 && azim>0 && azim<90) rotSet.az = 360 + azim;
+        if (rotSet.overlap && rotGet.az>270 && azim>=0 && azim<=90 && my_rot->caps->max_az>360) rotSet.az = 360 + azim;
         else rotSet.az = azim;
         rotSet.el = elev;
         rot_set_position(my_rot, rotSet.az, rotSet.el);
         break;
     case 1:
-        if (rotSet2.overlap && rotGet2.az>270 && azim>0 && azim<90) rotSet2.az = 360 + azim;
+        if (rotSet2.overlap && rotGet2.az>270 && azim>=0 && azim<=90 && my_rot2->caps->max_az>360) rotSet2.az = 360 + azim;
         else rotSet2.az = azim;
         rotSet2.el = elev;
         rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
         break;
     case 2:
-        if (rotSet3.overlap && rotGet3.az>270 && azim>0 && azim<90) rotSet3.az = 360 + azim;
+        if (rotSet3.overlap && rotGet3.az>270 && azim>=0 && azim<=90 && my_rot3->caps->max_az>360) rotSet3.az = 360 + azim;
         else rotSet3.az = azim;
         rotSet3.el = elev;
         rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
@@ -684,7 +684,8 @@ void MainWindow::on_pushButton_go_clicked()
            rotSet.az = tempAz;
            if (tempEl >= 0) rotSet.el = tempEl;
        }
-       rot_set_position(my_rot, rotSet.az, rotSet.el);
+       //rot_set_position(my_rot, rotSet.az, rotSet.el);
+       setPosition(0, rotSet.az, rotSet.el);
    }
 }
 
@@ -761,7 +762,8 @@ void MainWindow::on_pushButton_go_2_clicked()
             rotSet2.az = tempAz;
             if (tempEl >= 0) rotSet2.el = tempEl;
         }
-        rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
+        //rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
+        setPosition(1, rotSet.az, rotSet.el);
     }
 }
 
@@ -837,7 +839,8 @@ void MainWindow::on_pushButton_go_3_clicked()
             rotSet3.az = tempAz;
             if (tempEl >= 0) rotSet3.el = tempEl;
         }
-        rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
+        //rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
+        setPosition(2, rotSet.az, rotSet.el);
     }
 }
 
