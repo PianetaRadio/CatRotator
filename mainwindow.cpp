@@ -695,6 +695,7 @@ void MainWindow::on_pushButton_stop_clicked()
     if (rotCom.connected)
     {
         rotSet.trackFlag = false; //stop tracking (if any)
+        ui->toolButton_track->setChecked(false);
         rot_stop(my_rot);   //send stop command
         rotSet.az = rotGet.az;  //retrieve last position
         rotSet.el = rotGet.el;
@@ -703,6 +704,7 @@ void MainWindow::on_pushButton_stop_clicked()
     if (rotCom2.connected)
     {
         rotSet2.trackFlag = false;
+        ui->toolButton_track_2->setChecked(false);
         rot_stop(my_rot2);
         rotSet2.az = rotGet2.az;
         rotSet2.el = rotGet2.el;
@@ -711,6 +713,7 @@ void MainWindow::on_pushButton_stop_clicked()
     if (rotCom3.connected)
     {
         rotSet3.trackFlag = false;
+        ui->toolButton_track_3->setChecked(false);
         rot_stop(my_rot3);
         rotSet3.az = rotGet3.az;
         rotSet3.el = rotGet3.el;
