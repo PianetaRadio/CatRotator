@@ -491,7 +491,7 @@ void MainWindow::parseWSJTX(double *azim, double *elev)
 
         //if (azelMoonDatMatch.hasMatch())
         //{
-            QRegularExpression azelDat(",?\\s*(\\d+\\.?\\d*),?\\s*(\\d+\\.?\\d*),Moon");   //Match x.x,x.x
+            QRegularExpression azelDat(",?\\s*(\\d+\\.?\\d*),?\\s*(\\d+\\.?\\d*),Moon");   //Match x.x,x.x,Moon
             QRegularExpressionMatch azelDatMatch = azelDat.match(datWSJTX);
 
             if (azelDatMatch.hasMatch())
@@ -692,9 +692,31 @@ void MainWindow::on_pushButton_connect_toggled(bool checked)
 
 void MainWindow::on_pushButton_stop_clicked()
 {
-    rot_stop(my_rot);
-    if (rotSet2.enable) rot_stop(my_rot2);
-    if (rotSet3.enable) rot_stop(my_rot3);
+    if (rotCom.connected)
+    {
+        rotSet.trackFlag = false; //stop tracking (if any)
+        rot_stop(my_rot);   //send stop command
+        rotSet.az = rotGet.az;  //retrieve last position
+        rotSet.el = rotGet.el;
+    }
+
+    if (rotCom2.connected)
+    {
+        rotSet2.trackFlag = false;
+        rot_stop(my_rot2);
+        rotSet2.az = rotGet2.az;
+        rotSet2.el = rotGet2.el;
+    }
+
+    if (rotCom3.connected)
+    {
+        rotSet3.trackFlag = false;
+        rot_stop(my_rot3);
+        rotSet3.az = rotGet3.az;
+        rotSet3.el = rotGet3.el;
+    }
+
+    ui->statusbar->showMessage("Stop all");
 }
 
 
