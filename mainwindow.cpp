@@ -731,6 +731,7 @@ void MainWindow::on_pushButton_go_clicked()
    {
        //rot_set_position(my_rot, rotSet.az, rotSet.el);
        setPosition(0, tempAz, tempEl);
+       ui->lineEdit_posAz->setText(QString::number(rotSet.az));
    }
 }
 
@@ -799,6 +800,7 @@ void MainWindow::on_pushButton_go_2_clicked()
     {
         //rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
         setPosition(1, tempAz, tempEl);
+        ui->lineEdit_posAz_2->setText(QString::number(rotSet2.az));
     }
 }
 
@@ -866,6 +868,7 @@ void MainWindow::on_pushButton_go_3_clicked()
     {
         //rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
         setPosition(3, tempAz, tempEl);
+        ui->lineEdit_posAz_3->setText(QString::number(rotSet3.az));
     }
 }
 

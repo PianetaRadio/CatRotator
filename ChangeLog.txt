@@ -2,7 +2,7 @@ CatRotator
 
 (+ New, * Updated, - Removed)
 
-1.2.0 - 2022-15-09
+1.2.0 - 2022-09-16
 	+ Manage rotators with overlap 450deg
 	+ Plus/Minus buttons for step increment
 	+ Tracking AirScout aircraft
