@@ -867,7 +867,7 @@ void MainWindow::on_pushButton_go_3_clicked()
     if (MainWindow::azElInput(ui->lineEdit_posAz_3->text(), rotSet3.lPathFlag, &tempAz, &tempEl))
     {
         //rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
-        setPosition(3, tempAz, tempEl);
+        setPosition(2, tempAz, tempEl);
         ui->lineEdit_posAz_3->setText(QString::number(rotSet3.az));
     }
 }
