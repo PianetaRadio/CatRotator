@@ -283,21 +283,21 @@ void MainWindow::guiUpdate()
             //rotSet.az = rotUdpEx.azUdp;
             //rotSet.el = rotUdpEx.elUdp;
             setPosition(0, rotUdpEx.azUdp, rotUdpEx.elUdp);
-            ui->lineEdit_posAz->setText(QString::number(rotSet.az) + " " + QString::number(rotSet.el));
+            ui->lineEdit_posAz->setText(QString::number(rotSet.az, 'f', 1) + " " + QString::number(rotSet.el, 'f', 1));
             //rot_set_position(my_rot, rotSet.az, rotSet.el);
             break;
         case 1:
             //rotSet2.az = rotUdpEx.azUdp;
             //rotSet2.el = rotUdpEx.elUdp;
             setPosition(1, rotUdpEx.azUdp, rotUdpEx.elUdp);
-            ui->lineEdit_posAz_2->setText(QString::number(rotSet2.az) + " " + QString::number(rotSet2.el));
+            ui->lineEdit_posAz_2->setText(QString::number(rotSet2.az, 'f', 1) + " " + QString::number(rotSet2.el, 'f', 1));
             //rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
             break;
         case 2:
             //rotSet3.az = rotUdpEx.azUdp;
             //rotSet3.el = rotUdpEx.elUdp;
             setPosition(2, rotUdpEx.azUdp, rotUdpEx.elUdp);
-            ui->lineEdit_posAz_3->setText(QString::number(rotSet3.az) + " " + QString::number(rotSet3.el));
+            ui->lineEdit_posAz_3->setText(QString::number(rotSet3.az, 'f', 1) + " " + QString::number(rotSet3.el, 'f', 1));
             //rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
             break;
         }
@@ -420,7 +420,7 @@ void MainWindow::presetInit()
     ui->pushButton_p8->setText(rotCfg.presetLabel[8]);
 }
 
-void MainWindow::setPosition(int rot, double azim, double elev)
+void MainWindow::setPosition(int rot, float azim, float elev)
 {
     switch (rot)
     {
@@ -535,9 +535,9 @@ void MainWindow::parseAirScout(double *azim, double *elev)
 
 bool MainWindow::azElInput(QString value, bool lPath, double *azim, double *elev)
 {
-    QRegularExpression azCmdDeg("^-?\\d\\d?\\d?");    //Match 0, 00, 000 with or w/o -
+    QRegularExpression azCmdDeg("^-?\\d\\d?\\d?[.]?\\d?");    //Match 0, 00, 000 with or w/o "-" with or w/o decimal
     QRegularExpressionMatch azCmdDegMatch = azCmdDeg.match(value);
-    QRegularExpression azElCmdDeg("^(-?\\d\\d?\\d?) (-?\\d\\d?\\d?)");
+    QRegularExpression azElCmdDeg("^(-?\\d\\d?\\d?[.]?\\d?) (-?\\d\\d?[.]?\\d?)");
     QRegularExpressionMatch azElCmdDegMatch = azElCmdDeg.match(value);
     QRegularExpression azCmdLoc("^[a-rA-R][a-rA-R]\\d{2}([a-xA-X][a-xA-X])?(\\d{2})?"); //Match AA00, AA00AA, AA00AA00
     QRegularExpressionMatch azCmdLocMatch = azCmdLoc.match(value);
@@ -731,21 +731,21 @@ void MainWindow::on_pushButton_go_clicked()
    {
        //rot_set_position(my_rot, rotSet.az, rotSet.el);
        setPosition(0, tempAz, tempEl);
-       ui->lineEdit_posAz->setText(QString::number(rotSet.az));
+       ui->lineEdit_posAz->setText(QString::number(rotSet.az,'f',1));
    }
 }
 
 void MainWindow::on_toolButton_minus_clicked()
 {
     rotSet.az = rotSet.az - rotCfg.incrementAz;
-    ui->lineEdit_posAz->setText(QString::number(rotSet.az));
+    ui->lineEdit_posAz->setText(QString::number(rotSet.az,'f',1));
 }
 
 
 void MainWindow::on_toolButton_plus_clicked()
 {
     rotSet.az = rotSet.az + rotCfg.incrementAz;
-    ui->lineEdit_posAz->setText(QString::number(rotSet.az));
+    ui->lineEdit_posAz->setText(QString::number(rotSet.az,'f',1));
 }
 
 void MainWindow::on_toolButton_pathSL_toggled(bool checked)

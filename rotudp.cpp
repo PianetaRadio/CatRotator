@@ -60,22 +60,22 @@ void rotUdp::readDatagrams()
         //qDebug() << "Message: " << datagrams;
 
         //QRegularExpression pstAzimuth("<PST><AZIMUTH>(\\d+)</AZIMUTH></PST>");
-        QRegularExpression pstAzCmd("<AZIMUTH>(\\d+)</AZIMUTH>");
+        QRegularExpression pstAzCmd("<AZIMUTH>(\\d+\\.?\\d*)</AZIMUTH>");
         QRegularExpressionMatch pstMatch = pstAzCmd.match(datagrams);
         if (pstMatch.hasMatch())
         {
             QString pstMatchString = pstMatch.captured(1);
             rotUdpEx.azUdpFlag = true;
-            rotUdpEx.azUdp = pstMatchString.toInt();
+            rotUdpEx.azUdp = pstMatchString.toFloat();
         }
 
-        QRegularExpression pstElCmd("<ELEVATION>(\\d+)</ELEVATION>");
+        QRegularExpression pstElCmd("<ELEVATION>(\\d+\\.?\\d*)</ELEVATION>");
         pstMatch = pstElCmd.match(datagrams);
         if (pstMatch.hasMatch())
         {
             QString pstMatchString = pstMatch.captured(1);
             rotUdpEx.elUdpFlag = true;
-            rotUdpEx.elUdp = pstMatchString.toInt();
+            rotUdpEx.elUdp = pstMatchString.toFloat();
         }
 
         QRegularExpression pstStopCmd("<STOP>(\\d)</STOP>");

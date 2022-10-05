@@ -122,7 +122,7 @@ private:
     void guiUpdate();
     void presetGo(int presetNumber);
     void presetInit();
-    void setPosition(int rot, double azim, double elev);
+    void setPosition(int rot, float azim, float elev);
 
     void parseWSJTX(double *azim, double *elev);    //Read WSJT-X azel.dat tracking data
     void parseAirScout(double *azim, double *elev); //Read AirScout azel.dat tracking data

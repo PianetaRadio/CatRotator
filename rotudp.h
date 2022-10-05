@@ -31,9 +31,6 @@ public:
     explicit rotUdp(QObject *parent = nullptr);
     bool initSocket();
 
-    bool azUdpFlag;
-    int azUdp;
-
 private slots:
     void readDatagrams();
 

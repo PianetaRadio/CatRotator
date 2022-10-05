@@ -42,7 +42,7 @@ typedef struct {
     bool overlap;   //Overlap capacity
     bool lPathFlag;    //Long Path
     bool trackFlag, trackWSJTX, trackAirScout; //Tracking
-    float trackTolerance;    //Tracking tolerance
+    double trackTolerance;    //Tracking tolerance
 } rotatorSettings;
 
 
@@ -62,7 +62,7 @@ typedef struct {
 
 typedef struct {
     bool azUdpFlag, elUdpFlag, stopUdpFlag, parkUdpFlag;    //UDP received command
-    int azUdp, elUdp;
+    double azUdp, elUdp;
 } rotatorUdpEx;
 
 #endif // ROTATORDATA_H
