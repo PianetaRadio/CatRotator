@@ -38,7 +38,7 @@ private:
     QUdpSocket *udpSocket;
 
 signals:
-    void resultReady();
+    //void resultReady();
 
 };
 

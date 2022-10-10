@@ -17,7 +17,7 @@
    <item row="1" column="0" colspan="2">
     <widget class="QTabWidget" name="tabWidget_dialogRotator">
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="tab_rotator1">
       <attribute name="title">
@@ -183,17 +183,17 @@
           <string>Tracking</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_7">
-          <item row="1" column="0">
-           <widget class="QCheckBox" name="checkBox_WSJTX">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_tolerance">
             <property name="text">
-             <string>WSJT-X</string>
+             <string>Tolerance</string>
             </property>
-            <property name="autoExclusive">
-             <bool>true</bool>
+            <property name="buddy">
+             <cstring>doubleSpinBox_tolerance</cstring>
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
+          <item row="1" column="4">
            <widget class="QCheckBox" name="checkBox_AirScout">
             <property name="text">
              <string>AirScout</string>
@@ -206,13 +206,23 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_tolerance">
+          <item row="1" column="2">
+           <widget class="QCheckBox" name="checkBox_WSJTX">
             <property name="text">
-             <string>Tolerance (+/- deg)</string>
+             <string>WSJT-X</string>
             </property>
-            <property name="buddy">
-             <cstring>doubleSpinBox_tolerance</cstring>
+            <property name="autoExclusive">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="checkBox_PreviSat">
+            <property name="text">
+             <string>PreviSat</string>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -226,6 +236,29 @@
             </property>
             <property name="value">
              <double>5.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <widget class="QDoubleSpinBox" name="doubleSpinBox_threshold">
+            <property name="decimals">
+             <number>1</number>
+            </property>
+            <property name="minimum">
+             <double>-45.000000000000000</double>
+            </property>
+            <property name="maximum">
+             <double>90.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QLabel" name="label_threshold">
+            <property name="text">
+             <string>El Threshold</string>
+            </property>
+            <property name="buddy">
+             <cstring>doubleSpinBox_threshold</cstring>
             </property>
            </widget>
           </item>
@@ -401,10 +434,63 @@
           <item row="0" column="0">
            <widget class="QLabel" name="label_tolerance_2">
             <property name="text">
-             <string>Tolerance (+/- deg)</string>
+             <string>Tolerance</string>
             </property>
             <property name="buddy">
              <cstring>doubleSpinBox_tolerance_2</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <widget class="QDoubleSpinBox" name="doubleSpinBox_threshold_2">
+            <property name="decimals">
+             <number>1</number>
+            </property>
+            <property name="minimum">
+             <double>-45.000000000000000</double>
+            </property>
+            <property name="maximum">
+             <double>90.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QCheckBox" name="checkBox_WSJTX_2">
+            <property name="text">
+             <string>WSJT-X</string>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="4">
+           <widget class="QCheckBox" name="checkBox_AirScout_2">
+            <property name="text">
+             <string>AirScout</string>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
+            </property>
+            <property name="tristate">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="checkBox_PreviSat_2">
+            <property name="text">
+             <string>PreviSat</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QLabel" name="label_threshold_2">
+            <property name="text">
+             <string>El Threshold</string>
+            </property>
+            <property name="buddy">
+             <cstring>doubleSpinBox_threshold_2</cstring>
             </property>
            </widget>
           </item>
@@ -418,29 +504,6 @@
             </property>
             <property name="value">
              <double>5.000000000000000</double>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QCheckBox" name="checkBox_WSJTX_2">
-            <property name="text">
-             <string>WSJT-X</string>
-            </property>
-            <property name="autoExclusive">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QCheckBox" name="checkBox_AirScout_2">
-            <property name="text">
-             <string>AirScout</string>
-            </property>
-            <property name="autoExclusive">
-             <bool>true</bool>
-            </property>
-            <property name="tristate">
-             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -613,10 +676,40 @@
           <string>Tracking</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_9">
+          <item row="0" column="3">
+           <widget class="QLabel" name="label_threshold_3">
+            <property name="text">
+             <string>El Threshold</string>
+            </property>
+            <property name="buddy">
+             <cstring>doubleSpinBox_threshold_3</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="checkBox_PreviSat_3">
+            <property name="text">
+             <string>PreviSat</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <widget class="QDoubleSpinBox" name="doubleSpinBox_threshold_3">
+            <property name="decimals">
+             <number>1</number>
+            </property>
+            <property name="minimum">
+             <double>-45.000000000000000</double>
+            </property>
+            <property name="maximum">
+             <double>90.000000000000000</double>
+            </property>
+           </widget>
+          </item>
           <item row="0" column="0">
            <widget class="QLabel" name="label_tolerance_3">
             <property name="text">
-             <string>Tolerance (+/- deg)</string>
+             <string>Tolerance</string>
             </property>
             <property name="buddy">
              <cstring>doubleSpinBox_tolerance_3</cstring>
@@ -636,17 +729,7 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
-           <widget class="QCheckBox" name="checkBox_WSJTX_3">
-            <property name="text">
-             <string>WSJT-X</string>
-            </property>
-            <property name="autoExclusive">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
+          <item row="1" column="4">
            <widget class="QCheckBox" name="checkBox_AirScout_3">
             <property name="text">
              <string>AirScout</string>
@@ -656,6 +739,16 @@
             </property>
             <property name="tristate">
              <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QCheckBox" name="checkBox_WSJTX_3">
+            <property name="text">
+             <string>WSJT-X</string>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -766,7 +859,6 @@
   <tabstop>spinBox_azPark</tabstop>
   <tabstop>spinBox_elPark</tabstop>
   <tabstop>checkBox_overlap</tabstop>
-  <tabstop>doubleSpinBox_tolerance</tabstop>
   <tabstop>checkBox_WSJTX</tabstop>
   <tabstop>checkBox_AirScout</tabstop>
   <tabstop>spinBox_refreshRate</tabstop>
@@ -779,9 +871,6 @@
   <tabstop>spinBox_azPark_2</tabstop>
   <tabstop>spinBox_elPark_2</tabstop>
   <tabstop>checkBox_overlap_2</tabstop>
-  <tabstop>doubleSpinBox_tolerance_2</tabstop>
-  <tabstop>checkBox_WSJTX_2</tabstop>
-  <tabstop>checkBox_AirScout_2</tabstop>
   <tabstop>comboBox_rotModel_3</tabstop>
   <tabstop>tabWidget_comms_3</tabstop>
   <tabstop>comboBox_comPort_3</tabstop>
@@ -790,9 +879,6 @@
   <tabstop>spinBox_azPark_3</tabstop>
   <tabstop>spinBox_elPark_3</tabstop>
   <tabstop>checkBox_overlap_3</tabstop>
-  <tabstop>doubleSpinBox_tolerance_3</tabstop>
-  <tabstop>checkBox_WSJTX_3</tabstop>
-  <tabstop>checkBox_AirScout_3</tabstop>
   <tabstop>checkBox_netRotctl_2</tabstop>
   <tabstop>lineEdit_ip_2</tabstop>
   <tabstop>lineEdit_ip_3</tabstop>

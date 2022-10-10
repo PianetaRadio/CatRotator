@@ -59,7 +59,30 @@ void rotUdp::readDatagrams()
         //qDebug() << "Message port: " << senderPort;
         //qDebug() << "Message: " << datagrams;
 
-        //QRegularExpression pstAzimuth("<PST><AZIMUTH>(\\d+)</AZIMUTH></PST>");
+        //Previsat
+        QRegularExpression previSatCmd("<PREVISAT>");
+        QRegularExpressionMatch previMatch = previSatCmd.match(datagrams);
+        if (previMatch.hasMatch())
+        {
+            rotUdpEx.previSatUdp = true;
+
+            QRegularExpression previSatName("<SAT>(.+)</SAT>");
+            previMatch = previSatName.match(datagrams);
+            if (previMatch.hasMatch())
+            {
+                QString previMatchString = previMatch.captured(1);
+                rotUdpEx.satName = previMatchString;
+            }
+
+            QRegularExpression previSatAOS("<AOS>(\\d)</AOS>");
+            previMatch = previSatAOS.match(datagrams);
+            if (previMatch.hasMatch())
+            {
+                QString previMatchString = previMatch.captured(1);
+                rotUdpEx.satAOS = previMatchString.toUInt();
+            }
+        }
+
         QRegularExpression pstAzCmd("<AZIMUTH>(\\d+\\.?\\d*)</AZIMUTH>");
         QRegularExpressionMatch pstMatch = pstAzCmd.match(datagrams);
         if (pstMatch.hasMatch())
@@ -69,7 +92,7 @@ void rotUdp::readDatagrams()
             rotUdpEx.azUdp = pstMatchString.toFloat();
         }
 
-        QRegularExpression pstElCmd("<ELEVATION>(\\d+\\.?\\d*)</ELEVATION>");
+        QRegularExpression pstElCmd("<ELEVATION>(-?\\d+\\.?\\d*)</ELEVATION>");
         pstMatch = pstElCmd.match(datagrams);
         if (pstMatch.hasMatch())
         {

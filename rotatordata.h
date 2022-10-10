@@ -41,8 +41,9 @@ typedef struct {
     elevation_t el, elPark;
     bool overlap;   //Overlap capacity
     bool lPathFlag;    //Long Path
-    bool trackFlag, trackWSJTX, trackAirScout; //Tracking
+    bool trackFlag, trackPreviSat, trackWSJTX, trackAirScout; //Tracking
     double trackTolerance;    //Tracking tolerance
+    double trackThreshold;  //Tracking elevation threshold
 } rotatorSettings;
 
 
@@ -62,7 +63,10 @@ typedef struct {
 
 typedef struct {
     bool azUdpFlag, elUdpFlag, stopUdpFlag, parkUdpFlag;    //UDP received command
+    bool previSatUdp;   //PreviSat UDP datagrams
     double azUdp, elUdp;
+    QString satName;
+    bool satAOS;
 } rotatorUdpEx;
 
 #endif // ROTATORDATA_H

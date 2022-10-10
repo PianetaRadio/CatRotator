@@ -105,6 +105,8 @@ MainWindow::MainWindow(QWidget *parent)
     rotSet.elPark = configFile.value("Rotator1/elPark", 0).toInt();
     rotSet.overlap = configFile.value("Rotator1/overlap", false).toBool();
     rotSet.trackTolerance = configFile.value("Rotator1/trackTolerance", 5.0).toDouble();
+    rotSet.trackThreshold = configFile.value("Rotator1/trackThreshold", 0.0).toDouble();
+    rotSet.trackPreviSat = configFile.value("Rotator1/trackPreviSat", false).toBool();
     rotSet.trackWSJTX = configFile.value("Rotator1/trackWSJTX", false).toBool();
     rotSet.trackAirScout = configFile.value("Rotator1/trackAirScout", false).toBool();
 
@@ -118,6 +120,8 @@ MainWindow::MainWindow(QWidget *parent)
     rotSet2.elPark = configFile.value("Rotator2/elPark", 0).toInt();
     rotSet2.overlap = configFile.value("Rotator2/overlap", false).toBool();
     rotSet2.trackTolerance = configFile.value("Rotator2/trackTolerance", 5.0).toDouble();
+    rotSet2.trackThreshold = configFile.value("Rotator2/trackThreshold", 0.0).toDouble();
+    rotSet2.trackPreviSat = configFile.value("Rotator2/trackPreviSat", false).toBool();
     rotSet2.trackWSJTX = configFile.value("Rotator2/trackWSJTX", false).toBool();
     rotSet2.trackAirScout = configFile.value("Rotator2/trackAirScout", false).toBool();
 
@@ -131,6 +135,8 @@ MainWindow::MainWindow(QWidget *parent)
     rotSet3.elPark = configFile.value("Rotator3/elPark", 0).toInt();
     rotSet3.overlap = configFile.value("Rotator3/overlap", false).toBool();
     rotSet3.trackTolerance = configFile.value("Rotator3/trackTolerance", 5.0).toDouble();
+    rotSet3.trackThreshold = configFile.value("Rotator3/trackThreshold", 0.0).toDouble();
+    rotSet3.trackPreviSat = configFile.value("Rotator3/trackPreviSat", false).toBool();
     rotSet3.trackWSJTX = configFile.value("Rotator3/trackWSJTX", false).toBool();
     rotSet3.trackAirScout = configFile.value("Rotator3/trackAirScout", false).toBool();
 
@@ -272,7 +278,7 @@ void MainWindow::guiUpdate()
     }
 
     //Parse UDP command
-    if (rotUdpEx.azUdpFlag || rotUdpEx.elUdpFlag)
+    if ((rotUdpEx.azUdpFlag || rotUdpEx.elUdpFlag) && (!rotUdpEx.previSatUdp))
     {
         rotUdpEx.azUdpFlag = false;
         rotUdpEx.elUdpFlag = false;
@@ -319,11 +325,22 @@ void MainWindow::guiUpdate()
     if (rotSet.trackFlag)
     {
         double tempAz=0, tempEl=0;
+
         if (rotSet.trackWSJTX) parseWSJTX(&tempAz, &tempEl);
         else if (rotSet.trackAirScout) parseAirScout(&tempAz, &tempEl);
-        if (tempEl != -1)   //No tracking dat error
+        else if (rotSet.trackPreviSat && rotUdpEx.previSatUdp)
         {
-            if (((abs(tempAz - rotSet.az) > rotSet.trackTolerance) || (abs(tempEl - rotSet.el) > rotSet.trackTolerance)) && ((tempAz != rotSet.az) || (tempEl != rotSet.el)))
+            tempAz = rotUdpEx.azUdp;
+            tempEl = rotUdpEx.elUdp;
+            if (!rotUdpEx.satAOS && (tempEl >= rotSet.trackThreshold)) ui->statusbar->showMessage("Ready for tracking " + rotUdpEx.satName);
+            else if (rotUdpEx.satAOS && (tempEl >= rotSet.trackThreshold)) ui->statusbar->showMessage("Tracking " + rotUdpEx.satName);
+            else ui->statusbar->clearMessage();
+            rotUdpEx.previSatUdp = false;
+        }
+
+        if (tempEl != -90)   //No tracking data error
+        {
+            if (((abs(tempAz - rotSet.az) > rotSet.trackTolerance) || (abs(tempEl - rotSet.el) > rotSet.trackTolerance)) && ((tempAz != rotSet.az) || (tempEl != rotSet.el)) && (tempEl >= rotSet.trackThreshold))
             {
                 //rotSet.az = tempAz;
                 //rotSet.el = tempEl;
@@ -339,9 +356,19 @@ void MainWindow::guiUpdate()
         double tempAz=0, tempEl=0;
         if (rotSet2.trackWSJTX) parseWSJTX(&tempAz, &tempEl);
         else if (rotSet2.trackAirScout) parseAirScout(&tempAz, &tempEl);
-        if (tempEl != -1)   //No tracking dat error
+        else if (rotSet2.trackPreviSat && rotUdpEx.previSatUdp)
         {
-            if (((abs(tempAz - rotSet2.az) > rotSet2.trackTolerance) || (abs(tempEl - rotSet2.el) > rotSet2.trackTolerance)) && ((tempAz != rotSet2.az) || (tempEl != rotSet2.el)))
+            tempAz = rotUdpEx.azUdp;
+            tempEl = rotUdpEx.elUdp;
+            if (!rotUdpEx.satAOS && (tempEl >= rotSet2.trackThreshold)) ui->statusbar->showMessage("Ready for tracking " + rotUdpEx.satName);
+            else if (rotUdpEx.satAOS && (tempEl >= rotSet2.trackThreshold)) ui->statusbar->showMessage("Tracking " + rotUdpEx.satName);
+            else ui->statusbar->clearMessage();
+            rotUdpEx.previSatUdp = false;
+        }
+
+        if (tempEl != -90)   //No tracking dat error
+        {
+            if (((abs(tempAz - rotSet2.az) > rotSet2.trackTolerance) || (abs(tempEl - rotSet2.el) > rotSet2.trackTolerance)) && ((tempAz != rotSet2.az) || (tempEl != rotSet2.el)) && (tempEl >= rotSet2.trackThreshold))
             {
                 //rotSet2.az = tempAz;
                 //rotSet2.el = tempEl;
@@ -357,9 +384,19 @@ void MainWindow::guiUpdate()
         double tempAz=0, tempEl=0;
         if (rotSet3.trackWSJTX) parseWSJTX(&tempAz, &tempEl);
         else if (rotSet3.trackAirScout) parseAirScout(&tempAz, &tempEl);
-        if (tempEl != -1)   //No tracking dat error
+        else if (rotSet3.trackPreviSat && rotUdpEx.previSatUdp)
         {
-            if (((abs(tempAz - rotSet3.az) > rotSet3.trackTolerance) || (abs(tempEl - rotSet3.el) > rotSet3.trackTolerance)) && ((tempAz != rotSet3.az) || (tempEl != rotSet3.el)))
+            tempAz = rotUdpEx.azUdp;
+            tempEl = rotUdpEx.elUdp;
+            if (!rotUdpEx.satAOS && (tempEl >= rotSet3.trackThreshold)) ui->statusbar->showMessage("Ready for tracking " + rotUdpEx.satName);
+            else if (rotUdpEx.satAOS && (tempEl >= rotSet3.trackThreshold)) ui->statusbar->showMessage("Tracking " + rotUdpEx.satName);
+            else ui->statusbar->clearMessage();
+            rotUdpEx.previSatUdp = false;
+        }
+
+        if (tempEl != -90)   //No tracking dat error
+        {
+            if (((abs(tempAz - rotSet3.az) > rotSet3.trackTolerance) || (abs(tempEl - rotSet3.el) > rotSet3.trackTolerance)) && ((tempAz != rotSet3.az) || (tempEl != rotSet3.el)) && (tempEl >= rotSet3.trackThreshold))
             {
                 //rotSet3.az = tempAz;
                 //rotSet3.el = tempEl;
@@ -479,7 +516,7 @@ void MainWindow::parseWSJTX(double *azim, double *elev)
     QFile azelDatWSJTX(rotCfg.pathTrackWSJTX + "/azel.dat");
     if (!azelDatWSJTX.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        *elev = -1; //Used for error
+        *elev = -90; //Used for error
         return;
     }
 
@@ -501,7 +538,7 @@ void MainWindow::parseWSJTX(double *azim, double *elev)
 
                 break;
             }
-            else *elev = -1;    //Used for error
+            else *elev = -90;    //Used for error
         //}
     }
 
@@ -514,7 +551,7 @@ void MainWindow::parseAirScout(double *azim, double *elev)
     QFile azelDatAirScout(rotCfg.pathTrackAirScout + "/azel.dat");
     if (!azelDatAirScout.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        *elev = -1; //Used for error
+        *elev = -90; //Used for error
         return;
     }
     QString datAirScout = azelDatAirScout.readLine(0);
@@ -527,7 +564,7 @@ void MainWindow::parseAirScout(double *azim, double *elev)
         *azim = azelDatMatch.captured(1).toDouble();
         *elev = azelDatMatch.captured(2).toDouble();
     }
-    else *elev = -1;    //Used for error
+    else *elev = -90;    //Used for error
 
     azelDatAirScout.close();
     return;
@@ -767,7 +804,12 @@ void MainWindow::on_toolButton_track_toggled(bool checked)
 {
     if (checked)
     {
-        if (rotSet.trackWSJTX)
+        if (rotSet.trackPreviSat)
+        {
+            ui->toolButton_track->setText("SAT");
+            ui->statusbar->showMessage("Tracking PreviSat " + rotSet.nameLabel);
+        }
+        else if (rotSet.trackWSJTX)
         {
             ui->toolButton_track->setText("WSJ");
             ui->statusbar->showMessage("Tracking WSJT-X (Moon) " + rotSet.nameLabel);
