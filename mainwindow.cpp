@@ -816,7 +816,7 @@ void MainWindow::on_toolButton_track_toggled(bool checked)
         }
         else if (rotSet.trackAirScout)
         {
-            ui->toolButton_track->setText("AS");
+            ui->toolButton_track->setText("AP");
             ui->statusbar->showMessage("Tracking AirScout " + rotSet.nameLabel);
         }
         else
@@ -877,14 +877,19 @@ void MainWindow::on_toolButton_track_2_toggled(bool checked)
 {
     if (checked)
     {
-        if (rotSet2.trackWSJTX)
+        if (rotSet2.trackPreviSat)
+        {
+            ui->toolButton_track_2->setText("SAT");
+            ui->statusbar->showMessage("Tracking PreviSat " + rotSet2.nameLabel);
+        }
+        else if (rotSet2.trackWSJTX)
         {
             ui->toolButton_track_2->setText("WSJ");
             ui->statusbar->showMessage("Tracking WSJT-X (Moon) " + rotSet2.nameLabel);
         }
         else if (rotSet2.trackAirScout)
         {
-            ui->toolButton_track_2->setText("AS");
+            ui->toolButton_track_2->setText("AP");
             ui->statusbar->showMessage("Tracking AirScout " + rotSet2.nameLabel);
         }
         else
@@ -945,14 +950,19 @@ void MainWindow::on_toolButton_track_3_toggled(bool checked)
 {
     if (checked)
     {
-        if (rotSet3.trackWSJTX)
+        if (rotSet3.trackPreviSat)
+        {
+            ui->toolButton_track_3->setText("SAT");
+            ui->statusbar->showMessage("Tracking PreviSat " + rotSet3.nameLabel);
+        }
+        else if (rotSet3.trackWSJTX)
         {
             ui->toolButton_track_3->setText("WSJ");
             ui->statusbar->showMessage("Tracking WSJT-X (Moon) " + rotSet3.nameLabel);
         }
         else if (rotSet3.trackAirScout)
         {
-            ui->toolButton_track_3->setText("AS");
+            ui->toolButton_track_3->setText("AP");
             ui->statusbar->showMessage("Tracking AirScout " + rotSet3.nameLabel);
         }
         else
