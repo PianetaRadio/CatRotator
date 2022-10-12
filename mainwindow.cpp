@@ -483,49 +483,58 @@ void MainWindow::setPosition(int rot, float azim, float elev)
     switch (rot)
     {
     case 0:
-        if (my_rot->caps->rot_type == ROT_TYPE_ELEVATION)    //Elevation only rotator
+        if (rotCom.connected)
         {
-            rotSet.az = 0;
-            rotSet.el = elev;
+            if (my_rot->caps->rot_type == ROT_TYPE_ELEVATION)    //Elevation only rotator
+            {
+                rotSet.az = 0;
+                rotSet.el = elev;
+            }
+            else //Azimuth or Az/El rotator
+            {
+                if (rotSet.overlap && rotGet.az>270 && azim>=0 && azim<=90 && my_rot->caps->max_az>360) rotSet.az = 360 + azim;
+                else rotSet.az = azim;
+                if (elev >= 0 && my_rot->caps->rot_type == ROT_TYPE_AZEL) rotSet.el = elev;
+                else rotSet.el = 0;
+            }
+            rot_set_position(my_rot, rotSet.az, rotSet.el);
         }
-        else //Azimuth or Az/El rotator
-        {
-            if (rotSet.overlap && rotGet.az>270 && azim>=0 && azim<=90 && my_rot->caps->max_az>360) rotSet.az = 360 + azim;
-            else rotSet.az = azim;
-            if (elev >= 0 && my_rot->caps->rot_type == ROT_TYPE_AZEL) rotSet.el = elev;
-            else rotSet.el = 0;
-        }
-        rot_set_position(my_rot, rotSet.az, rotSet.el);
         break;
     case 1:
-        if (my_rot2->caps->rot_type == ROT_TYPE_ELEVATION)
+        if (rotCom2.connected)
         {
-            rotSet2.az = 0;
-            rotSet2.el = elev;
+            if (my_rot2->caps->rot_type == ROT_TYPE_ELEVATION)
+            {
+                rotSet2.az = 0;
+                rotSet2.el = elev;
+            }
+            else
+            {
+                if (rotSet2.overlap && rotGet2.az>270 && azim>=0 && azim<=90 && my_rot2->caps->max_az>360) rotSet2.az = 360 + azim;
+                else rotSet2.az = azim;
+                if (elev >= 0 && my_rot2->caps->rot_type == ROT_TYPE_AZEL) rotSet2.el = elev;
+                else rotSet2.el = 0;
+            }
+            rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
         }
-        else
-        {
-            if (rotSet2.overlap && rotGet2.az>270 && azim>=0 && azim<=90 && my_rot2->caps->max_az>360) rotSet2.az = 360 + azim;
-            else rotSet2.az = azim;
-            if (elev >= 0 && my_rot2->caps->rot_type == ROT_TYPE_AZEL) rotSet2.el = elev;
-            else rotSet2.el = 0;
-        }
-        rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
         break;
     case 2:
-        if (my_rot3->caps->rot_type == ROT_TYPE_ELEVATION)
+        if (rotCom3.connected)
         {
-            rotSet3.az = 0;
-            rotSet3.el = elev;
+            if (my_rot3->caps->rot_type == ROT_TYPE_ELEVATION)
+            {
+                rotSet3.az = 0;
+                rotSet3.el = elev;
+            }
+            else
+            {
+                if (rotSet3.overlap && rotGet3.az>270 && azim>=0 && azim<=90 && my_rot3->caps->max_az>360) rotSet3.az = 360 + azim;
+                else rotSet3.az = azim;
+                if (elev >= 0 && my_rot3->caps->rot_type == ROT_TYPE_AZEL) rotSet3.el = elev;
+                else rotSet3.el = 0;
+            }
+            rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
         }
-        else
-        {
-            if (rotSet3.overlap && rotGet3.az>270 && azim>=0 && azim<=90 && my_rot3->caps->max_az>360) rotSet3.az = 360 + azim;
-            else rotSet3.az = azim;
-            if (elev >= 0 && my_rot3->caps->rot_type == ROT_TYPE_AZEL) rotSet3.el = elev;
-            else rotSet3.el = 0;
-        }
-        rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
         break;
     }
 
