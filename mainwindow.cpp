@@ -326,9 +326,9 @@ void MainWindow::guiUpdate()
     {
         double tempAz=0, tempEl=0;
 
-        if (rotSet.trackWSJTX) parseWSJTX(&tempAz, &tempEl);
-        else if (rotSet.trackAirScout) parseAirScout(&tempAz, &tempEl);
-        else if (rotSet.trackPreviSat && rotUdpEx.previSatUdp)
+        if (rotSet.trackWSJTX) parseWSJTX(&tempAz, &tempEl);    //WSJT-X
+        else if (rotSet.trackAirScout) parseAirScout(&tempAz, &tempEl);     //AirScout
+        else if ((rotSet.trackPreviSat && rotUdpEx.previSatUdp) && (rotUdpEx.azUdpFlag || rotUdpEx.elUdpFlag))      //PreviSat
         {
             tempAz = rotUdpEx.azUdp;
             tempEl = rotUdpEx.elUdp;
@@ -336,9 +336,16 @@ void MainWindow::guiUpdate()
             else if (rotUdpEx.satAOS && (tempEl >= rotSet.trackThreshold)) ui->statusbar->showMessage("Tracking " + rotUdpEx.satName);
             else ui->statusbar->clearMessage();
             rotUdpEx.previSatUdp = false;
+            rotUdpEx.azUdpFlag = false;
+            rotUdpEx.elUdpFlag = false;
+        }
+        else
+        {
+            tempEl = -90;      //Data error flag
+            ui->statusbar->clearMessage();
         }
 
-        if (tempEl != -90)   //No tracking data error
+        if (tempEl != -90)   //No error
         {
             if (((abs(tempAz - rotSet.az) > rotSet.trackTolerance) || (abs(tempEl - rotSet.el) > rotSet.trackTolerance)) && ((tempAz != rotSet.az) || (tempEl != rotSet.el)) && (tempEl >= rotSet.trackThreshold))
             {
@@ -356,7 +363,7 @@ void MainWindow::guiUpdate()
         double tempAz=0, tempEl=0;
         if (rotSet2.trackWSJTX) parseWSJTX(&tempAz, &tempEl);
         else if (rotSet2.trackAirScout) parseAirScout(&tempAz, &tempEl);
-        else if (rotSet2.trackPreviSat && rotUdpEx.previSatUdp)
+        else if ((rotSet2.trackPreviSat && rotUdpEx.previSatUdp) && (rotUdpEx.azUdpFlag || rotUdpEx.elUdpFlag))
         {
             tempAz = rotUdpEx.azUdp;
             tempEl = rotUdpEx.elUdp;
@@ -364,6 +371,13 @@ void MainWindow::guiUpdate()
             else if (rotUdpEx.satAOS && (tempEl >= rotSet2.trackThreshold)) ui->statusbar->showMessage("Tracking " + rotUdpEx.satName);
             else ui->statusbar->clearMessage();
             rotUdpEx.previSatUdp = false;
+            rotUdpEx.azUdpFlag = false;
+            rotUdpEx.elUdpFlag = false;
+        }
+        else
+        {
+            tempEl = -90;
+            ui->statusbar->clearMessage();
         }
 
         if (tempEl != -90)   //No tracking dat error
@@ -384,7 +398,7 @@ void MainWindow::guiUpdate()
         double tempAz=0, tempEl=0;
         if (rotSet3.trackWSJTX) parseWSJTX(&tempAz, &tempEl);
         else if (rotSet3.trackAirScout) parseAirScout(&tempAz, &tempEl);
-        else if (rotSet3.trackPreviSat && rotUdpEx.previSatUdp)
+        else if ((rotSet3.trackPreviSat && rotUdpEx.previSatUdp) && (rotUdpEx.azUdpFlag || rotUdpEx.elUdpFlag))
         {
             tempAz = rotUdpEx.azUdp;
             tempEl = rotUdpEx.elUdp;
@@ -392,6 +406,13 @@ void MainWindow::guiUpdate()
             else if (rotUdpEx.satAOS && (tempEl >= rotSet3.trackThreshold)) ui->statusbar->showMessage("Tracking " + rotUdpEx.satName);
             else ui->statusbar->clearMessage();
             rotUdpEx.previSatUdp = false;
+            rotUdpEx.azUdpFlag = false;
+            rotUdpEx.elUdpFlag = false;
+        }
+        else
+        {
+            tempEl = -90;
+            ui->statusbar->clearMessage();
         }
 
         if (tempEl != -90)   //No tracking dat error
@@ -538,7 +559,7 @@ void MainWindow::parseWSJTX(double *azim, double *elev)
 
                 break;
             }
-            else *elev = -90;    //Used for error
+            else *elev = -90;    //Data error flag
         //}
     }
 
@@ -564,7 +585,7 @@ void MainWindow::parseAirScout(double *azim, double *elev)
         *azim = azelDatMatch.captured(1).toDouble();
         *elev = azelDatMatch.captured(2).toDouble();
     }
-    else *elev = -90;    //Used for error
+    else *elev = -90;    //Data error flag
 
     azelDatAirScout.close();
     return;
