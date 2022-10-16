@@ -33,12 +33,12 @@ class RotDaemon : public QObject
 public:
     explicit RotDaemon(QObject *parent = nullptr);
     ROT *rotConnect(rotatorConnect *rotCom = nullptr);
-    void rotUpdate(ROT *rot = nullptr, rotatorSettings *rotGet = nullptr);
+    void rotUpdate(int rotNumber, ROT *rot = nullptr, rotatorSettings *rotGet = nullptr);
 
 public slots:
 
 signals:
-    void resultReady();
+    void resultReady(int rotNumber);
 
 };
 

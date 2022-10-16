@@ -31,15 +31,8 @@
 #include <rotator.h>
 
 
-extern rotatorConnect rotCom;
-extern rotatorSettings rotSet;
-
-extern rotatorConnect rotCom2;
-extern rotatorSettings rotSet2;
-
-extern rotatorConnect rotCom3;
-extern rotatorSettings rotSet3;
-
+extern rotatorConnect rotCom[3];
+extern rotatorSettings rotSet[3];
 extern catRotatorConfig rotCfg;
 
 
@@ -179,71 +172,71 @@ DialogRotator::DialogRotator(QWidget *parent) :
     ui->comboBox_serialSpeed_3->addItem("38400");
 
     //* Update values in the GUI
-    ui->comboBox_rotModel->setCurrentIndex(ui->comboBox_rotModel->findText(QString::number(rotCom.rotModel),Qt::MatchStartsWith));
-    if (rotCom.netRotctl)
+    ui->comboBox_rotModel->setCurrentIndex(ui->comboBox_rotModel->findText(QString::number(rotCom[0].rotModel),Qt::MatchStartsWith));
+    if (rotCom[0].netRotctl)
     {
-        ui->checkBox_netRotctl->setChecked(rotCom.netRotctl);
-        ui->lineEdit_ip->setText(rotCom.rotPort);
+        ui->checkBox_netRotctl->setChecked(rotCom[0].netRotctl);
+        ui->lineEdit_ip->setText(rotCom[0].rotPort);
     }
     else
     {
-        ui->comboBox_comPort->setCurrentText(rotCom.rotPort);
-        ui->comboBox_serialSpeed->setCurrentText(QString::number(rotCom.serialSpeed));
+        ui->comboBox_comPort->setCurrentText(rotCom[0].rotPort);
+        ui->comboBox_serialSpeed->setCurrentText(QString::number(rotCom[0].serialSpeed));
     }
 
-    ui->lineEdit_name->setText(rotSet.nameLabel);
-    ui->spinBox_azPark->setValue(rotSet.azPark);
-    ui->spinBox_elPark->setValue(rotSet.elPark);
-    ui->checkBox_overlap->setChecked(rotSet.overlap);
-    ui->doubleSpinBox_tolerance->setValue(rotSet.trackTolerance);
-    ui->doubleSpinBox_threshold->setValue(rotSet.trackThreshold);
-    ui->checkBox_PreviSat->setChecked(rotSet.trackPreviSat);
-    ui->checkBox_WSJTX->setChecked(rotSet.trackWSJTX);
-    ui->checkBox_AirScout->setChecked(rotSet.trackAirScout);
+    ui->lineEdit_name->setText(rotSet[0].nameLabel);
+    ui->spinBox_azPark->setValue(rotSet[0].azPark);
+    ui->spinBox_elPark->setValue(rotSet[0].elPark);
+    ui->checkBox_overlap->setChecked(rotSet[0].overlap);
+    ui->doubleSpinBox_tolerance->setValue(rotSet[0].trackTolerance);
+    ui->doubleSpinBox_threshold->setValue(rotSet[0].trackThreshold);
+    ui->checkBox_PreviSat->setChecked(rotSet[0].trackPreviSat);
+    ui->checkBox_WSJTX->setChecked(rotSet[0].trackWSJTX);
+    ui->checkBox_AirScout->setChecked(rotSet[0].trackAirScout);
 
-    ui->comboBox_rotModel_2->setCurrentIndex(ui->comboBox_rotModel_2->findText(QString::number(rotCom2.rotModel),Qt::MatchStartsWith));
-    if (rotCom2.netRotctl)
+    ui->comboBox_rotModel_2->setCurrentIndex(ui->comboBox_rotModel_2->findText(QString::number(rotCom[1].rotModel),Qt::MatchStartsWith));
+    if (rotCom[1].netRotctl)
     {
-        ui->checkBox_netRotctl_2->setChecked(rotCom2.netRotctl);
-        ui->lineEdit_ip_2->setText(rotCom2.rotPort);
+        ui->checkBox_netRotctl_2->setChecked(rotCom[1].netRotctl);
+        ui->lineEdit_ip_2->setText(rotCom[1].rotPort);
     }
     else
     {
-        ui->comboBox_comPort_2->setCurrentText(rotCom2.rotPort);
-        ui->comboBox_serialSpeed_2->setCurrentText(QString::number(rotCom2.serialSpeed));
+        ui->comboBox_comPort_2->setCurrentText(rotCom[1].rotPort);
+        ui->comboBox_serialSpeed_2->setCurrentText(QString::number(rotCom[1].serialSpeed));
     }
 
-    ui->lineEdit_name_2->setText(rotSet2.nameLabel);
-    ui->spinBox_azPark_2->setValue(rotSet2.azPark);
-    ui->spinBox_elPark_2->setValue(rotSet2.elPark);
-    ui->checkBox_overlap_2->setChecked(rotSet2.overlap);
-    ui->doubleSpinBox_tolerance_2->setValue(rotSet2.trackTolerance);
-    ui->doubleSpinBox_threshold_2->setValue(rotSet2.trackThreshold);
-    ui->checkBox_PreviSat_2->setChecked(rotSet2.trackPreviSat);
-    ui->checkBox_WSJTX_2->setChecked(rotSet2.trackWSJTX);
-    ui->checkBox_AirScout_2->setChecked(rotSet2.trackAirScout);
+    ui->lineEdit_name_2->setText(rotSet[1].nameLabel);
+    ui->spinBox_azPark_2->setValue(rotSet[1].azPark);
+    ui->spinBox_elPark_2->setValue(rotSet[1].elPark);
+    ui->checkBox_overlap_2->setChecked(rotSet[1].overlap);
+    ui->doubleSpinBox_tolerance_2->setValue(rotSet[1].trackTolerance);
+    ui->doubleSpinBox_threshold_2->setValue(rotSet[1].trackThreshold);
+    ui->checkBox_PreviSat_2->setChecked(rotSet[1].trackPreviSat);
+    ui->checkBox_WSJTX_2->setChecked(rotSet[1].trackWSJTX);
+    ui->checkBox_AirScout_2->setChecked(rotSet[1].trackAirScout);
 
-    ui->comboBox_rotModel_3->setCurrentIndex(ui->comboBox_rotModel_3->findText(QString::number(rotCom3.rotModel),Qt::MatchStartsWith));
-    if (rotCom3.netRotctl)
+    ui->comboBox_rotModel_3->setCurrentIndex(ui->comboBox_rotModel_3->findText(QString::number(rotCom[2].rotModel),Qt::MatchStartsWith));
+    if (rotCom[2].netRotctl)
     {
-        ui->checkBox_netRotctl_3->setChecked(rotCom3.netRotctl);
-        ui->lineEdit_ip_3->setText(rotCom3.rotPort);
+        ui->checkBox_netRotctl_3->setChecked(rotCom[2].netRotctl);
+        ui->lineEdit_ip_3->setText(rotCom[2].rotPort);
     }
     else
     {
-        ui->comboBox_comPort_3->setCurrentText(rotCom3.rotPort);
-        ui->comboBox_serialSpeed_3->setCurrentText(QString::number(rotCom3.serialSpeed));
+        ui->comboBox_comPort_3->setCurrentText(rotCom[2].rotPort);
+        ui->comboBox_serialSpeed_3->setCurrentText(QString::number(rotCom[2].serialSpeed));
     }
 
-    ui->lineEdit_name_3->setText(rotSet3.nameLabel);
-    ui->spinBox_azPark_3->setValue(rotSet3.azPark);
-    ui->spinBox_elPark_3->setValue(rotSet3.elPark);
-    ui->checkBox_overlap_3->setChecked(rotSet3.overlap);
-    ui->doubleSpinBox_tolerance_3->setValue(rotSet3.trackTolerance);
-    ui->doubleSpinBox_threshold_3->setValue(rotSet3.trackThreshold);
-    ui->checkBox_PreviSat_3->setChecked(rotSet3.trackPreviSat);
-    ui->checkBox_WSJTX_3->setChecked(rotSet3.trackWSJTX);
-    ui->checkBox_AirScout_3->setChecked(rotSet3.trackAirScout);
+    ui->lineEdit_name_3->setText(rotSet[2].nameLabel);
+    ui->spinBox_azPark_3->setValue(rotSet[2].azPark);
+    ui->spinBox_elPark_3->setValue(rotSet[2].elPark);
+    ui->checkBox_overlap_3->setChecked(rotSet[2].overlap);
+    ui->doubleSpinBox_tolerance_3->setValue(rotSet[2].trackTolerance);
+    ui->doubleSpinBox_threshold_3->setValue(rotSet[2].trackThreshold);
+    ui->checkBox_PreviSat_3->setChecked(rotSet[2].trackPreviSat);
+    ui->checkBox_WSJTX_3->setChecked(rotSet[2].trackWSJTX);
+    ui->checkBox_AirScout_3->setChecked(rotSet[2].trackAirScout);
 
     ui->spinBox_refreshRate->setValue(rotCfg.rotRefresh);
     ui->spinBox_incrementAz->setValue(rotCfg.incrementAz);
@@ -271,14 +264,14 @@ void DialogRotator::on_buttonBox_accepted()
         QString rotModel = ui->comboBox_rotModel->currentText();
         QRegularExpression regexp("[0-9]+");
         QRegularExpressionMatch rotNumber = regexp.match(rotModel);
-        rotCom.rotModel = rotNumber.captured(0).toInt();
+        rotCom[0].rotModel = rotNumber.captured(0).toInt();
 
         if (ui->checkBox_netRotctl->isChecked())   //TCP port
         {
-            rotCom.netRotctl = true;
-            rotCom.rotPort = ui->lineEdit_ip->text();
+            rotCom[0].netRotctl = true;
+            rotCom[0].rotPort = ui->lineEdit_ip->text();
 
-            if (rotCom.rotPort == "")
+            if (rotCom[0].rotPort == "")
             {
                 QMessageBox msgBox; //Show error MessageBox
                 msgBox.setWindowTitle("Warning");
@@ -290,11 +283,11 @@ void DialogRotator::on_buttonBox_accepted()
         }
         else    //COM port
         {
-            rotCom.netRotctl = false;
-            rotCom.rotPort = ui->comboBox_comPort->currentText();
-            rotCom.serialSpeed = ui->comboBox_serialSpeed->currentText().toInt();
+            rotCom[0].netRotctl = false;
+            rotCom[0].rotPort = ui->comboBox_comPort->currentText();
+            rotCom[0].serialSpeed = ui->comboBox_serialSpeed->currentText().toInt();
 
-            if (rotCom.rotPort == "" && rotCom.rotModel != 1)
+            if (rotCom[0].rotPort == "" && rotCom[0].rotModel != 1)
             {
                 QMessageBox msgBox; //Show error MessageBox
                 msgBox.setWindowTitle("Warning");
@@ -306,36 +299,36 @@ void DialogRotator::on_buttonBox_accepted()
         }
     }
 
-    rotSet.nameLabel = ui->lineEdit_name->text();
-    rotSet.azPark = ui->spinBox_azPark->value();
-    rotSet.elPark = ui->spinBox_elPark->value();
-    rotSet.overlap = ui->checkBox_overlap->isChecked();
-    rotSet.trackTolerance = ui->doubleSpinBox_tolerance->value();
-    rotSet.trackThreshold = ui->doubleSpinBox_threshold->value();
-    rotSet.trackPreviSat = ui->checkBox_PreviSat->isChecked();
-    rotSet.trackWSJTX = ui->checkBox_WSJTX->isChecked();
-    rotSet.trackAirScout = ui->checkBox_AirScout->isChecked();
+    rotSet[0].nameLabel = ui->lineEdit_name->text();
+    rotSet[0].azPark = ui->spinBox_azPark->value();
+    rotSet[0].elPark = ui->spinBox_elPark->value();
+    rotSet[0].overlap = ui->checkBox_overlap->isChecked();
+    rotSet[0].trackTolerance = ui->doubleSpinBox_tolerance->value();
+    rotSet[0].trackThreshold = ui->doubleSpinBox_threshold->value();
+    rotSet[0].trackPreviSat = ui->checkBox_PreviSat->isChecked();
+    rotSet[0].trackWSJTX = ui->checkBox_WSJTX->isChecked();
+    rotSet[0].trackAirScout = ui->checkBox_AirScout->isChecked();
 
     //Rotator 2
     if (ui->comboBox_rotModel_2->currentText() == "") //No backend selected
     {
-        rotSet2.enable = false;
-        rotCom2.rotModel = 0;
+        rotSet[1].enable = false;
+        rotCom[1].rotModel = 0;
     }
     else
     {
-        rotSet2.enable = true;
+        rotSet[1].enable = true;
         QString rotModel = ui->comboBox_rotModel_2->currentText();
         QRegularExpression regexp("[0-9]+");
         QRegularExpressionMatch rotNumber = regexp.match(rotModel);
-        rotCom2.rotModel = rotNumber.captured(0).toInt();
+        rotCom[1].rotModel = rotNumber.captured(0).toInt();
 
         if (ui->checkBox_netRotctl_2->isChecked())   //TCP port
         {
-            rotCom2.netRotctl = true;
-            rotCom2.rotPort = ui->lineEdit_ip_2->text();
+            rotCom[1].netRotctl = true;
+            rotCom[1].rotPort = ui->lineEdit_ip_2->text();
 
-            if (rotCom2.rotPort == "")
+            if (rotCom[1].rotPort == "")
             {
                 QMessageBox msgBox; //Show error MessageBox
                 msgBox.setWindowTitle("Warning");
@@ -347,11 +340,11 @@ void DialogRotator::on_buttonBox_accepted()
         }
         else    //COM port
         {
-            rotCom2.netRotctl = false;
-            rotCom2.rotPort = ui->comboBox_comPort_2->currentText();
-            rotCom2.serialSpeed = ui->comboBox_serialSpeed_2->currentText().toInt();
+            rotCom[1].netRotctl = false;
+            rotCom[1].rotPort = ui->comboBox_comPort_2->currentText();
+            rotCom[1].serialSpeed = ui->comboBox_serialSpeed_2->currentText().toInt();
 
-            if (rotCom2.rotPort == "" && rotCom2.rotModel != 1)
+            if (rotCom[1].rotPort == "" && rotCom[1].rotModel != 1)
             {
                 QMessageBox msgBox; //Show error MessageBox
                 msgBox.setWindowTitle("Warning");
@@ -363,36 +356,36 @@ void DialogRotator::on_buttonBox_accepted()
         }
     }
 
-    rotSet2.nameLabel = ui->lineEdit_name_2->text();
-    rotSet2.azPark = ui->spinBox_azPark_2->value();
-    rotSet2.elPark = ui->spinBox_elPark_2->value();
-    rotSet2.overlap = ui->checkBox_overlap_2->isChecked();
-    rotSet2.trackTolerance = ui->doubleSpinBox_tolerance_2->value();
-    rotSet2.trackThreshold = ui->doubleSpinBox_threshold_2->value();
-    rotSet2.trackPreviSat = ui->checkBox_PreviSat_2->isChecked();
-    rotSet2.trackWSJTX = ui->checkBox_WSJTX_2->isChecked();
-    rotSet2.trackAirScout = ui->checkBox_AirScout_2->isChecked();
+    rotSet[1].nameLabel = ui->lineEdit_name_2->text();
+    rotSet[1].azPark = ui->spinBox_azPark_2->value();
+    rotSet[1].elPark = ui->spinBox_elPark_2->value();
+    rotSet[1].overlap = ui->checkBox_overlap_2->isChecked();
+    rotSet[1].trackTolerance = ui->doubleSpinBox_tolerance_2->value();
+    rotSet[1].trackThreshold = ui->doubleSpinBox_threshold_2->value();
+    rotSet[1].trackPreviSat = ui->checkBox_PreviSat_2->isChecked();
+    rotSet[1].trackWSJTX = ui->checkBox_WSJTX_2->isChecked();
+    rotSet[1].trackAirScout = ui->checkBox_AirScout_2->isChecked();
 
     //Rotator 3
     if (ui->comboBox_rotModel_3->currentText() == "") //No backend selected
     {
-        rotSet3.enable = false;
-        rotCom3.rotModel = 0;
+        rotSet[2].enable = false;
+        rotCom[2].rotModel = 0;
     }
     else
     {
-        rotSet3.enable = true;
+        rotSet[2].enable = true;
         QString rotModel = ui->comboBox_rotModel_3->currentText();
         QRegularExpression regexp("[0-9]+");
         QRegularExpressionMatch rotNumber = regexp.match(rotModel);
-        rotCom3.rotModel = rotNumber.captured(0).toInt();
+        rotCom[2].rotModel = rotNumber.captured(0).toInt();
 
         if (ui->checkBox_netRotctl_3->isChecked())   //TCP port
         {
-            rotCom3.netRotctl = true;
-            rotCom3.rotPort = ui->lineEdit_ip_3->text();
+            rotCom[2].netRotctl = true;
+            rotCom[2].rotPort = ui->lineEdit_ip_3->text();
 
-            if (rotCom3.rotPort == "")
+            if (rotCom[2].rotPort == "")
             {
                 QMessageBox msgBox; //Show error MessageBox
                 msgBox.setWindowTitle("Warning");
@@ -404,11 +397,11 @@ void DialogRotator::on_buttonBox_accepted()
         }
         else    //COM port
         {
-            rotCom3.netRotctl = false;
-            rotCom3.rotPort = ui->comboBox_comPort_3->currentText();
-            rotCom3.serialSpeed = ui->comboBox_serialSpeed_3->currentText().toInt();
+            rotCom[2].netRotctl = false;
+            rotCom[2].rotPort = ui->comboBox_comPort_3->currentText();
+            rotCom[2].serialSpeed = ui->comboBox_serialSpeed_3->currentText().toInt();
 
-            if (rotCom3.rotPort == "" && rotCom3.rotModel != 1)
+            if (rotCom[2].rotPort == "" && rotCom[2].rotModel != 1)
             {
                 QMessageBox msgBox; //Show error MessageBox
                 msgBox.setWindowTitle("Warning");
@@ -420,62 +413,62 @@ void DialogRotator::on_buttonBox_accepted()
         }
     }
 
-    rotSet3.nameLabel = ui->lineEdit_name_3->text();
-    rotSet3.azPark = ui->spinBox_azPark_3->value();
-    rotSet3.elPark = ui->spinBox_elPark_3->value();
-    rotSet3.overlap = ui->checkBox_overlap_3->isChecked();
-    rotSet3.trackTolerance = ui->doubleSpinBox_tolerance_3->value();
-    rotSet3.trackThreshold = ui->doubleSpinBox_threshold_3->value();
-    rotSet3.trackPreviSat = ui->checkBox_PreviSat_3->isChecked();
-    rotSet3.trackWSJTX = ui->checkBox_WSJTX_3->isChecked();
-    rotSet3.trackAirScout = ui->checkBox_AirScout_3->isChecked();
+    rotSet[2].nameLabel = ui->lineEdit_name_3->text();
+    rotSet[2].azPark = ui->spinBox_azPark_3->value();
+    rotSet[2].elPark = ui->spinBox_elPark_3->value();
+    rotSet[2].overlap = ui->checkBox_overlap_3->isChecked();
+    rotSet[2].trackTolerance = ui->doubleSpinBox_tolerance_3->value();
+    rotSet[2].trackThreshold = ui->doubleSpinBox_threshold_3->value();
+    rotSet[2].trackPreviSat = ui->checkBox_PreviSat_3->isChecked();
+    rotSet[2].trackWSJTX = ui->checkBox_WSJTX_3->isChecked();
+    rotSet[2].trackAirScout = ui->checkBox_AirScout_3->isChecked();
 
     rotCfg.rotRefresh = ui->spinBox_refreshRate->value();   //Refresh
     rotCfg.incrementAz = ui->spinBox_incrementAz->value();  //Increment
 
     //* Save settings in catrotator.ini
     QSettings configFile(QString("catrotator.ini"), QSettings::IniFormat);
-    configFile.setValue("Rotator1/rotModel", rotCom.rotModel);
-    configFile.setValue("Rotator1/rotPort", rotCom.rotPort);
+    configFile.setValue("Rotator1/rotModel", rotCom[0].rotModel);
+    configFile.setValue("Rotator1/rotPort", rotCom[0].rotPort);
     configFile.setValue("Rotator1/serialSpeed", ui->comboBox_serialSpeed->currentText());
     configFile.setValue("Rotator1/netRotctl", ui->checkBox_netRotctl->isChecked());
-    configFile.setValue("Rotator1/nameLabel", rotSet.nameLabel);
-    configFile.setValue("Rotator1/azPark", rotSet.azPark);
-    configFile.setValue("Rotator1/elPark", rotSet.elPark);
-    configFile.setValue("Rotator1/overlap", rotSet.overlap);
-    configFile.setValue("Rotator1/trackTolerance", rotSet.trackTolerance);
-    configFile.setValue("Rotator1/trackThreshold", rotSet.trackThreshold);
-    configFile.setValue("Rotator1/trackPreviSat", rotSet.trackPreviSat);
-    configFile.setValue("Rotator1/trackWSJTX", rotSet.trackWSJTX);
-    configFile.setValue("Rotator1/trackAirScout", rotSet.trackAirScout);
+    configFile.setValue("Rotator1/nameLabel", rotSet[0].nameLabel);
+    configFile.setValue("Rotator1/azPark", rotSet[0].azPark);
+    configFile.setValue("Rotator1/elPark", rotSet[0].elPark);
+    configFile.setValue("Rotator1/overlap", rotSet[0].overlap);
+    configFile.setValue("Rotator1/trackTolerance", rotSet[0].trackTolerance);
+    configFile.setValue("Rotator1/trackThreshold", rotSet[0].trackThreshold);
+    configFile.setValue("Rotator1/trackPreviSat", rotSet[0].trackPreviSat);
+    configFile.setValue("Rotator1/trackWSJTX", rotSet[0].trackWSJTX);
+    configFile.setValue("Rotator1/trackAirScout", rotSet[0].trackAirScout);
 
-    configFile.setValue("Rotator2/rotModel", rotCom2.rotModel);
-    configFile.setValue("Rotator2/rotPort", rotCom2.rotPort);
+    configFile.setValue("Rotator2/rotModel", rotCom[1].rotModel);
+    configFile.setValue("Rotator2/rotPort", rotCom[1].rotPort);
     configFile.setValue("Rotator2/serialSpeed", ui->comboBox_serialSpeed_2->currentText());
     configFile.setValue("Rotator2/netRotctl", ui->checkBox_netRotctl_2->isChecked());
-    configFile.setValue("Rotator2/nameLabel", rotSet2.nameLabel);
-    configFile.setValue("Rotator2/azPark", rotSet2.azPark);
-    configFile.setValue("Rotator2/elPark", rotSet2.elPark);
-    configFile.setValue("Rotator2/overlap", rotSet2.overlap);
-    configFile.setValue("Rotator2/trackTolerance", rotSet2.trackTolerance);
-    configFile.setValue("Rotator2/trackThreshold", rotSet2.trackThreshold);
-    configFile.setValue("Rotator2/trackPreviSat", rotSet2.trackPreviSat);
-    configFile.setValue("Rotator2/trackWSJTX", rotSet2.trackWSJTX);
-    configFile.setValue("Rotator2/trackAirScout", rotSet2.trackAirScout);
+    configFile.setValue("Rotator2/nameLabel", rotSet[1].nameLabel);
+    configFile.setValue("Rotator2/azPark", rotSet[1].azPark);
+    configFile.setValue("Rotator2/elPark", rotSet[1].elPark);
+    configFile.setValue("Rotator2/overlap", rotSet[1].overlap);
+    configFile.setValue("Rotator2/trackTolerance", rotSet[1].trackTolerance);
+    configFile.setValue("Rotator2/trackThreshold", rotSet[1].trackThreshold);
+    configFile.setValue("Rotator2/trackPreviSat", rotSet[1].trackPreviSat);
+    configFile.setValue("Rotator2/trackWSJTX", rotSet[1].trackWSJTX);
+    configFile.setValue("Rotator2/trackAirScout", rotSet[1].trackAirScout);
 
-    configFile.setValue("Rotator3/rotModel", rotCom3.rotModel);
-    configFile.setValue("Rotator3/rotPort", rotCom3.rotPort);
+    configFile.setValue("Rotator3/rotModel", rotCom[2].rotModel);
+    configFile.setValue("Rotator3/rotPort", rotCom[2].rotPort);
     configFile.setValue("Rotator3/serialSpeed", ui->comboBox_serialSpeed_3->currentText());
     configFile.setValue("Rotator3/netRotctl", ui->checkBox_netRotctl_3->isChecked());
-    configFile.setValue("Rotator3/nameLabel", rotSet3.nameLabel);
-    configFile.setValue("Rotator3/azPark", rotSet3.azPark);
-    configFile.setValue("Rotator3/elPark", rotSet3.elPark);
-    configFile.setValue("Rotator3/overlap", rotSet3.overlap);
-    configFile.setValue("Rotator3/trackTolerance", rotSet3.trackTolerance);
-    configFile.setValue("Rotator3/trackThreshold", rotSet3.trackThreshold);
-    configFile.setValue("Rotator3/trackPreviSat", rotSet3.trackPreviSat);
-    configFile.setValue("Rotator3/trackWSJTX", rotSet3.trackWSJTX);
-    configFile.setValue("Rotator3/trackAirScout", rotSet3.trackAirScout);
+    configFile.setValue("Rotator3/nameLabel", rotSet[2].nameLabel);
+    configFile.setValue("Rotator3/azPark", rotSet[2].azPark);
+    configFile.setValue("Rotator3/elPark", rotSet[2].elPark);
+    configFile.setValue("Rotator3/overlap", rotSet[2].overlap);
+    configFile.setValue("Rotator3/trackTolerance", rotSet[2].trackTolerance);
+    configFile.setValue("Rotator3/trackThreshold", rotSet[2].trackThreshold);
+    configFile.setValue("Rotator3/trackPreviSat", rotSet[2].trackPreviSat);
+    configFile.setValue("Rotator3/trackWSJTX", rotSet[2].trackWSJTX);
+    configFile.setValue("Rotator3/trackAirScout", rotSet[2].trackAirScout);
 
     configFile.setValue("rotRefresh", ui->spinBox_refreshRate->value());
     configFile.setValue("rotIncrementAz", ui->spinBox_incrementAz->value());

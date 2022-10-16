@@ -43,7 +43,7 @@ public:
 
 public slots:
     void rotUpdate();   //Slot fot QTimer
-    void on_rotDaemonResultReady();    //Slot for rotDaemon resultReady
+    void on_rotDaemonResultReady(int rotNumber);    //Slot for rotDaemon resultReady
 
 private slots:
     void on_actionRotator_triggered();
@@ -119,7 +119,7 @@ private:
     QTimer *timer;
 
     void guiInit();
-    void guiUpdate();
+    void guiUpdate(int rotNumber);
     void presetGo(int presetNumber);
     void presetInit();
     void setPosition(int rot, float azim, float elev);

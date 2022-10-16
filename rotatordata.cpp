@@ -19,17 +19,8 @@
 
 #include "rotatordata.h"
 
-rotatorConnect rotCom;
-rotatorSettings rotGet;
-rotatorSettings rotSet;
-
-rotatorConnect rotCom2;
-rotatorSettings rotGet2;
-rotatorSettings rotSet2;
-
-rotatorConnect rotCom3;
-rotatorSettings rotGet3;
-rotatorSettings rotSet3;
-
+rotatorConnect rotCom[3];
+rotatorSettings rotGet[3];
+rotatorSettings rotSet[3];
 catRotatorConfig rotCfg;
 rotatorUdpEx rotUdpEx;

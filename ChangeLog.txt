@@ -3,6 +3,7 @@ CatRotator
 (+ New, * Updated, - Removed)
 
 1.3.0 - 2022-xx-xx
+	* Code optimization
 	* Updated to library Hamlib 4.5 beta
 	+ Tracking PreviSat
 	* Bug correction Go button Rotator 3

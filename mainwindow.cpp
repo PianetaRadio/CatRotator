@@ -40,18 +40,9 @@ ROT *my_rot;
 ROT *my_rot2;
 ROT *my_rot3;
 
-extern rotatorConnect rotCom;
-extern rotatorSettings rotGet;
-extern rotatorSettings rotSet;
-
-extern rotatorConnect rotCom2;
-extern rotatorSettings rotGet2;
-extern rotatorSettings rotSet2;
-
-extern rotatorConnect rotCom3;
-extern rotatorSettings rotGet3;
-extern rotatorSettings rotSet3;
-
+extern rotatorConnect rotCom[3];
+extern rotatorSettings rotGet[3];
+extern rotatorSettings rotSet[3];
 extern catRotatorConfig rotCfg;
 extern rotatorUdpEx rotUdpEx;
 
@@ -95,50 +86,23 @@ MainWindow::MainWindow(QWidget *parent)
     //* Load settings from catrotator.ini
     QSettings configFile(QString("catrotator.ini"), QSettings::IniFormat);
 
-    rotCom.rotModel = configFile.value("Rotator1/rotModel", 0).toInt();
-    rotCom.rotPort = configFile.value("Rotator1/rotPort").toString();
-    rotCom.serialSpeed = configFile.value("Rotator1/serialSpeed", 9600).toInt();
-    rotCom.netRotctl = configFile.value("Rotator1/netRotctl", false).toBool();
-    if (rotCom.rotModel) rotSet.enable = true;
-    rotSet.nameLabel = configFile.value("Rotator1/nameLabel", "Rotator 1").toString();
-    rotSet.azPark = configFile.value("Rotator1/azPark", 0).toInt();
-    rotSet.elPark = configFile.value("Rotator1/elPark", 0).toInt();
-    rotSet.overlap = configFile.value("Rotator1/overlap", false).toBool();
-    rotSet.trackTolerance = configFile.value("Rotator1/trackTolerance", 5.0).toDouble();
-    rotSet.trackThreshold = configFile.value("Rotator1/trackThreshold", 0.0).toDouble();
-    rotSet.trackPreviSat = configFile.value("Rotator1/trackPreviSat", false).toBool();
-    rotSet.trackWSJTX = configFile.value("Rotator1/trackWSJTX", false).toBool();
-    rotSet.trackAirScout = configFile.value("Rotator1/trackAirScout", false).toBool();
-
-    rotCom2.rotModel = configFile.value("Rotator2/rotModel", 0).toInt();
-    rotCom2.rotPort = configFile.value("Rotator2/rotPort").toString();
-    rotCom2.serialSpeed = configFile.value("Rotator2/serialSpeed", 9600).toInt();
-    rotCom2.netRotctl = configFile.value("Rotator2/netRotctl", false).toBool();
-    if (rotCom2.rotModel) rotSet2.enable = true;
-    rotSet2.nameLabel = configFile.value("Rotator2/nameLabel", "Rotator 2").toString();
-    rotSet2.azPark = configFile.value("Rotator2/azPark", 0).toInt();
-    rotSet2.elPark = configFile.value("Rotator2/elPark", 0).toInt();
-    rotSet2.overlap = configFile.value("Rotator2/overlap", false).toBool();
-    rotSet2.trackTolerance = configFile.value("Rotator2/trackTolerance", 5.0).toDouble();
-    rotSet2.trackThreshold = configFile.value("Rotator2/trackThreshold", 0.0).toDouble();
-    rotSet2.trackPreviSat = configFile.value("Rotator2/trackPreviSat", false).toBool();
-    rotSet2.trackWSJTX = configFile.value("Rotator2/trackWSJTX", false).toBool();
-    rotSet2.trackAirScout = configFile.value("Rotator2/trackAirScout", false).toBool();
-
-    rotCom3.rotModel = configFile.value("Rotator3/rotModel", 0).toInt();
-    rotCom3.rotPort = configFile.value("Rotator3/rotPort").toString();
-    rotCom3.serialSpeed = configFile.value("Rotator3/serialSpeed", 9600).toInt();
-    rotCom3.netRotctl = configFile.value("Rotator3/netRotctl", false).toBool();
-    if (rotCom3.rotModel) rotSet3.enable = true;
-    rotSet3.nameLabel = configFile.value("Rotator3/nameLabel", "Rotator 3").toString();
-    rotSet3.azPark = configFile.value("Rotator3/azPark", 0).toInt();
-    rotSet3.elPark = configFile.value("Rotator3/elPark", 0).toInt();
-    rotSet3.overlap = configFile.value("Rotator3/overlap", false).toBool();
-    rotSet3.trackTolerance = configFile.value("Rotator3/trackTolerance", 5.0).toDouble();
-    rotSet3.trackThreshold = configFile.value("Rotator3/trackThreshold", 0.0).toDouble();
-    rotSet3.trackPreviSat = configFile.value("Rotator3/trackPreviSat", false).toBool();
-    rotSet3.trackWSJTX = configFile.value("Rotator3/trackWSJTX", false).toBool();
-    rotSet3.trackAirScout = configFile.value("Rotator3/trackAirScout", false).toBool();
+    for (int i = 0; i < 3; i++)
+    {
+        rotCom[i].rotModel = configFile.value("Rotator"+QString::number(i+1)+"/rotModel", 0).toInt();
+        rotCom[i].rotPort = configFile.value("Rotator"+QString::number(i+1)+"/rotPort").toString();
+        rotCom[i].serialSpeed = configFile.value("Rotator"+QString::number(i+1)+"/serialSpeed", 9600).toInt();
+        rotCom[i].netRotctl = configFile.value("Rotator"+QString::number(i+1)+"/netRotctl", false).toBool();
+        if (rotCom[i].rotModel) rotSet[i].enable = true;
+        rotSet[i].nameLabel = configFile.value("Rotator"+QString::number(i+1)+"/nameLabel", "Rotator "+QString::number(i+1)).toString();
+        rotSet[i].azPark = configFile.value("Rotator"+QString::number(i+1)+"/azPark", 0).toInt();
+        rotSet[i].elPark = configFile.value("Rotator"+QString::number(i+1)+"/elPark", 0).toInt();
+        rotSet[i].overlap = configFile.value("Rotator"+QString::number(i+1)+"/overlap", false).toBool();
+        rotSet[i].trackTolerance = configFile.value("Rotator"+QString::number(i+1)+"/trackTolerance", 5.0).toDouble();
+        rotSet[i].trackThreshold = configFile.value("Rotator"+QString::number(i+1)+"/trackThreshold", 0.0).toDouble();
+        rotSet[i].trackPreviSat = configFile.value("Rotator"+QString::number(i+1)+"/trackPreviSat", false).toBool();
+        rotSet[i].trackWSJTX = configFile.value("Rotator"+QString::number(i+1)+"/trackWSJTX", false).toBool();
+        rotSet[i].trackAirScout = configFile.value("Rotator"+QString::number(i+1)+"/trackAirScout", false).toBool();
+    }
 
     rotCfg.rotRefresh = configFile.value("rotRefresh", 1).toInt();
     rotCfg.incrementAz = configFile.value("rotIncrementAz", 10).toInt();
@@ -146,12 +110,10 @@ MainWindow::MainWindow(QWidget *parent)
     rotCfg.udp = configFile.value("udp", false).toBool();
     rotCfg.udpAddress = configFile.value("udpAddress", "127.0.0.1").toString();
     rotCfg.udpPort = configFile.value("udpPort", 12000).toUInt();   //should be toUShort()
-    rotCfg.pathTrackWSJTX = configFile.value("pathTrackWSJTX", QDir::homePath() + "/AppData/Local/WSJT-X").toString();
-                                                    //RPi /home/pi/.local/share/WSJT-X
+    rotCfg.pathTrackWSJTX = configFile.value("pathTrackWSJTX", QDir::homePath() + "/AppData/Local/WSJT-X").toString();      //RPi /home/pi/.local/share/WSJT-X
     rotCfg.pathTrackAirScout = configFile.value("pathTrackAirScout", QDir::homePath() + "/AppData/Local/DL2ALF/AirScout/Tmp").toString();
 
     //Presets
-    //std::copy(defaultPreset, defaultPreset+9, rotCfg.preset);
     MainWindow::presetInit();
 
     //Window settings
@@ -164,14 +126,28 @@ MainWindow::~MainWindow()
     workerThread.quit();
     workerThread.wait();
 
-    if (rotCom.connected)
-    {
-        timer->stop();
+    if (rotCom[0].connected || rotCom[1].connected || rotCom[2].connected) timer->stop();
 
-        rotCom.connected = 0;
+    if (rotCom[0].connected)
+    {
+        rotCom[0].connected = 0;
         rot_close(my_rot);  //Close the communication to the rotator
+        rot_cleanup(my_rot);    //Release rot handle and free associated memory
     }
-    rot_cleanup(my_rot);    //Release rot handle and free associated memory
+
+    if (rotCom[1].connected)
+    {
+        rotCom[1].connected = 0;
+        rot_close(my_rot2);
+        rot_cleanup(my_rot2);
+    }
+
+    if (rotCom[2].connected)
+    {
+        rotCom[2].connected = 0;
+        rot_close(my_rot3);
+        rot_cleanup(my_rot3);
+    }
 
     //* Save window settings
     QSettings configFile(QString("catrotator.ini"), QSettings::IniFormat);
@@ -184,15 +160,15 @@ MainWindow::~MainWindow()
 //* Get values
 void MainWindow::rotUpdate()
 {
-    if (rotCom.connected) rotDaemon->rotUpdate(my_rot, &rotGet);
-    if (rotSet2.enable && rotCom2.connected) rotDaemon->rotUpdate(my_rot2, &rotGet2);
-    if (rotSet3.enable && rotCom3.connected) rotDaemon->rotUpdate(my_rot3, &rotGet3);
+    if (rotCom[0].connected) rotDaemon->rotUpdate(0, my_rot, &rotGet[0]);
+    if (rotSet[1].enable && rotCom[1].connected) rotDaemon->rotUpdate(1, my_rot2, &rotGet[1]);
+    if (rotSet[2].enable && rotCom[2].connected) rotDaemon->rotUpdate(2, my_rot3, &rotGet[2]);
 }
 
 //* RotDaemon handle results
-void MainWindow::on_rotDaemonResultReady()
+void MainWindow::on_rotDaemonResultReady(int rotNumber)
 {
-    guiUpdate();
+    guiUpdate(rotNumber);
 }
 
 void MainWindow::guiInit()
@@ -201,13 +177,13 @@ void MainWindow::guiInit()
     ui->tabWidget_rotator->removeTab(3);
 #endif
 
-    if (rotSet3.enable)
+    if (rotSet[2].enable)
     {
-        ui->tabWidget_rotator->setTabText(2, rotSet3.nameLabel);
+        ui->tabWidget_rotator->setTabText(2, rotSet[2].nameLabel);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
         ui->tabWidget_rotator->setTabVisible(2, true);
 #endif
-        if (rotCom3.connected)
+        if (rotCom[2].connected)
         {
             ui->tabWidget_rotator->setTabEnabled(2, true);
             if (my_rot3->caps->rot_type == ROT_TYPE_AZIMUTH) ui->lcdNumber_posEl_3->setVisible(false);
@@ -224,13 +200,13 @@ void MainWindow::guiInit()
 #endif
     }
 
-    if (rotSet2.enable)
+    if (rotSet[1].enable)
     {
-        ui->tabWidget_rotator->setTabText(1, rotSet2.nameLabel);
+        ui->tabWidget_rotator->setTabText(1, rotSet[1].nameLabel);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
         ui->tabWidget_rotator->setTabVisible(1, true);
 #endif
-        if (rotCom2.connected)
+        if (rotCom[1].connected)
         {
             ui->tabWidget_rotator->setTabEnabled(1, true);
             if (my_rot2->caps->rot_type == ROT_TYPE_AZIMUTH) ui->lcdNumber_posEl_2->setVisible(false);
@@ -247,8 +223,8 @@ void MainWindow::guiInit()
 #endif
     }
 
-    ui->tabWidget_rotator->setTabText(0, rotSet.nameLabel);
-    if (rotCom.connected)
+    ui->tabWidget_rotator->setTabText(0, rotSet[0].nameLabel);
+    if (rotCom[0].connected)
     {
         ui->tabWidget_rotator->setTabEnabled(0, true);
         if (my_rot->caps->rot_type == ROT_TYPE_AZIMUTH) ui->lcdNumber_posEl->setVisible(false);
@@ -259,22 +235,25 @@ void MainWindow::guiInit()
     else ui->tabWidget_rotator->setTabEnabled(0, false);
 }
 
-void MainWindow::guiUpdate()
+void MainWindow::guiUpdate(int rotNumber)
 {
     //Update current position
-    ui->lcdNumber_posAz->display(QString::number(rotGet.az, 'f', 1));
-    ui->lcdNumber_posEl->display(QString::number(rotGet.el, 'f', 1));
-
-    if (rotSet2.enable)
+    if (rotSet[0].enable)
     {
-        ui->lcdNumber_posAz_2->display(QString::number(rotGet2.az, 'f', 1));
-        ui->lcdNumber_posEl_2->display(QString::number(rotGet2.el, 'f', 1));
+        ui->lcdNumber_posAz->display(QString::number(rotGet[0].az, 'f', 1));
+        ui->lcdNumber_posEl->display(QString::number(rotGet[0].el, 'f', 1));
     }
 
-    if (rotSet3.enable)
+    if (rotSet[1].enable)
     {
-        ui->lcdNumber_posAz_3->display(QString::number(rotGet3.az, 'f', 1));
-        ui->lcdNumber_posEl_3->display(QString::number(rotGet3.el, 'f', 1));
+        ui->lcdNumber_posAz_2->display(QString::number(rotGet[1].az, 'f', 1));
+        ui->lcdNumber_posEl_2->display(QString::number(rotGet[1].el, 'f', 1));
+    }
+
+    if (rotSet[2].enable)
+    {
+        ui->lcdNumber_posAz_3->display(QString::number(rotGet[2].az, 'f', 1));
+        ui->lcdNumber_posEl_3->display(QString::number(rotGet[2].el, 'f', 1));
     }
 
     //Parse UDP command
@@ -286,25 +265,25 @@ void MainWindow::guiUpdate()
         switch (ui->tabWidget_rotator->currentIndex())
         {
         case 0:
-            //rotSet.az = rotUdpEx.azUdp;
-            //rotSet.el = rotUdpEx.elUdp;
+            //rotSet[0].az = rotUdpEx.azUdp;
+            //rotSet[0].el = rotUdpEx.elUdp;
             setPosition(0, rotUdpEx.azUdp, rotUdpEx.elUdp);
-            ui->lineEdit_posAz->setText(QString::number(rotSet.az, 'f', 1) + " " + QString::number(rotSet.el, 'f', 1));
-            //rot_set_position(my_rot, rotSet.az, rotSet.el);
+            ui->lineEdit_posAz->setText(QString::number(rotSet[0].az, 'f', 1) + " " + QString::number(rotSet[0].el, 'f', 1));
+            //rot_set_position(my_rot, rotSet[0].az, rotSet[0].el);
             break;
         case 1:
-            //rotSet2.az = rotUdpEx.azUdp;
-            //rotSet2.el = rotUdpEx.elUdp;
+            //rotSet[1].az = rotUdpEx.azUdp;
+            //rotSet[1].el = rotUdpEx.elUdp;
             setPosition(1, rotUdpEx.azUdp, rotUdpEx.elUdp);
-            ui->lineEdit_posAz_2->setText(QString::number(rotSet2.az, 'f', 1) + " " + QString::number(rotSet2.el, 'f', 1));
-            //rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
+            ui->lineEdit_posAz_2->setText(QString::number(rotSet[1].az, 'f', 1) + " " + QString::number(rotSet[1].el, 'f', 1));
+            //rot_set_position(my_rot2, rotSet[1].az, rotSet[1].el);
             break;
         case 2:
-            //rotSet3.az = rotUdpEx.azUdp;
-            //rotSet3.el = rotUdpEx.elUdp;
+            //rotSet[2].az = rotUdpEx.azUdp;
+            //rotSet[2].el = rotUdpEx.elUdp;
             setPosition(2, rotUdpEx.azUdp, rotUdpEx.elUdp);
-            ui->lineEdit_posAz_3->setText(QString::number(rotSet3.az, 'f', 1) + " " + QString::number(rotSet3.el, 'f', 1));
-            //rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
+            ui->lineEdit_posAz_3->setText(QString::number(rotSet[2].az, 'f', 1) + " " + QString::number(rotSet[2].el, 'f', 1));
+            //rot_set_position(my_rot3, rotSet[2].az, rotSet[2].el);
             break;
         }
     }
@@ -322,18 +301,18 @@ void MainWindow::guiUpdate()
     }
 
     //Tracking
-    if (rotSet.trackFlag)
+    if (rotNumber == 0 && rotSet[0].trackFlag)
     {
         double tempAz=0, tempEl=0;
 
-        if (rotSet.trackWSJTX) parseWSJTX(&tempAz, &tempEl);    //WSJT-X
-        else if (rotSet.trackAirScout) parseAirScout(&tempAz, &tempEl);     //AirScout
-        else if ((rotSet.trackPreviSat && rotUdpEx.previSatUdp) && (rotUdpEx.azUdpFlag || rotUdpEx.elUdpFlag))      //PreviSat
+        if (rotSet[0].trackWSJTX) parseWSJTX(&tempAz, &tempEl);    //WSJT-X
+        else if (rotSet[0].trackAirScout) parseAirScout(&tempAz, &tempEl);     //AirScout
+        else if ((rotSet[0].trackPreviSat && rotUdpEx.previSatUdp) && (rotUdpEx.azUdpFlag || rotUdpEx.elUdpFlag))      //PreviSat
         {
             tempAz = rotUdpEx.azUdp;
             tempEl = rotUdpEx.elUdp;
-            if (!rotUdpEx.satAOS && (tempEl >= rotSet.trackThreshold)) ui->statusbar->showMessage("Ready for tracking " + rotUdpEx.satName);
-            else if (rotUdpEx.satAOS && (tempEl >= rotSet.trackThreshold)) ui->statusbar->showMessage("Tracking " + rotUdpEx.satName);
+            if (!rotUdpEx.satAOS && (tempEl >= rotSet[0].trackThreshold)) ui->statusbar->showMessage("Ready for tracking " + rotUdpEx.satName);
+            else if (rotUdpEx.satAOS && (tempEl >= rotSet[0].trackThreshold)) ui->statusbar->showMessage("Tracking " + rotUdpEx.satName);
             else ui->statusbar->clearMessage();
             rotUdpEx.previSatUdp = false;
             rotUdpEx.azUdpFlag = false;
@@ -347,28 +326,28 @@ void MainWindow::guiUpdate()
 
         if (tempEl != -90)   //No error
         {
-            if (((abs(tempAz - rotSet.az) > rotSet.trackTolerance) || (abs(tempEl - rotSet.el) > rotSet.trackTolerance)) && ((tempAz != rotSet.az) || (tempEl != rotSet.el)) && (tempEl >= rotSet.trackThreshold))
+            if (((abs(tempAz - rotSet[0].az) > rotSet[0].trackTolerance) || (abs(tempEl - rotSet[0].el) > rotSet[0].trackTolerance)) && ((tempAz != rotSet[0].az) || (tempEl != rotSet[0].el)) && (tempEl >= rotSet[0].trackThreshold))
             {
-                //rotSet.az = tempAz;
-                //rotSet.el = tempEl;
+                //rotSet[0].az = tempAz;
+                //rotSet[0].el = tempEl;
                 setPosition(0, tempAz, tempEl);
-                ui->lineEdit_posAz->setText(QString::number(rotSet.az) + " " + QString::number(rotSet.el));
-                //rot_set_position(my_rot, rotSet.az, rotSet.el);
+                ui->lineEdit_posAz->setText(QString::number(rotSet[0].az) + " " + QString::number(rotSet[0].el));
+                //rot_set_position(my_rot, rotSet[0].az, rotSet[0].el);
             }
         }
     }
 
-    if (rotSet2.trackFlag)
+    if (rotNumber == 1 && rotSet[1].trackFlag)
     {
         double tempAz=0, tempEl=0;
-        if (rotSet2.trackWSJTX) parseWSJTX(&tempAz, &tempEl);
-        else if (rotSet2.trackAirScout) parseAirScout(&tempAz, &tempEl);
-        else if ((rotSet2.trackPreviSat && rotUdpEx.previSatUdp) && (rotUdpEx.azUdpFlag || rotUdpEx.elUdpFlag))
+        if (rotSet[1].trackWSJTX) parseWSJTX(&tempAz, &tempEl);
+        else if (rotSet[1].trackAirScout) parseAirScout(&tempAz, &tempEl);
+        else if ((rotSet[1].trackPreviSat && rotUdpEx.previSatUdp) && (rotUdpEx.azUdpFlag || rotUdpEx.elUdpFlag))
         {
             tempAz = rotUdpEx.azUdp;
             tempEl = rotUdpEx.elUdp;
-            if (!rotUdpEx.satAOS && (tempEl >= rotSet2.trackThreshold)) ui->statusbar->showMessage("Ready for tracking " + rotUdpEx.satName);
-            else if (rotUdpEx.satAOS && (tempEl >= rotSet2.trackThreshold)) ui->statusbar->showMessage("Tracking " + rotUdpEx.satName);
+            if (!rotUdpEx.satAOS && (tempEl >= rotSet[1].trackThreshold)) ui->statusbar->showMessage("Ready for tracking " + rotUdpEx.satName);
+            else if (rotUdpEx.satAOS && (tempEl >= rotSet[1].trackThreshold)) ui->statusbar->showMessage("Tracking " + rotUdpEx.satName);
             else ui->statusbar->clearMessage();
             rotUdpEx.previSatUdp = false;
             rotUdpEx.azUdpFlag = false;
@@ -382,28 +361,28 @@ void MainWindow::guiUpdate()
 
         if (tempEl != -90)   //No tracking dat error
         {
-            if (((abs(tempAz - rotSet2.az) > rotSet2.trackTolerance) || (abs(tempEl - rotSet2.el) > rotSet2.trackTolerance)) && ((tempAz != rotSet2.az) || (tempEl != rotSet2.el)) && (tempEl >= rotSet2.trackThreshold))
+            if (((abs(tempAz - rotSet[1].az) > rotSet[1].trackTolerance) || (abs(tempEl - rotSet[1].el) > rotSet[1].trackTolerance)) && ((tempAz != rotSet[1].az) || (tempEl != rotSet[1].el)) && (tempEl >= rotSet[1].trackThreshold))
             {
-                //rotSet2.az = tempAz;
-                //rotSet2.el = tempEl;
+                //rotSet[1].az = tempAz;
+                //rotSet[1].el = tempEl;
                 setPosition(1, tempAz, tempEl);
-                ui->lineEdit_posAz_2->setText(QString::number(rotSet2.az) + " " + QString::number(rotSet2.el));
-                //rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
+                ui->lineEdit_posAz_2->setText(QString::number(rotSet[1].az) + " " + QString::number(rotSet[1].el));
+                //rot_set_position(my_rot2, rotSet[1].az, rotSet[1].el);
             }
         }
     }
 
-    if (rotSet3.trackFlag)
+    if (rotNumber == 2 && rotSet[2].trackFlag)
     {
         double tempAz=0, tempEl=0;
-        if (rotSet3.trackWSJTX) parseWSJTX(&tempAz, &tempEl);
-        else if (rotSet3.trackAirScout) parseAirScout(&tempAz, &tempEl);
-        else if ((rotSet3.trackPreviSat && rotUdpEx.previSatUdp) && (rotUdpEx.azUdpFlag || rotUdpEx.elUdpFlag))
+        if (rotSet[2].trackWSJTX) parseWSJTX(&tempAz, &tempEl);
+        else if (rotSet[2].trackAirScout) parseAirScout(&tempAz, &tempEl);
+        else if ((rotSet[2].trackPreviSat && rotUdpEx.previSatUdp) && (rotUdpEx.azUdpFlag || rotUdpEx.elUdpFlag))
         {
             tempAz = rotUdpEx.azUdp;
             tempEl = rotUdpEx.elUdp;
-            if (!rotUdpEx.satAOS && (tempEl >= rotSet3.trackThreshold)) ui->statusbar->showMessage("Ready for tracking " + rotUdpEx.satName);
-            else if (rotUdpEx.satAOS && (tempEl >= rotSet3.trackThreshold)) ui->statusbar->showMessage("Tracking " + rotUdpEx.satName);
+            if (!rotUdpEx.satAOS && (tempEl >= rotSet[2].trackThreshold)) ui->statusbar->showMessage("Ready for tracking " + rotUdpEx.satName);
+            else if (rotUdpEx.satAOS && (tempEl >= rotSet[2].trackThreshold)) ui->statusbar->showMessage("Tracking " + rotUdpEx.satName);
             else ui->statusbar->clearMessage();
             rotUdpEx.previSatUdp = false;
             rotUdpEx.azUdpFlag = false;
@@ -417,13 +396,13 @@ void MainWindow::guiUpdate()
 
         if (tempEl != -90)   //No tracking dat error
         {
-            if (((abs(tempAz - rotSet3.az) > rotSet3.trackTolerance) || (abs(tempEl - rotSet3.el) > rotSet3.trackTolerance)) && ((tempAz != rotSet3.az) || (tempEl != rotSet3.el)) && (tempEl >= rotSet3.trackThreshold))
+            if (((abs(tempAz - rotSet[2].az) > rotSet[2].trackTolerance) || (abs(tempEl - rotSet[2].el) > rotSet[2].trackTolerance)) && ((tempAz != rotSet[2].az) || (tempEl != rotSet[2].el)) && (tempEl >= rotSet[2].trackThreshold))
             {
-                //rotSet3.az = tempAz;
-                //rotSet3.el = tempEl;
+                //rotSet[2].az = tempAz;
+                //rotSet[2].el = tempEl;
                 setPosition(2, tempAz, tempEl);
-                ui->lineEdit_posAz_3->setText(QString::number(rotSet3.az) + " " + QString::number(rotSet3.el));
-                //rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
+                ui->lineEdit_posAz_3->setText(QString::number(rotSet[2].az) + " " + QString::number(rotSet[2].el));
+                //rot_set_position(my_rot3, rotSet[2].az, rotSet[2].el);
             }
         }
     }
@@ -434,22 +413,22 @@ void MainWindow::presetGo(int presetNumber)
     switch (ui->tabWidget_rotator->currentIndex())
     {
     case 0:
-        rotSet.az = rotCfg.presetAz[presetNumber];
-        setPosition(0, rotSet.az, rotSet.el);
-        ui->lineEdit_posAz->setText(QString::number(rotSet.az));
-        //rot_set_position(my_rot, rotSet.az, rotSet.el);
+        rotSet[0].az = rotCfg.presetAz[presetNumber];
+        setPosition(0, rotSet[0].az, rotSet[0].el);
+        ui->lineEdit_posAz->setText(QString::number(rotSet[0].az));
+        //rot_set_position(my_rot, rotSet[0].az, rotSet[0].el);
         break;
     case 1:
-        rotSet2.az = rotCfg.presetAz[presetNumber];
-        setPosition(1, rotSet2.az, rotSet2.el);
-        ui->lineEdit_posAz_2->setText(QString::number(rotSet2.az));
-        //rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
+        rotSet[1].az = rotCfg.presetAz[presetNumber];
+        setPosition(1, rotSet[1].az, rotSet[1].el);
+        ui->lineEdit_posAz_2->setText(QString::number(rotSet[1].az));
+        //rot_set_position(my_rot2, rotSet[1].az, rotSet[1].el);
         break;
     case 2:
-        rotSet3.az = rotCfg.presetAz[presetNumber];
-        setPosition(2, rotSet3.az, rotSet3.el);
-        ui->lineEdit_posAz_3->setText(QString::number(rotSet3.az));
-        //rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
+        rotSet[2].az = rotCfg.presetAz[presetNumber];
+        setPosition(2, rotSet[2].az, rotSet[2].el);
+        ui->lineEdit_posAz_3->setText(QString::number(rotSet[2].az));
+        //rot_set_position(my_rot3, rotSet[2].az, rotSet[2].el);
         break;
     }
 }
@@ -483,57 +462,57 @@ void MainWindow::setPosition(int rot, float azim, float elev)
     switch (rot)
     {
     case 0:
-        if (rotCom.connected)
+        if (rotCom[0].connected)
         {
             if (my_rot->caps->rot_type == ROT_TYPE_ELEVATION)    //Elevation only rotator
             {
-                rotSet.az = 0;
-                rotSet.el = elev;
+                rotSet[0].az = 0;
+                rotSet[0].el = elev;
             }
             else //Azimuth or Az/El rotator
             {
-                if (rotSet.overlap && rotGet.az>270 && azim>=0 && azim<=90 && my_rot->caps->max_az>360) rotSet.az = 360 + azim;
-                else rotSet.az = azim;
-                if (elev >= 0 && my_rot->caps->rot_type == ROT_TYPE_AZEL) rotSet.el = elev;
-                else rotSet.el = 0;
+                if (rotSet[0].overlap && rotGet[0].az>270 && azim>=0 && azim<=90 && my_rot->caps->max_az>360) rotSet[0].az = 360 + azim;
+                else rotSet[0].az = azim;
+                if (elev >= 0 && my_rot->caps->rot_type == ROT_TYPE_AZEL) rotSet[0].el = elev;
+                else rotSet[0].el = 0;
             }
-            rot_set_position(my_rot, rotSet.az, rotSet.el);
+            rot_set_position(my_rot, rotSet[0].az, rotSet[0].el);
         }
         break;
     case 1:
-        if (rotCom2.connected)
+        if (rotCom[1].connected)
         {
             if (my_rot2->caps->rot_type == ROT_TYPE_ELEVATION)
             {
-                rotSet2.az = 0;
-                rotSet2.el = elev;
+                rotSet[1].az = 0;
+                rotSet[1].el = elev;
             }
             else
             {
-                if (rotSet2.overlap && rotGet2.az>270 && azim>=0 && azim<=90 && my_rot2->caps->max_az>360) rotSet2.az = 360 + azim;
-                else rotSet2.az = azim;
-                if (elev >= 0 && my_rot2->caps->rot_type == ROT_TYPE_AZEL) rotSet2.el = elev;
-                else rotSet2.el = 0;
+                if (rotSet[1].overlap && rotGet[1].az>270 && azim>=0 && azim<=90 && my_rot2->caps->max_az>360) rotSet[1].az = 360 + azim;
+                else rotSet[1].az = azim;
+                if (elev >= 0 && my_rot2->caps->rot_type == ROT_TYPE_AZEL) rotSet[1].el = elev;
+                else rotSet[1].el = 0;
             }
-            rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
+            rot_set_position(my_rot2, rotSet[1].az, rotSet[1].el);
         }
         break;
     case 2:
-        if (rotCom3.connected)
+        if (rotCom[2].connected)
         {
             if (my_rot3->caps->rot_type == ROT_TYPE_ELEVATION)
             {
-                rotSet3.az = 0;
-                rotSet3.el = elev;
+                rotSet[2].az = 0;
+                rotSet[2].el = elev;
             }
             else
             {
-                if (rotSet3.overlap && rotGet3.az>270 && azim>=0 && azim<=90 && my_rot3->caps->max_az>360) rotSet3.az = 360 + azim;
-                else rotSet3.az = azim;
-                if (elev >= 0 && my_rot3->caps->rot_type == ROT_TYPE_AZEL) rotSet3.el = elev;
-                else rotSet3.el = 0;
+                if (rotSet[2].overlap && rotGet[2].az>270 && azim>=0 && azim<=90 && my_rot3->caps->max_az>360) rotSet[2].az = 360 + azim;
+                else rotSet[2].az = azim;
+                if (elev >= 0 && my_rot3->caps->rot_type == ROT_TYPE_AZEL) rotSet[2].el = elev;
+                else rotSet[2].el = 0;
             }
-            rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
+            rot_set_position(my_rot3, rotSet[2].az, rotSet[2].el);
         }
         break;
     }
@@ -696,25 +675,25 @@ void MainWindow::on_pushButton_connect_toggled(bool checked)
 
     if (checked)
     {
-       my_rot = rotDaemon->rotConnect(&rotCom);   //Open Rotator connection
-       if (!my_rot) rotCom.connected = 0;
-       else rotCom.connected = 1;
+       my_rot = rotDaemon->rotConnect(&rotCom[0]);   //Open Rotator connection
+       if (!my_rot) rotCom[0].connected = 0;
+       else rotCom[0].connected = 1;
 
-       if (rotSet2.enable)
+       if (rotSet[1].enable)
        {
-           my_rot2 = rotDaemon->rotConnect(&rotCom2);
-           if (!my_rot2) rotCom2.connected = 0;
-           else rotCom2.connected = 1;
+           my_rot2 = rotDaemon->rotConnect(&rotCom[1]);
+           if (!my_rot2) rotCom[1].connected = 0;
+           else rotCom[1].connected = 1;
        }
 
-       if (rotSet3.enable)
+       if (rotSet[2].enable)
        {
-           my_rot3 = rotDaemon->rotConnect(&rotCom3);
-           if (!my_rot3) rotCom3.connected = 0;
-           else rotCom3.connected = 1;
+           my_rot3 = rotDaemon->rotConnect(&rotCom[2]);
+           if (!my_rot3) rotCom[2].connected = 0;
+           else rotCom[2].connected = 1;
        }
 
-       if (!rotCom.connected && (rotSet2.enable && !rotCom2.connected) && (rotSet3.enable && !rotCom3.connected))   //Connection error
+       if (!rotCom[0].connected && (rotSet[1].enable && !rotCom[1].connected) && (rotSet[2].enable && !rotCom[2].connected))   //Connection error
        {
            connectMsg = "Connection error!";
            ui->pushButton_connect->setChecked(false);  //Uncheck the button
@@ -725,31 +704,31 @@ void MainWindow::on_pushButton_connect_toggled(bool checked)
            guiInit();
 
            connectMsg = "Connected";
-           if (rotCom.connected) connectMsg = connectMsg + " " + rotSet.nameLabel;
-           if (rotCom2.connected) connectMsg = connectMsg + " " + rotSet2.nameLabel;
-           if (rotCom3.connected) connectMsg = connectMsg + " " + rotSet3.nameLabel;
+           if (rotCom[0].connected) connectMsg = connectMsg + " " + rotSet[0].nameLabel;
+           if (rotCom[1].connected) connectMsg = connectMsg + " " + rotSet[1].nameLabel;
+           if (rotCom[2].connected) connectMsg = connectMsg + " " + rotSet[2].nameLabel;
        }
     }
     else   //Button unchecked
     {
         timer->stop();
 
-        if (rotCom.connected)
+        if (rotCom[0].connected)
         {
             rot_close(my_rot);  //Close the communication to the rotator
-            rotCom.connected = 0;
+            rotCom[0].connected = 0;
         }
 
-        if (rotSet2.enable && rotCom2.connected)
+        if (rotSet[1].enable && rotCom[1].connected)
         {
             rot_close(my_rot2);
-            rotCom2.connected = 0;
+            rotCom[1].connected = 0;
         }
 
-        if (rotSet3.enable && rotCom3.connected)
+        if (rotSet[2].enable && rotCom[2].connected)
         {
             rot_close(my_rot3);
-            rotCom3.connected = 0;
+            rotCom[2].connected = 0;
         }
         connectMsg = "Disconnected";
     }
@@ -759,31 +738,31 @@ void MainWindow::on_pushButton_connect_toggled(bool checked)
 
 void MainWindow::on_pushButton_stop_clicked()
 {
-    if (rotCom.connected)
+    if (rotCom[0].connected)
     {
-        rotSet.trackFlag = false; //stop tracking (if any)
+        rotSet[0].trackFlag = false; //stop tracking (if any)
         ui->toolButton_track->setChecked(false);
         rot_stop(my_rot);   //send stop command
-        rotSet.az = rotGet.az;  //retrieve last position
-        rotSet.el = rotGet.el;
+        rotSet[0].az = rotGet[0].az;  //retrieve last position
+        rotSet[0].el = rotGet[0].el;
     }
 
-    if (rotCom2.connected)
+    if (rotCom[1].connected)
     {
-        rotSet2.trackFlag = false;
+        rotSet[1].trackFlag = false;
         ui->toolButton_track_2->setChecked(false);
         rot_stop(my_rot2);
-        rotSet2.az = rotGet2.az;
-        rotSet2.el = rotGet2.el;
+        rotSet[1].az = rotGet[1].az;
+        rotSet[1].el = rotGet[1].el;
     }
 
-    if (rotCom3.connected)
+    if (rotCom[2].connected)
     {
-        rotSet3.trackFlag = false;
+        rotSet[2].trackFlag = false;
         ui->toolButton_track_3->setChecked(false);
         rot_stop(my_rot3);
-        rotSet3.az = rotGet3.az;
-        rotSet3.el = rotGet3.el;
+        rotSet[2].az = rotGet[2].az;
+        rotSet[2].el = rotGet[2].el;
     }
 
     ui->statusbar->showMessage("Stop all");
@@ -794,25 +773,25 @@ void MainWindow::on_pushButton_stop_clicked()
 void MainWindow::on_pushButton_go_clicked()
 {
    double tempAz, tempEl;
-   if (MainWindow::azElInput(ui->lineEdit_posAz->text(), rotSet.lPathFlag, &tempAz, &tempEl))
+   if (MainWindow::azElInput(ui->lineEdit_posAz->text(), rotSet[0].lPathFlag, &tempAz, &tempEl))
    {
-       //rot_set_position(my_rot, rotSet.az, rotSet.el);
+       //rot_set_position(my_rot, rotSet[0].az, rotSet[0].el);
        setPosition(0, tempAz, tempEl);
-       ui->lineEdit_posAz->setText(QString::number(rotSet.az,'f',1));
+       ui->lineEdit_posAz->setText(QString::number(rotSet[0].az,'f',1));
    }
 }
 
 void MainWindow::on_toolButton_minus_clicked()
 {
-    rotSet.az = rotSet.az - rotCfg.incrementAz;
-    ui->lineEdit_posAz->setText(QString::number(rotSet.az,'f',1));
+    rotSet[0].az = rotSet[0].az - rotCfg.incrementAz;
+    ui->lineEdit_posAz->setText(QString::number(rotSet[0].az,'f',1));
 }
 
 
 void MainWindow::on_toolButton_plus_clicked()
 {
-    rotSet.az = rotSet.az + rotCfg.incrementAz;
-    ui->lineEdit_posAz->setText(QString::number(rotSet.az,'f',1));
+    rotSet[0].az = rotSet[0].az + rotCfg.incrementAz;
+    ui->lineEdit_posAz->setText(QString::number(rotSet[0].az,'f',1));
 }
 
 void MainWindow::on_toolButton_pathSL_toggled(bool checked)
@@ -820,12 +799,12 @@ void MainWindow::on_toolButton_pathSL_toggled(bool checked)
     if (checked)
     {
         ui->toolButton_pathSL->setText("LP");
-        rotSet.lPathFlag = true;
+        rotSet[0].lPathFlag = true;
     }
     else
     {
         ui->toolButton_pathSL->setText("SP");
-        rotSet.lPathFlag = false;
+        rotSet[0].lPathFlag = false;
     }
     emit ui->pushButton_go->clicked(true);
 }
@@ -834,33 +813,33 @@ void MainWindow::on_toolButton_track_toggled(bool checked)
 {
     if (checked)
     {
-        if (rotSet.trackPreviSat)
+        if (rotSet[0].trackPreviSat)
         {
             ui->toolButton_track->setText("SAT");
-            ui->statusbar->showMessage("Tracking PreviSat " + rotSet.nameLabel);
+            ui->statusbar->showMessage("Tracking PreviSat " + rotSet[0].nameLabel);
         }
-        else if (rotSet.trackWSJTX)
+        else if (rotSet[0].trackWSJTX)
         {
             ui->toolButton_track->setText("WSJ");
-            ui->statusbar->showMessage("Tracking WSJT-X (Moon) " + rotSet.nameLabel);
+            ui->statusbar->showMessage("Tracking WSJT-X (Moon) " + rotSet[0].nameLabel);
         }
-        else if (rotSet.trackAirScout)
+        else if (rotSet[0].trackAirScout)
         {
             ui->toolButton_track->setText("AP");
-            ui->statusbar->showMessage("Tracking AirScout " + rotSet.nameLabel);
+            ui->statusbar->showMessage("Tracking AirScout " + rotSet[0].nameLabel);
         }
         else
         {
             ui->toolButton_track->setChecked(false);
             return;
         }
-        rotSet.trackFlag = true;
+        rotSet[0].trackFlag = true;
     }
     else
     {
         ui->toolButton_track->setText("TRK");
-        ui->statusbar->showMessage("Tracking off " + rotSet.nameLabel);
-        rotSet.trackFlag = false;
+        ui->statusbar->showMessage("Tracking off " + rotSet[0].nameLabel);
+        rotSet[0].trackFlag = false;
     }
 }
 
@@ -868,24 +847,24 @@ void MainWindow::on_toolButton_track_toggled(bool checked)
 void MainWindow::on_pushButton_go_2_clicked()
 {
     double tempAz, tempEl;
-    if (MainWindow::azElInput(ui->lineEdit_posAz_2->text(), rotSet2.lPathFlag, &tempAz, &tempEl))
+    if (MainWindow::azElInput(ui->lineEdit_posAz_2->text(), rotSet[1].lPathFlag, &tempAz, &tempEl))
     {
-        //rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
+        //rot_set_position(my_rot2, rotSet[1].az, rotSet[1].el);
         setPosition(1, tempAz, tempEl);
-        ui->lineEdit_posAz_2->setText(QString::number(rotSet2.az));
+        ui->lineEdit_posAz_2->setText(QString::number(rotSet[1].az));
     }
 }
 
 void MainWindow::on_toolButton_minus_2_clicked()
 {
-    rotSet2.az = rotSet2.az - rotCfg.incrementAz;
-    ui->lineEdit_posAz_2->setText(QString::number(rotSet2.az));
+    rotSet[1].az = rotSet[1].az - rotCfg.incrementAz;
+    ui->lineEdit_posAz_2->setText(QString::number(rotSet[1].az));
 }
 
 void MainWindow::on_toolButton_plus_2_clicked()
 {
-    rotSet2.az = rotSet2.az + rotCfg.incrementAz;
-    ui->lineEdit_posAz_2->setText(QString::number(rotSet2.az));
+    rotSet[1].az = rotSet[1].az + rotCfg.incrementAz;
+    ui->lineEdit_posAz_2->setText(QString::number(rotSet[1].az));
 }
 
 void MainWindow::on_toolButton_pathSL_2_toggled(bool checked)
@@ -893,12 +872,12 @@ void MainWindow::on_toolButton_pathSL_2_toggled(bool checked)
     if (checked)
     {
         ui->toolButton_pathSL_2->setText("LP");
-        rotSet2.lPathFlag = true;
+        rotSet[1].lPathFlag = true;
     }
     else
     {
         ui->toolButton_pathSL_2->setText("SP");
-        rotSet2.lPathFlag = false;
+        rotSet[1].lPathFlag = false;
     }
     emit ui->pushButton_go_2->clicked(true);
 }
@@ -907,33 +886,33 @@ void MainWindow::on_toolButton_track_2_toggled(bool checked)
 {
     if (checked)
     {
-        if (rotSet2.trackPreviSat)
+        if (rotSet[1].trackPreviSat)
         {
             ui->toolButton_track_2->setText("SAT");
-            ui->statusbar->showMessage("Tracking PreviSat " + rotSet2.nameLabel);
+            ui->statusbar->showMessage("Tracking PreviSat " + rotSet[1].nameLabel);
         }
-        else if (rotSet2.trackWSJTX)
+        else if (rotSet[1].trackWSJTX)
         {
             ui->toolButton_track_2->setText("WSJ");
-            ui->statusbar->showMessage("Tracking WSJT-X (Moon) " + rotSet2.nameLabel);
+            ui->statusbar->showMessage("Tracking WSJT-X (Moon) " + rotSet[1].nameLabel);
         }
-        else if (rotSet2.trackAirScout)
+        else if (rotSet[1].trackAirScout)
         {
             ui->toolButton_track_2->setText("AP");
-            ui->statusbar->showMessage("Tracking AirScout " + rotSet2.nameLabel);
+            ui->statusbar->showMessage("Tracking AirScout " + rotSet[1].nameLabel);
         }
         else
         {
             ui->toolButton_track_2->setChecked(false);
             return;
         }
-        rotSet2.trackFlag = true;
+        rotSet[1].trackFlag = true;
     }
     else
     {
         ui->toolButton_track_2->setText("TRK");
-        ui->statusbar->showMessage("Tracking off " + rotSet2.nameLabel);
-        rotSet2.trackFlag = false;
+        ui->statusbar->showMessage("Tracking off " + rotSet[1].nameLabel);
+        rotSet[1].trackFlag = false;
     }
 }
 
@@ -941,24 +920,24 @@ void MainWindow::on_toolButton_track_2_toggled(bool checked)
 void MainWindow::on_pushButton_go_3_clicked()
 {
     double tempAz, tempEl;
-    if (MainWindow::azElInput(ui->lineEdit_posAz_3->text(), rotSet3.lPathFlag, &tempAz, &tempEl))
+    if (MainWindow::azElInput(ui->lineEdit_posAz_3->text(), rotSet[2].lPathFlag, &tempAz, &tempEl))
     {
-        //rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
+        //rot_set_position(my_rot3, rotSet[2].az, rotSet[2].el);
         setPosition(2, tempAz, tempEl);
-        ui->lineEdit_posAz_3->setText(QString::number(rotSet3.az));
+        ui->lineEdit_posAz_3->setText(QString::number(rotSet[2].az));
     }
 }
 
 void MainWindow::on_toolButton_minus_3_clicked()
 {
-    rotSet3.az = rotSet3.az - rotCfg.incrementAz;
-    ui->lineEdit_posAz_3->setText(QString::number(rotSet3.az));
+    rotSet[2].az = rotSet[2].az - rotCfg.incrementAz;
+    ui->lineEdit_posAz_3->setText(QString::number(rotSet[2].az));
 }
 
 void MainWindow::on_toolButton_plus_3_clicked()
 {
-    rotSet3.az = rotSet3.az + rotCfg.incrementAz;
-    ui->lineEdit_posAz_3->setText(QString::number(rotSet3.az));
+    rotSet[2].az = rotSet[2].az + rotCfg.incrementAz;
+    ui->lineEdit_posAz_3->setText(QString::number(rotSet[2].az));
 }
 
 void MainWindow::on_toolButton_pathSL_3_toggled(bool checked)
@@ -966,12 +945,12 @@ void MainWindow::on_toolButton_pathSL_3_toggled(bool checked)
     if (checked)
     {
         ui->toolButton_pathSL_3->setText("LP");
-        rotSet3.lPathFlag = true;
+        rotSet[2].lPathFlag = true;
     }
     else
     {
         ui->toolButton_pathSL_3->setText("SP");
-        rotSet3.lPathFlag = false;
+        rotSet[2].lPathFlag = false;
     }
     emit ui->pushButton_go_3->clicked(true);
 }
@@ -980,33 +959,33 @@ void MainWindow::on_toolButton_track_3_toggled(bool checked)
 {
     if (checked)
     {
-        if (rotSet3.trackPreviSat)
+        if (rotSet[2].trackPreviSat)
         {
             ui->toolButton_track_3->setText("SAT");
-            ui->statusbar->showMessage("Tracking PreviSat " + rotSet3.nameLabel);
+            ui->statusbar->showMessage("Tracking PreviSat " + rotSet[2].nameLabel);
         }
-        else if (rotSet3.trackWSJTX)
+        else if (rotSet[2].trackWSJTX)
         {
             ui->toolButton_track_3->setText("WSJ");
-            ui->statusbar->showMessage("Tracking WSJT-X (Moon) " + rotSet3.nameLabel);
+            ui->statusbar->showMessage("Tracking WSJT-X (Moon) " + rotSet[2].nameLabel);
         }
-        else if (rotSet3.trackAirScout)
+        else if (rotSet[2].trackAirScout)
         {
             ui->toolButton_track_3->setText("AP");
-            ui->statusbar->showMessage("Tracking AirScout " + rotSet3.nameLabel);
+            ui->statusbar->showMessage("Tracking AirScout " + rotSet[2].nameLabel);
         }
         else
         {
             ui->toolButton_track_3->setChecked(false);
             return;
         }
-        rotSet3.trackFlag = true;
+        rotSet[2].trackFlag = true;
     }
     else
     {
         ui->toolButton_track_3->setText("TRK");
-        ui->statusbar->showMessage("Tracking off " + rotSet3.nameLabel);
-        rotSet3.trackFlag = false;
+        ui->statusbar->showMessage("Tracking off " + rotSet[2].nameLabel);
+        rotSet[2].trackFlag = false;
     }
 }
 
@@ -1019,10 +998,10 @@ void MainWindow::on_pushButton_park_clicked()
         if (my_rot->caps->park) rot_park(my_rot);
         else
         {
-            rotSet.az = rotSet.azPark;
-            rotSet.el = rotSet.elPark;
-            ui->lineEdit_posAz->setText(QString::number(rotSet.az));
-            rot_set_position(my_rot, rotSet.az, rotSet.el);
+            rotSet[0].az = rotSet[0].azPark;
+            rotSet[0].el = rotSet[0].elPark;
+            ui->lineEdit_posAz->setText(QString::number(rotSet[0].az));
+            rot_set_position(my_rot, rotSet[0].az, rotSet[0].el);
         }
         break;
 
@@ -1030,10 +1009,10 @@ void MainWindow::on_pushButton_park_clicked()
         if (my_rot2->caps->park) rot_park(my_rot2);
         else
         {
-            rotSet2.az = rotSet2.azPark;
-            rotSet2.el = rotSet2.elPark;
-            ui->lineEdit_posAz_2->setText(QString::number(rotSet2.az));
-            rot_set_position(my_rot2, rotSet2.az, rotSet2.el);
+            rotSet[1].az = rotSet[1].azPark;
+            rotSet[1].el = rotSet[1].elPark;
+            ui->lineEdit_posAz_2->setText(QString::number(rotSet[1].az));
+            rot_set_position(my_rot2, rotSet[1].az, rotSet[1].el);
         }
         break;
 
@@ -1041,10 +1020,10 @@ void MainWindow::on_pushButton_park_clicked()
         if (my_rot3->caps->park) rot_park(my_rot3);
         else
         {
-            rotSet3.az = rotSet3.azPark;
-            rotSet3.el = rotSet3.elPark;
-            ui->lineEdit_posAz_3->setText(QString::number(rotSet3.az));
-            rot_set_position(my_rot3, rotSet3.az, rotSet3.el);
+            rotSet[2].az = rotSet[2].azPark;
+            rotSet[2].el = rotSet[2].elPark;
+            ui->lineEdit_posAz_3->setText(QString::number(rotSet[2].az));
+            rot_set_position(my_rot3, rotSet[2].az, rotSet[2].el);
         }
         break;
     }

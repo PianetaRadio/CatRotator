@@ -68,11 +68,11 @@ ROT *RotDaemon::rotConnect(rotatorConnect *rotCom)
      }
 }
 
-void RotDaemon::rotUpdate(ROT *rot, rotatorSettings *rotGet)
+void RotDaemon::rotUpdate(int rotNumber, ROT *rot, rotatorSettings *rotGet)
 {
     //int retcode;
 
     rot_get_position(rot, &rotGet->az, &rotGet->el);
 
-    emit resultReady();
+    emit resultReady(rotNumber);
 }
