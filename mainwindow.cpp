@@ -591,7 +591,7 @@ bool MainWindow::azElInput(QString value, bool lPath, double *azim, double *elev
     double dist = 0;
     double tempAz, tempEl;
 
-    *elev = -1; //Used for no elevation input
+    *elev = -90; //Used for no elevation input
 
     if (azElCmdDegMatch.hasMatch()) //Az && El
     {
@@ -775,9 +775,21 @@ void MainWindow::on_pushButton_go_clicked()
    double tempAz, tempEl;
    if (MainWindow::azElInput(ui->lineEdit_posAz->text(), rotSet[0].lPathFlag, &tempAz, &tempEl))
    {
-       //rot_set_position(my_rot, rotSet[0].az, rotSet[0].el);
+       if (tempEl == -90 && my_rot->caps->rot_type == ROT_TYPE_ELEVATION)
+       {
+           tempEl = tempAz;
+           tempAz = 0;
+       }
+       else if (tempEl == -90) tempEl = rotGet[0].el;
+
        setPosition(0, tempAz, tempEl);
-       ui->lineEdit_posAz->setText(QString::number(rotSet[0].az,'f',1));
+
+       QString posText;
+       if (my_rot->caps->rot_type == ROT_TYPE_AZEL) posText = QString::number(rotSet[0].az,'f',1) + " " + QString::number(rotSet[0].el,'f',1);
+       else if (my_rot->caps->rot_type == ROT_TYPE_ELEVATION) posText = QString::number(rotSet[0].el,'f',1);
+       else QString::number(rotSet[0].az,'f',1);    //ROT_TYPE_AZIMUTH
+
+       ui->lineEdit_posAz->setText(posText);
    }
 }
 
@@ -849,9 +861,21 @@ void MainWindow::on_pushButton_go_2_clicked()
     double tempAz, tempEl;
     if (MainWindow::azElInput(ui->lineEdit_posAz_2->text(), rotSet[1].lPathFlag, &tempAz, &tempEl))
     {
-        //rot_set_position(my_rot2, rotSet[1].az, rotSet[1].el);
+        if (tempEl == -90 && my_rot2->caps->rot_type == ROT_TYPE_ELEVATION)
+        {
+            tempEl = tempAz;
+            tempAz = 0;
+        }
+        else if (tempEl == -90) tempEl = rotGet[1].el;
+
         setPosition(1, tempAz, tempEl);
-        ui->lineEdit_posAz_2->setText(QString::number(rotSet[1].az));
+
+        QString posText;
+        if (my_rot2->caps->rot_type == ROT_TYPE_AZEL) posText = QString::number(rotSet[1].az,'f',1) + " " + QString::number(rotSet[1].el,'f',1);
+        else if (my_rot2->caps->rot_type == ROT_TYPE_ELEVATION) posText = QString::number(rotSet[1].el,'f',1);
+        else QString::number(rotSet[1].az,'f',1);    //ROT_TYPE_AZIMUTH
+
+        ui->lineEdit_posAz_2->setText(posText);
     }
 }
 
@@ -922,9 +946,21 @@ void MainWindow::on_pushButton_go_3_clicked()
     double tempAz, tempEl;
     if (MainWindow::azElInput(ui->lineEdit_posAz_3->text(), rotSet[2].lPathFlag, &tempAz, &tempEl))
     {
-        //rot_set_position(my_rot3, rotSet[2].az, rotSet[2].el);
+        if (tempEl == -90 && my_rot3->caps->rot_type == ROT_TYPE_ELEVATION)
+        {
+            tempEl = tempAz;
+            tempAz = 0;
+        }
+        else if (tempEl == -90) tempEl = rotGet[2].el;
+
         setPosition(2, tempAz, tempEl);
-        ui->lineEdit_posAz_3->setText(QString::number(rotSet[2].az));
+
+        QString posText;
+        if (my_rot3->caps->rot_type == ROT_TYPE_AZEL) posText = QString::number(rotSet[2].az,'f',1) + " " + QString::number(rotSet[2].el,'f',1);
+        else if (my_rot3->caps->rot_type == ROT_TYPE_ELEVATION) posText = QString::number(rotSet[2].el,'f',1);
+        else QString::number(rotSet[2].az,'f',1);    //ROT_TYPE_AZIMUTH
+
+        ui->lineEdit_posAz_3->setText(posText);
     }
 }
 
