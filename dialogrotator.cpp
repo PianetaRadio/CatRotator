@@ -481,3 +481,94 @@ int printRotatorList(const struct rot_caps *rotCaps, void *data)    //Load rotat
     stream << rotCaps->rot_model << " " << rotCaps->mfg_name << " " << rotCaps->model_name << "\n";
     return 1;
 }
+
+
+void DialogRotator::on_checkBox_PreviSat_toggled(bool checked)
+{
+    if (checked)
+    {
+        ui->checkBox_WSJTX->setChecked(false);
+        ui->checkBox_AirScout->setChecked(false);
+    }
+}
+
+
+void DialogRotator::on_checkBox_WSJTX_toggled(bool checked)
+{
+    if (checked)
+    {
+        ui->checkBox_PreviSat->setChecked(false);
+        ui->checkBox_AirScout->setChecked(false);
+    }
+}
+
+
+void DialogRotator::on_checkBox_AirScout_toggled(bool checked)
+{
+    if (checked)
+    {
+        ui->checkBox_PreviSat->setChecked(false);
+        ui->checkBox_WSJTX->setChecked(false);
+    }
+}
+
+
+void DialogRotator::on_checkBox_PreviSat_2_toggled(bool checked)
+{
+    if (checked)
+    {
+        ui->checkBox_WSJTX_2->setChecked(false);
+        ui->checkBox_AirScout_2->setChecked(false);
+    }
+}
+
+
+void DialogRotator::on_checkBox_WSJTX_2_toggled(bool checked)
+{
+    if (checked)
+    {
+        ui->checkBox_PreviSat_2->setChecked(false);
+        ui->checkBox_AirScout_2->setChecked(false);
+    }
+}
+
+
+void DialogRotator::on_checkBox_AirScout_2_toggled(bool checked)
+{
+    if (checked)
+    {
+        ui->checkBox_PreviSat_2->setChecked(false);
+        ui->checkBox_WSJTX_2->setChecked(false);
+    }
+}
+
+
+void DialogRotator::on_checkBox_PreviSat_3_toggled(bool checked)
+{
+    if (checked)
+    {
+        ui->checkBox_WSJTX_3->setChecked(false);
+        ui->checkBox_AirScout_3->setChecked(false);
+    }
+}
+
+
+void DialogRotator::on_checkBox_WSJTX_3_toggled(bool checked)
+{
+    if (checked)
+    {
+        ui->checkBox_PreviSat_3->setChecked(false);
+        ui->checkBox_AirScout_3->setChecked(false);
+    }
+}
+
+
+void DialogRotator::on_checkBox_AirScout_3_toggled(bool checked)
+{
+    if (checked)
+    {
+        ui->checkBox_PreviSat_3->setChecked(false);
+        ui->checkBox_WSJTX_3->setChecked(false);
+    }
+}
+

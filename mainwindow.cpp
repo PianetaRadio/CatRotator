@@ -1081,14 +1081,14 @@ void MainWindow::on_pushButton_p8_clicked()
 void MainWindow::on_actionRotator_triggered()
 {
     DialogRotator config;
-    config.setModal(true);
+    //config.setModal(true);
     config.exec();
 }
 
 void MainWindow::on_actionSetup_triggered()
 {
     DialogSetup setup;
-    setup.setModal(true);
+    //setup.setModal(true);
     setup.exec();
 }
 
@@ -1096,7 +1096,7 @@ void MainWindow::on_actionPresets_triggered()
 {
     DialogPreset preset;
     connect(&preset, &DialogPreset::configDone, this, &MainWindow::presetInit);
-    preset.setModal(true);
+    //preset.setModal(true);
     preset.exec();
 }
 
