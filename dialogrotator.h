@@ -37,6 +37,24 @@ public:
 private slots:
     void on_buttonBox_accepted();
 
+    void on_checkBox_PreviSat_toggled(bool checked);
+
+    void on_checkBox_WSJTX_toggled(bool checked);
+
+    void on_checkBox_AirScout_toggled(bool checked);
+
+    void on_checkBox_PreviSat_2_toggled(bool checked);
+
+    void on_checkBox_WSJTX_2_toggled(bool checked);
+
+    void on_checkBox_AirScout_2_toggled(bool checked);
+
+    void on_checkBox_PreviSat_3_toggled(bool checked);
+
+    void on_checkBox_WSJTX_3_toggled(bool checked);
+
+    void on_checkBox_AirScout_3_toggled(bool checked);
+
 private:
     Ui::DialogRotator *ui;
 };
