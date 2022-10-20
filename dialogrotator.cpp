@@ -428,48 +428,22 @@ void DialogRotator::on_buttonBox_accepted()
 
     //* Save settings in catrotator.ini
     QSettings configFile(QString("catrotator.ini"), QSettings::IniFormat);
-    configFile.setValue("Rotator1/rotModel", rotCom[0].rotModel);
-    configFile.setValue("Rotator1/rotPort", rotCom[0].rotPort);
-    configFile.setValue("Rotator1/serialSpeed", ui->comboBox_serialSpeed->currentText());
-    configFile.setValue("Rotator1/netRotctl", ui->checkBox_netRotctl->isChecked());
-    configFile.setValue("Rotator1/nameLabel", rotSet[0].nameLabel);
-    configFile.setValue("Rotator1/azPark", rotSet[0].azPark);
-    configFile.setValue("Rotator1/elPark", rotSet[0].elPark);
-    configFile.setValue("Rotator1/overlap", rotSet[0].overlap);
-    configFile.setValue("Rotator1/trackTolerance", rotSet[0].trackTolerance);
-    configFile.setValue("Rotator1/trackThreshold", rotSet[0].trackThreshold);
-    configFile.setValue("Rotator1/trackPreviSat", rotSet[0].trackPreviSat);
-    configFile.setValue("Rotator1/trackWSJTX", rotSet[0].trackWSJTX);
-    configFile.setValue("Rotator1/trackAirScout", rotSet[0].trackAirScout);
-
-    configFile.setValue("Rotator2/rotModel", rotCom[1].rotModel);
-    configFile.setValue("Rotator2/rotPort", rotCom[1].rotPort);
-    configFile.setValue("Rotator2/serialSpeed", ui->comboBox_serialSpeed_2->currentText());
-    configFile.setValue("Rotator2/netRotctl", ui->checkBox_netRotctl_2->isChecked());
-    configFile.setValue("Rotator2/nameLabel", rotSet[1].nameLabel);
-    configFile.setValue("Rotator2/azPark", rotSet[1].azPark);
-    configFile.setValue("Rotator2/elPark", rotSet[1].elPark);
-    configFile.setValue("Rotator2/overlap", rotSet[1].overlap);
-    configFile.setValue("Rotator2/trackTolerance", rotSet[1].trackTolerance);
-    configFile.setValue("Rotator2/trackThreshold", rotSet[1].trackThreshold);
-    configFile.setValue("Rotator2/trackPreviSat", rotSet[1].trackPreviSat);
-    configFile.setValue("Rotator2/trackWSJTX", rotSet[1].trackWSJTX);
-    configFile.setValue("Rotator2/trackAirScout", rotSet[1].trackAirScout);
-
-    configFile.setValue("Rotator3/rotModel", rotCom[2].rotModel);
-    configFile.setValue("Rotator3/rotPort", rotCom[2].rotPort);
-    configFile.setValue("Rotator3/serialSpeed", ui->comboBox_serialSpeed_3->currentText());
-    configFile.setValue("Rotator3/netRotctl", ui->checkBox_netRotctl_3->isChecked());
-    configFile.setValue("Rotator3/nameLabel", rotSet[2].nameLabel);
-    configFile.setValue("Rotator3/azPark", rotSet[2].azPark);
-    configFile.setValue("Rotator3/elPark", rotSet[2].elPark);
-    configFile.setValue("Rotator3/overlap", rotSet[2].overlap);
-    configFile.setValue("Rotator3/trackTolerance", rotSet[2].trackTolerance);
-    configFile.setValue("Rotator3/trackThreshold", rotSet[2].trackThreshold);
-    configFile.setValue("Rotator3/trackPreviSat", rotSet[2].trackPreviSat);
-    configFile.setValue("Rotator3/trackWSJTX", rotSet[2].trackWSJTX);
-    configFile.setValue("Rotator3/trackAirScout", rotSet[2].trackAirScout);
-
+    for (int i = 0; i < 3; i++)
+    {
+        configFile.setValue("Rotator"+QString::number(i+1)+"/rotModel", rotCom[i].rotModel);
+        configFile.setValue("Rotator"+QString::number(i+1)+"/rotPort", rotCom[i].rotPort);
+        configFile.setValue("Rotator"+QString::number(i+1)+"/serialSpeed", rotCom[i].serialSpeed);
+        configFile.setValue("Rotator"+QString::number(i+1)+"/netRotctl", rotCom[i].netRotctl);
+        configFile.setValue("Rotator"+QString::number(i+1)+"/nameLabel", rotSet[i].nameLabel);
+        configFile.setValue("Rotator"+QString::number(i+1)+"/azPark", rotSet[i].azPark);
+        configFile.setValue("Rotator"+QString::number(i+1)+"/elPark", rotSet[i].elPark);
+        configFile.setValue("Rotator"+QString::number(i+1)+"/overlap", rotSet[i].overlap);
+        configFile.setValue("Rotator"+QString::number(i+1)+"/trackTolerance", rotSet[i].trackTolerance);
+        configFile.setValue("Rotator"+QString::number(i+1)+"/trackThreshold", rotSet[i].trackThreshold);
+        configFile.setValue("Rotator"+QString::number(i+1)+"/trackPreviSat", rotSet[i].trackPreviSat);
+        configFile.setValue("Rotator"+QString::number(i+1)+"/trackWSJTX", rotSet[i].trackWSJTX);
+        configFile.setValue("Rotator"+QString::number(i+1)+"/trackAirScout", rotSet[i].trackAirScout);
+    }
     configFile.setValue("rotRefresh", ui->spinBox_refreshRate->value());
     configFile.setValue("rotIncrementAz", ui->spinBox_incrementAz->value());
 }
