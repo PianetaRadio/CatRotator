@@ -25,6 +25,7 @@
 #include <QFile>
 #include <QFileDialog>
 #include <QDir>
+#include <QMessageBox>
 
 extern catRotatorConfig rotCfg;
 
@@ -64,8 +65,19 @@ void DialogSetup::on_pushButton_WSJTX_clicked()
 
 void DialogSetup::on_buttonBox_accepted()
 {
+    //MessageBox to restart if UDP config is changed
+    if ((rotCfg.udp != ui->checkBox_udp->isChecked()) || (rotCfg.udpAddress != ui->lineEdit_udpAddress->text()) || (rotCfg.udpPort != ui->lineEdit_udpPort->text().toUShort()))
+    {
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("UDP");
+        msgBox.setText("Please, restart CatRotator to make effective the UDP setup changes.");
+        msgBox.setIcon(QMessageBox::Information);
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.exec();
+    }
+
     rotCfg.qthLocator = ui->lineEdit_qthLocator->text();
-    rotCfg.udp = ui->checkBox_udp->checkState();
+    rotCfg.udp = ui->checkBox_udp->isChecked();
     rotCfg.udpAddress = ui->lineEdit_udpAddress->text();
     rotCfg.udpPort = ui->lineEdit_udpPort->text().toUShort();
     rotCfg.pathTrackWSJTX = ui->lineEdit_WSJTX->text();
