@@ -126,7 +126,7 @@
        <bool>true</bool>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab_1">
        <attribute name="title">
@@ -146,7 +146,7 @@
         <item row="0" column="3">
          <widget class="QLineEdit" name="lineEdit_posAz">
           <property name="toolTip">
-           <string>Az (El) angle or QRA loc</string>
+           <string>Az (El) angle, QRA loc, Callsign+&lt;enter&gt;</string>
           </property>
           <property name="inputMask">
            <string/>
@@ -239,7 +239,7 @@
         <item row="0" column="3">
          <widget class="QLineEdit" name="lineEdit_posAz_2">
           <property name="toolTip">
-           <string>Az (El) angle or QRA loc</string>
+           <string>Az (El) angle, QRA loc, Callsign+&lt;enter&gt;</string>
           </property>
          </widget>
         </item>
@@ -345,7 +345,7 @@
         <item row="0" column="3">
          <widget class="QLineEdit" name="lineEdit_posAz_3">
           <property name="toolTip">
-           <string>Az (El) angle or QRA loc</string>
+           <string>Az (El) angle, QRA loc, Callsign+&lt;enter&gt;</string>
           </property>
          </widget>
         </item>
@@ -399,6 +399,9 @@
        </layout>
       </widget>
       <widget class="QWidget" name="tab_4">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <attribute name="title">
         <string>Rotator 4</string>
        </attribute>
@@ -433,6 +436,7 @@
     <addaction name="actionAbout_CatRotator"/>
     <addaction name="actionAbout_Qt"/>
     <addaction name="actionAbout_Hamlib"/>
+    <addaction name="actionAbout_cty_dat"/>
    </widget>
    <addaction name="menuConfig"/>
    <addaction name="menuHelp"/>
@@ -471,6 +475,11 @@
   <action name="actionPresets">
    <property name="text">
     <string>Presets</string>
+   </property>
+  </action>
+  <action name="actionAbout_cty_dat">
+   <property name="text">
+    <string>About cty.dat</string>
    </property>
   </action>
  </widget>

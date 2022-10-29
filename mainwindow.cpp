@@ -51,6 +51,9 @@ int defaultPreset[9] = {0, 45, 90, 135, 180, 225, 270, 315, 360};
 
 FILE* debugFile;
 
+QString ctyFile = "CTY.dat";    //Country file
+QFile cty(ctyFile);
+
 QThread workerThread;
 RotDaemon *rotDaemon = new RotDaemon;
 
@@ -62,9 +65,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
-    ui->tabWidget_rotator->setTabVisible(1, false);
-    ui->tabWidget_rotator->setTabVisible(2, false);
-    ui->tabWidget_rotator->setTabVisible(3, false);
+    ui->tabWidget_rotator->setTabVisible(0, true);
+    ui->tabWidget_rotator->setTabVisible(1, true);
+    ui->tabWidget_rotator->setTabVisible(2, true);
+    ui->tabWidget_rotator->setTabVisible(3, false); //Not used at the moment
 #endif
 
     timer = new QTimer(this);   //timer for rotDaemon thread call
@@ -82,6 +86,11 @@ MainWindow::MainWindow(QWidget *parent)
     connect(timer, &QTimer::timeout, this, &MainWindow::rotUpdate);
     connect(rotDaemon, &RotDaemon::resultReady, this, &MainWindow::on_rotDaemonResultReady);
     workerThread.start();
+
+    //Capture "enter" key in the lineEdit
+    connect(ui->lineEdit_posAz, SIGNAL(returnPressed()), this, SLOT(on_lineEditEnterPressed()));
+    connect(ui->lineEdit_posAz_2, SIGNAL(returnPressed()), this, SLOT(on_lineEditEnterPressed2()));
+    connect(ui->lineEdit_posAz_3, SIGNAL(returnPressed()), this, SLOT(on_lineEditEnterPressed3()));
 
     //* Load settings from catrotator.ini
     QSettings configFile(QString("catrotator.ini"), QSettings::IniFormat);
@@ -171,6 +180,63 @@ void MainWindow::on_rotDaemonResultReady(int rotNumber)
     guiUpdate(rotNumber);
 }
 
+//* "Enter" key event in the lineEdit
+void MainWindow::on_lineEditEnterPressed()
+{
+    //Use lineEdit value as callsign and find location in CTY.DAT
+    QString countryName, country;
+    double countryLat,countryLon;
+    char locatorCty[4];
+
+    QString callsign = ui->lineEdit_posAz->text();
+    parseCTY(callsign, &countryName, &country, &countryLat, &countryLon);
+
+    if (country !="")
+    {
+        ui->statusbar->showMessage("Pointing to " + countryName + " (" + country + ")");
+        longlat2locator(countryLon, countryLat, locatorCty, 2);
+        ui->lineEdit_posAz->setText(locatorCty);
+    }
+    else ui->statusbar->showMessage(countryName);
+}
+
+void MainWindow::on_lineEditEnterPressed2()
+{
+    QString countryName, country;
+    double countryLat,countryLon;
+    char locatorCty[4];
+
+    QString callsign = ui->lineEdit_posAz_2->text();
+    parseCTY(callsign, &countryName, &country, &countryLat, &countryLon);
+
+    if (country !="")
+    {
+        ui->statusbar->showMessage("Pointing to " + countryName + " (" + country + ")");
+        longlat2locator(countryLon, countryLat, locatorCty, 2);
+        ui->lineEdit_posAz_2->setText(locatorCty);
+    }
+    else ui->statusbar->showMessage(countryName);
+}
+
+void MainWindow::on_lineEditEnterPressed3()
+{
+    QString countryName, country;
+    double countryLat,countryLon;
+    char locatorCty[4];
+
+    QString callsign = ui->lineEdit_posAz_3->text();
+    parseCTY(callsign, &countryName, &country, &countryLat, &countryLon);
+
+    if (country !="")
+    {
+        ui->statusbar->showMessage("Pointing to " + countryName + " (" + country + ")");
+        longlat2locator(countryLon, countryLat, locatorCty, 2);
+        ui->lineEdit_posAz_3->setText(locatorCty);
+    }
+    else ui->statusbar->showMessage(countryName);
+}
+
+//* Init
 void MainWindow::guiInit()
 {
 #if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
@@ -235,6 +301,7 @@ void MainWindow::guiInit()
     else ui->tabWidget_rotator->setTabEnabled(0, false);
 }
 
+//* Update
 void MainWindow::guiUpdate(int rotNumber)
 {
     //Update current position
@@ -408,6 +475,7 @@ void MainWindow::guiUpdate(int rotNumber)
     }
 }
 
+//* Presets
 void MainWindow::presetGo(int presetNumber)
 {
     switch (ui->tabWidget_rotator->currentIndex())
@@ -518,6 +586,95 @@ void MainWindow::setPosition(int rot, float azim, float elev)
     }
 
     return;
+}
+
+void MainWindow::parseCTY(QString callsign, QString *countryName, QString *country, double *lat, double *lon)
+{
+    *lat = 0;
+    *lon = 0;
+    *countryName = "Unknown";
+
+    if (cty.exists())
+    {
+        QString tempCountryName, tempCountry;
+        double tempLat = 0, tempLon = 0;
+        int count = 0;
+
+        cty.open(QIODevice::ReadOnly);    //Open file CTY.dat
+        cty.seek(0);
+
+        QRegularExpression countryRegExp("(?P<countryName>[a-zA-Z0-9 ]+):\\s+(?P<itu>\\d+):\\s+(?P<cq>\\d+):\\s+(?P<cont>\\w\\w):\\s+(?P<lat>[+-]?\\d+.\\d+):\\s+(?P<lon>[+-]?\\d+.\\d+):\\s+(?P<tz>[+-]?\\d+.\\d+):\\s+[*]?(?P<country>[a-zA-Z0-9 ]+):");
+        QRegularExpression prefixRegExp("(?P<prefix>[A-Z0-9/]+)");
+
+        while(!cty.atEnd())
+        {
+            QString line = cty.readLine();
+
+            if (line[0].isLetter())
+            {
+                QRegularExpressionMatch countryMatch = countryRegExp.match(line);
+                tempCountryName = countryMatch.captured("countryName"); //Country Name
+                tempCountry = countryMatch.captured("country"); //Primary DXCC Prefix
+                tempLat = countryMatch.captured("lat").toDouble();  //Latitude in degrees, + for North
+                tempLon = countryMatch.captured("lon").toDouble();  //Longitude in degrees, + for West
+            }
+
+            else if (line[0].isSpace())
+            {
+                QRegularExpressionMatchIterator prefixMatchIterator = prefixRegExp.globalMatch(line);
+
+                while (prefixMatchIterator.hasNext())
+                {
+                    QRegularExpressionMatch prefixMatch = prefixMatchIterator.next();
+                    if (callsign.startsWith(prefixMatch.captured("prefix"), Qt::CaseInsensitive))
+                    {
+                        if (prefixMatch.captured("prefix").size() > count)
+                        {
+                            count = prefixMatch.captured("prefix").size();
+
+                            *countryName = tempCountryName;
+                            *country = tempCountry;
+                            *lat = tempLat;
+                            *lon = -tempLon;
+                        }
+                    }
+                }
+            }
+        }
+        //qDebug() << countryName << country << *lat << *lon;
+        cty.close();
+    }
+    else *countryName = "Missing file CTY.DAT";
+
+    return;
+}
+
+QString MainWindow::versionCTY()
+{
+    QString version;
+
+    if (cty.exists())
+    {
+        cty.open(QIODevice::ReadOnly);    //Open file CTY.dat
+        cty.seek(0);
+
+        QRegularExpression versionRegExp("=VER(?P<version>\\d{8})");   //Search "=VERyyyymmdd"
+
+        while(!cty.atEnd())
+        {
+            QString line = cty.readLine();
+
+            if (line[0].isSpace())
+            {
+                QRegularExpressionMatch versionMatch = versionRegExp.match(line);
+                if (versionMatch.hasMatch()) version = versionMatch.captured("version");
+            }
+        }
+        cty.close();
+    }
+    else version = "NA";
+
+    return version;
 }
 
 void MainWindow::parseWSJTX(double *azim, double *elev)
@@ -1114,6 +1271,8 @@ void MainWindow::on_pushButton_p8_clicked()
 
 
 //* Menu
+//* Setup
+//Rotator
 void MainWindow::on_actionRotator_triggered()
 {
     DialogRotator config;
@@ -1121,6 +1280,7 @@ void MainWindow::on_actionRotator_triggered()
     config.exec();
 }
 
+//Setup
 void MainWindow::on_actionSetup_triggered()
 {
     DialogSetup setup;
@@ -1128,6 +1288,7 @@ void MainWindow::on_actionSetup_triggered()
     setup.exec();
 }
 
+//Presets
 void MainWindow::on_actionPresets_triggered()
 {
     DialogPreset preset;
@@ -1136,12 +1297,15 @@ void MainWindow::on_actionPresets_triggered()
     preset.exec();
 }
 
+//* Help
+//Homepage
 void MainWindow::on_actionCatRotator_homepage_triggered()
 {
     QUrl homepage("https://www.pianetaradio.it/blog/catrotator/");
     QDesktopServices::openUrl(homepage);
 }
 
+//About CatRotator
 void MainWindow::on_actionAbout_CatRotator_triggered()
 {
     QMessageBox msgBox;
@@ -1149,11 +1313,11 @@ void MainWindow::on_actionAbout_CatRotator_triggered()
     msgBox.setTextFormat(Qt::RichText);
     QString version = QString::number(VERSION_MAJ)+"."+QString::number(VERSION_MIN)+"."+QString::number(VERSION_MIC);
     msgBox.setText("<b>CatRotator</b> <i>Rotator control software</i><br/>version "+version+" "+RELEASE_DATE);
-    msgBox.setInformativeText("Copyright (C) 2022 Gianfranco Sordetti IZ8EWD<br/>"
+    msgBox.setInformativeText("<p>Copyright (C) 2022 Gianfranco Sordetti IZ8EWD<br/>"
                               "<a href='https://www.pianetaradio.it'>www.pianetaradio.it</a></p>"
                               "<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.<br/>"
                               "This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.<br/>"
-                              "You should have received a copy of the GNU General Public License along with this program.  If not, see <a href='http://www.gnu.org/licenses/'>www.gnu.org/licenses</a>.");
+                              "You should have received a copy of the GNU General Public License along with this program.  If not, see <a href='http://www.gnu.org/licenses/'>www.gnu.org/licenses</a>.</p>");
     msgBox.setIcon(QMessageBox::NoIcon);
     msgBox.setStandardButtons(QMessageBox::Ok);
 
@@ -1163,11 +1327,13 @@ void MainWindow::on_actionAbout_CatRotator_triggered()
     msgBox.exec();
 }
 
+//About Qt
 void MainWindow::on_actionAbout_Qt_triggered()
 {
     QMessageBox::aboutQt(this);
 }
 
+//About Hamlib
 void MainWindow::on_actionAbout_Hamlib_triggered()
 {
     QMessageBox msgBox;
@@ -1179,3 +1345,25 @@ void MainWindow::on_actionAbout_Hamlib_triggered()
     msgBox.setStandardButtons(QMessageBox::Ok);
     msgBox.exec();
 }
+
+//About cty.dat
+void MainWindow::on_actionAbout_cty_dat_triggered()
+{
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("About cty.dat");
+    msgBox.setTextFormat(Qt::RichText);
+    msgBox.setText("<b>CTY.DAT</b> <i>Amateur Radio Country File</i><br/>version " + versionCTY());
+    msgBox.setInformativeText("<p>Copyright (C) 1994- Jim Reisert AD1C<br/>"
+                              "<a href='https://www.country-files.com'>www.country-files.com</a></p>"
+                              "<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS<br/>"
+                              "OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF<br/>"
+                              "MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.<br/>"
+                              "IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY<br/>"
+                              "CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,<br/>"
+                              "TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE<br/>"
+                              "SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>");
+    msgBox.setIcon(QMessageBox::Information);
+    msgBox.setStandardButtons(QMessageBox::Ok);
+    msgBox.exec();
+}
+

@@ -26,7 +26,7 @@
 
 #define RELEASE_DATE __DATE__
 #define VERSION_MAJ 1
-#define VERSION_MIN 3
+#define VERSION_MIN 4
 #define VERSION_MIC 0
 
 QT_BEGIN_NAMESPACE
@@ -44,6 +44,9 @@ public:
 public slots:
     void rotUpdate();   //Slot fot QTimer
     void on_rotDaemonResultReady(int rotNumber);    //Slot for rotDaemon resultReady
+    void on_lineEditEnterPressed();     //Slot for enter pressed in lineEdit
+    void on_lineEditEnterPressed2();
+    void on_lineEditEnterPressed3();
 
 private slots:
     void on_actionRotator_triggered();
@@ -114,6 +117,8 @@ private slots:
 
     void on_toolButton_track_3_toggled(bool checked);
 
+    void on_actionAbout_cty_dat_triggered();
+
 private:
     Ui::MainWindow *ui;
     QTimer *timer;
@@ -130,6 +135,9 @@ private:
     bool azElInput(QString value, bool lPath, double *azim, double *elev);  //Convert pointing value input, from format degree or QTH locator, into azimuth bearing angle and elevation
     bool bearingAngle(const char *locator1, const char *locator2, double *azim, double *dist);  //Calculate Short Path bearing angle and distance between two locators
     bool bearingAngleLP(const char *locator1, const char *locator2, double *azim, double *dist);    //Calculate Long Path bearing angle and distance between two locators
+
+    void parseCTY(QString callsign, QString *countryName, QString *country, double *lat, double *lon); //Find Country in CTY.DAT from callsign
+    QString versionCTY();  //Extract CTY.DAT version
 };
 
 #endif // MAINWINDOW_H
