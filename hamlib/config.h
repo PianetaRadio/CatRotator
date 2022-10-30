@@ -358,7 +358,7 @@
 #define PACKAGE_NAME "Hamlib"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "Hamlib 4.5~git"
+#define PACKAGE_STRING "Hamlib 4.5"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "hamlib"
@@ -367,7 +367,7 @@
 #define PACKAGE_URL "http://www.hamlib.org"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "4.5~git"
+#define PACKAGE_VERSION "4.5"
 
 /* Define to necessary symbol if this constant uses a non-standard name on
    your system. */
@@ -407,7 +407,7 @@
 
 
 /* Version number of package */
-#define VERSION "4.5~git"
+#define VERSION "4.5"
 
 /* Define to 1 if on MINIX. */
 /* #undef _MINIX */
