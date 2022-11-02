@@ -41,6 +41,8 @@ private slots:
 
     void on_pushButton_WSJTX_clicked();
 
+    void on_pushButton_udpDefault_clicked();
+
 private:
     Ui::DialogSetup *ui;
 };

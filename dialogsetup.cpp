@@ -49,6 +49,12 @@ DialogSetup::~DialogSetup()
     delete ui;
 }
 
+void DialogSetup::on_pushButton_udpDefault_clicked()    //Set default UDP address and port
+{
+    ui->lineEdit_udpAddress->setText("127.0.0.1");
+    ui->lineEdit_udpPort->setText("12000");
+}
+
 void DialogSetup::on_pushButton_AirScout_clicked()
 {
     //QString fileTrackAirScout = QFileDialog::getOpenFileName(this, "Set file", rotCfg.pathTrackAirScout);
