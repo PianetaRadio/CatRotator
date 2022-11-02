@@ -60,5 +60,6 @@ private:
 };
 
 int printRotatorList(const struct rot_caps *rotCaps, void *data);
+void msgActivateUdp();
 
 #endif // DIALOGROTATOR_H

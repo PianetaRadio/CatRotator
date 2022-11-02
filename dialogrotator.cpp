@@ -463,6 +463,8 @@ void DialogRotator::on_checkBox_PreviSat_toggled(bool checked)
     {
         ui->checkBox_WSJTX->setChecked(false);
         ui->checkBox_AirScout->setChecked(false);
+
+        msgActivateUdp();
     }
 }
 
@@ -493,6 +495,8 @@ void DialogRotator::on_checkBox_PreviSat_2_toggled(bool checked)
     {
         ui->checkBox_WSJTX_2->setChecked(false);
         ui->checkBox_AirScout_2->setChecked(false);
+
+        msgActivateUdp();
     }
 }
 
@@ -523,6 +527,8 @@ void DialogRotator::on_checkBox_PreviSat_3_toggled(bool checked)
     {
         ui->checkBox_WSJTX_3->setChecked(false);
         ui->checkBox_AirScout_3->setChecked(false);
+
+        msgActivateUdp();
     }
 }
 
@@ -546,3 +552,17 @@ void DialogRotator::on_checkBox_AirScout_3_toggled(bool checked)
     }
 }
 
+
+void msgActivateUdp()
+{
+    //MessageBox to activate UDP
+    if (rotCfg.udp == false)
+    {
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("UDP");
+        msgBox.setText("Please, activate UDP in Config Setup.");
+        msgBox.setIcon(QMessageBox::Information);
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.exec();
+    }
+}
