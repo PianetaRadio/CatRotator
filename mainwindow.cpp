@@ -64,6 +64,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    QDir::setCurrent(QCoreApplication::applicationDirPath());   //set current path = application path
+
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     ui->tabWidget_rotator->setTabVisible(0, true);
     ui->tabWidget_rotator->setTabVisible(1, true);
@@ -193,7 +195,7 @@ void MainWindow::on_lineEditEnterPressed()
 
     if (country !="")
     {
-        ui->statusbar->showMessage("Pointing to " + countryName + " (" + country + ")");
+        ui->statusbar->showMessage(countryName + " (" + country + ")");
         longlat2locator(countryLon, countryLat, locatorCty, 2);
         ui->lineEdit_posAz->setText(locatorCty);
     }
@@ -211,7 +213,7 @@ void MainWindow::on_lineEditEnterPressed2()
 
     if (country !="")
     {
-        ui->statusbar->showMessage("Pointing to " + countryName + " (" + country + ")");
+        ui->statusbar->showMessage(countryName + " (" + country + ")");
         longlat2locator(countryLon, countryLat, locatorCty, 2);
         ui->lineEdit_posAz_2->setText(locatorCty);
     }
@@ -229,7 +231,7 @@ void MainWindow::on_lineEditEnterPressed3()
 
     if (country !="")
     {
-        ui->statusbar->showMessage("Pointing to " + countryName + " (" + country + ")");
+        ui->statusbar->showMessage(countryName + " (" + country + ")");
         longlat2locator(countryLon, countryLat, locatorCty, 2);
         ui->lineEdit_posAz_3->setText(locatorCty);
     }
