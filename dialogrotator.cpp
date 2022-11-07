@@ -37,7 +37,7 @@ extern catRotatorConfig rotCfg;
 
 
 QString rotListFile = "rotator.lst";    //Text file containing the list of rotators supported by hamlib
-QFile file(rotListFile);
+QFile rotFile(rotListFile);
 
 
 DialogRotator::DialogRotator(QWidget *parent) :
@@ -46,21 +46,29 @@ DialogRotator::DialogRotator(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    //* rigModel comboBox
-    if (!file.exists()) //Create file rotator.lst if not exists
+    //* rotModel comboBox
+    if (!rotFile.exists()) //Create file rotator.lst if not exists
     {
-        file.open(QIODevice::ReadWrite);
-        rot_load_all_backends();    //Load all backends information
-        rot_list_foreach(printRotatorList, NULL);   //Create the rotators list
+        createRotFile();
     }
-    else file.open(QIODevice::ReadOnly);    //Open file rotators.lst and populate the combobox
-    file.seek(0);
+    else rotFile.open(QIODevice::ReadOnly);    //Open file rotators.lst and populate the combobox
+    rotFile.seek(0);
+
+    QString versionFile = rotFile.readLine();   //Update rotFile if old version
+    if (versionFile.trimmed() != hamlib_version)
+    {
+        rotFile.remove();
+        createRotFile();
+        rotFile.seek(0);
+        rotFile.readLine();
+    }
+
     ui->comboBox_rotModel->clear();
     ui->comboBox_rotModel->addItem("");
     QRegularExpression regexp("[0-9]+");
-    while(!file.atEnd())
+    while(!rotFile.atEnd())
     {
-        QString line = file.readLine();
+        QString line = rotFile.readLine();
         int i = 1;
         if (ui->comboBox_rotModel->count() == 1) ui->comboBox_rotModel->addItem(line.trimmed());    //first line
         else while (i < ui->comboBox_rotModel->count()) //sort ascending by model number
@@ -79,12 +87,13 @@ DialogRotator::DialogRotator(QWidget *parent) :
         if (i == ui->comboBox_rotModel->count()) ui->comboBox_rotModel->addItem(line.trimmed());
     }
 
-    file.seek(0);
+    rotFile.seek(0);
+    rotFile.readLine();
     ui->comboBox_rotModel_2->clear();
     ui->comboBox_rotModel_2->addItem("");
-    while(!file.atEnd())
+    while(!rotFile.atEnd())
     {
-        QString line = file.readLine();
+        QString line = rotFile.readLine();
         int i = 1;
         if (ui->comboBox_rotModel_2->count() == 1) ui->comboBox_rotModel_2->addItem(line.trimmed());    //first line
         else while (i < ui->comboBox_rotModel_2->count()) //sort ascending by model number
@@ -103,12 +112,13 @@ DialogRotator::DialogRotator(QWidget *parent) :
         if (i == ui->comboBox_rotModel_2->count()) ui->comboBox_rotModel_2->addItem(line.trimmed());
     }
 
-    file.seek(0);
+    rotFile.seek(0);
+    rotFile.readLine();
     ui->comboBox_rotModel_3->clear();
     ui->comboBox_rotModel_3->addItem("");
-    while(!file.atEnd())
+    while(!rotFile.atEnd())
     {
-        QString line = file.readLine();
+        QString line = rotFile.readLine();
         int i = 1;
         if (ui->comboBox_rotModel_3->count() == 1) ui->comboBox_rotModel_3->addItem(line.trimmed());    //first line
         else while (i < ui->comboBox_rotModel_3->count()) //sort ascending by model number
@@ -126,7 +136,7 @@ DialogRotator::DialogRotator(QWidget *parent) :
         }
         if (i == ui->comboBox_rotModel_3->count()) ui->comboBox_rotModel_3->addItem(line.trimmed());
     }
-    file.close();
+    rotFile.close();
 
     //* COM port
     ui->comboBox_comPort->clear();
@@ -451,11 +461,20 @@ void DialogRotator::on_buttonBox_accepted()
 int printRotatorList(const struct rot_caps *rotCaps, void *data)    //Load rotators list from hamlib and save into file rotator.lst
 {
     if (data) return 0;
-    QTextStream stream(&file);
+    QTextStream stream(&rotFile);
     stream << rotCaps->rot_model << " " << rotCaps->mfg_name << " " << rotCaps->model_name << "\n";
     return 1;
 }
 
+bool createRotFile()
+{
+    bool ret = rotFile.open(QIODevice::ReadWrite);
+    rotFile.write(hamlib_version);  //Write current Hamlib version in the file header
+    rotFile.write("\n");
+    rot_load_all_backends();    //Load all backends information
+    rot_list_foreach(printRotatorList, NULL);   //Create and write the rotators list
+    return ret;
+}
 
 void DialogRotator::on_checkBox_PreviSat_toggled(bool checked)
 {
