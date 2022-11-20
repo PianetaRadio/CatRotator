@@ -543,7 +543,7 @@ void MainWindow::setPosition(int rot, float azim, float elev)
             {
                 if (rotSet[0].overlap && rotGet[0].az>270 && azim>=0 && azim<=90 && my_rot->caps->max_az>360) rotSet[0].az = 360 + azim;
                 else rotSet[0].az = azim;
-                if (elev >= 0 && my_rot->caps->rot_type == ROT_TYPE_AZEL) rotSet[0].el = elev;
+                if (elev >= 0 && (my_rot->caps->rot_type == ROT_TYPE_AZEL || my_rot->caps->rot_type == ROT_TYPE_OTHER)) rotSet[0].el = elev;
                 else rotSet[0].el = 0;
             }
             rot_set_position(my_rot, rotSet[0].az, rotSet[0].el);
@@ -561,7 +561,7 @@ void MainWindow::setPosition(int rot, float azim, float elev)
             {
                 if (rotSet[1].overlap && rotGet[1].az>270 && azim>=0 && azim<=90 && my_rot2->caps->max_az>360) rotSet[1].az = 360 + azim;
                 else rotSet[1].az = azim;
-                if (elev >= 0 && my_rot2->caps->rot_type == ROT_TYPE_AZEL) rotSet[1].el = elev;
+                if (elev >= 0 && (my_rot2->caps->rot_type == ROT_TYPE_AZEL || my_rot2->caps->rot_type == ROT_TYPE_OTHER)) rotSet[1].el = elev;
                 else rotSet[1].el = 0;
             }
             rot_set_position(my_rot2, rotSet[1].az, rotSet[1].el);
@@ -579,7 +579,7 @@ void MainWindow::setPosition(int rot, float azim, float elev)
             {
                 if (rotSet[2].overlap && rotGet[2].az>270 && azim>=0 && azim<=90 && my_rot3->caps->max_az>360) rotSet[2].az = 360 + azim;
                 else rotSet[2].az = azim;
-                if (elev >= 0 && my_rot3->caps->rot_type == ROT_TYPE_AZEL) rotSet[2].el = elev;
+                if (elev >= 0 && (my_rot3->caps->rot_type == ROT_TYPE_AZEL || my_rot3->caps->rot_type == ROT_TYPE_OTHER)) rotSet[2].el = elev;
                 else rotSet[2].el = 0;
             }
             rot_set_position(my_rot3, rotSet[2].az, rotSet[2].el);
@@ -944,9 +944,9 @@ void MainWindow::on_pushButton_go_clicked()
        setPosition(0, tempAz, tempEl);
 
        QString posText;
-       if (my_rot->caps->rot_type == ROT_TYPE_AZEL) posText = QString::number(rotSet[0].az,'f',1) + " " + QString::number(rotSet[0].el,'f',1);
+       if (my_rot->caps->rot_type == ROT_TYPE_AZEL || my_rot->caps->rot_type == ROT_TYPE_OTHER) posText = QString::number(rotSet[0].az,'f',1) + " " + QString::number(rotSet[0].el,'f',1);
        else if (my_rot->caps->rot_type == ROT_TYPE_ELEVATION) posText = QString::number(rotSet[0].el,'f',1);
-       else QString::number(rotSet[0].az,'f',1);    //ROT_TYPE_AZIMUTH
+       else posText = QString::number(rotSet[0].az,'f',1);    //ROT_TYPE_AZIMUTH
 
        ui->lineEdit_posAz->setText(posText);
    }
@@ -1030,9 +1030,9 @@ void MainWindow::on_pushButton_go_2_clicked()
         setPosition(1, tempAz, tempEl);
 
         QString posText;
-        if (my_rot2->caps->rot_type == ROT_TYPE_AZEL) posText = QString::number(rotSet[1].az,'f',1) + " " + QString::number(rotSet[1].el,'f',1);
+        if (my_rot2->caps->rot_type == ROT_TYPE_AZEL || my_rot2->caps->rot_type == ROT_TYPE_OTHER) posText = QString::number(rotSet[1].az,'f',1) + " " + QString::number(rotSet[1].el,'f',1);
         else if (my_rot2->caps->rot_type == ROT_TYPE_ELEVATION) posText = QString::number(rotSet[1].el,'f',1);
-        else QString::number(rotSet[1].az,'f',1);    //ROT_TYPE_AZIMUTH
+        else posText = QString::number(rotSet[1].az,'f',1);    //ROT_TYPE_AZIMUTH
 
         ui->lineEdit_posAz_2->setText(posText);
     }
@@ -1115,9 +1115,9 @@ void MainWindow::on_pushButton_go_3_clicked()
         setPosition(2, tempAz, tempEl);
 
         QString posText;
-        if (my_rot3->caps->rot_type == ROT_TYPE_AZEL) posText = QString::number(rotSet[2].az,'f',1) + " " + QString::number(rotSet[2].el,'f',1);
+        if (my_rot3->caps->rot_type == ROT_TYPE_AZEL || my_rot3->caps->rot_type == ROT_TYPE_OTHER) posText = QString::number(rotSet[2].az,'f',1) + " " + QString::number(rotSet[2].el,'f',1);
         else if (my_rot3->caps->rot_type == ROT_TYPE_ELEVATION) posText = QString::number(rotSet[2].el,'f',1);
-        else QString::number(rotSet[2].az,'f',1);    //ROT_TYPE_AZIMUTH
+        else posText = QString::number(rotSet[2].az,'f',1);    //ROT_TYPE_AZIMUTH
 
         ui->lineEdit_posAz_3->setText(posText);
     }
