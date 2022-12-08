@@ -48,7 +48,11 @@
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QComboBox" name="comboBox_comPort"/>
+            <widget class="QComboBox" name="comboBox_comPort">
+             <property name="editable">
+              <bool>true</bool>
+             </property>
+            </widget>
            </item>
            <item row="1" column="0">
             <widget class="QLabel" name="label_serialSpeed">
@@ -300,7 +304,11 @@
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QComboBox" name="comboBox_comPort_2"/>
+            <widget class="QComboBox" name="comboBox_comPort_2">
+             <property name="editable">
+              <bool>true</bool>
+             </property>
+            </widget>
            </item>
            <item row="1" column="0">
             <widget class="QLabel" name="label_serialSpeed_2">
@@ -635,7 +643,11 @@
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QComboBox" name="comboBox_comPort_3"/>
+            <widget class="QComboBox" name="comboBox_comPort_3">
+             <property name="editable">
+              <bool>true</bool>
+             </property>
+            </widget>
            </item>
            <item row="1" column="0">
             <widget class="QLabel" name="label_serialSpeed_3">
