@@ -40,6 +40,7 @@ DialogSetup::DialogSetup(QWidget *parent) :
     ui->checkBox_udp->setChecked(rotCfg.udp);
     ui->lineEdit_udpAddress->setText(rotCfg.udpAddress);
     ui->lineEdit_udpPort->setText(QString::number(rotCfg.udpPort));
+    ui->lineEdit_WSJTXStatus->setText(rotCfg.pathTrackWSJTXStatus);
     ui->lineEdit_WSJTX->setText(rotCfg.pathTrackWSJTX);
     ui->lineEdit_AirScout->setText(rotCfg.pathTrackAirScout);
 }
@@ -61,6 +62,12 @@ void DialogSetup::on_pushButton_AirScout_clicked()
     rotCfg.pathTrackAirScout = QFileDialog::getExistingDirectory(this, "Set path", rotCfg.pathTrackAirScout);
     //fileTrackAirScout = fileTrackAirScout + "/azel.dat";
     ui->lineEdit_AirScout->setText(rotCfg.pathTrackAirScout);
+}
+
+void DialogSetup::on_pushButton_WSJTXStatus_clicked()
+{
+    rotCfg.pathTrackWSJTXStatus = QFileDialog::getExistingDirectory(this, "Set path", rotCfg.pathTrackWSJTXStatus);
+    ui->lineEdit_WSJTXStatus->setText(rotCfg.pathTrackWSJTXStatus);
 }
 
 void DialogSetup::on_pushButton_WSJTX_clicked()
@@ -86,6 +93,7 @@ void DialogSetup::on_buttonBox_accepted()
     rotCfg.udp = ui->checkBox_udp->isChecked();
     rotCfg.udpAddress = ui->lineEdit_udpAddress->text();
     rotCfg.udpPort = ui->lineEdit_udpPort->text().toUShort();
+    rotCfg.pathTrackWSJTXStatus = ui->lineEdit_WSJTXStatus->text();
     rotCfg.pathTrackWSJTX = ui->lineEdit_WSJTX->text();
     rotCfg.pathTrackAirScout = ui->lineEdit_AirScout->text();
 
@@ -95,6 +103,7 @@ void DialogSetup::on_buttonBox_accepted()
     configFile.setValue("udp", rotCfg.udp);
     configFile.setValue("udpAddress", rotCfg.udpAddress);
     configFile.setValue("udpPort", rotCfg.udpPort);
+    configFile.setValue("pathTrackWSJTXStatus", rotCfg.pathTrackWSJTXStatus);
     configFile.setValue("pathTrackWSJTX", rotCfg.pathTrackWSJTX);
     configFile.setValue("pathTrackAirScout", rotCfg.pathTrackAirScout);
 }

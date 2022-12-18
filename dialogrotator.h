@@ -39,21 +39,21 @@ private slots:
 
     void on_checkBox_PreviSat_toggled(bool checked);
 
-    void on_checkBox_WSJTX_toggled(bool checked);
-
     void on_checkBox_AirScout_toggled(bool checked);
 
     void on_checkBox_PreviSat_2_toggled(bool checked);
-
-    void on_checkBox_WSJTX_2_toggled(bool checked);
 
     void on_checkBox_AirScout_2_toggled(bool checked);
 
     void on_checkBox_PreviSat_3_toggled(bool checked);
 
-    void on_checkBox_WSJTX_3_toggled(bool checked);
-
     void on_checkBox_AirScout_3_toggled(bool checked);
+
+    void on_checkBox_WSJTX_stateChanged(int arg1);
+
+    void on_checkBox_WSJTX_2_stateChanged(int arg1);
+
+    void on_checkBox_WSJTX_3_stateChanged(int arg1);
 
 private:
     Ui::DialogRotator *ui;

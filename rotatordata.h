@@ -41,7 +41,8 @@ typedef struct {
     elevation_t el, elPark;
     bool overlap;   //Overlap capacity
     bool lPathFlag;    //Long Path
-    bool trackFlag, trackPreviSat, trackWSJTX, trackAirScout; //Tracking
+    bool trackFlag, trackPreviSat, trackAirScout; //Tracking
+    int trackWSJTX;
     double trackTolerance;    //Tracking tolerance
     double trackThreshold;  //Tracking elevation threshold
 } rotatorSettings;
@@ -56,7 +57,8 @@ typedef struct {
     QString presetLabel[9]; //Preset button array label
     int presetAz[9];  //Preset button array azimuth
     int incrementAz; //Increment interval for plus/minus buttons;
-    QString pathTrackWSJTX; //Path for WSJT-X tracking file;
+    QString pathTrackWSJTXStatus;   //Path for WSJT-X Status file;
+    QString pathTrackWSJTX; //Path for WSJT-X AzEl file;
     QString pathTrackAirScout;  //Path for AirScout tracking file;
 } catRotatorConfig;
 
@@ -64,6 +66,7 @@ typedef struct {
 typedef struct {
     bool azUdpFlag, elUdpFlag, stopUdpFlag, parkUdpFlag;    //UDP received command
     bool previSatUdp;   //PreviSat UDP datagrams
+    bool n1mmUdp;   //N1MM Logger+ datagrams
     double azUdp, elUdp;
     QString satName;
     bool satAOS;

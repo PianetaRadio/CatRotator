@@ -33,6 +33,7 @@
 #include <QRegularExpression>
 #include <QDir>
 #include <QFile>
+#include <QFileSystemWatcher>
 
 #include <rotator.h>    //Hamlib
 
@@ -94,6 +95,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->lineEdit_posAz_2, SIGNAL(returnPressed()), this, SLOT(on_lineEditEnterPressed2()));
     connect(ui->lineEdit_posAz_3, SIGNAL(returnPressed()), this, SLOT(on_lineEditEnterPressed3()));
 
+    //WSJT-X status file
+    connect(&statusWsjtxWatch, SIGNAL(fileChanged(QString)), this, SLOT(parseWSJTXStatus()));
+
     //* Load settings from catrotator.ini
     QSettings configFile(QString("catrotator.ini"), QSettings::IniFormat);
 
@@ -121,6 +125,7 @@ MainWindow::MainWindow(QWidget *parent)
     rotCfg.udp = configFile.value("udp", false).toBool();
     rotCfg.udpAddress = configFile.value("udpAddress", "127.0.0.1").toString();
     rotCfg.udpPort = configFile.value("udpPort", 12000).toUInt();   //should be toUShort()
+    rotCfg.pathTrackWSJTXStatus = configFile.value("pathTrackWSJTXStatus", QDir::homePath() + "/AppData/Local/Temp/WSJT-X").toString();  //Rpi /tmp/WSJT-X
     rotCfg.pathTrackWSJTX = configFile.value("pathTrackWSJTX", QDir::homePath() + "/AppData/Local/WSJT-X").toString();      //RPi /home/pi/.local/share/WSJT-X
     rotCfg.pathTrackAirScout = configFile.value("pathTrackAirScout", QDir::homePath() + "/AppData/Local/DL2ALF/AirScout/Tmp").toString();
 
@@ -297,8 +302,6 @@ void MainWindow::guiInit()
         ui->tabWidget_rotator->setTabEnabled(0, true);
         if (my_rot->caps->rot_type == ROT_TYPE_AZIMUTH) ui->lcdNumber_posEl->setVisible(false);
         if (my_rot->caps->rot_type == ROT_TYPE_ELEVATION) ui->toolButton_pathSL->setVisible(false);
-        //ui->spinBox_posAz->setMaximum(my_rot->caps->max_az);
-        //ui->spinBox_posAz->setMinimum(my_rot->caps->min_az);
     }
     else ui->tabWidget_rotator->setTabEnabled(0, false);
 }
@@ -370,11 +373,12 @@ void MainWindow::guiUpdate(int rotNumber)
     }
 
     //Tracking
+
     if (rotNumber == 0 && rotSet[0].trackFlag)
     {
         double tempAz=0, tempEl=0;
 
-        if (rotSet[0].trackWSJTX) parseWSJTX(&tempAz, &tempEl);    //WSJT-X
+        if (rotSet[0].trackWSJTX==2) parseWSJTXMoon(&tempAz, &tempEl);    //WSJT-X moon
         else if (rotSet[0].trackAirScout) parseAirScout(&tempAz, &tempEl);     //AirScout
         else if ((rotSet[0].trackPreviSat && rotUdpEx.previSatUdp) && (rotUdpEx.azUdpFlag || rotUdpEx.elUdpFlag))      //PreviSat
         {
@@ -390,7 +394,7 @@ void MainWindow::guiUpdate(int rotNumber)
         else
         {
             tempEl = -90;      //Data error flag
-            ui->statusbar->clearMessage();
+            //ui->statusbar->clearMessage();
         }
 
         if (tempEl != -90)   //No error
@@ -404,12 +408,19 @@ void MainWindow::guiUpdate(int rotNumber)
                 //rot_set_position(my_rot, rotSet[0].az, rotSet[0].el);
             }
         }
+
+        if (rotSet[0].trackWSJTX==1 && !statusWsjtx.isEmpty())    //WSJT-X Status
+        {
+            ui->lineEdit_posAz->setText(statusWsjtx);
+            statusWsjtx = "";
+        }
     }
 
     if (rotNumber == 1 && rotSet[1].trackFlag)
     {
         double tempAz=0, tempEl=0;
-        if (rotSet[1].trackWSJTX) parseWSJTX(&tempAz, &tempEl);
+
+        if (rotSet[1].trackWSJTX==2) parseWSJTXMoon(&tempAz, &tempEl);
         else if (rotSet[1].trackAirScout) parseAirScout(&tempAz, &tempEl);
         else if ((rotSet[1].trackPreviSat && rotUdpEx.previSatUdp) && (rotUdpEx.azUdpFlag || rotUdpEx.elUdpFlag))
         {
@@ -425,7 +436,7 @@ void MainWindow::guiUpdate(int rotNumber)
         else
         {
             tempEl = -90;
-            ui->statusbar->clearMessage();
+            //ui->statusbar->clearMessage();
         }
 
         if (tempEl != -90)   //No tracking dat error
@@ -439,12 +450,18 @@ void MainWindow::guiUpdate(int rotNumber)
                 //rot_set_position(my_rot2, rotSet[1].az, rotSet[1].el);
             }
         }
+
+        if (rotSet[1].trackWSJTX==1 && !statusWsjtx.isEmpty())
+        {
+            ui->lineEdit_posAz_2->setText(statusWsjtx);
+            statusWsjtx = "";
+        }
     }
 
     if (rotNumber == 2 && rotSet[2].trackFlag)
     {
         double tempAz=0, tempEl=0;
-        if (rotSet[2].trackWSJTX) parseWSJTX(&tempAz, &tempEl);
+        if (rotSet[2].trackWSJTX==2) parseWSJTXMoon(&tempAz, &tempEl);
         else if (rotSet[2].trackAirScout) parseAirScout(&tempAz, &tempEl);
         else if ((rotSet[2].trackPreviSat && rotUdpEx.previSatUdp) && (rotUdpEx.azUdpFlag || rotUdpEx.elUdpFlag))
         {
@@ -460,7 +477,7 @@ void MainWindow::guiUpdate(int rotNumber)
         else
         {
             tempEl = -90;
-            ui->statusbar->clearMessage();
+            //ui->statusbar->clearMessage();
         }
 
         if (tempEl != -90)   //No tracking dat error
@@ -473,6 +490,12 @@ void MainWindow::guiUpdate(int rotNumber)
                 ui->lineEdit_posAz_3->setText(QString::number(rotSet[2].az) + " " + QString::number(rotSet[2].el));
                 //rot_set_position(my_rot3, rotSet[2].az, rotSet[2].el);
             }
+        }
+
+        if (rotSet[2].trackWSJTX==1 && !statusWsjtx.isEmpty())
+        {
+            ui->lineEdit_posAz_3->setText(statusWsjtx);
+            statusWsjtx = "";
         }
     }
 }
@@ -679,7 +702,25 @@ QString MainWindow::versionCTY()
     return version;
 }
 
-void MainWindow::parseWSJTX(double *azim, double *elev)
+void MainWindow::parseWSJTXStatus()
+{
+    QFile statusWSJTX(rotCfg.pathTrackWSJTXStatus + "/wsjtx_status.txt");
+    if (!statusWSJTX.open(QIODevice::ReadOnly | QIODevice::Text)) return;
+
+    QString datWSJTX = statusWSJTX.readLine();
+    if (datWSJTX.isNull() || datWSJTX.isEmpty()) return;
+
+    QString callWSJTX = datWSJTX.section(';',2,2);
+    QString gridWSJTX = datWSJTX.section(';',5,5);
+
+    if (gridWSJTX=="n/a") statusWsjtx = callWSJTX;
+    else statusWsjtx = gridWSJTX;
+
+    statusWSJTX.close();
+    return;
+}
+
+void MainWindow::parseWSJTXMoon(double *azim, double *elev)
 {
     QFile azelDatWSJTX(rotCfg.pathTrackWSJTX + "/azel.dat");
     if (!azelDatWSJTX.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -989,10 +1030,24 @@ void MainWindow::on_toolButton_track_toggled(bool checked)
             ui->toolButton_track->setText("SAT");
             ui->statusbar->showMessage("Tracking PreviSat " + rotSet[0].nameLabel);
         }
-        else if (rotSet[0].trackWSJTX)
+        else if (rotSet[0].trackWSJTX==1)
+        {
+            if (QFile::exists(rotCfg.pathTrackWSJTXStatus+"/wsjtx_status.txt"))
+            {
+                statusWsjtxWatch.addPath(rotCfg.pathTrackWSJTXStatus+"/wsjtx_status.txt");
+                ui->toolButton_track->setText("WSJ");
+                ui->statusbar->showMessage("Tracking WSJT-X status " + rotSet[0].nameLabel);
+            }
+            else
+            {
+                ui->toolButton_track->setChecked(false);
+                return;
+            }
+        }
+        else if (rotSet[0].trackWSJTX==2)
         {
             ui->toolButton_track->setText("WSJ");
-            ui->statusbar->showMessage("Tracking WSJT-X (Moon) " + rotSet[0].nameLabel);
+            ui->statusbar->showMessage("Tracking WSJT-X Moon " + rotSet[0].nameLabel);
         }
         else if (rotSet[0].trackAirScout)
         {
@@ -1010,6 +1065,7 @@ void MainWindow::on_toolButton_track_toggled(bool checked)
     {
         ui->toolButton_track->setText("TRK");
         ui->statusbar->showMessage("Tracking off " + rotSet[0].nameLabel);
+        if (rotSet[0].trackWSJTX==1) statusWsjtxWatch.removePath(rotCfg.pathTrackWSJTXStatus+"/wsjtx_status.txt");
         rotSet[0].trackFlag = false;
     }
 }
@@ -1074,10 +1130,10 @@ void MainWindow::on_toolButton_track_2_toggled(bool checked)
             ui->toolButton_track_2->setText("SAT");
             ui->statusbar->showMessage("Tracking PreviSat " + rotSet[1].nameLabel);
         }
-        else if (rotSet[1].trackWSJTX)
+        else if (rotSet[1].trackWSJTX==2)
         {
-            ui->toolButton_track_2->setText("WSJ");
-            ui->statusbar->showMessage("Tracking WSJT-X (Moon) " + rotSet[1].nameLabel);
+            ui->toolButton_track->setText("WSJ");
+            ui->statusbar->showMessage("Tracking WSJT-X Moon " + rotSet[1].nameLabel);
         }
         else if (rotSet[1].trackAirScout)
         {
@@ -1159,10 +1215,10 @@ void MainWindow::on_toolButton_track_3_toggled(bool checked)
             ui->toolButton_track_3->setText("SAT");
             ui->statusbar->showMessage("Tracking PreviSat " + rotSet[2].nameLabel);
         }
-        else if (rotSet[2].trackWSJTX)
+        else if (rotSet[2].trackWSJTX==2)
         {
-            ui->toolButton_track_3->setText("WSJ");
-            ui->statusbar->showMessage("Tracking WSJT-X (Moon) " + rotSet[2].nameLabel);
+            ui->toolButton_track->setText("WSJ");
+            ui->statusbar->showMessage("Tracking WSJT-X Moon " + rotSet[2].nameLabel);
         }
         else if (rotSet[2].trackAirScout)
         {
@@ -1368,4 +1424,3 @@ void MainWindow::on_actionAbout_cty_dat_triggered()
     msgBox.setStandardButtons(QMessageBox::Ok);
     msgBox.exec();
 }
-

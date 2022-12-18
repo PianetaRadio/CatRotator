@@ -194,13 +194,13 @@
           <string>Tracking</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_7">
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_tolerance">
+          <item row="0" column="3">
+           <widget class="QLabel" name="label_threshold">
             <property name="text">
-             <string>Tolerance</string>
+             <string>El Threshold</string>
             </property>
             <property name="buddy">
-             <cstring>doubleSpinBox_tolerance</cstring>
+             <cstring>doubleSpinBox_threshold</cstring>
             </property>
            </widget>
           </item>
@@ -217,13 +217,26 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="2">
-           <widget class="QCheckBox" name="checkBox_WSJTX">
-            <property name="text">
-             <string>WSJT-X</string>
+          <item row="0" column="4">
+           <widget class="QDoubleSpinBox" name="doubleSpinBox_threshold">
+            <property name="decimals">
+             <number>1</number>
             </property>
-            <property name="autoExclusive">
-             <bool>false</bool>
+            <property name="minimum">
+             <double>-45.000000000000000</double>
+            </property>
+            <property name="maximum">
+             <double>90.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_tolerance">
+            <property name="text">
+             <string>Tolerance</string>
+            </property>
+            <property name="buddy">
+             <cstring>doubleSpinBox_tolerance</cstring>
             </property>
            </widget>
           </item>
@@ -250,26 +263,19 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="4">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_threshold">
-            <property name="decimals">
-             <number>1</number>
+          <item row="1" column="2">
+           <widget class="QCheckBox" name="checkBox_WSJTX">
+            <property name="toolTip">
+             <string>Status / Moon</string>
             </property>
-            <property name="minimum">
-             <double>-45.000000000000000</double>
-            </property>
-            <property name="maximum">
-             <double>90.000000000000000</double>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="3">
-           <widget class="QLabel" name="label_threshold">
             <property name="text">
-             <string>El Threshold</string>
+             <string>WSJT-X</string>
             </property>
-            <property name="buddy">
-             <cstring>doubleSpinBox_threshold</cstring>
+            <property name="autoExclusive">
+             <bool>false</bool>
+            </property>
+            <property name="tristate">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -475,11 +481,17 @@
           </item>
           <item row="1" column="2">
            <widget class="QCheckBox" name="checkBox_WSJTX_2">
+            <property name="toolTip">
+             <string>Status / Moon</string>
+            </property>
             <property name="text">
              <string>WSJT-X</string>
             </property>
             <property name="autoExclusive">
              <bool>false</bool>
+            </property>
+            <property name="tristate">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -777,11 +789,17 @@
           </item>
           <item row="1" column="2">
            <widget class="QCheckBox" name="checkBox_WSJTX_3">
+            <property name="toolTip">
+             <string>Status / Moon</string>
+            </property>
             <property name="text">
              <string>WSJT-X</string>
             </property>
             <property name="autoExclusive">
              <bool>false</bool>
+            </property>
+            <property name="tristate">
+             <bool>true</bool>
             </property>
            </widget>
           </item>

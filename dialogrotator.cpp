@@ -201,7 +201,7 @@ DialogRotator::DialogRotator(QWidget *parent) :
     ui->doubleSpinBox_tolerance->setValue(rotSet[0].trackTolerance);
     ui->doubleSpinBox_threshold->setValue(rotSet[0].trackThreshold);
     ui->checkBox_PreviSat->setChecked(rotSet[0].trackPreviSat);
-    ui->checkBox_WSJTX->setChecked(rotSet[0].trackWSJTX);
+    ui->checkBox_WSJTX->setCheckState((Qt::CheckState)rotSet[0].trackWSJTX);
     ui->checkBox_AirScout->setChecked(rotSet[0].trackAirScout);
 
     ui->comboBox_rotModel_2->setCurrentIndex(ui->comboBox_rotModel_2->findText(QString::number(rotCom[1].rotModel),Qt::MatchStartsWith));
@@ -223,7 +223,7 @@ DialogRotator::DialogRotator(QWidget *parent) :
     ui->doubleSpinBox_tolerance_2->setValue(rotSet[1].trackTolerance);
     ui->doubleSpinBox_threshold_2->setValue(rotSet[1].trackThreshold);
     ui->checkBox_PreviSat_2->setChecked(rotSet[1].trackPreviSat);
-    ui->checkBox_WSJTX_2->setChecked(rotSet[1].trackWSJTX);
+    ui->checkBox_WSJTX_2->setCheckState((Qt::CheckState)rotSet[1].trackWSJTX);
     ui->checkBox_AirScout_2->setChecked(rotSet[1].trackAirScout);
 
     ui->comboBox_rotModel_3->setCurrentIndex(ui->comboBox_rotModel_3->findText(QString::number(rotCom[2].rotModel),Qt::MatchStartsWith));
@@ -245,7 +245,7 @@ DialogRotator::DialogRotator(QWidget *parent) :
     ui->doubleSpinBox_tolerance_3->setValue(rotSet[2].trackTolerance);
     ui->doubleSpinBox_threshold_3->setValue(rotSet[2].trackThreshold);
     ui->checkBox_PreviSat_3->setChecked(rotSet[2].trackPreviSat);
-    ui->checkBox_WSJTX_3->setChecked(rotSet[2].trackWSJTX);
+    ui->checkBox_WSJTX_3->setCheckState((Qt::CheckState)rotSet[2].trackWSJTX);
     ui->checkBox_AirScout_3->setChecked(rotSet[2].trackAirScout);
 
     ui->spinBox_refreshRate->setValue(rotCfg.rotRefresh);
@@ -316,7 +316,7 @@ void DialogRotator::on_buttonBox_accepted()
     rotSet[0].trackTolerance = ui->doubleSpinBox_tolerance->value();
     rotSet[0].trackThreshold = ui->doubleSpinBox_threshold->value();
     rotSet[0].trackPreviSat = ui->checkBox_PreviSat->isChecked();
-    rotSet[0].trackWSJTX = ui->checkBox_WSJTX->isChecked();
+    rotSet[0].trackWSJTX = ui->checkBox_WSJTX->checkState();
     rotSet[0].trackAirScout = ui->checkBox_AirScout->isChecked();
 
     //Rotator 2
@@ -373,7 +373,7 @@ void DialogRotator::on_buttonBox_accepted()
     rotSet[1].trackTolerance = ui->doubleSpinBox_tolerance_2->value();
     rotSet[1].trackThreshold = ui->doubleSpinBox_threshold_2->value();
     rotSet[1].trackPreviSat = ui->checkBox_PreviSat_2->isChecked();
-    rotSet[1].trackWSJTX = ui->checkBox_WSJTX_2->isChecked();
+    rotSet[1].trackWSJTX = ui->checkBox_WSJTX_2->checkState();
     rotSet[1].trackAirScout = ui->checkBox_AirScout_2->isChecked();
 
     //Rotator 3
@@ -430,7 +430,7 @@ void DialogRotator::on_buttonBox_accepted()
     rotSet[2].trackTolerance = ui->doubleSpinBox_tolerance_3->value();
     rotSet[2].trackThreshold = ui->doubleSpinBox_threshold_3->value();
     rotSet[2].trackPreviSat = ui->checkBox_PreviSat_3->isChecked();
-    rotSet[2].trackWSJTX = ui->checkBox_WSJTX_3->isChecked();
+    rotSet[2].trackWSJTX = ui->checkBox_WSJTX_3->checkState();
     rotSet[2].trackAirScout = ui->checkBox_AirScout_3->isChecked();
 
     rotCfg.rotRefresh = ui->spinBox_refreshRate->value();   //Refresh
@@ -488,9 +488,9 @@ void DialogRotator::on_checkBox_PreviSat_toggled(bool checked)
 }
 
 
-void DialogRotator::on_checkBox_WSJTX_toggled(bool checked)
+void DialogRotator::on_checkBox_WSJTX_stateChanged(int arg1)
 {
-    if (checked)
+    if (arg1)
     {
         ui->checkBox_PreviSat->setChecked(false);
         ui->checkBox_AirScout->setChecked(false);
@@ -520,9 +520,9 @@ void DialogRotator::on_checkBox_PreviSat_2_toggled(bool checked)
 }
 
 
-void DialogRotator::on_checkBox_WSJTX_2_toggled(bool checked)
+void DialogRotator::on_checkBox_WSJTX_2_stateChanged(int arg1)
 {
-    if (checked)
+    if (arg1)
     {
         ui->checkBox_PreviSat_2->setChecked(false);
         ui->checkBox_AirScout_2->setChecked(false);
@@ -552,9 +552,9 @@ void DialogRotator::on_checkBox_PreviSat_3_toggled(bool checked)
 }
 
 
-void DialogRotator::on_checkBox_WSJTX_3_toggled(bool checked)
+void DialogRotator::on_checkBox_WSJTX_3_stateChanged(int arg1)
 {
-    if (checked)
+    if (arg1)
     {
         ui->checkBox_PreviSat_3->setChecked(false);
         ui->checkBox_AirScout_3->setChecked(false);

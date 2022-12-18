@@ -22,6 +22,7 @@
 
 #include <QMainWindow>
 #include <QTimer>
+#include <QFileSystemWatcher>
 
 
 #define RELEASE_DATE __DATE__
@@ -44,9 +45,13 @@ public:
 public slots:
     void rotUpdate();   //Slot fot QTimer
     void on_rotDaemonResultReady(int rotNumber);    //Slot for rotDaemon resultReady
+
     void on_lineEditEnterPressed();     //Slot for enter pressed in lineEdit
     void on_lineEditEnterPressed2();
     void on_lineEditEnterPressed3();
+
+    //void parseWSJTXStatus(QString *status);    //Read WSJT-X wsjtx_status.txt locator or call
+    void parseWSJTXStatus();
 
 private slots:
     void on_actionRotator_triggered();
@@ -123,13 +128,17 @@ private:
     Ui::MainWindow *ui;
     QTimer *timer;
 
+    QFileSystemWatcher statusWsjtxWatch;
+    QString statusWsjtx;
+    QString versionCTY();  //Extract CTY.DAT version
+
     void guiInit();
     void guiUpdate(int rotNumber);
     void presetGo(int presetNumber);
     void presetInit();
     void setPosition(int rot, float azim, float elev);
 
-    void parseWSJTX(double *azim, double *elev);    //Read WSJT-X azel.dat tracking data
+    void parseWSJTXMoon(double *azim, double *elev);    //Read WSJT-X azel.dat tracking data
     void parseAirScout(double *azim, double *elev); //Read AirScout azel.dat tracking data
 
     bool azElInput(QString value, bool lPath, double *azim, double *elev);  //Convert pointing value input, from format degree or QTH locator, into azimuth bearing angle and elevation
@@ -137,7 +146,6 @@ private:
     bool bearingAngleLP(const char *locator1, const char *locator2, double *azim, double *dist);    //Calculate Long Path bearing angle and distance between two locators
 
     void parseCTY(QString callsign, QString *countryName, QString *country, double *lat, double *lon); //Find Country in CTY.DAT from callsign
-    QString versionCTY();  //Extract CTY.DAT version
 };
 
 #endif // MAINWINDOW_H
