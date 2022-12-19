@@ -128,6 +128,7 @@ MainWindow::MainWindow(QWidget *parent)
     rotCfg.pathTrackWSJTXStatus = configFile.value("pathTrackWSJTXStatus", QDir::homePath() + "/AppData/Local/Temp/WSJT-X").toString();  //Rpi /tmp/WSJT-X
     rotCfg.pathTrackWSJTX = configFile.value("pathTrackWSJTX", QDir::homePath() + "/AppData/Local/WSJT-X").toString();      //RPi /home/pi/.local/share/WSJT-X
     rotCfg.pathTrackAirScout = configFile.value("pathTrackAirScout", QDir::homePath() + "/AppData/Local/DL2ALF/AirScout/Tmp").toString();
+    rotCfg.darkTheme = configFile.value("darkTheme", false).toBool();
 
     //Presets
     MainWindow::presetInit();
@@ -135,6 +136,21 @@ MainWindow::MainWindow(QWidget *parent)
     //Window settings
     restoreGeometry(configFile.value("WindowSettings/geometry").toByteArray());
     restoreState(configFile.value("WindowSettings/state").toByteArray());
+
+    //* Style
+    //Dark theme
+    if (rotCfg.darkTheme)
+    {
+        QFile darkStyleFile(":qdarkstyle/dark/darkstyle.qss");
+
+        if (!darkStyleFile.exists()) ui->statusbar->showMessage("Unable to set stylesheet, file not found!");
+        else
+        {
+            darkStyleFile.open(QFile::ReadOnly | QFile::Text);
+            QTextStream ts(&darkStyleFile);
+            qApp->setStyleSheet(ts.readAll());
+        }
+    }
 }
 
 MainWindow::~MainWindow()

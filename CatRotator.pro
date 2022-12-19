@@ -42,6 +42,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 LIBS += -L$$PWD/hamlib/ -lhamlib
 INCLUDEPATH += $$PWD/hamlib
+RESOURCES += qdarkstyle/dark/darkstyle.qrc
 
 VERSION = 1.4.0
 

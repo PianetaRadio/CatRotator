@@ -43,6 +43,7 @@ DialogSetup::DialogSetup(QWidget *parent) :
     ui->lineEdit_WSJTXStatus->setText(rotCfg.pathTrackWSJTXStatus);
     ui->lineEdit_WSJTX->setText(rotCfg.pathTrackWSJTX);
     ui->lineEdit_AirScout->setText(rotCfg.pathTrackAirScout);
+    ui->radioButton_themeDark->setChecked(rotCfg.darkTheme);
 }
 
 DialogSetup::~DialogSetup()
@@ -89,6 +90,16 @@ void DialogSetup::on_buttonBox_accepted()
         msgBox.exec();
     }
 
+    if ((rotCfg.darkTheme != ui->radioButton_themeDark->isChecked()))
+    {
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Theme");
+        msgBox.setText("Please, restart CatRotator to make effective the theme.");
+        msgBox.setIcon(QMessageBox::Information);
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.exec();
+    }
+
     rotCfg.qthLocator = ui->lineEdit_qthLocator->text();
     rotCfg.udp = ui->checkBox_udp->isChecked();
     rotCfg.udpAddress = ui->lineEdit_udpAddress->text();
@@ -96,6 +107,7 @@ void DialogSetup::on_buttonBox_accepted()
     rotCfg.pathTrackWSJTXStatus = ui->lineEdit_WSJTXStatus->text();
     rotCfg.pathTrackWSJTX = ui->lineEdit_WSJTX->text();
     rotCfg.pathTrackAirScout = ui->lineEdit_AirScout->text();
+    rotCfg.darkTheme = ui->radioButton_themeDark->isChecked();
 
     //* Save settings in catrotator.ini
     QSettings configFile(QString("catrotator.ini"), QSettings::IniFormat);
@@ -106,4 +118,5 @@ void DialogSetup::on_buttonBox_accepted()
     configFile.setValue("pathTrackWSJTXStatus", rotCfg.pathTrackWSJTXStatus);
     configFile.setValue("pathTrackWSJTX", rotCfg.pathTrackWSJTX);
     configFile.setValue("pathTrackAirScout", rotCfg.pathTrackAirScout);
+    configFile.setValue("darkTheme", rotCfg.darkTheme);
 }
