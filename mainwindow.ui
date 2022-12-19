@@ -126,7 +126,7 @@
        <bool>true</bool>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_1">
        <attribute name="title">
@@ -434,9 +434,10 @@
     <addaction name="actionCatRotator_homepage"/>
     <addaction name="separator"/>
     <addaction name="actionAbout_CatRotator"/>
-    <addaction name="actionAbout_Qt"/>
     <addaction name="actionAbout_Hamlib"/>
     <addaction name="actionAbout_cty_dat"/>
+    <addaction name="actionAbout_Qt"/>
+    <addaction name="actionAbout_DarkTheme"/>
    </widget>
    <addaction name="menuConfig"/>
    <addaction name="menuHelp"/>
@@ -480,6 +481,11 @@
   <action name="actionAbout_cty_dat">
    <property name="text">
     <string>About cty.dat</string>
+   </property>
+  </action>
+  <action name="actionAbout_DarkTheme">
+   <property name="text">
+    <string>About Dark Theme</string>
    </property>
   </action>
  </widget>

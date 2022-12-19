@@ -124,6 +124,8 @@ private slots:
 
     void on_actionAbout_cty_dat_triggered();
 
+    void on_actionAbout_DarkTheme_triggered();
+
 private:
     Ui::MainWindow *ui;
     QTimer *timer;
