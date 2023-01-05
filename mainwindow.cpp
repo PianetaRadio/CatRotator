@@ -1418,10 +1418,10 @@ void MainWindow::on_actionAbout_CatRotator_triggered()
     QString version = QString::number(VERSION_MAJ)+"."+QString::number(VERSION_MIN)+"."+QString::number(VERSION_MIC);
     msgBox.setText("<b>CatRotator</b> <i>Rotator control software</i><br/>version "+version+" "+RELEASE_DATE);
     msgBox.setInformativeText("<p>Copyright (C) 2022 Gianfranco Sordetti IZ8EWD<br/>"
-                              "<a href='https://www.pianetaradio.it'>www.pianetaradio.it</a></p>"
+                              "<a href='https://www.pianetaradio.it' style='color: #668fb8'>www.pianetaradio.it</a></p>"
                               "<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.<br/>"
                               "This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.<br/>"
-                              "You should have received a copy of the GNU General Public License along with this program.  If not, see <a href='http://www.gnu.org/licenses/'>www.gnu.org/licenses</a>.</p>");
+                              "You should have received a copy of the GNU General Public License along with this program.  If not, see <a href='http://www.gnu.org/licenses/' style='color: #668fb8'>www.gnu.org/licenses</a>.</p>");
     msgBox.setIcon(QMessageBox::NoIcon);
     msgBox.setStandardButtons(QMessageBox::Ok);
 
@@ -1458,7 +1458,7 @@ void MainWindow::on_actionAbout_cty_dat_triggered()
     msgBox.setTextFormat(Qt::RichText);
     msgBox.setText("<b>CTY.DAT</b> <i>Amateur Radio Country File</i><br/>version " + versionCTY());
     msgBox.setInformativeText("<p>Copyright (C) 1994- Jim Reisert AD1C<br/>"
-                              "<a href='https://www.country-files.com'>www.country-files.com</a></p>"
+                              "<a href='https://www.country-files.com' style='color: #668fb8'>www.country-files.com</a></p>"
                               "<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS<br/>"
                               "OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF<br/>"
                               "MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.<br/>"
