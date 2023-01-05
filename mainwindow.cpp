@@ -1146,9 +1146,23 @@ void MainWindow::on_toolButton_track_2_toggled(bool checked)
             ui->toolButton_track_2->setText("SAT");
             ui->statusbar->showMessage("Tracking PreviSat " + rotSet[1].nameLabel);
         }
+        else if (rotSet[1].trackWSJTX==1)
+        {
+            if (QFile::exists(rotCfg.pathTrackWSJTXStatus+"/wsjtx_status.txt"))
+            {
+                statusWsjtxWatch.addPath(rotCfg.pathTrackWSJTXStatus+"/wsjtx_status.txt");
+                ui->toolButton_track_2->setText("WSJ");
+                ui->statusbar->showMessage("Tracking WSJT-X status " + rotSet[1].nameLabel);
+            }
+            else
+            {
+                ui->toolButton_track_2->setChecked(false);
+                return;
+            }
+        }
         else if (rotSet[1].trackWSJTX==2)
         {
-            ui->toolButton_track->setText("WSJ");
+            ui->toolButton_track_2->setText("WSJ");
             ui->statusbar->showMessage("Tracking WSJT-X Moon " + rotSet[1].nameLabel);
         }
         else if (rotSet[1].trackAirScout)
@@ -1167,6 +1181,7 @@ void MainWindow::on_toolButton_track_2_toggled(bool checked)
     {
         ui->toolButton_track_2->setText("TRK");
         ui->statusbar->showMessage("Tracking off " + rotSet[1].nameLabel);
+        if (rotSet[1].trackWSJTX==1) statusWsjtxWatch.removePath(rotCfg.pathTrackWSJTXStatus+"/wsjtx_status.txt");
         rotSet[1].trackFlag = false;
     }
 }
@@ -1231,9 +1246,23 @@ void MainWindow::on_toolButton_track_3_toggled(bool checked)
             ui->toolButton_track_3->setText("SAT");
             ui->statusbar->showMessage("Tracking PreviSat " + rotSet[2].nameLabel);
         }
+        else if (rotSet[2].trackWSJTX==1)
+        {
+            if (QFile::exists(rotCfg.pathTrackWSJTXStatus+"/wsjtx_status.txt"))
+            {
+                statusWsjtxWatch.addPath(rotCfg.pathTrackWSJTXStatus+"/wsjtx_status.txt");
+                ui->toolButton_track_3->setText("WSJ");
+                ui->statusbar->showMessage("Tracking WSJT-X status " + rotSet[2].nameLabel);
+            }
+            else
+            {
+                ui->toolButton_track->setChecked(false);
+                return;
+            }
+        }
         else if (rotSet[2].trackWSJTX==2)
         {
-            ui->toolButton_track->setText("WSJ");
+            ui->toolButton_track_3->setText("WSJ");
             ui->statusbar->showMessage("Tracking WSJT-X Moon " + rotSet[2].nameLabel);
         }
         else if (rotSet[2].trackAirScout)
@@ -1252,6 +1281,7 @@ void MainWindow::on_toolButton_track_3_toggled(bool checked)
     {
         ui->toolButton_track_3->setText("TRK");
         ui->statusbar->showMessage("Tracking off " + rotSet[2].nameLabel);
+        if (rotSet[2].trackWSJTX==1) statusWsjtxWatch.removePath(rotCfg.pathTrackWSJTXStatus+"/wsjtx_status.txt");
         rotSet[2].trackFlag = false;
     }
 }
