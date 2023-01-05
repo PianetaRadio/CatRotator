@@ -729,7 +729,7 @@ void MainWindow::parseWSJTXStatus()
     QString callWSJTX = datWSJTX.section(';',2,2);
     QString gridWSJTX = datWSJTX.section(';',5,5);
 
-    if (gridWSJTX=="n/a") statusWsjtx = callWSJTX;
+    if (gridWSJTX.contains("n/a")) statusWsjtx = callWSJTX;
     else statusWsjtx = gridWSJTX;
 
     statusWSJTX.close();
