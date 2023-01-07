@@ -34,6 +34,7 @@
 #include <QDir>
 #include <QFile>
 #include <QFileSystemWatcher>
+#include <QTextStream>
 
 #include <rotator.h>    //Hamlib
 
@@ -52,7 +53,7 @@ int defaultPreset[9] = {0, 45, 90, 135, 180, 225, 270, 315, 360};
 
 FILE* debugFile;
 
-QString ctyFile = "CTY.dat";    //Country file
+QString ctyFile = "cty.dat";    //Country file
 QFile cty(ctyFile);
 
 QThread workerThread;
@@ -685,7 +686,7 @@ void MainWindow::parseCTY(QString callsign, QString *countryName, QString *count
         //qDebug() << countryName << country << *lat << *lon;
         cty.close();
     }
-    else *countryName = "Missing file CTY.DAT";
+    else *countryName = "Missing file cty.dat";
 
     return;
 }
@@ -696,7 +697,7 @@ QString MainWindow::versionCTY()
 
     if (cty.exists())
     {
-        cty.open(QIODevice::ReadOnly);    //Open file CTY.dat
+        cty.open(QIODevice::ReadOnly);    //Open file cty.dat
         cty.seek(0);
 
         QRegularExpression versionRegExp("=VER(?P<version>\\d{8})");   //Search "=VERyyyymmdd"
@@ -1456,7 +1457,7 @@ void MainWindow::on_actionAbout_cty_dat_triggered()
     QMessageBox msgBox;
     msgBox.setWindowTitle("About cty.dat");
     msgBox.setTextFormat(Qt::RichText);
-    msgBox.setText("<b>CTY.DAT</b> <i>Amateur Radio Country File</i><br/>version " + versionCTY());
+    msgBox.setText("<b>cty.dat</b> <i>Amateur Radio Country File</i><br/>version " + versionCTY());
     msgBox.setInformativeText("<p>Copyright (C) 1994- Jim Reisert AD1C<br/>"
                               "<a href='https://www.country-files.com' style='color: #668fb8'>www.country-files.com</a></p>"
                               "<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS<br/>"
