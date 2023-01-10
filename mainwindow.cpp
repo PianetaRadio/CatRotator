@@ -1293,7 +1293,7 @@ void MainWindow::on_pushButton_park_clicked()
     switch (ui->tabWidget_rotator->currentIndex())
     {
     case 0:
-        if (my_rot->caps->park) rot_park(my_rot);
+        if (my_rot->caps->park && rotCom[0].rotModel>2) rot_park(my_rot);
         else
         {
             rotSet[0].az = rotSet[0].azPark;
@@ -1304,7 +1304,7 @@ void MainWindow::on_pushButton_park_clicked()
         break;
 
     case 1:
-        if (my_rot2->caps->park) rot_park(my_rot2);
+        if (my_rot2->caps->park && rotCom[1].rotModel>2) rot_park(my_rot2);
         else
         {
             rotSet[1].az = rotSet[1].azPark;
@@ -1315,7 +1315,7 @@ void MainWindow::on_pushButton_park_clicked()
         break;
 
     case 2:
-        if (my_rot3->caps->park) rot_park(my_rot3);
+        if (my_rot3->caps->park && rotCom[2].rotModel>2) rot_park(my_rot3);
         else
         {
             rotSet[2].az = rotSet[2].azPark;
@@ -1352,7 +1352,6 @@ void MainWindow::on_pushButton_p4_clicked()
 {
     presetGo(4);
 }
-
 
 void MainWindow::on_pushButton_p5_clicked()
 {
