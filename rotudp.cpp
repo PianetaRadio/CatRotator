@@ -19,7 +19,7 @@
 
 #include "rotudp.h"
 #include "rotatordata.h"
-#include "mainwindow.h"
+//#include "mainwindow.h"
 
 #include <QRegularExpression>
 
@@ -58,6 +58,36 @@ void rotUdp::readDatagrams()
         //qDebug() << "Message from: " << sender.toString();
         //qDebug() << "Message port: " << senderPort;
         //qDebug() << "Message: " << datagrams;
+
+        //N1MM Logger+
+        QRegularExpression n1mmCmd("<N1MMRotor>");
+        QRegularExpressionMatch n1mmMatch = n1mmCmd.match(datagrams);
+        if (n1mmMatch.hasMatch())
+        {
+            rotUdpEx.n1mmUdp = true;
+
+            QRegularExpression n1mmName("<rotor>(.+)</rotor>");
+            n1mmMatch = n1mmName.match(datagrams);
+            if (n1mmMatch.hasMatch())
+            {
+                QString n1mmMatchString = n1mmMatch.captured(1);
+                rotUdpEx.satName = n1mmMatchString;
+            }
+
+            QRegularExpression n1mmAzCmd("<goazi>(\\d+\\,?\\.?\\d*)</goazi>");
+            QRegularExpressionMatch n1mmMatch = n1mmAzCmd.match(datagrams);
+            if (n1mmMatch.hasMatch())
+            {
+                QString n1mmMatchString = n1mmMatch.captured(1);
+                n1mmMatchString.replace(",", ".", Qt::CaseInsensitive);
+                rotUdpEx.azUdpFlag = true;
+                rotUdpEx.azUdp = n1mmMatchString.toFloat();
+            }
+
+            QRegularExpression n1mmStopCmd("<stop>");
+            QRegularExpressionMatch n1mmStop = n1mmStopCmd.match(datagrams);
+            if (n1mmStop.hasMatch()) rotUdpEx.stopUdpFlag = true;
+        }
 
         //Previsat
         QRegularExpression previSatCmd("<PREVISAT>");
