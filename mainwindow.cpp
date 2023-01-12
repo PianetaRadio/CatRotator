@@ -323,7 +323,7 @@ void MainWindow::guiInit()
     else ui->tabWidget_rotator->setTabEnabled(0, false);
 }
 
-//* Update
+//* Update GUI
 void MainWindow::guiUpdate(int rotNumber)
 {
     //Update current position
@@ -346,6 +346,15 @@ void MainWindow::guiUpdate(int rotNumber)
     }
 
     //Parse UDP command
+    if (rotUdpEx.n1mmUdp)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            if (rotSet[i].enable && rotUdpEx.rotName == ui->tabWidget_rotator->tabText(i)) ui->tabWidget_rotator->setCurrentIndex(i);
+        }
+
+    }
+
     if ((rotUdpEx.azUdpFlag || rotUdpEx.elUdpFlag) && (!rotUdpEx.previSatUdp))
     {
         rotUdpEx.azUdpFlag = false;

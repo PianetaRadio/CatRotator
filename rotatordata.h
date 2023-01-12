@@ -69,7 +69,7 @@ typedef struct {
     bool previSatUdp;   //PreviSat UDP datagrams
     bool n1mmUdp;   //N1MM Logger+ datagrams
     double azUdp, elUdp;
-    QString satName;
+    QString satName, rotName;
     bool satAOS;
 } rotatorUdpEx;
 

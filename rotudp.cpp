@@ -57,7 +57,7 @@ void rotUdp::readDatagrams()
 
         //qDebug() << "Message from: " << sender.toString();
         //qDebug() << "Message port: " << senderPort;
-        //qDebug() << "Message: " << datagrams;
+        qDebug() << "Message: " << datagrams;
 
         //N1MM Logger+
         QRegularExpression n1mmCmd("<N1MMRotor>");
@@ -71,7 +71,7 @@ void rotUdp::readDatagrams()
             if (n1mmMatch.hasMatch())
             {
                 QString n1mmMatchString = n1mmMatch.captured(1);
-                rotUdpEx.satName = n1mmMatchString;
+                rotUdpEx.rotName = n1mmMatchString;
             }
 
             QRegularExpression n1mmAzCmd("<goazi>(\\d+\\,?\\.?\\d*)</goazi>");
