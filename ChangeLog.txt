@@ -9,7 +9,7 @@ CatRotator
 	+ Tracking WSJT-X status
 	+ Point with callsign
 	* Bug fix: COM port list
-	* Updated to library Hamlib 4.5.1
+	* Updated to library Hamlib 4.5.4
 
 1.3.0 - 2022-10-23
 	* Code optimization
