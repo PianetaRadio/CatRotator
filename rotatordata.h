@@ -61,6 +61,7 @@ typedef struct {
     QString pathTrackWSJTX; //Path for WSJT-X AzEl file;
     QString pathTrackAirScout;  //Path for AirScout tracking file;
     bool darkTheme; //flag for Dark theme
+    bool debugMode; //flag for debug log
 } catRotatorConfig;
 
 

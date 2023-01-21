@@ -77,13 +77,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     timer = new QTimer(this);   //timer for rotDaemon thread call
 
-    //* Debug
-    rig_set_debug_level(RIG_DEBUG_WARN);  //normal
-    //rig_set_debug_level(RIG_DEBUG_TRACE);   //debug
-    rig_set_debug_time_stamp(true);
-    if ((debugFile=fopen("catrotator.log","w+")) == NULL) rig_set_debug_level(RIG_DEBUG_NONE);
-    else rig_set_debug_file(debugFile);
-
     //* Thread for RigDaemon
     rotDaemon->moveToThread(&workerThread); //
     connect(&workerThread, &QThread::finished, rotDaemon, &QObject::deleteLater);
@@ -130,6 +123,16 @@ MainWindow::MainWindow(QWidget *parent)
     rotCfg.pathTrackWSJTX = configFile.value("pathTrackWSJTX", QDir::homePath() + "/AppData/Local/WSJT-X").toString();      //RPi /home/pi/.local/share/WSJT-X
     rotCfg.pathTrackAirScout = configFile.value("pathTrackAirScout", QDir::homePath() + "/AppData/Local/DL2ALF/AirScout/Tmp").toString();
     rotCfg.darkTheme = configFile.value("darkTheme", false).toBool();
+    rotCfg.debugMode = configFile.value("debugMode", false).toBool();
+
+    //* Debug
+    if (rotCfg.debugMode) rig_set_debug_level(RIG_DEBUG_VERBOSE); //debug verbose
+    else rig_set_debug_level(RIG_DEBUG_WARN);  //normal
+    //rig_set_debug_level(RIG_DEBUG_TRACE);   //debug trace
+    //rig_set_debug_level(RIG_DEBUG_VERBOSE);   //debug verbose
+    rig_set_debug_time_stamp(true);
+    if ((debugFile=fopen("catrotator.log","w+")) == NULL) rig_set_debug_level(RIG_DEBUG_NONE);
+    else rig_set_debug_file(debugFile);
 
     //Presets
     MainWindow::presetInit();

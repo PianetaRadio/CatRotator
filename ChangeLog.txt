@@ -4,6 +4,7 @@ CatRotator
 
 
 1.4.0 - 2023-01-dd
+	+ Debug mode
 	+ Tracking N1MM Logger+
 	+ Dark theme
 	+ Tracking WSJT-X status

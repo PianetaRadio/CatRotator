@@ -44,6 +44,7 @@ DialogSetup::DialogSetup(QWidget *parent) :
     ui->lineEdit_WSJTX->setText(rotCfg.pathTrackWSJTX);
     ui->lineEdit_AirScout->setText(rotCfg.pathTrackAirScout);
     ui->radioButton_themeDark->setChecked(rotCfg.darkTheme);
+    ui->checkBox_debug->setChecked(rotCfg.debugMode);
 }
 
 DialogSetup::~DialogSetup()
@@ -108,6 +109,7 @@ void DialogSetup::on_buttonBox_accepted()
     rotCfg.pathTrackWSJTX = ui->lineEdit_WSJTX->text();
     rotCfg.pathTrackAirScout = ui->lineEdit_AirScout->text();
     rotCfg.darkTheme = ui->radioButton_themeDark->isChecked();
+    rotCfg.debugMode = ui->checkBox_debug->isChecked();
 
     //* Save settings in catrotator.ini
     QSettings configFile(QString("catrotator.ini"), QSettings::IniFormat);
@@ -119,4 +121,5 @@ void DialogSetup::on_buttonBox_accepted()
     configFile.setValue("pathTrackWSJTX", rotCfg.pathTrackWSJTX);
     configFile.setValue("pathTrackAirScout", rotCfg.pathTrackAirScout);
     configFile.setValue("darkTheme", rotCfg.darkTheme);
+    configFile.setValue("debugMode", rotCfg.debugMode);
 }
