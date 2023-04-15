@@ -13,7 +13,7 @@ Rodriguez Island:         39:  53:  AF:  -19.70:   -63.42:    -4.0:  3B9:
 Equatorial Guinea:        36:  47:  AF:    1.70:   -10.33:    -1.0:  3C:
     3C;
 Annobon Island:           36:  52:  AF:   -1.43:    -5.62:    -1.0:  3C0:
-    3C0;
+    3C0,=VERSION;
 Fiji:                     32:  56:  OC:  -17.78:  -177.92:   -12.0:  3D2:
     3D2;
 Conway Reef:              32:  56:  OC:  -22.00:  -175.00:   -12.0:  3D2/c:
@@ -29,7 +29,7 @@ Vietnam:                  26:  49:  AS:   15.80:  -107.90:    -7.0:  3W:
 Guinea:                   35:  46:  AF:   11.00:    10.68:     0.0:  3X:
     3X;
 Bouvet:                   38:  67:  AF:  -54.42:    -3.38:    -1.0:  3Y/b:
-    =3Y0E;
+    =3Y0J;
 Peter 1 Island:           12:  72:  SA:  -68.77:    90.58:     4.0:  3Y/p:
     =3Y0X;
 Azerbaijan:               21:  29:  AS:   40.45:   -47.37:    -4.0:  4J:
@@ -45,7 +45,7 @@ ITU HQ:                   14:  28:  EU:   46.17:    -6.05:    -1.0:  4U1I:
 United Nations HQ:        05:  08:  NA:   40.75:    73.97:     5.0:  4U1U:
     =4U1UN;
 Vienna Intl Ctr:          15:  28:  EU:   48.20:   -16.30:    -1.0:  *4U1V:
-    =4U0R,=4U1A,=4U1VIC,=4U2U,=4Y1A,=C7A;
+    =4U0R,=4U100QO,=4U1A,=4U1VIC,=4U2U,=4UNR,=4Y1A,=C7A;
 Timor - Leste:            28:  54:  OC:   -8.80:  -126.05:    -9.0:  4W:
     4W;
 Israel:                   20:  39:  AS:   31.32:   -34.82:    -2.0:  4X:
@@ -105,7 +105,7 @@ Sierra Leone:             35:  46:  AF:    8.50:    13.25:     0.0:  9L:
 West Malaysia:            28:  54:  AS:    3.95:  -102.23:    -8.0:  9M2:
     9M,9W;
 East Malaysia:            28:  54:  OC:    2.68:  -113.32:    -8.0:  9M6:
-    9M6,9M8,9W6,9W8,=9M4CKR,=9M4CAK,=9M4CKT,=9M4CRB,=9M4CRP;
+    9M6,9M8,9W6,9W8,=9M4CKR,=9M4CBP,=9M4CKT,=9M4CRB,=9M4CRP;
 Nepal:                    22:  42:  AS:   27.70:   -85.33:   -5.75:  9N:
     9N;
 Dem. Rep. of the Congo:   36:  52:  AF:   -3.12:   -23.03:    -1.0:  9Q:
@@ -277,7 +277,8 @@ China:                    24:  44:  AS:   36.00:  -102.00:    -8.0:  BY:
     BZ8N[43],BZ8O[43],BZ8P[43],BZ8Q[43],BZ8R[43],BZ8S[43],BZ8T[43],BZ8U[43],
     BZ8V[43],BZ8W[43],BZ8X[43],BZ9A(24)[43],BZ9B(24)[43],BZ9C(24)[43],
     BZ9D(24)[43],BZ9E(24)[43],BZ9F(24)[43],BZ9S(23)[42],BZ9T(23)[42],
-    BZ9U(23)[42],BZ9V(23)[42],BZ9W(23)[42],BZ9X(23)[42];
+    BZ9U(23)[42],BZ9V(23)[42],BZ9W(23)[42],BZ9X(23)[42],=BD6KF/0(23)[42],
+    =BG9XD/2;
 Nauru:                    31:  65:  OC:   -0.52:  -166.92:   -12.0:  C2:
     C2;
 Andorra:                  14:  27:  EU:   42.58:    -1.62:    -1.0:  C3:
@@ -291,7 +292,7 @@ Mozambique:               37:  53:  AF:  -18.25:   -35.00:    -2.0:  C9:
 Chile:                    12:  14:  SA:  -30.00:    71.00:     4.0:  CE:
     3G,CA,CB,CC,CD,CE,XQ,XR,3G7[16],3G8[16],CA7[16],CA8[16],CB7[16],CB8[16],
     CC7[16],CC8[16],CD7[16],CD8[16],CE7[16],CE8[16],XQ7[16],XQ8[16],XR7[16],
-    XR8[16],=XQ6OA[16];
+    XR8[16],=XQ6CFX[16];
 San Felix & San Ambrosio: 12:  14:  SA:  -26.28:    80.07:     4.0:  CE0X:
     3G0X,CA0X,CB0X,CC0X,CD0X,CE0X,XQ0X,XR0X;
 Easter Island:            12:  63:  SA:  -27.10:   109.37:     6.0:  CE0Y:
@@ -304,9 +305,10 @@ Antarctica:               13:  74:  SA:  -90.00:     0.00:     0.0:  CE9:
     FT3Y(30)[70],FT4Y(30)[70],FT5Y(30)[70],FT6Y(30)[70],FT7Y(30)[70],
     FT8Y(30)[70],LU1Z[73],LU2Z[73],LU3Z[73],LU4Z[73],LU5Z[73],LU6Z[73],
     LU7Z[73],LU8Z[73],LU9Z[73],RI1AN(29)[69],VI0(39)[69],VK0(39)[69],
-    ZL5(30)[71],ZM5(30)[71],ZS7(38)[67],=KC4USD,=8J1RL(39)[67],
-    =DP0GVN(38)[67],=DP1POL(38)[67],=KC4AAA(39),=KC4AAC[73],=KC4USB(12),
-    =KC4USV(30)[71],=RI1ANC(29)[70],=RI1ANU(38)[67],=VP8ADE[73],=VP8ADE/B[73];
+    ZL5(30)[71],ZM5(30)[71],ZS7(38)[67],=8J1RL(39)[67],=AT42I(38)[67],
+    =AT42IND(38)[67],=DP0GVN(38)[67],=DP1POL(38)[67],=KC4AAA(39),=KC4AAC[73],
+    =KC4USB(12),=KC4USV(30)[71],=RI1ANC(29)[70],=RI1AND(38)[67],
+    =RI1ANU(38)[67],=RI30ANT(29)[70],=VP8ADE[73],=VP8ADE/B[73];
 Cuba:                     08:  11:  NA:   21.50:    80.00:     5.0:  CM:
     CL,CM,CO,T4;
 Morocco:                  33:  37:  AF:   32.00:     5.00:     0.0:  CN:
@@ -349,14 +351,14 @@ Niue:                     32:  62:  OC:  -19.03:   169.85:    11.0:  E6:
 Bosnia-Herzegovina:       15:  28:  EU:   44.32:   -17.57:    -1.0:  E7:
     E7;
 Spain:                    14:  37:  EU:   40.32:     3.43:    -1.0:  EA:
-    AM,AN,AO,EA,EB,EC,ED,EE,EF,EG,EH,=EA9PD,=EA2EZ/P,=EA5CC/P,=EA5IKT/P,
-    =EA9HU,=EC5AHA/P;
+    AM,AN,AO,EA,EB,EC,ED,EE,EF,EG,EH,=EA2EZ/P,=EA5CC/P,=EA5IKT/P,=EA9HU,
+    =EC5AHA/P;
 Balearic Islands:         14:  37:  EU:   39.60:    -2.95:    -1.0:  EA6:
-    AM6,AN6,AO6,EA6,EB6,EC6,ED6,EE6,EF6,EG6,EH6;
+    AM6,AN6,AO6,EA6,EB6,EC6,ED6,EE6,EF6,EG6,EH6,=EA6XQ/P;
 Canary Islands:           33:  36:  AF:   28.32:    15.85:     0.0:  EA8:
-    AM8,AN8,AO8,EA8,EB8,EC8,ED8,EE8,EF8,EG8,EH8,=EA3ICJ/8;
+    AM8,AN8,AO8,EA8,EB8,EC8,ED8,EE8,EF8,EG8,EH8;
 Ceuta & Melilla:          33:  37:  AF:   35.90:     5.27:    -1.0:  EA9:
-    AM9,AN9,AO9,EA9,EB9,EC9,ED9,EE9,EF9,EG9,EH9;
+    AM9,AN9,AO9,EA9,EB9,EC9,ED9,EE9,EF9,EG9,EH9,=EA9PD/P;
 Ireland:                  14:  27:  EU:   53.13:     8.02:     0.0:  EI:
     EI,EJ;
 Armenia:                  21:  29:  AS:   40.40:   -44.90:    -4.0:  EK:
@@ -381,33 +383,33 @@ Tajikistan:               17:  30:  AS:   38.82:   -71.22:    -5.0:  EY:
 Turkmenistan:             17:  30:  AS:   38.00:   -58.00:    -5.0:  EZ:
     EZ;
 France:                   14:  27:  EU:   46.00:    -2.00:    -1.0:  F:
-    F,HW,HX,HY,TH,TM,TP,TQ,TV;
+    F,HW,HX,HY,TH,TM,TO,TP,TQ,TV,TX;
 Guadeloupe:               08:  11:  NA:   16.13:    61.67:     4.0:  FG:
-    FG,=TO2DL;
+    FG,=TO1Q,=TO3Z;
 Mayotte:                  39:  53:  AF:  -12.88:   -45.15:    -3.0:  FH:
-    FH,=TO7GJ;
+    FH;
 St. Barthelemy:           08:  11:  NA:   17.90:    62.83:     4.0:  FJ:
     FJ;
 New Caledonia:            32:  56:  OC:  -21.50:  -165.50:   -11.0:  FK:
-    FK;
+    FK,=TX5L;
 Chesterfield Islands:     30:  56:  OC:  -19.87:  -158.32:   -11.0:  FK/c:
     =TX3X;
 Martinique:               08:  11:  NA:   14.70:    61.03:     4.0:  FM:
-    FM,=TO5A,=TO5T,=TO5Z,=TO7A;
+    FM,=TO5A,=TO7A,=TO7O;
 French Polynesia:         32:  63:  OC:  -17.65:   149.40:    10.0:  FO:
     FO;
 Austral Islands:          32:  63:  OC:  -23.37:   149.48:    10.0:  FO/a:
-    =TX5XG;
+    =TX5N;
 Clipperton Island:        07:  10:  NA:   10.28:   109.22:     8.0:  FO/c:
     =TX5P;
 Marquesas Islands:        31:  63:  OC:   -8.92:   140.07:     9.5:  FO/m:
-    =FO/F6BCW,=FO5QS,=TX7G;
+    =FO5QS;
 St. Pierre & Miquelon:    05:  09:  NA:   46.77:    56.20:     3.0:  FP:
     FP;
 Reunion Island:           39:  53:  AF:  -21.12:   -55.48:    -4.0:  FR:
     FR;
 St. Martin:               08:  11:  NA:   18.08:    63.03:     4.0:  FS:
-    FS,=TO5M,=TO9W;
+    FS,=TO5M,=TO5T;
 Glorioso Islands:         39:  53:  AF:  -11.55:   -47.28:    -4.0:  FT/g:
     FT0G,FT1G,FT2G,FT3G,FT4G,FT5G,FT6G,FT7G,FT8G,FT9G;
 Juan de Nova, Europa:     39:  53:  AF:  -17.05:   -42.72:    -3.0:  FT/j:
@@ -426,32 +428,32 @@ Wallis & Futuna Islands:  32:  62:  OC:  -13.30:   176.20:   -12.0:  FW:
 French Guiana:            09:  12:  SA:    4.00:    53.00:     3.0:  FY:
     FY,=TO1A;
 England:                  14:  27:  EU:   52.77:     1.47:     0.0:  G:
-    2E,G,M;
+    23C,2E,G,M;
 Isle of Man:              14:  27:  EU:   54.20:     4.53:     0.0:  GD:
-    2D,GD,GT,MD,MT;
+    2D,GD,GT,MD,MT,=GB3KCD;
 Northern Ireland:         14:  27:  EU:   54.73:     6.68:     0.0:  GI:
-    2I,GI,GN,MI,MN,=2Q0WMN,=GB0AAN,=GB0KC,=GB0QE,=GB100BBC,=GB8PJE;
+    2I,GI,GN,MI,MN,=GB0KC,=GB0QE,=GB0SPD,=GB1PAT,=GB2PAT,=GB2SPD,=GB3KCI,
+    =GB8KC,=GB8KCC;
 Jersey:                   14:  27:  EU:   49.22:     2.18:     0.0:  GJ:
-    2J,GH,GJ,MH,MJ,=GB2JSA,=GQ7LJJ;
+    2J,GH,GJ,MH,MJ,=GB3KCJ;
 Scotland:                 14:  27:  EU:   56.82:     4.18:     0.0:  GM:
-    2A,2M,GM,GS,MA,MM,MS,=GB0DOD,=GB0GDS,=GB0NMB,=GB0SSB,=GB0WRH,=GB2CWR,
-    =GB2ELH,=GB2JCM,=GB2KDR,=GB2OWM,=GB3ANG,=GB3LER,=GB3LER/B,=GB3ORK,
-    =GB3RMK/B,=GB4LER,=GB9GVC,=GQ0AZC,=GQ4ATA,=GQ5DX,=MQ0DHQ,=MQ0GOR;
+    2A,2M,GM,GS,MA,MM,MS,=2R0XZA,=GB0SIM,=GB0SSB,=GB2AAW,=GB2ELH,=GB2JCM,
+    =GB2OWM,=GB3ANG,=GB3KCM,=GB3LER,=GB3LER/B,=GB3RMK/B,=GB4LER,=GB5AAW,
+    =GB5LSG,=GB5SC,=GR0AZC,=GR5DX,=GR6ZAK,=MR0GOR;
 Shetland Islands:         14:  27:  EU:   60.50:     1.50:     0.0:  *GM/s:
     =2M0BDR,=2M0BDT,=2M0CPN,=2M0GFC,=2M0SEG,=2M0SPX,=2M0ZET,=GB2ELH,=GB3LER,
     =GB3LER/B,=GB4LER,=GM0AVR,=GM0CXQ,=GM0EKM,=GM0GFL,=GM0ILB,=GM0JDB,=GM1FGN,
     =GM1KKI,=GM1ZNR,=GM3WHT,=GM3ZET,=GM4IPK,=GM4JPI,=GM4LBE,=GM4LER,=GM4PXG,
-    =GM4SLV,=GM4SSA,=GM4WXQ,=GM4ZHL,=GM6RQW,=GM6YQA,=GM7AFE,=GM7GWW,=GM8LNH,
-    =GM8MMA,=GM8YEC,=GS3ZET,=MM0LSM,=MM0NQY,=MM0VIK,=MM0XAU,=MM0ZAL,=MM0ZCG,
-    =MM0ZRC,=MM1FEO,=MM1FJM,=MM3VQO,=MM5PSL,=MM5YLO,=MM6BDU,=MM6BZQ,=MM6IKB,
-    =MM6IMB,=MM6MFA,=MM6PTE,=MM6SJK,=MM6YLO,=MM6ZBG,=MM6ZDW,=MM7CGR,=MM8A,
-    =MS0ZCG,=MS0ZET;
+    =GM4SLV,=GM4WXQ,=GM4ZHL,=GM6RQW,=GM6YQA,=GM7AFE,=GM7GWW,=GM8LNH,=GM8MMA,
+    =GM8YEC,=GS3ZET,=MM0LSM,=MM0NQY,=MM0VIK,=MM0XAU,=MM0ZAL,=MM0ZCG,=MM0ZRC,
+    =MM1FEO,=MM1FJM,=MM3VQO,=MM5PSL,=MM5YLO,=MM6BDU,=MM6BZQ,=MM6IKB,=MM6IMB,
+    =MM6MFA,=MM6PTE,=MM6SJK,=MM6YLO,=MM6ZBG,=MM6ZDW,=MM7CGR,=MM8A,=MS0ZCG,
+    =MS0ZET;
 Guernsey:                 14:  27:  EU:   49.45:     2.58:     0.0:  GU:
-    2U,GP,GU,MP,MU,=GQ6RWD;
+    2U,GP,GU,MP,MU,=GB3KCU;
 Wales:                    14:  27:  EU:   52.28:     3.73:     0.0:  GW:
-    2W,GC,GW,MC,MW,=GB0MPA,=GB1BAF,=GB1MUU,=GB2IMD,=GB2SCC,=GB2TD,=GB2VK,
-    =GB4MDI,=GQ0MQU,=GQ0POA,=GQ1HNG,=GQ3XJQ,=GQ4BML,=GQ4CVT,=GQ6GXH,=MQ0HMV,
-    =MQ0USK,=MQ6IUT,=MQ7DX;
+    2W,GC,GW,MC,MW,=GB0AAW,=GB0GLV,=GB0MPA,=GB0RVW,=GB1GLC,=GB1MUU,=GB2IMD,
+    =GB2TD,=GB3KCW,=GB4MDI,=GB5LAF,=MR7OFS;
 Solomon Islands:          28:  51:  OC:   -9.00:  -160.00:   -11.0:  H4:
     H4;
 Temotu Province:          32:  51:  OC:  -10.72:  -165.80:   -11.0:  H40:
@@ -489,13 +491,13 @@ Vatican City:             15:  28:  EU:   41.90:   -12.47:    -1.0:  HV:
 Saudi Arabia:             21:  39:  AS:   24.20:   -43.83:    -3.0:  HZ:
     7Z,8Z,HZ;
 Italy:                    15:  28:  EU:   42.82:   -12.58:    -1.0:  I:
-    I,=4U0WFP,=4U1GSC,=4U5F,=4U9A,=IT9AAK/1,=IT9ELM/0,=IT9PQJ/0;
+    4U,I,=I2DMK/RM,=IT9ELM/0,=IT9PQJ/0,=IT9RGY/4;
 African Italy:            33:  37:  AF:   35.67:   -12.67:    -1.0:  *IG9:
     IG9,IH9;
 Sardinia:                 15:  28:  EU:   40.15:    -9.27:    -1.0:  IS:
-    IM0,IS,IW0U,IW0V,IW0W,IW0X,IW0Y,IW0Z,=II0ICH,=II0IDP,=II0IGNL,=II0M,
-    =IQ0AG,=IQ0AH,=IQ0AH/P,=IQ0AI,=IQ0AK,=IQ0AK/P,=IQ0AL,=IQ0AM,=IQ0EH,=IQ0HO,
-    =IQ0ID,=IQ0NU,=IQ0OG,=IQ0QP,=IQ0SS,=IY0GA;
+    IM0,IS0,IW0U,IW0V,IW0W,IW0X,IW0Y,IW0Z,=II0ICH,=II0ICV,=II0IDP,=II0M,
+    =IQ0AAI,=IQ0AG,=IQ0AH,=IQ0AH/P,=IQ0AI,=IQ0AK,=IQ0AL,=IQ0AM,=IQ0EH,=IQ0HO,
+    =IQ0ID,=IQ0NU,=IQ0OG,=IQ0PM,=IQ0QP,=IQ0SS,=IR0A,=IY0GA;
 Sicily:                   15:  28:  EU:   37.50:   -14.00:    -1.0:  *IT9:
     IB9,ID9,IE9,IF9,II9,IJ9,IO9,IQ9,IR9,IT9,IU9,IW9,IY9,=IQ1QQ/9,=IW0HBY/9;
 Djibouti:                 37:  48:  AF:   11.75:   -42.35:    -3.0:  J2:
@@ -514,7 +516,7 @@ Japan:                    25:  45:  AS:   36.40:  -138.38:    -9.0:  JA:
     7J,7K,7L,7M,7N,8J,8K,8L,8M,8N,JA,JE,JF,JG,JH,JI,JJ,JK,JL,JM,JN,JO,JP,JQ,
     JR,JS;
 Minami Torishima:         27:  90:  OC:   24.28:  -153.97:   -10.0:  JD/m:
-    =JD1YAA,=JG8NQJ/JD1;
+    =JD1YAA,=JE7IZM/JD1,=JG8NQJ/JD1;
 Ogasawara:                27:  45:  AS:   27.05:  -142.20:    -9.0:  JD/o:
     JD1;
 Mongolia:                 23:  32:  AS:   46.77:  -102.17:    -7.0:  JT:
@@ -528,176 +530,286 @@ Jan Mayen:                40:  18:  EU:   71.05:     8.28:     1.0:  JX:
 Jordan:                   20:  39:  AS:   31.18:   -36.42:    -2.0:  JY:
     JY;
 United States:            05:  08:  NA:   37.60:    91.87:     5.0:  K:
-    AA,AB,AC,AD,AE,AF,AG,AI,AJ,AK,K,N,W,=4U1WB(5)[8],=AA0O(5)[8],=AA2IL(3)[6],
-    =AA2MA(4)[8],=AA3C(4)[7],=AA4DD(4)[8],=AA4MB(4)[8],=AA4NU(4)[8],
-    =AA4R(4)[8],=AA4WW(4)[8],=AA5JF(5)[8],=AA5TL(3)[6],=AA5UN(5)[8],
-    =AA8R(5)[8],=AA8UL(5)[8],=AB1U(3)[6],=AB4B(4)[8],=AB4EJ(4)[8],
-    =AB4GG(4)[8],=AB4IQ(4)[8],=AB5OR(4)[8],=AB8RL(5)[8],=AB8YZ(4)[7],
-    =AC4CA(4)[7],=AC4G(4)[8],=AC5XK(5)[8],=AC6WI(5)[8],=AC6ZM(4)[8],
-    =AC7AF(4)[7],=AC7GG(5)[8],=AC8Y(5)[8],=AC9TO(4)[7],=AD1C(4)[7],
-    =AD4EB(4)[8],=AD4TA(4)[8],=AD8J(5)[8],=AE4ED(4)[8],=AE6JV(5)[8],
-    =AE7AP(4)[6],=AF1US(4)[8],=AF4T(4)[8],=AG1RL(3)[6],=AG2TH(3)[6],
-    =AG4W(4)[8],=AH0U(3)[6],=AH2AV(4)[8],=AH2O(5)[8],=AH6EZ(3)[6],
-    =AH6FF(4)[8],=AH6JS(3)[6],=AH6LE(3)[6],=AH6P(3)[6],=AH6SU(4)[8],
-    =AI1K(3)[6],=AI4DB(4)[8],=AI6O(4)[7],=AI7C(4)[7],=AI8O(5)[8],=AI9K(4)[7],
-    =AJ4A(4)[8],=AJ4F(4)[7],=AJ6T(4)[8],=AK5CT(4)[8],=AK9D(4)[7],=AL0G(4)[7],
-    =AL1VE(3)[6],=AL4B(4)[8],=AL4US(4)[8],=AL5M(4)[7],=AL5P(4)[7],
-    =AL7BX(3)[6],=AL7CR(3)[6],=AL7LI(3)[6],=AL7RF(3)[6],=AL7RT(4)[6],
-    =G8ERJ(5)[8],=K0ACP(4)[8],=K0AU(3)[6],=K0CIE(5)[8],=K0DSL(5)[8],
-    =K0DTJ(3)[6],=K0EJ(4)[8],=K0FE(5)[8],=K0IP(3)[6],=K0LUZ(5)[8],=K0NG(3)[6],
-    =K0NW(3)[6],=K0PG(4)[8],=K0PJ(4)[8],=K0SN(4)[6],=K0TQ(4)[8],=K0ZR(5)[8],
-    =K1CCN(4)[8],=K1DW(4)[7],=K1GU(4)[8],=K1KD(4)[7],=K1LT(4)[8],=K1MWH(4)[8],
-    =K1WTF(4)[7],=K2AK(3)[6],=K2CUB(4)[8],=K2DMS(3)[6],=K2DRH(4)[7],
-    =K2GMY(3)[6],=K2KR(4)[7],=K2PO(3)[6],=K2RD(3)[6],=K2RP(3)[6],=K2VV(4)[7],
-    =K2YAZ(4)[8],=K3DMG(4)[8],=K3EST(3)[6],=K3GP(4)[8],=K3IE(4)[8],
-    =K3JWI(4)[8],=K3KEK(4)[7],=K3NT(4)[7],=K3PA(4)[7],=K3YP(4)[8],=K4AB(4)[8],
-    =K4AFE(4)[8],=K4AMC(4)[8],=K4AVX(4)[8],=K4BFT(4)[8],=K4BWP(4)[8],
-    =K4BX(4)[8],=K4CNY(4)[8],=K4DR(4)[8],=K4DXV(4)[8],=K4DZR(4)[8],
-    =K4EES(4)[8],=K4FN(4)[8],=K4HAL(4)[8],=K4IE(4)[8],=K4IU(4)[7],
-    =K4KCG(4)[8],=K4KO(4)[8],=K4KSV(4)[8],=K4KYN(4)[8],=K4LEN(4)[8],
-    =K4OAQ(4)[8],=K4PO(4)[8],=K4RO(4)[8],=K4SHA(4)[8],=K4SPO(4)[8],
-    =K4TCG(4)[8],=K4TG(4)[8],=K4TZ(4)[8],=K4VIG(4)[8],=K4WG(4)[8],=K4WI(4)[8],
-    =K4WW(4)[8],=K4XU(3)[6],=K4YJ(4)[8],=K4YO(3)[6],=K4ZGB(4)[8],=K5EK(5)[8],
-    =K5HDU(3)[6],=K5JR(5)[8],=K5KG(5)[8],=K5ML(3)[6],=K5OA(3)[6],=K5OF(5)[8],
-    =K5OLV(4)[8],=K5PN(4)[8],=K5TF(5)[8],=K5TRP(4)[8],=K5VG(5)[8],
-    =K5VIP(5)[8],=K5WP(4)[8],=K5YVY(4)[8],=K5ZD(5)[8],=K5ZQ(4)[8],
-    =K6BOS(5)[8],=K6ES(5)[8],=K6ND(5)[8],=K6ZB(4)[7],=K7ABV(4)[6],=K7BG(4)[7],
-    =K7BV(5)[8],=K7CS(4)[8],=K7DR(4)[8],=K7GM(5)[8],=K7IA(4)[7],=K7LU(5)[8],
+    AA,AB,AC,AD,AE,AF,AG,AI,AJ,AK,K,N,W,=4U1WB(5)[8],=AA0O(5)[8],=AA0Y(3)[6],
+    =AA1JM(4)[8],=AA2IL(3)[6],=AA2MA(4)[8],=AA2Q(4)[8],=AA3C(4)[7],
+    =AA4DD(4)[8],=AA4HV(4)[8],=AA4MB(4)[8],=AA4NU(4)[8],=AA4Q(3)[6],
+    =AA4R(4)[8],=AA4U(4)[8],=AA4WW(4)[8],=AA5JF(5)[8],=AA5ND(3)[6],
+    =AA5TA(4)[8],=AA5TL(3)[6],=AA5UN(5)[8],=AA7JV(5)[8],=AA8R(5)[8],
+    =AA8UL(5)[8],=AA9HQ(5)[8],=AB1U(3)[6],=AB4B(4)[8],=AB4BA(4)[7],
+    =AB4EJ(4)[8],=AB4GG(4)[8],=AB4IQ(4)[8],=AB4WL(4)[8],=AB5VJ(5)[8],
+    =AB8RL(5)[8],=AB8YZ(4)[7],=AB9BH(3)[6],=AC4CA(4)[7],=AC4CH(4)[7],
+    =AC4G(4)[8],=AC4HI(4)[8],=AC5XK(5)[8],=AC6NT(4)[8],=AC6WI(5)[8],
+    =AC6ZM(4)[8],=AC7AF(4)[7],=AC7GG(5)[8],=AC7P(4)[7],=AC8Y(5)[8],
+    =AC9TO(4)[7],=AD0L(3)[6],=AD1C(4)[7],=AD4DQ(4)[8],=AD4EB(4)[8],
+    =AD4GG(4)[8],=AD4TA(4)[8],=AD8J(5)[8],=AE2V(4)[8],=AE4ED(4)[8],
+    =AE5MI(4)[8],=AE6JV(5)[8],=AE7AP(4)[6],=AF1US(4)[8],=AF4T(4)[8],
+    =AF6G(5)[8],=AF9W(3)[6],=AG1RL(3)[6],=AG2TH(3)[6],=AG4W(4)[8],
+    =AG5AT(4)[8],=AG5Z(4)[8],=AG8GT(5)[8],=AG9G(4)[7],=AH0U(3)[6],
+    =AH2AV(4)[8],=AH2O(5)[8],=AH6EZ(3)[6],=AH6FF(4)[8],=AH6JS(3)[6],
+    =AH6LE(3)[6],=AH6O(4)[7],=AH6P(3)[6],=AH6R(5)[8],=AH6SU(4)[8],=AI1K(3)[6],
+    =AI4DB(4)[8],=AI4LU(4)[8],=AI5HG(4)[8],=AI6O(4)[7],=AI7C(4)[7],
+    =AI8F(5)[8],=AI8O(5)[8],=AI9K(4)[7],=AJ0SE(3)[6],=AJ4A(4)[8],=AJ4F(4)[7],
+    =AJ4SB(4)[8],=AJ6T(4)[8],=AK4I(4)[8],=AK4R(4)[8],=AK4Z(4)[8],=AK5CT(4)[8],
+    =AK9B(4)[7],=AK9D(4)[7],=AL0G(4)[7],=AL1VE(3)[6],=AL2B(3)[6],=AL4B(4)[8],
+    =AL4US(4)[8],=AL5M(4)[7],=AL5P(4)[7],=AL7BX(3)[6],=AL7CR(3)[6],
+    =AL7LI(3)[6],=AL7RF(3)[6],=AL7RT(4)[6],=AL7V(4)[7],=G8ERJ(5)[8],
+    =K0AU(3)[6],=K0BAK(5)[8],=K0CIE(5)[8],=K0DSC(4)[8],=K0DSL(5)[8],
+    =K0DTJ(3)[6],=K0DVH(5)[8],=K0EJ(4)[8],=K0FE(5)[8],=K0HNL(5)[8],
+    =K0HT(5)[8],=K0IE(4)[8],=K0IP(3)[6],=K0LUZ(5)[8],=K0MP(3)[6],=K0NG(3)[6],
+    =K0NW(3)[6],=K0PG(4)[8],=K0PJ(4)[8],=K0RGI(4)[8],=K0SM(5)[8],=K0SN(4)[6],
+    =K0TQ(4)[8],=K0XP(3)[6],=K0ZR(5)[8],=K1BJC(4)[7],=K1CCN(4)[8],=K1DW(4)[7],
+    =K1EAR(4)[7],=K1GU(4)[8],=K1IEB(4)[7],=K1JD(4)[7],=K1KD(4)[7],=K1LT(4)[8],
+    =K1MWH(4)[8],=K1NA(4)[8],=K1ND(4)[8],=K1QS(4)[7],=K1VX(4)[8],=K1WTF(4)[7],
+    =K1XT(4)[7],=K2AK(3)[6],=K2BY(4)[7],=K2CUB(4)[8],=K2DP(4)[7],=K2DRH(4)[7],
+    =K2GMY(3)[6],=K2HT(4)[7],=K2KMC(4)[8],=K2KR(4)[7],=K2LAT(4)[8],
+    =K2PO(3)[6],=K2RD(3)[6],=K2RP(3)[6],=K2VV(4)[7],=K2YAZ(4)[8],=K2ZP(4)[7],
+    =K3DMG(4)[8],=K3EST(3)[6],=K3GP(4)[8],=K3GX(3)[6],=K3IE(4)[8],
+    =K3IFR(4)[7],=K3ILC(4)[7],=K3JWI(4)[8],=K3KEK(4)[7],=K3KO(4)[8],
+    =K3NT(4)[7],=K3OB(4)[8],=K3PA(4)[7],=K3USC(4)[8],=K3VIN(4)[8],=K3YP(4)[8],
+    =K4AB(4)[8],=K4AFE(4)[8],=K4AL(4)[8],=K4AMC(4)[8],=K4AVX(4)[8],
+    =K4BAD(4)[8],=K4BFT(4)[8],=K4BX(4)[8],=K4CNY(4)[8],=K4CWW(4)[8],
+    =K4DG(4)[7],=K4DR(4)[8],=K4DXV(4)[8],=K4DZR(4)[8],=K4EES(4)[8],
+    =K4EQ(4)[7],=K4FMH(4)[7],=K4FN(4)[8],=K4FTY(4)[8],=K4GIG(4)[8],
+    =K4HAL(4)[8],=K4HY(4)[8],=K4IE(4)[8],=K4ISV(4)[8],=K4IU(4)[7],
+    =K4KCG(4)[8],=K4KKI(4)[8],=K4KO(4)[8],=K4KSV(4)[8],=K4KYN(4)[8],
+    =K4LEN(4)[8],=K4NAX(4)[8],=K4NO(4)[8],=K4OAQ(4)[8],=K4PKM(4)[8],
+    =K4PO(4)[8],=K4RO(4)[8],=K4RVA(4)[7],=K4SHA(4)[8],=K4SPO(4)[8],
+    =K4TCG(4)[8],=K4TEC(4)[8],=K4TG(4)[8],=K4TIN(4)[8],=K4TNN(4)[8],
+    =K4TO(4)[8],=K4TZ(4)[8],=K4VIG(4)[8],=K4WG(4)[8],=K4WI(4)[8],=K4WW(4)[8],
+    =K4XU(3)[6],=K4XXX(4)[8],=K4YA(4)[8],=K4YJ(4)[8],=K4YO(3)[6],=K4ZGB(4)[8],
+    =K5AUP(5)[8],=K5EK(5)[8],=K5EM(3)[6],=K5FZ(4)[8],=K5HDU(3)[6],
+    =K5HIP(5)[8],=K5IJ(4)[8],=K5JR(5)[8],=K5KG(5)[8],=K5KMB(3)[6],=K5MH(4)[6],
+    =K5ML(3)[6],=K5MO(5)[8],=K5OA(3)[6],=K5OF(5)[8],=K5OLV(4)[8],=K5PN(4)[8],
+    =K5RC(3)[6],=K5TF(5)[8],=K5TRP(4)[8],=K5UF(4)[8],=K5VBA(4)[8],=K5VG(5)[8],
+    =K5VIP(5)[8],=K5WK(4)[8],=K5WP(4)[8],=K5YVY(4)[8],=K5ZD(5)[8],=K5ZQ(4)[8],
+    =K6DJ(4)[7],=K6ES(5)[8],=K6FX(4)[7],=K6KII(4)[7],=K6ND(5)[8],=K6PVZ(4)[8],
+    =K6RCW(4)[7],=K6RM(5)[8],=K6ZB(4)[7],=K7ABV(4)[6],=K7BG(4)[7],=K7BV(5)[8],
+    =K7CS(4)[8],=K7DR(4)[8],=K7DWI(4)[7],=K7GM(5)[8],=K7IA(4)[7],=K7JN(5)[8],
+    =K7KAR(4)[7],=K7LU(5)[8],=K7MOA(4)[7],=K7MS(4)[6],=K7MTD(4)[6],
     =K7OM(5)[8],=K7QA(4)[6],=K7RB(4)[7],=K7SCX(4)[7],=K7SHR(4)[7],=K7SV(5)[8],
-    =K7TD(4)[7],=K7UD(4)[7],=K7UWR(5)[8],=K7ZYV(4)[8],=K8AC(5)[8],
-    =K8ARY(5)[8],=K8CN(5)[8],=K8DF(5)[8],=K8FC(5)[8],=K8GP(5)[8],=K8IA(3)[6],
-    =K8JQ(5)[8],=K8LBQ(5)[8],=K8LF(5)[8],=K8LS(4)[7],=K8NS(5)[8],=K8NYG(5)[8],
+    =K7TAR(4)[8],=K7TD(4)[7],=K7UD(4)[7],=K7UPJ(5)[8],=K7UWR(5)[8],
+    =K7VF(4)[7],=K7VU(4)[7],=K7WCH(5)[8],=K7ZKM(4)[7],=K7ZYV(4)[8],
+    =K8AC(5)[8],=K8ARY(5)[8],=K8CN(5)[8],=K8DF(5)[8],=K8FC(5)[8],=K8GP(5)[8],
+    =K8HC(5)[8],=K8IA(3)[6],=K8JQ(5)[8],=K8LBQ(5)[8],=K8LF(5)[8],=K8LS(4)[7],
+    =K8LT(5)[8],=K8MCN(4)[7],=K8MV(5)[8],=K8NS(5)[8],=K8NYG(5)[8],=K8OZ(4)[7],
     =K8RAR(5)[8],=K8RRT(5)[8],=K8SYH(5)[8],=K8TE(4)[7],=K8TR(3)[6],
-    =K9AXT(5)[8],=K9CHP(5)[8],=K9DR(4)[7],=K9DU(4)[7],=K9EZ(5)[8],
-    =K9GWS(5)[8],=K9ILS(4)[7],=K9JF(3)[6],=K9JM(3)[6],=K9MWM(4)[7],
-    =K9OZ(4)[7],=K9PY(3)[6],=K9QC(4)[7],=K9RS(5)[8],=K9RZ(3)[6],=K9TAD(3)[6],
-    =K9WA(4)[7],=K9YC(3)[6],=KA0AZS(4)[8],=KA1RUE(4)[8],=KA3MTT(4)[8],
-    =KA4GAV(4)[7],=KA4J(4)[8],=KA4OTB(4)[7],=KA4SCV(4)[8],=KA5WSS(3)[6],
-    =KA8NJW(5)[8],=KA8OAT(5)[8],=KA8P(5)[8],=KA8Q(5)[8],=KA9FOX(4)[7],
-    =KA9OZP(4)[7],=KA9VVQ(4)[7],=KB1IKC(4)[7],=KB3HF(4)[7],=KB4QZH(4)[8],
-    =KB6NU(4)[8],=KB8DX(5)[8],=KB8KMH(5)[8],=KB9LLD(4)[7],=KB9S(4)[7],
-    =KC2LM(4)[7],=KC4HW(4)[8],=KC4NX(4)[8],=KC4SAW(4)[8],=KC4TEO(4)[8],
-    =KC4TNQ(4)[8],=KC4WQ(4)[8],=KC7QY(4)[7],=KC8GCR(5)[8],=KC8J(3)[6],
-    =KC8OPV(5)[8],=KC9K(4)[7],=KD0EE(4)[8],=KD2FSH(3)[6],=KD2KW(4)[7],
-    =KD4EE(4)[8],=KD4ULW(4)[8],=KD5DD(4)[8],=KD5RBU(3)[6],=KD7HU(4)[7],
-    =KD7RF(4)[8],=KD9QS(5)[8],=KE0L(4)[8],=KE0YI(4)[8],=KE1B(3)[6],
-    =KE2VB(3)[6],=KE3K(4)[8],=KE4KY(4)[8],=KE4WE(4)[8],=KE8AE(5)[8],
-    =KE8FT(3)[6],=KE8NN(3)[6],=KF4AV(4)[8],=KF4RWA(4)[8],=KF5MU(4)[8],
-    =KF6YU(4)[7],=KF7CG(4)[8],=KF7MD(4)[7],=KF7RO(5)[8],=KF7Z(4)[7],
-    =KF8N(5)[8],=KG4CUY(4)[8],=KG4SRK(4)[8],=KG4STL(4)[8],=KG5HVO(4)[8],
-    =KG5TA(5)[8],=KG9V(5)[8],=KH2AR(4)[7],=KH2BD(3)[6],=KH2BR(3)[6],
-    =KH2D(5)[8],=KH2GM(4)[8],=KH2PM(5)[8],=KH2SR(3)[6],=KH2TJ(3)[6],
-    =KH6CT(5)[8],=KH6GK(3)[6],=KH6M(5)[8],=KH6ND(3)[6],=KH6NO(3)[6],
-    =KH6VM(3)[6],=KH7FC(5)[8],=KH9AE(4)[7],=KI6DY(4)[8],=KI6QDH(4)[7],
-    =KI7ID(4)[7],=KI8I(5)[8],=KJ4AOM(4)[8],=KJ4M(4)[8],=KJ4ND(4)[8],
-    =KJ4YLR(4)[8],=KJ9C(4)[6],=KK2A(4)[8],=KK4JW(4)[8],=KK6MC(4)[7],
-    =KK9A(5)[8],=KK9N(4)[7],=KK9O(5)[8],=KL0SS(5)[8],=KL1SE(4)[8],
-    =KL3VA(5)[8],=KL5CS(3)[6],=KL7AN(3)[6],=KL7DJ(3)[6],=KL7GLK(4)[7],
-    =KL7HQR(3)[6],=KL7IKV(3)[6],=KL7NW(4)[7],=KL7QW(4)[7],=KM4CH(4)[8],
-    =KM4FO(4)[8],=KM4RO(4)[8],=KM7W(4)[6],=KN0W(3)[6],=KN4PHS(4)[8],
-    =KN6BU(5)[8],=KO4AWC(4)[8],=KO4IFG(4)[8],=KO4OL(4)[8],=KO4PZX(4)[8],
-    =KO4XJ(4)[8],=KO4YED(4)[8],=KO4YIN(4)[8],=KO4Z(4)[8],=KO8SCA(5)[8],
-    =KO8V(5)[8],=KO9V(4)[7],=KP2L(5)[8],=KP2X(4)[7],=KP2XX(4)[7],=KP3M(5)[8],
-    =KP3U(5)[8],=KP4AK(5)[8],=KP4IP(5)[8],=KP4VZ(4)[8],=KP4X(4)[8],
-    =KR4F(4)[8],=KR5X(5)[8],=KS4X(4)[8],=KS7T(4)[6],=KS9W(4)[7],=KT0P(4)[6],
-    =KT3M(4)[7],=KT4DW(4)[8],=KT4O(4)[8],=KT4RH(4)[8],=KT6D(5)[8],
-    =KU1CW(3)[6],=KU4A(4)[8],=KU8E(5)[8],=KV3T(4)[8],=KV4T(4)[8],=KV8S(4)[7],
-    =KW4J(4)[8],=KW4LU(4)[8],=KW4YA(4)[8],=KW7Q(4)[7],=KW9A(4)[7],=KX2P(4)[7],
-    =KX4AV(4)[8],=KX4X(4)[8],=KY0Q(4)[8],=KY0W(3)[6],=KY4BG(4)[8],
-    =KY4CU(4)[8],=KY4G(4)[8],=KY4KY(4)[8],=KY4L(4)[8],=KY6AA(4)[8],
-    =KZ1W(3)[6],=KZ4KX(4)[8],=KZ9V(4)[7],=N0KRE(3)[6],=N0OJ(5)[8],
-    =N0SMX(5)[8],=N0VFJ(5)[8],=N1AL(3)[6],=N1JM(3)[6],=N1KW(4)[8],=N2BJ(4)[8],
-    =N2GG(4)[7],=N2IC(4)[7],=N2JNR(3)[6],=N3BB(4)[7],=N3BUO(4)[7],=N3CI(4)[7],
-    =N3RA(4)[8],=N3RC(3)[6],=N3ZZ(3)[6],=N4ARO(4)[8],=N4ATU(4)[8],=N4AU(4)[8],
-    =N4BAA(4)[8],=N4BCD(4)[8],=N4CC(3)[6],=N4CSV(4)[8],=N4DW(4)[8],
-    =N4EL(4)[8],=N4FR(4)[8],=N4HAI(4)[8],=N4IDH(4)[8],=N4JDB(4)[8],
-    =N4JKO(4)[8],=N4JR(4)[8],=N4JRG(4)[8],=N4KGL(4)[8],=N4KH(4)[8],
-    =N4LSJ(4)[8],=N4LT(4)[8],=N4MCC(4)[8],=N4MZ(4)[8],=N4NM(4)[8],=N4NP(4)[8],
-    =N4OGW(4)[8],=N4PX(4)[8],=N4QS(4)[8],=N4RRR(4)[8],=N4SS(4)[8],=N4SV(4)[8],
-    =N4TY(4)[8],=N4TZ(4)[8],=N4UC(4)[8],=N4UPX(4)[8],=N4UW(4)[8],=N4VI(4)[7],
-    =N4WE(4)[8],=N4ZZ(4)[8],=N5BO(5)[8],=N5CR(3)[6],=N5CW(4)[8],=N5DX(5)[8],
-    =N5EP(4)[8],=N5GF(5)[8],=N5JED(4)[8],=N5KO(3)[6],=N5MKY(4)[8],=N5RP(4)[8],
-    =N5SMQ(5)[8],=N5TOO(5)[8],=N5YT(4)[8],=N5ZO(3)[6],=N6AR(5)[8],=N6DW(5)[8],
-    =N6MA(4)[8],=N6NT(5)[8],=N6RSH(4)[7],=N6WHV(4)[7],=N7DR(4)[7],=N7IV(4)[7],
-    =N7MZW(4)[7],=N7RCS(5)[8],=N7SE(4)[7],=N7US(4)[8],=N7WY(4)[7],=N7ZZ(4)[8],
-    =N8AID(5)[8],=N8BL(5)[8],=N8CL(5)[8],=N8ELA(3)[6],=N8GU(5)[8],=N8II(5)[8],
-    =N8IK(5)[8],=N8IVN(5)[8],=N8KH(5)[8],=N8NA(5)[8],=N8NN(5)[8],=N8OO(4)[7],
-    =N8RA(5)[8],=N8RW(5)[8],=N8UOA(5)[8],=N8URE(5)[8],=N8WXQ(5)[8],
-    =N8ZR(5)[8],=N9BD(3)[6],=N9BSO(4)[7],=N9CHA(4)[7],=N9CIQ(4)[7],
-    =N9EA(4)[7],=N9EE(5)[8],=N9EXU(4)[7],=N9GB(4)[7],=N9HDE(4)[7],=N9JF(4)[7],
-    =N9NA(3)[6],=N9NB(5)[8],=N9NC(5)[8],=N9NM(4)[7],=N9OF(4)[7],=N9RV(4)[6],
-    =N9SB(4)[7],=N9VPV(4)[7],=NA2U(3)[6],=NA4A(4)[8],=NA4C(4)[8],=NA4MM(4)[8],
-    =NA4W(4)[8],=NA5NN(4)[8],=NA7L(5)[8],=NA9J(5)[8],=NA9RB(4)[7],=ND2T(3)[6],
-    =ND3N(4)[8],=ND4X(4)[8],=ND4Y(4)[8],=ND8L(5)[8],=NE8P(5)[8],=NE9U(4)[7],
-    =NF4J(4)[8],=NF6P(5)[8],=NF7D(4)[8],=NG7A(4)[7],=NH6G(3)[6],=NH6L(4)[7],
-    =NH6PK(4)[8],=NH6T(4)[8],=NH6Z(3)[6],=NH7TV(5)[8],=NI7R(5)[8],=NJ4P(4)[8],
-    =NJ8J(5)[8],=NJ8M(4)[7],=NK3L(3)[6],=NK4I(4)[8],=NK7U(5)[8],=NK8Q(5)[8],
-    =NL7CQ(4)[7],=NL7D(3)[6],=NL7GN(3)[6],=NL7GW(3)[6],=NL7P(5)[8],
+    =K8WV(5)[8],=K8WWN(5)[8],=K8YC(5)[8],=K8YFM(5)[8],=K9AXT(5)[8],
+    =K9CHP(5)[8],=K9DR(4)[7],=K9DU(4)[7],=K9EZ(5)[8],=K9GS(5)[8],=K9GWS(5)[8],
+    =K9HXO(5)[8],=K9ILS(4)[7],=K9IVN(4)[7],=K9JF(3)[6],=K9JM(3)[6],
+    =K9JY(5)[8],=K9KSU(4)[7],=K9MBQ(5)[8],=K9MU(4)[7],=K9MWM(4)[7],
+    =K9OM(5)[8],=K9OQ(5)[8],=K9OR(4)[7],=K9OT(4)[7],=K9OZ(4)[7],=K9PY(3)[6],
+    =K9QC(4)[7],=K9RK(4)[7],=K9RQ(5)[8],=K9RS(5)[8],=K9RZ(3)[6],=K9TAD(3)[6],
+    =K9VD(4)[7],=K9VIT(3)[6],=K9WA(4)[7],=K9WM(4)[7],=K9WZB(3)[6],=K9YC(3)[6],
+    =K9ZMU(4)[7],=KA0AZS(4)[8],=KA1LDD(4)[8],=KA1RUE(4)[8],=KA2MLH(4)[8],
+    =KA3MTT(4)[8],=KA3NAM(4)[7],=KA4GAV(4)[7],=KA4J(4)[8],=KA4OTB(4)[7],
+    =KA4SCV(4)[8],=KA5VZG(4)[8],=KA5WSS(3)[6],=KA6Y(5)[8],=KA7PNH(4)[7],
+    =KA8JIL(5)[8],=KA8NJW(5)[8],=KA8OAT(5)[8],=KA8P(5)[8],=KA8Q(5)[8],
+    =KA9A(3)[6],=KA9FOX(4)[7],=KA9OZP(4)[7],=KA9VVQ(4)[7],=KB1IKC(4)[7],
+    =KB3A(4)[8],=KB3HF(4)[7],=KB4IRR(4)[7],=KB4QZH(4)[8],=KB4TLH(4)[8],
+    =KB4VL(4)[8],=KB6B(4)[7],=KB6NU(4)[8],=KB6OJE(4)[7],=KB8DX(5)[8],
+    =KB8KMH(5)[8],=KB9ENS(3)[6],=KB9JJA(4)[7],=KB9LLD(4)[7],=KB9RUG(4)[7],
+    =KB9S(4)[7],=KC1BB(3)[6],=KC1DWP(4)[8],=KC1EO(3)[6],=KC2LM(4)[7],
+    =KC4HW(4)[8],=KC4OBX(4)[8],=KC4TEO(4)[8],=KC4TNQ(4)[8],=KC4WQ(4)[8],
+    =KC6R(4)[7],=KC6UCN(4)[7],=KC6ZBE(4)[7],=KC7QY(4)[7],=KC8GCR(5)[8],
+    =KC8J(3)[6],=KC8NFN(4)[7],=KC8OPV(5)[8],=KC8YRK(5)[8],=KC9K(4)[7],
+    =KD0EE(4)[8],=KD2FSH(3)[6],=KD2KW(4)[7],=KD2RPX(4)[7],=KD4ADC(4)[8],
+    =KD4EE(4)[8],=KD4LT(4)[8],=KD4ULW(4)[8],=KD5DD(4)[8],=KD5EJG(4)[8],
+    =KD5RBU(3)[6],=KD7ACB(5)[8],=KD7HU(4)[7],=KD8TF(5)[8],=KD9LTN(4)[7],
+    =KD9QS(5)[8],=KD9RBY(4)[7],=KD9Z(3)[6],=KE0L(4)[8],=KE0YI(4)[8],
+    =KE1B(3)[6],=KE2VB(3)[6],=KE3K(4)[8],=KE4EW(3)[6],=KE4KY(4)[8],
+    =KE4SVI(4)[8],=KE4WE(4)[8],=KE4XT(4)[7],=KE5AX(3)[6],=KE5HDE(5)[8],
+    =KE5MIS(4)[8],=KE5NJ(5)[8],=KE7NO(4)[6],=KE8AE(5)[8],=KE8FT(3)[6],
+    =KE8KMX(5)[8],=KE8NN(3)[6],=KF0CT(4)[8],=KF4AV(4)[8],=KF4FMQ(4)[8],
+    =KF4RWA(4)[8],=KF5MU(4)[8],=KF6JOQ(4)[7],=KF6YU(4)[7],=KF7CG(4)[8],
+    =KF7HIL(4)[7],=KF7MD(4)[7],=KF7RO(5)[8],=KF7Z(4)[7],=KF8N(5)[8],
+    =KF9LI(4)[7],=KF9MT(4)[7],=KG2MD(4)[8],=KG4BIG(4)[8],=KG4CDL(4)[8],
+    =KG4SRK(4)[8],=KG4STL(4)[8],=KG5SSB(4)[8],=KG5TA(5)[8],=KG9JF(4)[7],
+    =KG9V(5)[8],=KH2AR(4)[7],=KH2BD(3)[6],=KH2BR(3)[6],=KH2D(5)[8],
+    =KH2GM(4)[8],=KH2PM(5)[8],=KH2SR(3)[6],=KH2TJ(3)[6],=KH6CT(5)[8],
+    =KH6GK(3)[6],=KH6HU(3)[6],=KH6JRC(3)[6],=KH6M(5)[8],=KH6ND(3)[6],
+    =KH6NO(3)[6],=KH6VM(3)[6],=KH7DA(5)[8],=KH7DA/4(5)[8],=KH7DM(5)[8],
+    =KH7FC(5)[8],=KH7RC(5)[8],=KH7X(3)[6],=KH7Z(5)[8],=KH9AE(4)[7],
+    =KI0EB(4)[8],=KI4KWR(4)[8],=KI4PHE(4)[8],=KI4VLI(4)[8],=KI5GX(4)[8],
+    =KI5UTQ(4)[8],=KI6DY(4)[8],=KI6HQT(4)[7],=KI6QDH(4)[7],=KI7ID(4)[7],
+    =KI7WX(5)[8],=KI8EM(5)[8],=KI8I(5)[8],=KJ4A(4)[8],=KJ4AOM(4)[8],
+    =KJ4BIX(4)[8],=KJ4JPV(4)[8],=KJ4M(4)[8],=KJ4ND(4)[8],=KJ4UGO(4)[8],
+    =KJ4YLR(4)[8],=KJ6DQ(4)[7],=KJ6YXI(4)[8],=KJ9C(4)[6],=KK2A(4)[8],
+    =KK4JW(4)[8],=KK4NAW(4)[7],=KK4OVW(4)[8],=KK4XA(4)[8],=KK5OQ(4)[8],
+    =KK6MC(4)[7],=KK9A(5)[8],=KK9N(4)[7],=KK9O(5)[8],=KK9U(4)[7],=KL1JF(3)[6],
+    =KL2YE(4)[8],=KL3UX(5)[8],=KL3VA(5)[8],=KL4C(5)[8],=KL5CS(3)[6],
+    =KL7AN(3)[6],=KL7DJ(3)[6],=KL7FDQ(3)[6],=KL7GLK(4)[7],=KL7HQR(3)[6],
+    =KL7IKV(3)[6],=KL7JR(5)[8],=KL7NW(4)[7],=KL7OF(3)[6],=KL7QW(4)[7],
+    =KL7SK(3)[6],=KL7U(4)[7],=KL7UT(3)[6],=KM1Z(4)[8],=KM4CH(4)[8],
+    =KM4CRC(4)[8],=KM4DR(4)[7],=KM4FO(4)[8],=KM4JAD(4)[8],=KM4RO(4)[8],
+    =KM4RT(4)[8],=KM4VI(4)[8],=KM5AT(5)[8],=KM7W(4)[6],=KM9DX(4)[7],
+    =KN0W(3)[6],=KN4CG(4)[8],=KN4CNU(4)[8],=KN4DUA(4)[8],=KN4LIU(4)[8],
+    =KN4PHS(4)[8],=KN4VKW(4)[8],=KN6BU(5)[8],=KN9K(3)[6],=KO1Z(4)[7],
+    =KO4AWC(4)[8],=KO4IFG(4)[8],=KO4O(4)[8],=KO4OL(4)[8],=KO4PZX(4)[8],
+    =KO4TFE(4)[8],=KO4UHE(4)[8],=KO4UOJ(4)[8],=KO4XJ(4)[8],=KO4YED(4)[8],
+    =KO4YIN(4)[8],=KO4Z(4)[8],=KO8SCA(5)[8],=KO8V(5)[8],=KO9V(4)[7],
+    =KP2L(5)[8],=KP2N(5)[8],=KP2X(4)[7],=KP2XX(4)[7],=KP3M(5)[8],=KP3U(5)[8],
+    =KP4AK(5)[8],=KP4IP(5)[8],=KP4Q(5)[8],=KP4VZ(4)[8],=KP4X(4)[8],
+    =KQ0J(5)[8],=KQ4CAE(4)[8],=KQ4FXO(4)[8],=KQ9J(4)[7],=KR4F(4)[8],
+    =KR5X(5)[8],=KR7Q(4)[6],=KS4X(4)[8],=KS4XU(4)[7],=KS7T(4)[6],=KS7X(5)[8],
+    =KS9W(4)[7],=KT0P(4)[6],=KT3M(4)[7],=KT4DW(4)[8],=KT4E(4)[8],=KT4O(4)[8],
+    =KT4RH(4)[8],=KT4RSQ(4)[8],=KT4XA(4)[8],=KT5LA(3)[6],=KT6D(5)[8],
+    =KT9T(4)[7],=KU1CW(3)[6],=KU4A(4)[8],=KU4H(4)[8],=KU8E(5)[8],=KV3T(4)[8],
+    =KV4AC(4)[8],=KV4T(4)[8],=KV8S(4)[7],=KW4J(4)[8],=KW4LU(4)[8],
+    =KW4SW(4)[8],=KW4YA(4)[8],=KW7EET(4)[7],=KW7Q(4)[7],=KW9A(4)[7],
+    =KX2P(4)[7],=KX4AV(4)[8],=KX4X(4)[8],=KY0Q(4)[8],=KY0W(3)[6],=KY4AR(4)[8],
+    =KY4BG(4)[8],=KY4CU(4)[8],=KY4G(4)[8],=KY4HV(4)[8],=KY4KY(4)[8],
+    =KY4L(4)[8],=KY4MAK(4)[8],=KY6AA(4)[8],=KZ1W(3)[6],=KZ4A(4)[8],
+    =KZ4KX(4)[8],=KZ5ED(5)[8],=KZ7A(4)[7],=KZ9V(4)[7],=N0AE(4)[8],
+    =N0FIR(5)[8],=N0FW(4)[8],=N0GAF(4)[8],=N0KRE(3)[6],=N0MU(5)[8],
+    =N0OJ(5)[8],=N0SMX(5)[8],=N0VFJ(5)[8],=N1AL(3)[6],=N1CC(3)[6],
+    =N1CCC(4)[7],=N1JM(3)[6],=N1KEZ(3)[6],=N1KW(4)[8],=N1NYT(4)[6],
+    =N1OKL(4)[8],=N1SMB(4)[7],=N2BJ(4)[8],=N2DEE(4)[7],=N2GG(4)[7],
+    =N2IC(4)[7],=N3AIU(3)[6],=N3BB(4)[7],=N3BEN(3)[6],=N3BUO(4)[7],
+    =N3CI(4)[7],=N3CY(4)[8],=N3DI(4)[8],=N3EG(3)[6],=N3JJT(4)[8],=N3KA(3)[6],
+    =N3MRA(4)[7],=N3RA(4)[8],=N3RC(3)[6],=N3ZZ(3)[6],=N4ARO(4)[8],
+    =N4ATU(4)[8],=N4AU(4)[8],=N4BAA(4)[8],=N4CC(3)[6],=N4CSV(4)[8],
+    =N4DBR(4)[8],=N4DLA(3)[6],=N4DW(4)[8],=N4DXN(4)[8],=N4EL(4)[8],
+    =N4FR(4)[8],=N4HAI(4)[8],=N4IDH(4)[8],=N4JDB(4)[8],=N4JKO(4)[8],
+    =N4JR(4)[8],=N4JRG(4)[8],=N4KGL(4)[8],=N4KH(4)[8],=N4KZ(4)[8],=N4LS(4)[8],
+    =N4LSJ(4)[8],=N4LT(4)[8],=N4MCC(4)[8],=N4MJ(4)[8],=N4MTE(4)[8],
+    =N4MZ(4)[8],=N4NA(4)[8],=N4NM(4)[8],=N4NP(4)[8],=N4NT(4)[8],=N4OGW(4)[8],
+    =N4OPI(4)[8],=N4PWG(4)[8],=N4PX(4)[8],=N4QS(4)[8],=N4ROA(4)[8],
+    =N4RRR(4)[8],=N4RZ(4)[8],=N4SS(4)[8],=N4SV(4)[8],=N4TY(4)[8],=N4TZ(4)[8],
+    =N4UC(4)[8],=N4UL(4)[8],=N4UPX(4)[8],=N4UW(4)[8],=N4VI(4)[7],=N4VN(4)[8],
+    =N4WE(4)[8],=N4ZZ(4)[8],=N5BLY(4)[8],=N5BO(5)[8],=N5CBP(5)[8],=N5CR(3)[6],
+    =N5CW(4)[8],=N5DX(5)[8],=N5EP(4)[8],=N5FTY(4)[8],=N5GD(4)[8],=N5GF(5)[8],
+    =N5GI(5)[8],=N5INV(4)[8],=N5JED(4)[8],=N5KO(3)[6],=N5MKY(4)[8],
+    =N5PA(4)[8],=N5RP(4)[8],=N5SA(4)[8],=N5SMQ(5)[8],=N5TB(5)[8],=N5TOO(5)[8],
+    =N5VX(5)[8],=N5WCS(4)[8],=N5YT(4)[8],=N5ZO(3)[6],=N6AQ(5)[8],=N6AR(5)[8],
+    =N6DW(5)[8],=N6EV(4)[7],=N6FS(4)[8],=N6GR(4)[7],=N6HEW(4)[7],=N6JRL(4)[8],
+    =N6LEE(4)[7],=N6MA(4)[8],=N6NT(5)[8],=N6RH(4)[7],=N6RSH(4)[7],=N6VF(4)[8],
+    =N6WHV(4)[7],=N6YMM(5)[8],=N6ZZ(4)[7],=N7AGP(4)[6],=N7CMJ(4)[6],
+    =N7CR(4)[8],=N7DH(5)[8],=N7DR(4)[7],=N7ECM(5)[8],=N7GFB(5)[8],=N7IV(4)[7],
+    =N7KA(4)[7],=N7KDT(4)[8],=N7LCT(4)[8],=N7MZW(4)[7],=N7PMS(4)[6],
+    =N7QAX(4)[7],=N7RCS(5)[8],=N7SE(4)[7],=N7US(4)[8],=N7WY(4)[7],=N7ZZ(4)[8],
+    =N8AHH(5)[8],=N8AID(5)[8],=N8BL(5)[8],=N8CL(5)[8],=N8CQD(5)[8],
+    =N8ELA(3)[6],=N8GU(5)[8],=N8HM(5)[8],=N8HOQ(4)[7],=N8II(5)[8],=N8IK(5)[8],
+    =N8IVN(5)[8],=N8JAX(5)[8],=N8JOE(3)[6],=N8KH(5)[8],=N8MD(4)[7],
+    =N8NA(5)[8],=N8NN(5)[8],=N8OO(4)[7],=N8OZY(5)[8],=N8RA(5)[8],=N8RW(5)[8],
+    =N8UOA(5)[8],=N8URE(5)[8],=N8WCR(3)[6],=N8WXQ(5)[8],=N8ZR(5)[8],
+    =N9ARX(4)[7],=N9ATF(4)[7],=N9BD(3)[6],=N9BSO(4)[7],=N9CD(4)[7],
+    =N9CDX(4)[7],=N9CHA(4)[7],=N9CIQ(4)[7],=N9EA(4)[7],=N9EE(5)[8],
+    =N9EXU(4)[7],=N9GB(4)[7],=N9HDE(4)[7],=N9ISN(4)[7],=N9JF(4)[7],
+    =N9JYJ(4)[7],=N9KIY(5)[8],=N9MS(5)[8],=N9MTG(5)[8],=N9NA(3)[6],
+    =N9NB(5)[8],=N9NC(5)[8],=N9NM(4)[7],=N9OF(4)[7],=N9PGG(5)[8],=N9RV(4)[6],
+    =N9SB(4)[7],=N9SXF(4)[7],=N9VAO(4)[7],=N9VPV(4)[7],=NA2U(3)[6],
+    =NA4A(4)[8],=NA4C(4)[8],=NA4MM(4)[8],=NA4W(4)[8],=NA5DX(4)[8],
+    =NA5NN(4)[8],=NA7L(5)[8],=NA9J(5)[8],=NA9RB(4)[7],=NB5E(5)[8],=ND2T(3)[6],
+    =ND3N(4)[8],=ND4U(4)[8],=ND4X(4)[8],=ND4Y(4)[8],=ND8L(5)[8],=ND9M(4)[7],
+    =NE5W(4)[8],=NE7DX(3)[7],=NE7R(4)[6],=NE8P(5)[8],=NE9U(4)[7],=NF6P(5)[8],
+    =NF7D(4)[8],=NG3Q(4)[8],=NG5U(4)[8],=NG7A(4)[7],=NG7IL(4)[7],=NG9B(4)[7],
+    =NH2JE(3)[6],=NH6G(3)[6],=NH6L(4)[7],=NH6PK(4)[8],=NH6T(4)[8],=NH6Z(3)[6],
+    =NH7TR(4)[7],=NH7TV(5)[8],=NI2M(4)[7],=NI5L(3)[7],=NI7R(5)[8],=NJ0U(4)[8],
+    =NJ4P(4)[8],=NJ7T(5)[8],=NJ8J(5)[8],=NJ8M(4)[7],=NK2J(3)[6],=NK3L(3)[6],
+    =NK4I(4)[8],=NK4T(4)[8],=NK7U(5)[8],=NK8Q(5)[8],=NK9I(3)[6],=NL7CQ(4)[7],
+    =NL7D(3)[6],=NL7FJ(5)[8],=NL7GN(3)[6],=NL7GW(3)[6],=NL7P(5)[8],
     =NL7QC(4)[7],=NL7RQ(4)[7],=NL7WA(5)[8],=NL7XM(5)[8],=NL7XT(4)[8],
-    =NN4NT(4)[8],=NN5O(4)[8],=NN5SS(4)[8],=NN7A(4)[7],=NN7CW(5)[8],
-    =NN9DD(5)[8],=NO2D(4)[7],=NO9E(5)[8],=NP2D(5)[8],=NP2GG(5)[8],
-    =NP2JV(5)[8],=NP2WJ(4)[8],=NP3FB(4)[8],=NP3K(5)[8],=NQ6N(4)[8],
-    =NR4L(4)[8],=NR5N(5)[8],=NR7DX(4)[6],=NS4X(4)[8],=NT0K(5)[8],=NU4N(4)[8],
-    =NV4B(4)[8],=NW8U(5)[8],=NX1P(3)[6],=NY1V(4)[8],=NY6DX(5)[8],=NY9H(5)[8],
-    =NZ2S(3)[6],=W0AG(4)[8],=W0BF(3)[6],=W0BR(5)[8],=W0CG(4)[8],=W0JX(4)[8],
-    =W0LL(5)[8],=W0NF(3)[6],=W0PV(5)[8],=W0RIC(3)[6],=W0SK(4)[8],=W0VQ(3)[6],
-    =W0YK(3)[6],=W1CLM(4)[8],=W1DGL(3)[6],=W1JCW(4)[7],=W1NN(4)[8],
-    =W1PD(4)[8],=W1PR(3)[6],=W1RH(3)[6],=W1SAV(3)[6],=W1SRD(3)[6],=W1YY(3)[6],
-    =W2ACY(4)[7],=W2FV(3)[6],=W2GS(4)[7],=W2HZ(3)[6],=W2IY(4)[7],=W2MN(4)[7],
-    =W2NQ(3)[6],=W2VJN(3)[6],=W3CB(4)[8],=W3CRZ(4)[8],=W3HDH(4)[8],
-    =W3HKK(4)[8],=W3PWF(4)[7],=W3RZ(4)[7],=W3TB(4)[8],=W3USA(4)[8],
-    =W4BCG(4)[8],=W4CMG(4)[8],=W4CQE(4)[8],=W4DAN(4)[8],=W4DTA(4)[8],
-    =W4EF(3)[6],=W4ER(4)[8],=W4GKM(4)[8],=W4IDX(3)[6],=W4IFI(4)[7],
-    =W4IL(4)[8],=W4IOD(4)[8],=W4JH(4)[8],=W4KD(4)[8],=W4KW(4)[8],=W4LC(4)[8],
-    =W4NBS(4)[8],=W4NI(4)[8],=W4NJA(4)[8],=W4NNF(4)[8],=W4NZ(4)[8],
-    =W4PA(4)[8],=W4PF(4)[8],=W4RYW(4)[8],=W4SDX(4)[8],=W4SIG(4)[8],
-    =W4SK(4)[8],=W4SSF(4)[8],=W4TLK(4)[8],=W4UAT(3)[6],=W4UT(4)[8],
-    =W4UWC(4)[8],=W4WKU(4)[8],=W4XK(4)[8],=W4YPW(4)[8],=W4ZXT(4)[8],
-    =W5ACQ(4)[8],=W5DT(4)[8],=W5FB(5)[8],=W5KBW(4)[8],=W5MX(4)[8],=W5NZ(4)[8],
-    =W5PET(4)[8],=W5TAF(5)[8],=W5VS(5)[8],=W5YD(4)[8],=W6FB(4)[7],
-    =W6GMT(4)[7],=W6HGF(5)[8],=W6KGP(4)[7],=W6LFB(4)[7],=W6NCB(4)[8],
-    =W6NWS(5)[8],=W6UB(4)[8],=W6WU(5)[8],=W7DGR(4)[7],=W7EE(4)[6],=W7EY(4)[6],
-    =W7FW(4)[8],=W7GKF(5)[8],=W7HJ(5)[8],=W7II(4)[7],=W7IMP(5)[8],=W7IY(5)[8],
-    =W7LG(5)[8],=W7RF(4)[7],=W7RY(4)[7],=W7UT(4)[7],=W7VNE(4)[6],=W7XT(4)[6],
-    =W8AKS(5)[8],=W8BAR(5)[8],=W8BLA(5)[8],=W8FJ(5)[8],=W8FN(5)[8],
-    =W8GJK(3)[6],=W8HAP(5)[8],=W8IX(5)[8],=W8KRZ(5)[8],=W8LYJ(4)[7],
-    =W8MYL(4)[7],=W8NOR(3)[6],=W8OP(5)[8],=W8OV(4)[7],=W8SP(5)[8],=W8TK(3)[6],
-    =W8WEJ(5)[8],=W8WVA(5)[8],=W8WZ(5)[8],=W8XAL(4)[7],=W8ZN(5)[8],
-    =W9AVM(4)[7],=W9AWE(4)[7],=W9BS(5)[8],=W9CF(3)[6],=W9DC(5)[8],
-    =W9DCT(4)[7],=W9ET(4)[7],=W9GOL(5)[8],=W9KB(5)[8],=W9KKN(3)[6],
-    =W9LCQ(4)[7],=W9MAF(4)[7],=W9MAK(3)[6],=W9MVA(4)[7],=W9PL(3)[6],
-    =W9RNY(4)[7],=W9TCV(5)[8],=W9WE(4)[7],=W9XG(4)[7],=WA0LJM(5)[8],
-    =WA0PFC(3)[6],=WA0WWW(3)[6],=WA1FCN(4)[8],=WA1FMM(4)[7],=WA1UJU(4)[8],
-    =WA2DHG(4)[8],=WA2JQZ(4)[7],=WA2PCN(4)[7],=WA2TOP(4)[7],=WA2USA(4)[8],
-    =WA2VYA(4)[7],=WA3C(4)[8],=WA3JAT(4)[8],=WA4GGK(4)[8],=WA4HR(4)[8],
-    =WA4JA(4)[8],=WA4VEK(4)[8],=WA4WZR(4)[8],=WA5POK(4)[8],=WA8KAN(5)[8],
-    =WA8OJR(5)[8],=WA8YVF(5)[8],=WA8ZBT(4)[7],=WA8ZNC(3)[6],=WA9AFM(4)[7],
-    =WA9JBR(4)[7],=WA9TZW(4)[7],=WB0CJB(4)[8],=WB0POH(5)[8],=WB2AWQ(3)[6],
-    =WB3JFS(3)[6],=WB4HMA(4)[8],=WB4IT(4)[8],=WB4WXE(4)[8],=WB4YDL(4)[8],
-    =WB4YDY(4)[8],=WB5NHL(5)[8],=WB5RYB(5)[8],=WB5WAJ(4)[8],=WB7BNE(4)[7],
-    =WB7UOF(3)[7],=WB8CZH(5)[8],=WB8III(5)[8],=WB8IMY(5)[8],=WB8PKK(5)[8],
-    =WB8YQJ(3)[6],=WB8YYY(5)[8],=WC2A(3)[6],=WC7S(4)[7],=WD4CFN(4)[8],
-    =WD4OHD(4)[8],=WD8RYV(5)[8],=WD9GKG(5)[8],=WE5P(4)[8],=WE6EZ(4)[7],
-    =WF3H(4)[7],=WF3T(4)[8],=WF7T(4)[8],=WF9A(5)[8],=WH0AI(4)[7],=WH6A(5)[8],
-    =WH6AQ(5)[8],=WH6FZY(3)[6],=WH6LE(5)[8],=WH7R(4)[7],=WJ8L(5)[8],
-    =WJ9B(3)[6],=WL7OU(4)[7],=WM4Q(4)[8],=WM5A(4)[8],=WM5DX(4)[8],
-    =WN4AT(4)[8],=WN7S(5)[8],=WN7Y(4)[7],=WN9J(3)[6],=WO7U(4)[7],=WP2C(5)[8],
-    =WP2J(5)[8],=WP3ME(5)[8],=WP4ADA(4)[7],=WP4BJS(5)[8],=WQ5L(4)[8],
+    =NM7W(4)[7],=NN4NT(4)[8],=NN4SA(4)[8],=NN5O(4)[8],=NN5SS(4)[8],
+    =NN7A(4)[7],=NN7CW(5)[8],=NN7V(4)[7],=NN9DD(5)[8],=NO2D(4)[7],
+    =NO3OO(4)[7],=NO9E(5)[8],=NP2D(5)[8],=NP2GG(5)[8],=NP2JV(5)[8],
+    =NP2WJ(4)[8],=NP2Z(5)[8],=NP3FB(4)[8],=NP3G(5)[8],=NP3K(5)[8],
+    =NP3ST(5)[8],=NP3XP(4)[7],=NP4CV(5)[8],=NQ6N(4)[8],=NR1K(3)[6],
+    =NR4L(4)[8],=NR5N(5)[8],=NR5NN(3)[6],=NR7DX(4)[6],=NR9Q(4)[7],=NS2X(4)[8],
+    =NS4X(4)[8],=NT0K(5)[8],=NT4J(4)[8],=NT4W(4)[8],=NT5A(3)[6],=NU4B(4)[8],
+    =NU4N(4)[8],=NV4G(4)[8],=NV9J(4)[7],=NW5H(3)[6],=NW8U(5)[8],=NX1P(3)[6],
+    =NX7U(5)[8],=NX7W(4)[6],=NX9T(5)[8],=NY1V(4)[8],=NY4JB(4)[8],=NY5E(5)[8],
+    =NY6DX(5)[8],=NY9H(5)[8],=NZ2S(3)[6],=NZ7Q(4)[7],=W0AG(4)[8],=W0AO(3)[6],
+    =W0BF(3)[6],=W0CG(4)[8],=W0FLZ(3)[6],=W0JAY(5)[8],=W0JX(4)[8],=W0LL(5)[8],
+    =W0MHK(5)[8],=W0NA(5)[8],=W0NF(3)[6],=W0PE(3)[6],=W0PV(5)[8],=W0RIC(3)[6],
+    =W0SK(4)[8],=W0VQ(3)[6],=W0YK(3)[6],=W0ZZ(3)[6],=W1CAM(4)[7],=W1CHL(4)[8],
+    =W1CLM(4)[8],=W1DGL(3)[6],=W1EG(4)[8],=W1ESE(3)[6],=W1JCW(4)[7],
+    =W1LTC(4)[8],=W1MVY(3)[6],=W1NN(4)[8],=W1PD(4)[8],=W1PR(3)[6],=W1QC(4)[8],
+    =W1RH(3)[6],=W1SAV(3)[6],=W1SKU(4)[8],=W1SRD(3)[6],=W1WSF(4)[8],
+    =W1YY(3)[6],=W2AA(3)[6],=W2ACY(4)[7],=W2BJN(4)[8],=W2CO(4)[7],=W2FV(3)[6],
+    =W2GS(4)[7],=W2HZ(3)[6],=W2IY(4)[7],=W2KF(4)[7],=W2MN(4)[7],=W2NQ(3)[6],
+    =W2ODH(4)[7],=W2RSS(4)[8],=W2UP(4)[7],=W2VJN(3)[6],=W2XX(3)[6],
+    =W3CB(4)[8],=W3CRZ(4)[8],=W3DEV(4)[8],=W3FF(3)[6],=W3HDH(4)[8],
+    =W3HKK(4)[8],=W3LZ(4)[8],=W3NX(3)[6],=W3PWF(4)[7],=W3RZ(4)[7],=W3TB(4)[8],
+    =W3USA(4)[8],=W3XO(4)[7],=W3ZF(4)[7],=W4AWE(4)[8],=W4BCG(4)[8],
+    =W4CMG(4)[8],=W4CN(4)[8],=W4CQE(4)[8],=W4DAN(4)[8],=W4DTA(4)[8],
+    =W4EF(3)[6],=W4ER(4)[8],=W4ETA(4)[8],=W4GKM(4)[8],=W4GON(4)[8],
+    =W4IDX(3)[6],=W4IFI(4)[7],=W4IL(4)[8],=W4IOD(4)[8],=W4IPA(4)[7],
+    =W4IX(3)[6],=W4JH(4)[8],=W4JUU(4)[8],=W4KD(4)[8],=W4KW(4)[8],=W4LC(4)[8],
+    =W4LOO(3)[6],=W4MRF(4)[8],=W4NBS(4)[8],=W4NI(4)[8],=W4NJA(4)[8],
+    =W4NJK(3)[6],=W4NNF(4)[8],=W4NZ(4)[8],=W4PA(4)[8],=W4PF(4)[8],
+    =W4PUD(4)[8],=W4RLB(4)[8],=W4RYW(4)[8],=W4SDX(4)[8],=W4SIG(4)[8],
+    =W4SK(4)[8],=W4SSF(4)[8],=W4SV(4)[8],=W4TLK(4)[8],=W4UAL(4)[8],
+    =W4UAT(3)[6],=W4UT(4)[8],=W4UWC(4)[8],=W4VFF(4)[8],=W4WKU(4)[8],
+    =W4WTS(4)[8],=W4WWV(4)[8],=W4XK(4)[8],=W4YPW(4)[8],=W4YTO(4)[8],
+    =W4ZXT(4)[8],=W5ACQ(4)[8],=W5BLX(5)[8],=W5DT(4)[8],=W5EPL(4)[8],
+    =W5FB(5)[8],=W5GAI(4)[8],=W5HIO(4)[8],=W5KBW(4)[8],=W5MX(4)[8],
+    =W5NZ(4)[8],=W5OBT(3)[6],=W5ORC(4)[8],=W5OT(3)[6],=W5PET(4)[8],
+    =W5RCG(4)[8],=W5SGL(4)[8],=W5TAF(5)[8],=W5THT(4)[8],=W5UHQ(4)[8],
+    =W5UJ(3)[6],=W5VS(5)[8],=W5WGF(4)[8],=W5XB(5)[8],=W5YD(4)[8],=W5ZC(5)[8],
+    =W6DVS(5)[8],=W6FB(4)[7],=W6GMT(4)[7],=W6HGF(5)[8],=W6JTB(5)[8],
+    =W6KGP(4)[7],=W6KW(5)[8],=W6LFB(4)[7],=W6LX(4)[8],=W6NCB(4)[8],
+    =W6NWS(5)[8],=W6QUV(4)[7],=W6RIF(5)[8],=W6SFG(5)[8],=W6UB(4)[8],
+    =W6WU(5)[8],=W7DGR(4)[7],=W7DMW(3)[7],=W7EE(4)[6],=W7EY(4)[6],=W7FW(4)[8],
+    =W7GKF(5)[8],=W7HJ(5)[8],=W7II(4)[7],=W7IMP(5)[8],=W7IY(5)[8],
+    =W7JKC(4)[7],=W7KAM(4)[7],=W7KF(4)[6],=W7KK(4)[6],=W7LG(5)[8],
+    =W7MAE(5)[8],=W7RF(4)[7],=W7RIP(4)[6],=W7RY(4)[7],=W7UM(4)[7],=W7UT(4)[7],
+    =W7VNE(4)[6],=W7XT(4)[6],=W8AKS(5)[8],=W8BAR(5)[8],=W8BFX(3)[6],
+    =W8BLA(5)[8],=W8BRY(5)[8],=W8BT(5)[8],=W8EHH(5)[8],=W8FJ(5)[8],
+    =W8FN(5)[8],=W8GJK(3)[6],=W8HAP(5)[8],=W8HMK(5)[8],=W8IX(5)[8],
+    =W8KA(3)[6],=W8KR(4)[7],=W8KRZ(5)[8],=W8LYJ(4)[7],=W8MYL(4)[7],
+    =W8NOR(3)[6],=W8NUD(5)[8],=W8OV(4)[7],=W8RKW(5)[8],=W8SP(5)[8],
+    =W8TJM(3)[6],=W8TK(3)[6],=W8VZ(5)[8],=W8WEJ(5)[8],=W8WVA(5)[8],
+    =W8WZ(5)[8],=W8XAL(4)[7],=W8XC(5)[8],=W8ZN(5)[8],=W9AVM(4)[7],
+    =W9AWE(4)[7],=W9BM(4)[7],=W9BS(5)[8],=W9CF(3)[6],=W9DC(5)[8],=W9DCT(4)[7],
+    =W9DKB(4)[7],=W9DX(4)[7],=W9DXM(4)[7],=W9ET(4)[7],=W9FZ(4)[7],=W9GM(4)[7],
+    =W9GOL(5)[8],=W9JA(4)[7],=W9JEF(4)[7],=W9JFK(4)[7],=W9LCQ(4)[7],
+    =W9MAF(4)[7],=W9MAK(3)[6],=W9MC(4)[7],=W9MET(5)[8],=W9MVA(4)[7],
+    =W9PL(3)[6],=W9RNY(4)[7],=W9TCV(5)[8],=W9UP(4)[7],=W9WE(4)[7],=W9XG(4)[7],
+    =W9YZR(4)[7],=WA0LJM(5)[8],=WA0PFC(3)[6],=WA0WHT(5)[8],=WA0WWW(3)[6],
+    =WA0YPC(5)[8],=WA1FCN(4)[8],=WA1FMM(4)[7],=WA1TYB(4)[6],=WA1UJU(4)[8],
+    =WA2DHG(4)[8],=WA2EDJ(3)[6],=WA2JQZ(4)[7],=WA2PCN(4)[7],=WA2TOP(4)[7],
+    =WA2USA(4)[8],=WA2VYA(4)[7],=WA3C(4)[8],=WA3JAT(4)[8],=WA3NZA(4)[7],
+    =WA4AA(4)[8],=WA4CAX(4)[8],=WA4GGK(4)[8],=WA4HR(4)[8],=WA4JA(4)[8],
+    =WA4JQS(4)[8],=WA4KY(4)[8],=WA4MLD(4)[8],=WA4VEK(4)[8],=WA4VGZ(4)[8],
+    =WA4WZR(4)[8],=WA4ZXV(4)[8],=WA5POK(4)[8],=WA7EM(4)[7],=WA8AHZ(5)[8],
+    =WA8KAN(5)[8],=WA8NLX(5)[8],=WA8OJR(5)[8],=WA8YVF(5)[8],=WA8ZBT(4)[7],
+    =WA8ZNC(3)[6],=WA9AFM(4)[7],=WA9JBR(4)[7],=WA9JIB(3)[6],=WA9TZW(4)[7],
+    =WA9ZZ(4)[7],=WB0CJB(4)[8],=WB0POH(5)[8],=WB2AWQ(3)[6],=WB3JFS(3)[6],
+    =WB4E(4)[8],=WB4GHZ(4)[8],=WB4HMA(4)[8],=WB4IT(4)[8],=WB4WXE(4)[8],
+    =WB4YDL(4)[8],=WB4YDY(4)[8],=WB5EVF(5)[8],=WB5KFP(5)[8],=WB5NHL(5)[8],
+    =WB5NOE(3)[6],=WB5RYB(5)[8],=WB5WAH(4)[8],=WB5WAJ(4)[8],=WB6UIA(4)[7],
+    =WB7BNE(4)[7],=WB7BWZ(4)[7],=WB7GR(4)[7],=WB7PMP(5)[8],=WB7S(4)[7],
+    =WB7UOF(3)[7],=WB8BEL(5)[8],=WB8BPU(5)[8],=WB8CZH(5)[8],=WB8EKG(5)[8],
+    =WB8III(5)[8],=WB8IMY(5)[8],=WB8PAF(5)[8],=WB8PKK(5)[8],=WB8YQJ(3)[6],
+    =WB8YYY(5)[8],=WB9YLZ(4)[7],=WC0W(5)[8],=WC2A(3)[6],=WC4AR(4)[8],
+    =WC4DC(4)[8],=WC7S(4)[7],=WC8L(5)[8],=WD0ETG(5)[8],=WD0FYV(5)[8],
+    =WD1W(4)[7],=WD4CFN(4)[8],=WD4IXD(4)[7],=WD4KTF(4)[8],=WD4OHD(4)[8],
+    =WD4PTJ(4)[8],=WD5CCA(4)[8],=WD6BNY(4)[8],=WD8RYV(5)[8],=WD9GKG(5)[8],
+    =WD9GMK(5)[8],=WE5P(4)[8],=WE6EZ(4)[7],=WE8USN(5)[8],=WF3H(4)[7],
+    =WF3T(4)[8],=WF4U(3)[6],=WF7I(5)[8],=WF7T(4)[8],=WF8D(5)[8],=WF8E(5)[8],
+    =WF9A(5)[8],=WG8Y(5)[8],=WH0AI(4)[7],=WH6A(5)[8],=WH6AQ(5)[8],
+    =WH6CPT(3)[6],=WH6FZY(3)[6],=WH6LE(5)[8],=WH7R(4)[7],=WI4T(4)[7],
+    =WJ5K(4)[8],=WJ8L(5)[8],=WJ9B(3)[6],=WL7OU(4)[7],=WM0G(5)[8],=WM4Q(4)[8],
+    =WM5A(4)[8],=WM5DX(4)[8],=WN4AT(4)[8],=WN7S(5)[8],=WN7Y(4)[7],=WN9J(3)[6],
+    =WO1S(3)[6],=WO3X(4)[8],=WO7U(4)[7],=WO8L(5)[8],=WP2C(5)[8],=WP2J(5)[8],
+    =WP3K(5)[8],=WP3ME(5)[8],=WP4ADA(4)[7],=WP4BJS(5)[8],=WP4HSZ(5)[8],
+    =WP4PUR(5)[8],=WQ3U(3)[6],=WQ5L(4)[8],=WQ5O(4)[8],=WQ9T(4)[7],
     =WR2JN(4)[7],=WR3O(4)[8],=WR4T(4)[8],=WR5J(3)[6],=WR8AA(5)[8],=WS6K(4)[8],
     =WS6X(5)[8],=WS7X(5)[8],=WS9M(5)[8],=WT2P(4)[8],=WT4DX(4)[7],=WT4U(4)[8],
-    =WT7TT(4)[7],=WT8P(3)[6],=WT8WV(5)[8],=WU7Q(4)[8],=WU9B(3)[6],=WV4P(4)[8],
-    =WW4R(4)[8],=WW5M(4)[8],=WW5X(4)[8],=WW8RT(5)[8],=WX4HP(4)[8],=WX4W(4)[8],
-    =WX7MB(5)[8],=WX7T(5)[8],=WX7V(4)[7],=WY7DT(4)[7],=WY7FD(4)[7],
-    =WY7M(4)[7],=WZ4F(4)[8],=WZ7I(5)[8],=WZ8T(3)[6];
+    =WT7TT(4)[7],=WT8P(3)[6],=WT8WV(5)[8],=WU5E(5)[8],=WU7Q(4)[8],=WU9B(3)[6],
+    =WV4P(4)[8],=WV7MS(5)[8],=WV8TG(5)[8],=WW2OK(4)[7],=WW4N(4)[8],
+    =WW4R(4)[8],=WW5M(4)[8],=WW5X(4)[8],=WX4HP(4)[8],=WX4W(4)[8],=WX5S(3)[6],
+    =WX7F(4)[6],=WX7MB(5)[8],=WX7T(5)[8],=WX7V(4)[7],=WY6K(4)[7],=WY7AA(4)[7],
+    =WY7DT(4)[7],=WY7KY(4)[7],=WY7M(4)[7],=WZ4F(4)[8],=WZ7I(5)[8],=WZ8T(3)[6];
 Guantanamo Bay:           08:  11:  NA:   20.00:    75.00:     5.0:  KG4:
     KG4,=KG4NE;
 Mariana Islands:          27:  64:  OC:   15.18:  -145.72:   -10.0:  KH0:
-    AH0,KH0,NH0,WH0,=AA2YL,=NH2B;
+    AH0,KH0,NH0,WH0,=NH2B;
 Baker & Howland Islands:  31:  61:  OC:    0.00:   176.00:    12.0:  KH1:
     AH1,KH1,NH1,WH1;
 Guam:                     27:  64:  OC:   13.37:  -144.70:   -10.0:  KH2:
-    AH2,KH2,NH2,WH2,=KA1I,=KF7BMU,=KF7GTT,=KG6DX,=KG6JDX,=KH0P,=KO4EGC,=KO4JB,
-    =N1GU,=N6MSK,=WA0OII;
+    AH2,KH2,NH2,WH2,=KF7BMU,=KF7GTT,=KG6DX,=KG6JDX,=KH0P,=KH6KK,=KO4JB,=N6MSK,
+    =WA0OII;
 Johnston Island:          31:  61:  OC:   16.72:   169.53:    10.0:  KH3:
     AH3,KH3,NH3,WH3;
 Midway Island:            31:  61:  OC:   28.20:   177.37:    11.0:  KH4:
@@ -705,12 +817,13 @@ Midway Island:            31:  61:  OC:   28.20:   177.37:    11.0:  KH4:
 Palmyra & Jarvis Islands: 31:  61:  OC:    5.87:   162.07:    11.0:  KH5:
     AH5,KH5,NH5,WH5;
 Hawaii:                   31:  61:  OC:   21.12:   157.48:    10.0:  KH6:
-    AH6,AH7,KH6,KH7,NH6,NH7,WH6,WH7,=AA3CM,=AA7DI,=AB7RT,=AE7QR,=K0RIV,=K2GT,
-    =K2SHO,=K4XV,=K5ZYO,=K7WTH,=KA0SAJ,=KB1HGW,=KB3WLK,=KB6EGA,=KB6LDF,=KB7HN,
-    =KC6REO,=KC7ELH,=KC8JNV,=KD9TEZ,=KE7HKK,=KE8QB,=KF7QVM,=KG4TML,=KG5HMM,
-    =KG6HFK,=KG7VWF,=KH0WJ,=KH3AE,=KI7NAU,=KI7ZTQ,=KJ6MSJ,=KJ6SGY,=KJ6THQ,
-    =KJ6THS,=KK4KPX,=KK4KXS,=KK4QAX,=KN6NAH,=KZ6T,=N3GWR,=N6OM,=N7AK,=NH2IY,
-    =W1GDM,=W1ZWC,=W2DK,=W6KCH,=WA6QDQ,=WB2CAT,=WB4JTT,=WG1A;
+    AH6,AH7,KH6,KH7,NH6,NH7,WH6,WH7,=AA2TT,=AA3CM,=AB7RT,=K0RIV,=K1ENT,=K2GT,
+    =K4RBK,=K4XV,=K5ZYO,=K6DCA,=K7DWJ,=K7WTH,=KA1MRC,=KA6MCS,=KB6EGA,=KB6LDF,
+    =KC8JNV,=KC8UHF,=KC9CVX,=KD0OLJ,=KD9IAH,=KD9ISN,=KE0TCW,=KE7HKK,=KE8LGD,
+    =KE8QB,=KF0FMQ,=KF5VYL,=KF7SEE,=KF7TFO,=KG5HMM,=KG6JSH,=KG7ART,=KG7VWF,
+    =KH0WJ,=KH3AE,=KI5YDR,=KJ6THQ,=KJ6THS,=KK4KPX,=KK4KXS,=KK4QAX,=KM6NFS,
+    =KN6CID,=KO4LNN,=KO4ZYO,=KX4ES,=KZ6T,=N3GWR,=W1NGR,=W1ZWC,=W2DK,=W6KCH,
+    =W6SPO,=W8EBR,=WA6QDQ,=WB2CAT,=WB4JTT,=WG1A;
 Kure Island:              31:  61:  OC:   29.00:   178.00:    10.0:  KH7K:
     AH7K,KH7K,NH7K,WH7K;
 American Samoa:           32:  62:  OC:  -14.32:   170.78:    11.0:  KH8:
@@ -720,19 +833,20 @@ Swains Island:            32:  62:  OC:  -11.05:   171.25:    11.0:  KH8/s:
 Wake Island:              31:  65:  OC:   19.28:  -166.63:   -12.0:  KH9:
     AH9,KH9,NH9,WH9;
 Alaska:                   01:  01:  NA:   61.40:   148.87:     8.0:  KL:
-    AL,KL,NL,WL,=AE6FK,=AF7UM,=K6SAS,=K9UL,=K9YJW,=KA1NCN,=KA3FZH,=KA7GAL,
-    =KB1UPV,=KC2VSR,=KC8VKY,=KD0OXY,=KD7CTV,=KD7WSQ,=KD8RMO,=KE0PRX,=KG4SUE,
-    =KG5HMN,=KG7MIK,=KI4YRQ,=KI6WBS,=KJ6GDW,=KJ6NPJ,=KJ7FOI,=KJ7OKC,=KJ7YTO,
-    =KK6NRF,=KK7BVD,=KK7I,=KN6LTY,=N1TX,=N4IJB,=N6JM,=N7CGC,=N7XBY,=N7ZXJ,
-    =NA9Z,=NN7C,=W4BVB,=W4BZB,=W7SGT,=WA3LEE,=WA4BUD,=WB5EAA;
+    AL,KL,NL,WL,=AC2UJ,=AC7EV,=AD0DK,=AG6PI,=AI4SV,=K6VH,=K7TWN,=K8VEZ,=K9ROB,
+    =K9UL,=K9YJW,=KA1NCN,=KA2ZSD,=KA3FZH,=KB1BED,=KB1UPV,=KB7DEL,=KC2LHD,
+    =KD0ZOD,=KD2ZZV,=KD7CTV,=KD7OTW,=KD7RF,=KD7UZB,=KE0PRX,=KE0RWP,=KE4RCO,
+    =KE6FNQ,=KF7MVM,=KF7PFN,=KF7WUC,=KG7AUD,=KG7BFK,=KI5HPI,=KI6ZYO,=KJ6EHV,
+    =KJ6GDW,=KJ7OKC,=KK6BVH,=KK6CAU,=KK6IMB,=KK6NRF,=KK7BVD,=KK7IVL,=KN4MRX,
+    =KN6JOY,=N0SN,=N1TX,=N2KJU,=N4IJB,=N5ZDI,=N7CGC,=N7DKL,=N7XBY,=N7ZXJ,
+    =NA9Z,=W7ORR,=WA3LEE;
 Navassa Island:           08:  11:  NA:   18.40:    75.00:     5.0:  KP1:
     KP1,NP1,WP1;
 US Virgin Islands:        08:  11:  NA:   17.73:    64.80:     4.0:  KP2:
-    KP2,NP2,WP2,=K3BMG,=K9VV,=KD4CDL,=KV4BT,=W4LIS,=W7YDT;
+    KP2,NP2,WP2,=K9VV,=KD4CDL,=KV4BT,=KW2G,=N2JVO,=W4LIS;
 Puerto Rico:              08:  11:  NA:   18.18:    66.55:     4.0:  KP4:
-    KP3,KP4,NP3,NP4,WP3,WP4,=AL7KI,=K1QM,=KA3PNP,=KD2BK,=KD2VEC,=KH2RU,
-    =KI5JZC,=KI5MKH,=KK4GKZ,=KK4HLB,=KN4GYF,=KP2H,=KP2Z,=N5YIZ,=N5YXK,=N8TJH,
-    =WB2HMY;
+    KP3,KP4,NP3,NP4,WP3,WP4,=AL7KI,=K1QM,=K4VIC,=KD2BK,=KD9PLJ,=KH2RU,=KN4GYF,
+    =KP2H,=WA4BCR,=WB2HMY;
 Desecheo Island:          08:  11:  NA:   18.08:    67.88:     4.0:  KP5:
     KP5,NP5,WP5;
 Norway:                   14:  18:  EU:   61.00:    -9.00:    -1.0:  LA:
@@ -833,9 +947,11 @@ Argentina:                13:  14:  SA:  -32.50:    62.13:     3.0:  LU:
     LW2W[16],LW2X[16],LW2Y[16],LW3V[16],LW3W[16],LW3X[16],LW3Y[16],LW4V[16],
     LW4W[16],LW4X[16],LW4Y[16],LW5V[16],LW5W[16],LW5X[16],LW5Y[16],LW6V[16],
     LW6W[16],LW6X[16],LW6Y[16],LW7V[16],LW7W[16],LW7X[16],LW7Y[16],LW8V[16],
-    LW8W[16],LW8X[16],LW8Y[16],LW9V[16],LW9W[16],LW9X[16],LW9Y[16],=LP1A/E,
-    =LU1AW/X[16],=LU1VDF/V[16],=LU2DVI/H,=LU3DVN/X[16],=LU5BE/GR,=LU7EO/D,
-    =LU7JMS/GR,=LU8EFF/GR;
+    LW8W[16],LW8X[16],LW8Y[16],LW9V[16],LW9W[16],LW9X[16],LW9Y[16],=LT2F/F,
+    =LU1AW/X[16],=LU1DAX/D,=LU1XA/XA[16],=LU1XZ/H,=LU2DVI/H,=LU2WA/W[16],
+    =LU3DVN/X[16],=LU3ERU/D,=LU3EU/D,=LU3HGB/H,=LU3XAP/H,=LU4ARU/D,=LU6EFG/D,
+    =LU7CC/E,=LU7DZV/D,=LU7EMM/D,=LU9BSA/D,=LW5DHG/D,=LW6DXU/D,=LW6EGE/H,
+    =LW9EUE/D;
 Luxembourg:               14:  27:  EU:   50.00:    -6.00:    -1.0:  LX:
     LX;
 Lithuania:                15:  29:  EU:   55.45:   -23.63:    -2.0:  LY:
@@ -847,7 +963,7 @@ Peru:                     10:  12:  SA:  -10.00:    76.00:     5.0:  OA:
 Lebanon:                  20:  39:  AS:   33.83:   -35.83:    -2.0:  OD:
     OD;
 Austria:                  15:  28:  EU:   47.33:   -13.33:    -1.0:  OE:
-    OE,=4U0R,=4U1A,=4U1VIC,=4U2U,=4Y1A,=C7A;
+    OE,=4U0R,=4U100QO,=4U1A,=4U1VIC,=4U2U,=4UNR,=4Y1A,=C7A;
 Finland:                  15:  18:  EU:   61.38:   -24.82:    -2.0:  OH:
     OF,OG,OH,OI,OJ;
 Aland Islands:            15:  18:  EU:   60.13:   -20.37:    -2.0:  OH0:
@@ -922,13 +1038,13 @@ Sao Tome & Principe:      36:  47:  AF:    0.22:    -6.57:     0.0:  S9:
 Sweden:                   14:  18:  EU:   58.90:   -15.33:    -1.0:  SM:
     7S,8S,SA,SB,SC,SD,SE,SF,SG,SH,SI,SJ,SK,SL,SM;
 Poland:                   15:  28:  EU:   52.28:   -18.67:    -1.0:  SP:
-    3Z,HF,SN,SO,SP,SQ,SR,=SP9KJU/ARCO;
+    3Z,HF,SN,SO,SP,SQ,SR;
 Sudan:                    34:  48:  AF:   14.47:   -28.62:    -3.0:  ST:
     6T,6U,ST;
 Egypt:                    34:  38:  AF:   26.28:   -28.60:    -2.0:  SU:
     6A,6B,SS,SU;
 Greece:                   20:  28:  EU:   39.78:   -21.78:    -2.0:  SV:
-    J4,SV,SW,SX,SY,SZ;
+    J4,SV,SW,SX,SY,SZ,=SX50AHH;
 Mount Athos:              20:  28:  EU:   40.00:   -24.00:    -2.0:  SV/a:
     =SV2ASP/A,=SV2RSG/A;
 Dodecanese:               20:  28:  EU:   36.17:   -27.93:    -2.0:  SV5:
@@ -952,7 +1068,8 @@ San Marino:               15:  28:  EU:   43.95:   -12.45:    -1.0:  T7:
 Palau:                    27:  64:  OC:    7.45:  -134.53:    -9.0:  T8:
     T8;
 Asiatic Turkey:           20:  39:  AS:   39.18:   -35.65:    -2.0:  TA:
-    TA,TB,TC,YM,=TA1C/2;
+    TA,TB,TC,YM,=TC100AGE,=TC100HQ,=TC100OLD,=TC100TA,=TC100TC,=TC100TR,
+    =TC100YEAR,=TC10O,=TA1C/2;
 European Turkey:          20:  39:  EU:   41.02:   -28.97:    -2.0:  *TA1:
     TA1,TB1,TC1,YM1,=TA6CQ/1;
 Iceland:                  40:  17:  EU:   64.80:    18.73:     0.0:  TF:
@@ -1051,15 +1168,16 @@ European Russia:          16:  29:  EU:   53.65:   -41.37:    -4.0:  UA:
     UH4W[30],UH8F(17)[30],UH8G(17)[30],UH8X(17)[20],UH9F(17)[30],UH9G(17)[30],
     UH9X(17)[20],UI1I(17)[20],UI1N[19],UI1O[19],UI1P[20],UI1Z[19],UI4H[30],
     UI4I[30],UI4W[30],UI8F(17)[30],UI8G(17)[30],UI8X(17)[20],UI9F(17)[30],
-    UI9G(17)[30],UI9X(17)[20],=RI41POL(40),=R0SBC/6,=R4HAT[29],=R4HC[29],
+    UI9G(17)[30],UI9X(17)[20],=RN9JM/6,=R0AAE/6,=R0QAW/3,=R4HAT[29],=R4HC[29],
     =R4HCE[29],=R4HCZ[29],=R4HD[29],=R4HDC[29],=R4HDR[29],=R4HL[29],=R4IC[29],
     =R4ID[29],=R4II[29],=R4IK[29],=R4IM[29],=R4IN[29],=R4IO[29],=R4IT[29],
-    =R4WAN/P[30],=R85RTO,=R870G,=R8MB/1(17)[20],=R9OM/6,=RA4HL[29],=RC4HT[29],
-    =RC4I[29],=RJ4I[29],=RK4HM[29],=RK4P[30],=RM4I[29],=RM4R[30],=RN4HFJ[29],
-    =RN4HIF[29],=RT2F/P,=RU4HD[29],=RU4HP[29],=RU4I[29],=RW4HM[29],
-    =RW4HTK[29],=RW4HW[29],=RW4HZ[29],=RW9WJ/4[30],=UA0QNE/3,=UA4H[29],
-    =UA4HBM[29],=UA4HGL[29],=UA4HIP[29],=UA4HRZ[29],=UA4HY[29],=UA4NF[30],
-    =UA4PN[30],=UA9XK/1[19],=UC4I[29],=UE85L,=UE85RO,=UI4I[29];
+    =R8MB/1(17)[20],=R9GM/6,=R9OM/6,=R9ZAC/1[20],=RA0BM/6,=RA3X/1(17)[20],
+    =RA4HL[29],=RA9UF/4,=RC4HT[29],=RC4I[29],=RJ4I[29],=RJ4P[30],=RK4HM[29],
+    =RK4P[30],=RL1I/P(17)[20],=RM4I[29],=RN4HFJ[29],=RN4HIF[29],=RT9K/6,
+    =RU4HD[29],=RU4HP[29],=RU4I[29],=RV1CC/1[19],=RW4HM[29],=RW4HTK[29],
+    =RW4HW[29],=RW4HZ[29],=RW6MD/1(17)[20],=UA0QNV/3,=UA4H[29],=UA4HBM[29],
+    =UA4HGL[29],=UA4HIP[29],=UA4HRZ[29],=UA4HY[29],=UA4NF[30],=UA4PN[30],
+    =UA4Q[30],=UB0AZR/3,=UC4I[29],=UI4I[29];
 Kaliningrad:              15:  29:  EU:   54.72:   -20.52:    -3.0:  UA2:
     R2F,R2K,RA2,RC2F,RC2K,RD2F,RD2K,RE2F,RE2K,RF2F,RF2K,RG2F,RG2K,RJ2F,RJ2K,
     RK2F,RK2K,RL2F,RL2K,RM2F,RM2K,RN2F,RN2K,RO2F,RO2K,RQ2F,RQ2K,RT2F,RT2K,
@@ -1183,10 +1301,10 @@ Asiatic Russia:           17:  30:  AS:   55.88:   -84.08:    -7.0:  UA9:
     UI8O(18)[31],UI8P(18)[31],UI8S(16)[30],UI8T(16)[30],UI8U(18)[31],
     UI8V(18)[31],UI8W(16)[30],UI8Y(18)[31],UI8Z(18)[31],UI9I(18)[31],
     UI9M(17)[30],UI9P(18)[31],UI9S(16),UI9T(16),UI9V(18)[31],UI9W(16),
-    =RA4UAI/9,=R0SDG/P(19)[23],=R150AV(19)[34],=R2BZ/9(18)[31],
-    =R2ET/9(18)[31],=R700SSR(18)[32],=R9CS/P,=R9XD/9[20],=RA/DK2AI(19)[34],
-    =RA75AA,=RM8A/0(19)[24],=RN9S(16),=RU9MV/0(19)[25],=RV3DSA/0(19)[34],
-    =RX9WT/P,=UA9AR/P;
+    =RI41POL,=R0FBA/9(18)[31],=R195JV(19)[34],=R2ET/9(18)[31],=R2VC/9(17)[30],
+    =R9CS/P,=R9PS/0(18)[32],=R9SAO/P[20],=RC7LE/9(18)[31],=RK4PA/9[20],
+    =RV3DSA/0(19)[34],=RW6MD/9[20],=RX9WT/P(16),=UA5B/8(17)[30],=UA9AR/P,
+    =UA9CTT/P,=UD6AOP/0(19)[35];
 Uzbekistan:               17:  30:  AS:   41.40:   -63.97:    -5.0:  UK:
     UJ,UK,UL,UM;
 Kazakhstan:               17:  30:  AS:   48.17:   -65.18:    -5.0:  UN:
@@ -1231,12 +1349,12 @@ Canada:                   05:  09:  NA:   44.35:    78.75:     5.0:  VE:
     CI0(2)[4],CI1(1)[2],CI2,CJ2[4],CK2[4],CY1,CY2(2),CZ0(2)[4],CZ1(1)[2],CZ2,
     VA2[4],VB2[4],VC2[4],VD1,VD2(2),VE2[4],VF1(1)[2],VF2,VG2[4],VO1,VO2(2),
     VX2[4],VY0(2)[4],VY1(1)[2],VY2,XJ1,XJ2(2),XK0(2)[4],XK1(1)[2],XK2,XL2[4],
-    XM2[4],XN1,XN2(2),XO0(2)[4],XO1(1)[2],XO2,=VER20221017,=VA2VVV(2)[4],
-    =VE2CSI(2)[4],=VE2EKA(2)[4],=VE2FK[9],=VE2IDX(2)[4],=VE2IM(2)[4],
-    =VE2TKH(2)[4],=VY0PW(4)[3];
+    XM2[4],XN1,XN2(2),XO0(2)[4],XO1(1)[2],XO2,=VER20230407,=VA2RC(2)[4],
+    =VA2VVV(2)[4],=VE2BFR(2)[4],=VE2CSI(2)[4],=VE2EKA(2)[4],=VE2FK[9],
+    =VE2IM(2)[4],=VE2TKH(2)[4],=VY0PW(4)[3];
 Australia:                30:  59:  OC:  -23.70:  -132.33:   -10.0:  VK:
-    AX,VI,VJ,VK,VL,AX4[55],VI4[55],VJ4[55],VK4[55],VL4[55],=VK90ABC,
-    =VK2BYF/P(29)[58],=VK3ZW(29)[55];
+    AX,VI,VJ,VK,VL,AX4[55],VI4[55],VJ4[55],VK4[55],VL4[55],=VI75G,=VK1A/4[55],
+    =VK2BYF/7,=VK3ZW(29)[55],=VK7LTD/3;
 Heard Island:             39:  68:  AF:  -53.08:   -73.50:    -5.0:  VK0H:
     =VK0EK;
 Macquarie Island:         30:  60:  OC:  -54.60:  -158.88:   -10.0:  VK0M:
@@ -1248,7 +1366,7 @@ Lord Howe Island:         30:  60:  OC:  -31.55:  -159.08:   -10.5:  VK9L:
 Mellish Reef:             30:  56:  OC:  -17.40:  -155.85:   -10.0:  VK9M:
     AX9M,VI9M,VK9M,VZ9M;
 Norfolk Island:           32:  60:  OC:  -29.03:  -167.93:   -11.5:  VK9N:
-    AX9,VI9,VK9;
+    AX9,VI9,VK9,=VJ9N,=VK2NOW/9;
 Willis Island:            30:  55:  OC:  -16.22:  -150.02:   -10.0:  VK9W:
     AX9W,AX9Z,VI9W,VI9Z,VK9FW,VK9W,VK9Z,VZ9W;
 Christmas Island:         29:  54:  OC:  -10.48:  -105.63:    -7.0:  VK9X:
@@ -1268,7 +1386,7 @@ Ducie Island:             32:  63:  OC:  -24.70:   124.80:     8.0:  VP6/d:
 Falkland Islands:         13:  16:  SA:  -51.63:    58.72:     4.0:  VP8:
     VP8;
 South Georgia Island:     13:  73:  SA:  -54.48:    37.08:     2.0:  VP8/g:
-    =VP8CA;
+    =VP0GAA;
 South Shetland Islands:   13:  73:  SA:  -62.08:    58.67:     4.0:  VP8/h:
     CE9,XR9,=HF0POL,=LU1ZI;
 South Orkney Islands:     13:  73:  SA:  -60.60:    45.55:     3.0:  VP8/o:
@@ -1280,7 +1398,7 @@ Bermuda:                  05:  11:  NA:   32.32:    64.73:     4.0:  VP9:
 Chagos Islands:           39:  41:  AF:   -7.32:   -72.42:    -6.0:  VQ9:
     VQ9;
 Hong Kong:                24:  44:  AS:   22.28:  -114.18:    -8.0:  VR:
-    VR,=VERSION;
+    VR;
 India:                    22:  41:  AS:   22.50:   -77.58:    -5.5:  VU:
     8T,8U,8V,8W,8X,8Y,AT,AU,AV,AW,VT,VU,VV,VW;
 Andaman & Nicobar Is.:    26:  49:  AS:   12.37:   -92.78:    -5.5:  VU4:
@@ -1363,7 +1481,7 @@ Republic of South Sudan:  34:  48:  AF:    4.85:   -31.60:    -3.0:  Z8:
 Albania:                  15:  28:  EU:   41.00:   -20.00:    -1.0:  ZA:
     ZA;
 Gibraltar:                14:  37:  EU:   36.15:     5.37:    -1.0:  ZB:
-    ZB,ZG;
+    ZB,ZG,=ZQ2HRH,=ZQ2YN;
 UK Base Areas on Cyprus:  20:  39:  AS:   35.32:   -33.57:    -2.0:  ZC4:
     ZC4;
 St. Helena:               36:  66:  AF:  -15.97:     5.72:     0.0:  ZD7:
@@ -1377,7 +1495,7 @@ Cayman Islands:           08:  11:  NA:   19.32:    81.22:     5.0:  ZF:
 Tokelau Islands:          31:  62:  OC:   -9.40:   171.20:   -13.0:  ZK3:
     ZK3;
 New Zealand:              32:  60:  OC:  -39.03:  -174.47:   -12.0:  ZL:
-    ZK,ZL,ZL50,ZM,=ZL75WARC;
+    ZK,ZL,ZL50,ZM;
 Chatham Islands:          32:  60:  OC:  -43.85:   176.48:  -12.75:  ZL7:
     ZL7,ZM7;
 Kermadec Islands:         32:  60:  OC:  -29.25:   177.92:   -12.0:  ZL8:

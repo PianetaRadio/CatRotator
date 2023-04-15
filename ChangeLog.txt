@@ -3,7 +3,7 @@ CatRotator
 (+ New, * Updated, - Removed)
 
 
-1.4.0 - 2023-01-dd
+1.4.0 - 2023-04-15
 	+ Debug mode
 	+ Tracking N1MM Logger+
 	+ Dark theme
