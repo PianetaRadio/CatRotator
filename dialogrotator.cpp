@@ -1,6 +1,6 @@
 /**
  ** This file is part of the CatRotator project.
- ** Copyright 2022 Gianfranco Sordetti IZ8EWD <iz8ewd@pianetaradio.it>.
+ ** Copyright 2022-2023 Gianfranco Sordetti IZ8EWD <iz8ewd@pianetaradio.it>.
  **
  ** This program is free software: you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
@@ -197,6 +197,8 @@ DialogRotator::DialogRotator(QWidget *parent) :
     ui->lineEdit_name->setText(rotSet[0].nameLabel);
     ui->spinBox_azPark->setValue(rotSet[0].azPark);
     ui->spinBox_elPark->setValue(rotSet[0].elPark);
+    ui->spinBox_azOffset->setValue(rotSet[0].azOffset);
+    ui->spinBox_elOffset->setValue(rotSet[0].elOffset);
     ui->checkBox_overlap->setChecked(rotSet[0].overlap);
     ui->doubleSpinBox_tolerance->setValue(rotSet[0].trackTolerance);
     ui->doubleSpinBox_threshold->setValue(rotSet[0].trackThreshold);
@@ -219,6 +221,8 @@ DialogRotator::DialogRotator(QWidget *parent) :
     ui->lineEdit_name_2->setText(rotSet[1].nameLabel);
     ui->spinBox_azPark_2->setValue(rotSet[1].azPark);
     ui->spinBox_elPark_2->setValue(rotSet[1].elPark);
+    ui->spinBox_azOffset_2->setValue(rotSet[1].azOffset);
+    ui->spinBox_elOffset_2->setValue(rotSet[1].elOffset);
     ui->checkBox_overlap_2->setChecked(rotSet[1].overlap);
     ui->doubleSpinBox_tolerance_2->setValue(rotSet[1].trackTolerance);
     ui->doubleSpinBox_threshold_2->setValue(rotSet[1].trackThreshold);
@@ -241,6 +245,8 @@ DialogRotator::DialogRotator(QWidget *parent) :
     ui->lineEdit_name_3->setText(rotSet[2].nameLabel);
     ui->spinBox_azPark_3->setValue(rotSet[2].azPark);
     ui->spinBox_elPark_3->setValue(rotSet[2].elPark);
+    ui->spinBox_azOffset_3->setValue(rotSet[2].azOffset);
+    ui->spinBox_elOffset_3->setValue(rotSet[2].elOffset);
     ui->checkBox_overlap_3->setChecked(rotSet[2].overlap);
     ui->doubleSpinBox_tolerance_3->setValue(rotSet[2].trackTolerance);
     ui->doubleSpinBox_threshold_3->setValue(rotSet[2].trackThreshold);
@@ -312,6 +318,8 @@ void DialogRotator::on_buttonBox_accepted()
     rotSet[0].nameLabel = ui->lineEdit_name->text();
     rotSet[0].azPark = ui->spinBox_azPark->value();
     rotSet[0].elPark = ui->spinBox_elPark->value();
+    rotSet[0].azOffset = ui->spinBox_azOffset->value();
+    rotSet[0].elOffset = ui->spinBox_elOffset->value();
     rotSet[0].overlap = ui->checkBox_overlap->isChecked();
     rotSet[0].trackTolerance = ui->doubleSpinBox_tolerance->value();
     rotSet[0].trackThreshold = ui->doubleSpinBox_threshold->value();
@@ -369,6 +377,8 @@ void DialogRotator::on_buttonBox_accepted()
     rotSet[1].nameLabel = ui->lineEdit_name_2->text();
     rotSet[1].azPark = ui->spinBox_azPark_2->value();
     rotSet[1].elPark = ui->spinBox_elPark_2->value();
+    rotSet[1].azOffset = ui->spinBox_azOffset_2->value();
+    rotSet[1].elOffset = ui->spinBox_elOffset_2->value();
     rotSet[1].overlap = ui->checkBox_overlap_2->isChecked();
     rotSet[1].trackTolerance = ui->doubleSpinBox_tolerance_2->value();
     rotSet[1].trackThreshold = ui->doubleSpinBox_threshold_2->value();
@@ -426,6 +436,8 @@ void DialogRotator::on_buttonBox_accepted()
     rotSet[2].nameLabel = ui->lineEdit_name_3->text();
     rotSet[2].azPark = ui->spinBox_azPark_3->value();
     rotSet[2].elPark = ui->spinBox_elPark_3->value();
+    rotSet[2].azOffset = ui->spinBox_azOffset_3->value();
+    rotSet[2].elOffset = ui->spinBox_elOffset_3->value();
     rotSet[2].overlap = ui->checkBox_overlap_3->isChecked();
     rotSet[2].trackTolerance = ui->doubleSpinBox_tolerance_3->value();
     rotSet[2].trackThreshold = ui->doubleSpinBox_threshold_3->value();
@@ -447,6 +459,8 @@ void DialogRotator::on_buttonBox_accepted()
         configFile.setValue("Rotator"+QString::number(i+1)+"/nameLabel", rotSet[i].nameLabel);
         configFile.setValue("Rotator"+QString::number(i+1)+"/azPark", rotSet[i].azPark);
         configFile.setValue("Rotator"+QString::number(i+1)+"/elPark", rotSet[i].elPark);
+        configFile.setValue("Rotator"+QString::number(i+1)+"/azOffset", rotSet[i].azOffset);
+        configFile.setValue("Rotator"+QString::number(i+1)+"/elOffset", rotSet[i].elOffset);
         configFile.setValue("Rotator"+QString::number(i+1)+"/overlap", rotSet[i].overlap);
         configFile.setValue("Rotator"+QString::number(i+1)+"/trackTolerance", rotSet[i].trackTolerance);
         configFile.setValue("Rotator"+QString::number(i+1)+"/trackThreshold", rotSet[i].trackThreshold);

@@ -1,6 +1,6 @@
 /**
  ** This file is part of the CatRotator project.
- ** Copyright 2022 Gianfranco Sordetti IZ8EWD <iz8ewd@pianetaradio.it>.
+ ** Copyright 2022-2023 Gianfranco Sordetti IZ8EWD <iz8ewd@pianetaradio.it>.
  **
  ** This program is free software: you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
@@ -105,6 +105,8 @@ MainWindow::MainWindow(QWidget *parent)
         rotSet[i].nameLabel = configFile.value("Rotator"+QString::number(i+1)+"/nameLabel", "Rotator "+QString::number(i+1)).toString();
         rotSet[i].azPark = configFile.value("Rotator"+QString::number(i+1)+"/azPark", 0).toInt();
         rotSet[i].elPark = configFile.value("Rotator"+QString::number(i+1)+"/elPark", 0).toInt();
+        rotSet[i].azOffset = configFile.value("Rotator"+QString::number(i+1)+"/azOffset", 0).toInt();
+        rotSet[i].elOffset = configFile.value("Rotator"+QString::number(i+1)+"/elOffset", 0).toInt();
         rotSet[i].overlap = configFile.value("Rotator"+QString::number(i+1)+"/overlap", false).toBool();
         rotSet[i].trackTolerance = configFile.value("Rotator"+QString::number(i+1)+"/trackTolerance", 5.0).toDouble();
         rotSet[i].trackThreshold = configFile.value("Rotator"+QString::number(i+1)+"/trackThreshold", 0.0).toDouble();
@@ -586,6 +588,10 @@ void MainWindow::setPosition(int rot, float azim, float elev)
     case 0:
         if (rotCom[0].connected)
         {
+            azim = azim - rotSet[0].azOffset;       //Apply offset
+            if (azim < 0) azim = 360 + azim;
+            elev = elev - rotSet[0].elOffset;
+
             if (my_rot->caps->rot_type == ROT_TYPE_ELEVATION)    //Elevation only rotator
             {
                 rotSet[0].az = 0;
@@ -1014,9 +1020,13 @@ void MainWindow::on_pushButton_go_clicked()
        setPosition(0, tempAz, tempEl);
 
        QString posText;
-       if (my_rot->caps->rot_type == ROT_TYPE_AZEL || my_rot->caps->rot_type == ROT_TYPE_OTHER) posText = QString::number(rotSet[0].az,'f',1) + " " + QString::number(rotSet[0].el,'f',1);
-       else if (my_rot->caps->rot_type == ROT_TYPE_ELEVATION) posText = QString::number(rotSet[0].el,'f',1);
-       else posText = QString::number(rotSet[0].az,'f',1);    //ROT_TYPE_AZIMUTH
+       //if (my_rot->caps->rot_type == ROT_TYPE_AZEL || my_rot->caps->rot_type == ROT_TYPE_OTHER) posText = QString::number(rotSet[0].az,'f',1) + " " + QString::number(rotSet[0].el,'f',1);
+       //else if (my_rot->caps->rot_type == ROT_TYPE_ELEVATION) posText = QString::number(rotSet[0].el,'f',1);
+       //else posText = QString::number(rotSet[0].az,'f',1);    //ROT_TYPE_AZIMUTH
+
+       if (my_rot->caps->rot_type == ROT_TYPE_AZEL || my_rot->caps->rot_type == ROT_TYPE_OTHER) posText = QString::number(tempAz,'f',1) + " " + QString::number(tempEl,'f',1);
+       else if (my_rot->caps->rot_type == ROT_TYPE_ELEVATION) posText = QString::number(tempEl,'f',1);
+       else posText = QString::number(tempAz,'f',1);    //ROT_TYPE_AZIMUTH
 
        ui->lineEdit_posAz->setText(posText);
    }

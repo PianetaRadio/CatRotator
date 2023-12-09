@@ -1,6 +1,6 @@
 /**
  ** This file is part of the CatRotator project.
- ** Copyright 2022 Gianfranco Sordetti IZ8EWD <iz8ewd@pianetaradio.it>.
+ ** Copyright 2022-2023 Gianfranco Sordetti IZ8EWD <iz8ewd@pianetaradio.it>.
  **
  ** This program is free software: you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
@@ -37,8 +37,8 @@ typedef struct {
 typedef struct {
     bool enable;    //Rotor enabled
     QString nameLabel;  //Rotor name
-    azimuth_t az, azPark;
-    elevation_t el, elPark;
+    azimuth_t az, azPark, azOffset;
+    elevation_t el, elPark, elOffset;
     bool overlap;   //Overlap capacity
     bool lPathFlag;    //Long Path
     bool trackFlag, trackPreviSat, trackAirScout; //Tracking

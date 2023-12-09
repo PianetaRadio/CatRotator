@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>440</width>
-    <height>573</height>
+    <height>605</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -108,46 +108,6 @@
           <string>Settings</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_azPark">
-            <property name="text">
-             <string>Az Park</string>
-            </property>
-            <property name="buddy">
-             <cstring>spinBox_azPark</cstring>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="2">
-           <widget class="QLabel" name="label_elPark">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="text">
-             <string>El Park</string>
-            </property>
-            <property name="buddy">
-             <cstring>spinBox_elPark</cstring>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1" colspan="3">
-           <widget class="QLineEdit" name="lineEdit_name">
-            <property name="text">
-             <string>Rotator 1</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="3">
-           <widget class="QSpinBox" name="spinBox_elPark">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="maximum">
-             <number>90</number>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="1">
            <widget class="QSpinBox" name="spinBox_azPark">
             <property name="maximum">
@@ -165,10 +125,84 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
+          <item row="1" column="3">
+           <widget class="QSpinBox" name="spinBox_elPark">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="maximum">
+             <number>90</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLabel" name="label_elPark">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="text">
+             <string>El Park</string>
+            </property>
+            <property name="buddy">
+             <cstring>spinBox_elPark</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
            <widget class="QCheckBox" name="checkBox_overlap">
             <property name="text">
              <string>Overlap</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" colspan="3">
+           <widget class="QLineEdit" name="lineEdit_name">
+            <property name="text">
+             <string>Rotator 1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_azPark">
+            <property name="text">
+             <string>Az Park</string>
+            </property>
+            <property name="buddy">
+             <cstring>spinBox_azPark</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_azOffset">
+            <property name="text">
+             <string>Az Offset</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QSpinBox" name="spinBox_azOffset">
+            <property name="minimum">
+             <number>-180</number>
+            </property>
+            <property name="maximum">
+             <number>180</number>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QLabel" name="label_elOffset">
+            <property name="text">
+             <string>El Offset</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="3">
+           <widget class="QSpinBox" name="spinBox_elOffset">
+            <property name="minimum">
+             <number>-90</number>
+            </property>
+            <property name="maximum">
+             <number>90</number>
             </property>
            </widget>
           </item>
@@ -370,26 +404,6 @@
           <string>Settings</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_5">
-          <item row="1" column="3">
-           <widget class="QSpinBox" name="spinBox_elPark_2">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="maximum">
-             <number>90</number>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_azPark_2">
-            <property name="text">
-             <string>Az Park</string>
-            </property>
-            <property name="buddy">
-             <cstring>spinBox_azPark_2</cstring>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="0">
            <widget class="QLabel" name="label_name_2">
             <property name="text">
@@ -397,6 +411,23 @@
             </property>
             <property name="buddy">
              <cstring>lineEdit_name_2</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QSpinBox" name="spinBox_azPark_2">
+            <property name="maximum">
+             <number>450</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QSpinBox" name="spinBox_elPark_2">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="maximum">
+             <number>90</number>
             </property>
            </widget>
           </item>
@@ -420,17 +451,54 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
-           <widget class="QSpinBox" name="spinBox_azPark_2">
-            <property name="maximum">
-             <number>450</number>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_azPark_2">
+            <property name="text">
+             <string>Az Park</string>
+            </property>
+            <property name="buddy">
+             <cstring>spinBox_azPark_2</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QCheckBox" name="checkBox_overlap_2">
+            <property name="text">
+             <string>Overlap</string>
             </property>
            </widget>
           </item>
           <item row="2" column="0">
-           <widget class="QCheckBox" name="checkBox_overlap_2">
+           <widget class="QLabel" name="label_azOffset2">
             <property name="text">
-             <string>Overlap</string>
+             <string>Az Offset</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QSpinBox" name="spinBox_azOffset_2">
+            <property name="minimum">
+             <number>-180</number>
+            </property>
+            <property name="maximum">
+             <number>180</number>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QLabel" name="label_elOffset2">
+            <property name="text">
+             <string>El Offset</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="3">
+           <widget class="QSpinBox" name="spinBox_elOffset_2">
+            <property name="minimum">
+             <number>-90</number>
+            </property>
+            <property name="maximum">
+             <number>90</number>
             </property>
            </widget>
           </item>
@@ -557,13 +625,6 @@
           <string>Settings</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_12">
-          <item row="0" column="1" colspan="3">
-           <widget class="QLineEdit" name="lineEdit_name_3">
-            <property name="text">
-             <string>Rotator 3</string>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="0">
            <widget class="QLabel" name="label_name_3">
             <property name="text">
@@ -574,23 +635,24 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="3">
-           <widget class="QSpinBox" name="spinBox_elPark_3">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="maximum">
-             <number>90</number>
+          <item row="3" column="0">
+           <widget class="QCheckBox" name="checkBox_overlap_3">
+            <property name="text">
+             <string>Overlap</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_azPark_3">
-            <property name="text">
-             <string>Az Park</string>
+          <item row="1" column="1">
+           <widget class="QSpinBox" name="spinBox_azPark_3">
+            <property name="maximum">
+             <number>450</number>
             </property>
-            <property name="buddy">
-             <cstring>spinBox_azPark_2</cstring>
+           </widget>
+          </item>
+          <item row="0" column="1" colspan="3">
+           <widget class="QLineEdit" name="lineEdit_name_3">
+            <property name="text">
+             <string>Rotator 3</string>
             </property>
            </widget>
           </item>
@@ -607,17 +669,57 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
-           <widget class="QSpinBox" name="spinBox_azPark_3">
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_azPark_3">
+            <property name="text">
+             <string>Az Park</string>
+            </property>
+            <property name="buddy">
+             <cstring>spinBox_azPark_2</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QSpinBox" name="spinBox_elPark_3">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
             <property name="maximum">
-             <number>450</number>
+             <number>90</number>
             </property>
            </widget>
           </item>
           <item row="2" column="0">
-           <widget class="QCheckBox" name="checkBox_overlap_3">
+           <widget class="QLabel" name="label_azOffset3">
             <property name="text">
-             <string>Overlap</string>
+             <string>Az Offset</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QSpinBox" name="spinBox_azOffset_3">
+            <property name="minimum">
+             <number>-180</number>
+            </property>
+            <property name="maximum">
+             <number>180</number>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QLabel" name="label_elOffset3">
+            <property name="text">
+             <string>El Offset</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="3">
+           <widget class="QSpinBox" name="spinBox_elOffset_3">
+            <property name="minimum">
+             <number>-90</number>
+            </property>
+            <property name="maximum">
+             <number>90</number>
             </property>
            </widget>
           </item>

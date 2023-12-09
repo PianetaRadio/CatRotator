@@ -1,6 +1,6 @@
 /**
  ** This file is part of the CatRotator project.
- ** Copyright 2022 Gianfranco Sordetti IZ8EWD <iz8ewd@pianetaradio.it>.
+ ** Copyright 2022-2023 Gianfranco Sordetti IZ8EWD <iz8ewd@pianetaradio.it>.
  **
  ** This program is free software: you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@
 
 #define RELEASE_DATE __DATE__
 #define VERSION_MAJ 1
-#define VERSION_MIN 4
+#define VERSION_MIN 5
 #define VERSION_MIC 0
 
 QT_BEGIN_NAMESPACE

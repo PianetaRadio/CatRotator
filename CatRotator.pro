@@ -1,4 +1,4 @@
-QT       += core gui
+pQT       += core gui
 QT       += serialport
 QT       += network
 
@@ -44,7 +44,7 @@ LIBS += -L$$PWD/hamlib/ -lhamlib
 INCLUDEPATH += $$PWD/hamlib
 RESOURCES += qdarkstyle/dark/darkstyle.qrc
 
-VERSION = 1.4.0
+VERSION = 1.5.0
 
 RC_ICONS = catrotator.ico
 
