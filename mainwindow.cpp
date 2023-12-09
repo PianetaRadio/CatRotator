@@ -331,23 +331,39 @@ void MainWindow::guiInit()
 //* Update GUI
 void MainWindow::guiUpdate(int rotNumber)
 {
+    double tempAz, tempEl;
+
     //Update current position
     if (rotSet[0].enable)
     {
-        ui->lcdNumber_posAz->display(QString::number(rotGet[0].az, 'f', 1));
-        ui->lcdNumber_posEl->display(QString::number(rotGet[0].el, 'f', 1));
+        tempAz = rotGet[0].az + rotSet[0].azOffset;
+        if (tempAz > 360) tempAz = tempAz - 360;
+        tempEl = rotGet[0].el + rotSet[0].elOffset;
+
+        //ui->lcdNumber_posAz->display(QString::number(rotGet[0].az, 'f', 1));
+        //ui->lcdNumber_posEl->display(QString::number(rotGet[0].el, 'f', 1));
+        ui->lcdNumber_posAz->display(QString::number(tempAz, 'f', 1));
+        ui->lcdNumber_posEl->display(QString::number(tempEl, 'f', 1));
     }
 
     if (rotSet[1].enable)
     {
-        ui->lcdNumber_posAz_2->display(QString::number(rotGet[1].az, 'f', 1));
-        ui->lcdNumber_posEl_2->display(QString::number(rotGet[1].el, 'f', 1));
+        tempAz = rotGet[1].az + rotSet[1].azOffset;
+        if (tempAz > 360) tempAz = tempAz - 360;
+        tempEl = rotGet[1].el + rotSet[1].elOffset;
+
+        ui->lcdNumber_posAz_2->display(QString::number(tempAz, 'f', 1));
+        ui->lcdNumber_posEl_2->display(QString::number(tempEl, 'f', 1));
     }
 
     if (rotSet[2].enable)
     {
-        ui->lcdNumber_posAz_3->display(QString::number(rotGet[2].az, 'f', 1));
-        ui->lcdNumber_posEl_3->display(QString::number(rotGet[2].el, 'f', 1));
+        tempAz = rotGet[2].az + rotSet[2].azOffset;
+        if (tempAz > 360) tempAz = tempAz - 360;
+        tempEl = rotGet[2].el + rotSet[2].elOffset;
+
+        ui->lcdNumber_posAz_3->display(QString::number(tempAz, 'f', 1));
+        ui->lcdNumber_posEl_3->display(QString::number(tempEl, 'f', 1));
     }
 
     //Parse UDP command
@@ -371,22 +387,16 @@ void MainWindow::guiUpdate(int rotNumber)
             //rotSet[0].az = rotUdpEx.azUdp;
             //rotSet[0].el = rotUdpEx.elUdp;
             setPosition(0, rotUdpEx.azUdp, rotUdpEx.elUdp);
-            ui->lineEdit_posAz->setText(QString::number(rotSet[0].az, 'f', 1) + " " + QString::number(rotSet[0].el, 'f', 1));
+            //ui->lineEdit_posAz->setText(QString::number(rotSet[0].az, 'f', 1) + " " + QString::number(rotSet[0].el, 'f', 1));
             //rot_set_position(my_rot, rotSet[0].az, rotSet[0].el);
             break;
         case 1:
-            //rotSet[1].az = rotUdpEx.azUdp;
-            //rotSet[1].el = rotUdpEx.elUdp;
             setPosition(1, rotUdpEx.azUdp, rotUdpEx.elUdp);
             ui->lineEdit_posAz_2->setText(QString::number(rotSet[1].az, 'f', 1) + " " + QString::number(rotSet[1].el, 'f', 1));
-            //rot_set_position(my_rot2, rotSet[1].az, rotSet[1].el);
             break;
         case 2:
-            //rotSet[2].az = rotUdpEx.azUdp;
-            //rotSet[2].el = rotUdpEx.elUdp;
             setPosition(2, rotUdpEx.azUdp, rotUdpEx.elUdp);
             ui->lineEdit_posAz_3->setText(QString::number(rotSet[2].az, 'f', 1) + " " + QString::number(rotSet[2].el, 'f', 1));
-            //rot_set_position(my_rot3, rotSet[2].az, rotSet[2].el);
             break;
         }
     }
@@ -435,7 +445,7 @@ void MainWindow::guiUpdate(int rotNumber)
                 //rotSet[0].az = tempAz;
                 //rotSet[0].el = tempEl;
                 setPosition(0, tempAz, tempEl);
-                ui->lineEdit_posAz->setText(QString::number(rotSet[0].az) + " " + QString::number(rotSet[0].el));
+                //ui->lineEdit_posAz->setText(QString::number(rotSet[0].az) + " " + QString::number(rotSet[0].el));
                 //rot_set_position(my_rot, rotSet[0].az, rotSet[0].el);
             }
         }
@@ -539,20 +549,18 @@ void MainWindow::presetGo(int presetNumber)
     case 0:
         rotSet[0].az = rotCfg.presetAz[presetNumber];
         setPosition(0, rotSet[0].az, rotSet[0].el);
-        ui->lineEdit_posAz->setText(QString::number(rotSet[0].az));
+        //ui->lineEdit_posAz->setText(QString::number(rotSet[0].az));
         //rot_set_position(my_rot, rotSet[0].az, rotSet[0].el);
         break;
     case 1:
         rotSet[1].az = rotCfg.presetAz[presetNumber];
         setPosition(1, rotSet[1].az, rotSet[1].el);
         ui->lineEdit_posAz_2->setText(QString::number(rotSet[1].az));
-        //rot_set_position(my_rot2, rotSet[1].az, rotSet[1].el);
         break;
     case 2:
         rotSet[2].az = rotCfg.presetAz[presetNumber];
         setPosition(2, rotSet[2].az, rotSet[2].el);
         ui->lineEdit_posAz_3->setText(QString::number(rotSet[2].az));
-        //rot_set_position(my_rot3, rotSet[2].az, rotSet[2].el);
         break;
     }
 }
@@ -583,6 +591,10 @@ void MainWindow::presetInit()
 
 void MainWindow::setPosition(int rot, float azim, float elev)
 {
+    QString posText, azText, elText;
+    azText = QString::number(azim,'f',1);
+    elText = QString::number(elev,'f',1);
+
     switch (rot)
     {
     case 0:
@@ -596,15 +608,26 @@ void MainWindow::setPosition(int rot, float azim, float elev)
             {
                 rotSet[0].az = 0;
                 rotSet[0].el = elev;
+
+                posText = elText;
             }
             else //Azimuth or Az/El rotator
             {
                 if (rotSet[0].overlap && rotGet[0].az>270 && azim>=0 && azim<=90 && my_rot->caps->max_az>360) rotSet[0].az = 360 + azim;
                 else rotSet[0].az = azim;
-                if (elev >= 0 && (my_rot->caps->rot_type == ROT_TYPE_AZEL || my_rot->caps->rot_type == ROT_TYPE_OTHER)) rotSet[0].el = elev;
-                else rotSet[0].el = 0;
+                if (elev >= 0 && (my_rot->caps->rot_type == ROT_TYPE_AZEL || my_rot->caps->rot_type == ROT_TYPE_OTHER))
+                {
+                    rotSet[0].el = elev;
+                    posText = azText + " " + elText;
+                }
+                else        //ROT_TYPE_AZIMUTH
+                {
+                    rotSet[0].el = 0;
+                    posText = azText;
+                }
             }
             rot_set_position(my_rot, rotSet[0].az, rotSet[0].el);
+            ui->lineEdit_posAz->setText(posText);
         }
         break;
     case 1:
@@ -644,6 +667,8 @@ void MainWindow::setPosition(int rot, float azim, float elev)
         }
         break;
     }
+
+    //ui->lineEdit_posAz->setText(posText);
 
     return;
 }
@@ -1008,6 +1033,7 @@ void MainWindow::on_pushButton_stop_clicked()
 void MainWindow::on_pushButton_go_clicked()
 {
    double tempAz, tempEl;
+
    if (MainWindow::azElInput(ui->lineEdit_posAz->text(), rotSet[0].lPathFlag, &tempAz, &tempEl))
    {
        if (tempEl == -90 && my_rot->caps->rot_type == ROT_TYPE_ELEVATION)
@@ -1019,16 +1045,16 @@ void MainWindow::on_pushButton_go_clicked()
 
        setPosition(0, tempAz, tempEl);
 
-       QString posText;
+       //QString posText;
        //if (my_rot->caps->rot_type == ROT_TYPE_AZEL || my_rot->caps->rot_type == ROT_TYPE_OTHER) posText = QString::number(rotSet[0].az,'f',1) + " " + QString::number(rotSet[0].el,'f',1);
        //else if (my_rot->caps->rot_type == ROT_TYPE_ELEVATION) posText = QString::number(rotSet[0].el,'f',1);
        //else posText = QString::number(rotSet[0].az,'f',1);    //ROT_TYPE_AZIMUTH
 
-       if (my_rot->caps->rot_type == ROT_TYPE_AZEL || my_rot->caps->rot_type == ROT_TYPE_OTHER) posText = QString::number(tempAz,'f',1) + " " + QString::number(tempEl,'f',1);
-       else if (my_rot->caps->rot_type == ROT_TYPE_ELEVATION) posText = QString::number(tempEl,'f',1);
-       else posText = QString::number(tempAz,'f',1);    //ROT_TYPE_AZIMUTH
+       //if (my_rot->caps->rot_type == ROT_TYPE_AZEL || my_rot->caps->rot_type == ROT_TYPE_OTHER) posText = QString::number(tempAz,'f',1) + " " + QString::number(tempEl,'f',1);
+       //else if (my_rot->caps->rot_type == ROT_TYPE_ELEVATION) posText = QString::number(tempEl,'f',1);
+       //else posText = QString::number(tempAz,'f',1);    //ROT_TYPE_AZIMUTH
 
-       ui->lineEdit_posAz->setText(posText);
+       //ui->lineEdit_posAz->setText(posText);
    }
 }
 
@@ -1125,9 +1151,9 @@ void MainWindow::on_pushButton_go_2_clicked()
         setPosition(1, tempAz, tempEl);
 
         QString posText;
-        if (my_rot2->caps->rot_type == ROT_TYPE_AZEL || my_rot2->caps->rot_type == ROT_TYPE_OTHER) posText = QString::number(rotSet[1].az,'f',1) + " " + QString::number(rotSet[1].el,'f',1);
-        else if (my_rot2->caps->rot_type == ROT_TYPE_ELEVATION) posText = QString::number(rotSet[1].el,'f',1);
-        else posText = QString::number(rotSet[1].az,'f',1);    //ROT_TYPE_AZIMUTH
+        if (my_rot2->caps->rot_type == ROT_TYPE_AZEL || my_rot2->caps->rot_type == ROT_TYPE_OTHER) posText = QString::number(tempAz,'f',1) + " " + QString::number(tempEl,'f',1);
+        else if (my_rot2->caps->rot_type == ROT_TYPE_ELEVATION) posText = QString::number(tempEl,'f',1);
+        else posText = QString::number(tempAz,'f',1);    //ROT_TYPE_AZIMUTH
 
         ui->lineEdit_posAz_2->setText(posText);
     }
@@ -1225,9 +1251,9 @@ void MainWindow::on_pushButton_go_3_clicked()
         setPosition(2, tempAz, tempEl);
 
         QString posText;
-        if (my_rot3->caps->rot_type == ROT_TYPE_AZEL || my_rot3->caps->rot_type == ROT_TYPE_OTHER) posText = QString::number(rotSet[2].az,'f',1) + " " + QString::number(rotSet[2].el,'f',1);
-        else if (my_rot3->caps->rot_type == ROT_TYPE_ELEVATION) posText = QString::number(rotSet[2].el,'f',1);
-        else posText = QString::number(rotSet[2].az,'f',1);    //ROT_TYPE_AZIMUTH
+        if (my_rot3->caps->rot_type == ROT_TYPE_AZEL || my_rot3->caps->rot_type == ROT_TYPE_OTHER) posText = QString::number(tempAz,'f',1) + " " + QString::number(tempEl,'f',1);
+        else if (my_rot3->caps->rot_type == ROT_TYPE_ELEVATION) posText = QString::number(tempEl,'f',1);
+        else posText = QString::number(tempAz,'f',1);    //ROT_TYPE_AZIMUTH
 
         ui->lineEdit_posAz_3->setText(posText);
     }
@@ -1320,8 +1346,9 @@ void MainWindow::on_pushButton_park_clicked()
         {
             rotSet[0].az = rotSet[0].azPark;
             rotSet[0].el = rotSet[0].elPark;
-            ui->lineEdit_posAz->setText(QString::number(rotSet[0].az));
-            rot_set_position(my_rot, rotSet[0].az, rotSet[0].el);
+            //ui->lineEdit_posAz->setText(QString::number(rotSet[0].az));
+            //rot_set_position(my_rot, rotSet[0].az, rotSet[0].el);
+            setPosition(0, rotSet[0].az, rotSet[0].el);
         }
         break;
 
