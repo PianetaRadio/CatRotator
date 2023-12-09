@@ -434,11 +434,11 @@ void MainWindow::guiUpdate(int rotNumber)
         }
         else
         {
-            tempEl = -90;      //Data error flag
+            tempEl = -91;      //Data error flag
             //ui->statusbar->clearMessage();
         }
 
-        if (tempEl != -90)   //No error
+        if (tempEl != -91)   //No error
         {
             if (((abs(tempAz - rotSet[0].az) > rotSet[0].trackTolerance) || (abs(tempEl - rotSet[0].el) > rotSet[0].trackTolerance)) && ((tempAz != rotSet[0].az) || (tempEl != rotSet[0].el)) && (tempEl >= rotSet[0].trackThreshold))
             {
@@ -476,11 +476,11 @@ void MainWindow::guiUpdate(int rotNumber)
         }
         else
         {
-            tempEl = -90;
+            tempEl = -91;
             //ui->statusbar->clearMessage();
         }
 
-        if (tempEl != -90)   //No tracking dat error
+        if (tempEl != -91)   //No tracking dat error
         {
             if (((abs(tempAz - rotSet[1].az) > rotSet[1].trackTolerance) || (abs(tempEl - rotSet[1].el) > rotSet[1].trackTolerance)) && ((tempAz != rotSet[1].az) || (tempEl != rotSet[1].el)) && (tempEl >= rotSet[1].trackThreshold))
             {
@@ -517,11 +517,11 @@ void MainWindow::guiUpdate(int rotNumber)
         }
         else
         {
-            tempEl = -90;
+            tempEl = -91;
             //ui->statusbar->clearMessage();
         }
 
-        if (tempEl != -90)   //No tracking dat error
+        if (tempEl != -91)   //No tracking dat error
         {
             if (((abs(tempAz - rotSet[2].az) > rotSet[2].trackTolerance) || (abs(tempEl - rotSet[2].el) > rotSet[2].trackTolerance)) && ((tempAz != rotSet[2].az) || (tempEl != rotSet[2].el)) && (tempEl >= rotSet[2].trackThreshold))
             {
@@ -615,7 +615,7 @@ void MainWindow::setPosition(int rot, float azim, float elev)
             {
                 if (rotSet[0].overlap && rotGet[0].az>270 && azim>=0 && azim<=90 && my_rot->caps->max_az>360) rotSet[0].az = 360 + azim;
                 else rotSet[0].az = azim;
-                if (elev >= 0 && (my_rot->caps->rot_type == ROT_TYPE_AZEL || my_rot->caps->rot_type == ROT_TYPE_OTHER))
+                if (elev >= -90 && (my_rot->caps->rot_type == ROT_TYPE_AZEL || my_rot->caps->rot_type == ROT_TYPE_OTHER))
                 {
                     rotSet[0].el = elev;
                     posText = azText + " " + elText;
@@ -785,7 +785,7 @@ void MainWindow::parseWSJTXMoon(double *azim, double *elev)
     QFile azelDatWSJTX(rotCfg.pathTrackWSJTX + "/azel.dat");
     if (!azelDatWSJTX.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        *elev = -90; //Used for error
+        *elev = -91; //Used for error
         return;
     }
 
@@ -807,7 +807,7 @@ void MainWindow::parseWSJTXMoon(double *azim, double *elev)
 
                 break;
             }
-            else *elev = -90;    //Data error flag
+            else *elev = -91;    //Data error flag
         //}
     }
 
@@ -820,7 +820,7 @@ void MainWindow::parseAirScout(double *azim, double *elev)
     QFile azelDatAirScout(rotCfg.pathTrackAirScout + "/azel.dat");
     if (!azelDatAirScout.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        *elev = -90; //Used for error
+        *elev = -91; //Used for error
         return;
     }
     QString datAirScout = azelDatAirScout.readLine(0);
@@ -833,7 +833,7 @@ void MainWindow::parseAirScout(double *azim, double *elev)
         *azim = azelDatMatch.captured(1).toDouble();
         *elev = azelDatMatch.captured(2).toDouble();
     }
-    else *elev = -90;    //Data error flag
+    else *elev = -91;    //Data error flag
 
     azelDatAirScout.close();
     return;
@@ -851,7 +851,7 @@ bool MainWindow::azElInput(QString value, bool lPath, double *azim, double *elev
     double dist = 0;
     double tempAz, tempEl;
 
-    *elev = -90; //Used for no elevation input
+    *elev = -91; //Used for no elevation input
 
     if (azElCmdDegMatch.hasMatch()) //Az && El
     {
@@ -1036,12 +1036,12 @@ void MainWindow::on_pushButton_go_clicked()
 
    if (MainWindow::azElInput(ui->lineEdit_posAz->text(), rotSet[0].lPathFlag, &tempAz, &tempEl))
    {
-       if (tempEl == -90 && my_rot->caps->rot_type == ROT_TYPE_ELEVATION)
+       if (tempEl == -91 && my_rot->caps->rot_type == ROT_TYPE_ELEVATION)
        {
            tempEl = tempAz;
            tempAz = 0;
        }
-       else if (tempEl == -90) tempEl = rotGet[0].el;
+       else if (tempEl == -91) tempEl = rotGet[0].el;
 
        setPosition(0, tempAz, tempEl);
 
@@ -1141,12 +1141,12 @@ void MainWindow::on_pushButton_go_2_clicked()
     double tempAz, tempEl;
     if (MainWindow::azElInput(ui->lineEdit_posAz_2->text(), rotSet[1].lPathFlag, &tempAz, &tempEl))
     {
-        if (tempEl == -90 && my_rot2->caps->rot_type == ROT_TYPE_ELEVATION)
+        if (tempEl == -91 && my_rot2->caps->rot_type == ROT_TYPE_ELEVATION)
         {
             tempEl = tempAz;
             tempAz = 0;
         }
-        else if (tempEl == -90) tempEl = rotGet[1].el;
+        else if (tempEl == -91) tempEl = rotGet[1].el;
 
         setPosition(1, tempAz, tempEl);
 
@@ -1241,12 +1241,12 @@ void MainWindow::on_pushButton_go_3_clicked()
     double tempAz, tempEl;
     if (MainWindow::azElInput(ui->lineEdit_posAz_3->text(), rotSet[2].lPathFlag, &tempAz, &tempEl))
     {
-        if (tempEl == -90 && my_rot3->caps->rot_type == ROT_TYPE_ELEVATION)
+        if (tempEl == -91 && my_rot3->caps->rot_type == ROT_TYPE_ELEVATION)
         {
             tempEl = tempAz;
             tempAz = 0;
         }
-        else if (tempEl == -90) tempEl = rotGet[2].el;
+        else if (tempEl == -91) tempEl = rotGet[2].el;
 
         setPosition(2, tempAz, tempEl);
 
