@@ -1,7 +1,7 @@
 CatRotator
 (+ New, * Updated, - Removed)
 
-1.5.0 - 2023-12-xx
+1.5.0 - 2023-12-10
 	+ Antenna offset
 
 1.4.0 - 2023-04-15
