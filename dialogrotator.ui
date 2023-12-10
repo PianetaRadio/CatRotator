@@ -13,12 +13,24 @@
     <height>605</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>Rotator Config</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_3" columnstretch="0,0">
-   <item row="1" column="0" colspan="2">
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
     <widget class="QTabWidget" name="tabWidget_dialogRotator">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="currentIndex">
       <number>0</number>
      </property>
@@ -29,6 +41,12 @@
       <layout class="QGridLayout" name="gridLayout_4">
        <item row="2" column="0" colspan="2">
         <widget class="QTabWidget" name="tabWidget_comms">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="currentIndex">
           <number>0</number>
          </property>
@@ -102,8 +120,24 @@
          </widget>
         </widget>
        </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_rotModel">
+         <property name="text">
+          <string>Model</string>
+         </property>
+         <property name="buddy">
+          <cstring>comboBox_rotModel</cstring>
+         </property>
+        </widget>
+       </item>
        <item row="3" column="0" colspan="2">
         <widget class="QGroupBox" name="groupBox_settings">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="title">
           <string>Settings</string>
          </property>
@@ -177,6 +211,9 @@
             <property name="text">
              <string>Az Offset</string>
             </property>
+            <property name="buddy">
+             <cstring>spinBox_azOffset</cstring>
+            </property>
            </widget>
           </item>
           <item row="2" column="1">
@@ -193,6 +230,9 @@
            <widget class="QLabel" name="label_elOffset">
             <property name="text">
              <string>El Offset</string>
+            </property>
+            <property name="buddy">
+             <cstring>spinBox_elOffset</cstring>
             </property>
            </widget>
           </item>
@@ -212,18 +252,14 @@
        <item row="0" column="1">
         <widget class="QComboBox" name="comboBox_rotModel"/>
        </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_rotModel">
-         <property name="text">
-          <string>Model</string>
-         </property>
-         <property name="buddy">
-          <cstring>comboBox_rotModel</cstring>
-         </property>
-        </widget>
-       </item>
        <item row="4" column="0" colspan="2">
         <widget class="QGroupBox" name="groupBox_tracking">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="title">
           <string>Tracking</string>
          </property>
@@ -325,6 +361,12 @@
       <layout class="QGridLayout" name="gridLayout_6">
        <item row="2" column="0" colspan="2">
         <widget class="QTabWidget" name="tabWidget_comms_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="currentIndex">
           <number>0</number>
          </property>
@@ -400,6 +442,12 @@
        </item>
        <item row="3" column="0" colspan="2">
         <widget class="QGroupBox" name="groupBox_settings_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="title">
           <string>Settings</string>
          </property>
@@ -473,6 +521,9 @@
             <property name="text">
              <string>Az Offset</string>
             </property>
+            <property name="buddy">
+             <cstring>spinBox_azOffset_2</cstring>
+            </property>
            </widget>
           </item>
           <item row="2" column="1">
@@ -489,6 +540,9 @@
            <widget class="QLabel" name="label_elOffset2">
             <property name="text">
              <string>El Offset</string>
+            </property>
+            <property name="buddy">
+             <cstring>spinBox_elOffset_2</cstring>
             </property>
            </widget>
           </item>
@@ -520,6 +574,12 @@
        </item>
        <item row="4" column="0" colspan="2">
         <widget class="QGroupBox" name="groupBox_tracking_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="title">
           <string>Tracking</string>
          </property>
@@ -621,6 +681,12 @@
       <layout class="QGridLayout" name="gridLayout_13">
        <item row="2" column="0" colspan="2">
         <widget class="QGroupBox" name="groupBox_settings_3">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="title">
           <string>Settings</string>
          </property>
@@ -694,6 +760,9 @@
             <property name="text">
              <string>Az Offset</string>
             </property>
+            <property name="buddy">
+             <cstring>spinBox_azOffset_3</cstring>
+            </property>
            </widget>
           </item>
           <item row="2" column="1">
@@ -710,6 +779,9 @@
            <widget class="QLabel" name="label_elOffset3">
             <property name="text">
              <string>El Offset</string>
+            </property>
+            <property name="buddy">
+             <cstring>spinBox_elOffset_3</cstring>
             </property>
            </widget>
           </item>
@@ -738,6 +810,12 @@
        </item>
        <item row="1" column="0" colspan="2">
         <widget class="QTabWidget" name="tabWidget_comms_3">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="currentIndex">
           <number>0</number>
          </property>
@@ -816,6 +894,12 @@
        </item>
        <item row="3" column="0" colspan="2">
         <widget class="QGroupBox" name="groupBox_tracking_3">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="title">
           <string>Tracking</string>
          </property>
@@ -912,7 +996,7 @@
      </widget>
     </widget>
    </item>
-   <item row="2" column="0" colspan="2">
+   <item>
     <widget class="QGroupBox" name="groupBox_options">
      <property name="title">
       <string>Options</string>
@@ -990,7 +1074,7 @@
      </layout>
     </widget>
    </item>
-   <item row="3" column="0" colspan="2">
+   <item>
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -1011,7 +1095,12 @@
   <tabstop>lineEdit_name</tabstop>
   <tabstop>spinBox_azPark</tabstop>
   <tabstop>spinBox_elPark</tabstop>
+  <tabstop>spinBox_azOffset</tabstop>
+  <tabstop>spinBox_elOffset</tabstop>
   <tabstop>checkBox_overlap</tabstop>
+  <tabstop>doubleSpinBox_tolerance</tabstop>
+  <tabstop>doubleSpinBox_threshold</tabstop>
+  <tabstop>checkBox_PreviSat</tabstop>
   <tabstop>checkBox_WSJTX</tabstop>
   <tabstop>checkBox_AirScout</tabstop>
   <tabstop>spinBox_refreshRate</tabstop>
@@ -1023,7 +1112,14 @@
   <tabstop>lineEdit_name_2</tabstop>
   <tabstop>spinBox_azPark_2</tabstop>
   <tabstop>spinBox_elPark_2</tabstop>
+  <tabstop>spinBox_azOffset_2</tabstop>
+  <tabstop>spinBox_elOffset_2</tabstop>
   <tabstop>checkBox_overlap_2</tabstop>
+  <tabstop>doubleSpinBox_tolerance_2</tabstop>
+  <tabstop>doubleSpinBox_threshold_2</tabstop>
+  <tabstop>checkBox_PreviSat_2</tabstop>
+  <tabstop>checkBox_WSJTX_2</tabstop>
+  <tabstop>checkBox_AirScout_2</tabstop>
   <tabstop>comboBox_rotModel_3</tabstop>
   <tabstop>tabWidget_comms_3</tabstop>
   <tabstop>comboBox_comPort_3</tabstop>
@@ -1031,13 +1127,20 @@
   <tabstop>lineEdit_name_3</tabstop>
   <tabstop>spinBox_azPark_3</tabstop>
   <tabstop>spinBox_elPark_3</tabstop>
+  <tabstop>spinBox_azOffset_3</tabstop>
+  <tabstop>spinBox_elOffset_3</tabstop>
   <tabstop>checkBox_overlap_3</tabstop>
-  <tabstop>checkBox_netRotctl_2</tabstop>
-  <tabstop>lineEdit_ip_2</tabstop>
-  <tabstop>lineEdit_ip_3</tabstop>
-  <tabstop>lineEdit_ip</tabstop>
+  <tabstop>doubleSpinBox_tolerance_3</tabstop>
+  <tabstop>doubleSpinBox_threshold_3</tabstop>
+  <tabstop>checkBox_PreviSat_3</tabstop>
+  <tabstop>checkBox_WSJTX_3</tabstop>
+  <tabstop>checkBox_AirScout_3</tabstop>
   <tabstop>checkBox_netRotctl_3</tabstop>
+  <tabstop>lineEdit_ip_2</tabstop>
+  <tabstop>lineEdit_ip</tabstop>
+  <tabstop>lineEdit_ip_3</tabstop>
   <tabstop>checkBox_netRotctl</tabstop>
+  <tabstop>checkBox_netRotctl_2</tabstop>
  </tabstops>
  <resources/>
  <connections>
