@@ -1,6 +1,6 @@
 /**
  ** This file is part of the CatRotator project.
- ** Copyright 2022 Gianfranco Sordetti IZ8EWD <iz8ewd@pianetaradio.it>.
+ ** Copyright 2022-2024 Gianfranco Sordetti IZ8EWD <iz8ewd@pianetaradio.it>.
  **
  ** This program is free software: you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
@@ -36,6 +36,7 @@ DialogSetup::DialogSetup(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    //* Set config
     ui->lineEdit_qthLocator->setText(rotCfg.qthLocator);
     ui->checkBox_udp->setChecked(rotCfg.udp);
     ui->lineEdit_udpAddress->setText(rotCfg.udpAddress);
@@ -44,6 +45,7 @@ DialogSetup::DialogSetup(QWidget *parent) :
     ui->lineEdit_WSJTX->setText(rotCfg.pathTrackWSJTX);
     ui->lineEdit_AirScout->setText(rotCfg.pathTrackAirScout);
     ui->radioButton_themeDark->setChecked(rotCfg.darkTheme);
+    ui->checkBox_autoConnect->setChecked(rotCfg.autoConnect);
     ui->checkBox_debug->setChecked(rotCfg.debugMode);
 }
 
@@ -101,6 +103,7 @@ void DialogSetup::on_buttonBox_accepted()
         msgBox.exec();
     }
 
+    //* Load config from dialog
     rotCfg.qthLocator = ui->lineEdit_qthLocator->text();
     rotCfg.udp = ui->checkBox_udp->isChecked();
     rotCfg.udpAddress = ui->lineEdit_udpAddress->text();
@@ -109,6 +112,7 @@ void DialogSetup::on_buttonBox_accepted()
     rotCfg.pathTrackWSJTX = ui->lineEdit_WSJTX->text();
     rotCfg.pathTrackAirScout = ui->lineEdit_AirScout->text();
     rotCfg.darkTheme = ui->radioButton_themeDark->isChecked();
+    rotCfg.autoConnect = ui->checkBox_autoConnect->isChecked();
     rotCfg.debugMode = ui->checkBox_debug->isChecked();
 
     //* Save settings in catrotator.ini
@@ -121,5 +125,6 @@ void DialogSetup::on_buttonBox_accepted()
     configFile.setValue("pathTrackWSJTX", rotCfg.pathTrackWSJTX);
     configFile.setValue("pathTrackAirScout", rotCfg.pathTrackAirScout);
     configFile.setValue("darkTheme", rotCfg.darkTheme);
+    configFile.setValue("autoConnect", rotCfg.autoConnect);
     configFile.setValue("debugMode", rotCfg.debugMode);
 }

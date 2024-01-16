@@ -1,6 +1,9 @@
 CatRotator
 (+ New, * Updated, - Removed)
 
+1.5.1 - 2024-
+	+ Auto connect option
+
 1.5.0 - 2023-12-10
 	+ Antenna offset
 

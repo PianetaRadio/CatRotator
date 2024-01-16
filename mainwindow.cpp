@@ -1,6 +1,6 @@
 /**
  ** This file is part of the CatRotator project.
- ** Copyright 2022-2023 Gianfranco Sordetti IZ8EWD <iz8ewd@pianetaradio.it>.
+ ** Copyright 2022-2024 Gianfranco Sordetti IZ8EWD <iz8ewd@pianetaradio.it>.
  **
  ** This program is free software: you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
@@ -18,6 +18,7 @@
 
 
 #include "mainwindow.h"
+#include "qdebug.h"
 #include "ui_mainwindow.h"
 #include "dialogrotator.h"
 #include "dialogsetup.h"
@@ -125,6 +126,7 @@ MainWindow::MainWindow(QWidget *parent)
     rotCfg.pathTrackWSJTX = configFile.value("pathTrackWSJTX", QDir::homePath() + "/AppData/Local/WSJT-X").toString();      //RPi /home/pi/.local/share/WSJT-X
     rotCfg.pathTrackAirScout = configFile.value("pathTrackAirScout", QDir::homePath() + "/AppData/Local/DL2ALF/AirScout/Tmp").toString();
     rotCfg.darkTheme = configFile.value("darkTheme", false).toBool();
+    rotCfg.autoConnect = configFile.value("autoConnect", false).toBool();
     rotCfg.debugMode = configFile.value("debugMode", false).toBool();
 
     //* Debug
@@ -157,6 +159,8 @@ MainWindow::MainWindow(QWidget *parent)
             qApp->setStyleSheet(ts.readAll());
         }
     }
+
+    if (rotCfg.autoConnect) ui->pushButton_connect->toggle(); //Auto connect
 }
 
 MainWindow::~MainWindow()
@@ -387,6 +391,7 @@ void MainWindow::guiUpdate(int rotNumber)
                 //rotSet[0].az = rotUdpEx.azUdp;
                 //rotSet[0].el = rotUdpEx.elUdp;
             setPosition(0, rotUdpEx.azUdp, rotUdpEx.elUdp);
+            //qDebug() << rotUdpEx.azUdp << rotUdpEx.elUdp;
             //ui->lineEdit_posAz->setText(QString::number(rotSet[0].az, 'f', 1) + " " + QString::number(rotSet[0].el, 'f', 1));
                 //rot_set_position(my_rot, rotSet[0].az, rotSet[0].el);
             break;
@@ -1464,7 +1469,7 @@ void MainWindow::on_actionAbout_CatRotator_triggered()
     msgBox.setTextFormat(Qt::RichText);
     QString version = QString::number(VERSION_MAJ)+"."+QString::number(VERSION_MIN)+"."+QString::number(VERSION_MIC);
     msgBox.setText("<b>CatRotator</b> <i>Rotator control software</i><br/>version "+version+" "+RELEASE_DATE);
-    msgBox.setInformativeText("<p>Copyright (C) 2022-2023 Gianfranco Sordetti IZ8EWD<br/>"
+    msgBox.setInformativeText("<p>Copyright (C) 2022-2024 Gianfranco Sordetti IZ8EWD<br/>"
                               "<a href='https://www.pianetaradio.it' style='color: #668fb8'>www.pianetaradio.it</a></p>"
                               "<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.<br/>"
                               "This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.<br/>"

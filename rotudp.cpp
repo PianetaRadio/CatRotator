@@ -1,6 +1,6 @@
 /**
  ** This file is part of the CatRotator project.
- ** Copyright 2022 Gianfranco Sordetti IZ8EWD <iz8ewd@pianetaradio.it>.
+ ** Copyright 2022-2024 Gianfranco Sordetti IZ8EWD <iz8ewd@pianetaradio.it>.
  **
  ** This program is free software: you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
@@ -57,7 +57,7 @@ void rotUdp::readDatagrams()
 
         //qDebug() << "Message from: " << sender.toString();
         //qDebug() << "Message port: " << senderPort;
-        qDebug() << "Message: " << datagrams;
+        //qDebug() << "Message: " << datagrams;
 
         //N1MM Logger+
         QRegularExpression n1mmCmd("<N1MMRotor>");
@@ -120,6 +120,7 @@ void rotUdp::readDatagrams()
             QString pstMatchString = pstMatch.captured(1);
             rotUdpEx.azUdpFlag = true;
             rotUdpEx.azUdp = pstMatchString.toFloat();
+            //rotUdpEx.elUdp = 0;
         }
 
         QRegularExpression pstElCmd("<ELEVATION>(-?\\d+\\.?\\d*)</ELEVATION>");

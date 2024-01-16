@@ -1,6 +1,6 @@
 /**
  ** This file is part of the CatRotator project.
- ** Copyright 2022-2023 Gianfranco Sordetti IZ8EWD <iz8ewd@pianetaradio.it>.
+ ** Copyright 2022-2024 Gianfranco Sordetti IZ8EWD <iz8ewd@pianetaradio.it>.
  **
  ** This program is free software: you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
@@ -62,6 +62,7 @@ typedef struct {
     QString pathTrackAirScout;  //Path for AirScout tracking file;
     bool darkTheme; //flag for Dark theme
     bool debugMode; //flag for debug log
+    bool autoConnect;   //flag for auto-connect
 } catRotatorConfig;
 
 
