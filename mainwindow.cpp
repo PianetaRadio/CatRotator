@@ -112,7 +112,7 @@ MainWindow::MainWindow(QWidget *parent)
         rotSet[i].trackTolerance = configFile.value("Rotator"+QString::number(i+1)+"/trackTolerance", 5.0).toDouble();
         rotSet[i].trackThreshold = configFile.value("Rotator"+QString::number(i+1)+"/trackThreshold", 0.0).toDouble();
         rotSet[i].trackPreviSat = configFile.value("Rotator"+QString::number(i+1)+"/trackPreviSat", false).toBool();
-        rotSet[i].trackWSJTX = configFile.value("Rotator"+QString::number(i+1)+"/trackWSJTX", false).toBool();
+        rotSet[i].trackWSJTX = configFile.value("Rotator"+QString::number(i+1)+"/trackWSJTX", 0).toInt();
         rotSet[i].trackAirScout = configFile.value("Rotator"+QString::number(i+1)+"/trackAirScout", false).toBool();
     }
 
