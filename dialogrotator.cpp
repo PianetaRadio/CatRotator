@@ -1,6 +1,6 @@
 /**
  ** This file is part of the CatRotator project.
- ** Copyright 2022-2023 Gianfranco Sordetti IZ8EWD <iz8ewd@pianetaradio.it>.
+ ** Copyright 2022-2025 Gianfranco Sordetti IZ8EWD <iz8ewd@pianetaradio.it>.
  **
  ** This program is free software: you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
@@ -162,6 +162,8 @@ DialogRotator::DialogRotator(QWidget *parent) :
     //* serialSpeed
     ui->comboBox_serialSpeed->clear();
     ui->comboBox_serialSpeed->addItem("");
+    ui->comboBox_serialSpeed->addItem("1200");
+    ui->comboBox_serialSpeed->addItem("2400");
     ui->comboBox_serialSpeed->addItem("4800");
     ui->comboBox_serialSpeed->addItem("9600");
     ui->comboBox_serialSpeed->addItem("19200");
@@ -169,6 +171,8 @@ DialogRotator::DialogRotator(QWidget *parent) :
 
     ui->comboBox_serialSpeed_2->clear();
     ui->comboBox_serialSpeed_2->addItem("");
+    ui->comboBox_serialSpeed_2->addItem("1200");
+    ui->comboBox_serialSpeed_2->addItem("2400");
     ui->comboBox_serialSpeed_2->addItem("4800");
     ui->comboBox_serialSpeed_2->addItem("9600");
     ui->comboBox_serialSpeed_2->addItem("19200");
@@ -176,6 +180,8 @@ DialogRotator::DialogRotator(QWidget *parent) :
 
     ui->comboBox_serialSpeed_3->clear();
     ui->comboBox_serialSpeed_3->addItem("");
+    ui->comboBox_serialSpeed_3->addItem("1200");
+    ui->comboBox_serialSpeed_3->addItem("2400");
     ui->comboBox_serialSpeed_3->addItem("4800");
     ui->comboBox_serialSpeed_3->addItem("9600");
     ui->comboBox_serialSpeed_3->addItem("19200");

@@ -1,8 +1,10 @@
 CatRotator
 (+ New, * Updated, - Removed)
 
-1.5.1 - 2024-
+1.5.1 - 2025-
 	+ Auto connect option
+	* Added COM port baud 1200 and 2400
+	* Bug fix: WSJT-X save tracking setting
 
 1.5.0 - 2023-12-10
 	+ Antenna offset
