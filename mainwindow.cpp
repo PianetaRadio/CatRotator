@@ -1,6 +1,6 @@
 /**
  ** This file is part of the CatRotator project.
- ** Copyright 2022-2024 Gianfranco Sordetti IZ8EWD <iz8ewd@pianetaradio.it>.
+ ** Copyright 2022-2025 Gianfranco Sordetti IZ8EWD <iz8ewd@pianetaradio.it>.
  **
  ** This program is free software: you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
@@ -216,6 +216,9 @@ void MainWindow::on_rotDaemonResultReady(int rotNumber)
 //* "Enter" key event in the lineEdit
 void MainWindow::on_lineEditEnterPressed()
 {
+    ui->pushButton_go->click();
+
+    /*
     //Use lineEdit value as callsign and find location in CTY.DAT
     QString countryName, country;
     double countryLat,countryLon;
@@ -230,43 +233,17 @@ void MainWindow::on_lineEditEnterPressed()
         longlat2locator(countryLon, countryLat, locatorCty, 2);
         ui->lineEdit_posAz->setText(locatorCty);
     }
-    else ui->statusbar->showMessage(countryName);
+    else ui->statusbar->showMessage(countryName);*/
 }
 
 void MainWindow::on_lineEditEnterPressed2()
 {
-    QString countryName, country;
-    double countryLat,countryLon;
-    char locatorCty[4];
-
-    QString callsign = ui->lineEdit_posAz_2->text();
-    parseCTY(callsign, &countryName, &country, &countryLat, &countryLon);
-
-    if (country !="")
-    {
-        ui->statusbar->showMessage(countryName + " (" + country + ")");
-        longlat2locator(countryLon, countryLat, locatorCty, 2);
-        ui->lineEdit_posAz_2->setText(locatorCty);
-    }
-    else ui->statusbar->showMessage(countryName);
+    ui->pushButton_go_2->click();
 }
 
 void MainWindow::on_lineEditEnterPressed3()
 {
-    QString countryName, country;
-    double countryLat,countryLon;
-    char locatorCty[4];
-
-    QString callsign = ui->lineEdit_posAz_3->text();
-    parseCTY(callsign, &countryName, &country, &countryLat, &countryLon);
-
-    if (country !="")
-    {
-        ui->statusbar->showMessage(countryName + " (" + country + ")");
-        longlat2locator(countryLon, countryLat, locatorCty, 2);
-        ui->lineEdit_posAz_3->setText(locatorCty);
-    }
-    else ui->statusbar->showMessage(countryName);
+    ui->pushButton_go_3->click();
 }
 
 //* Init
@@ -689,11 +666,11 @@ void MainWindow::setPosition(int rot, float azim, float elev)
     return;
 }
 
-void MainWindow::parseCTY(QString callsign, QString *countryName, QString *country, double *lat, double *lon)
+bool MainWindow::parseCTY(QString callsign, QString *countryName, QString *country, double *lat, double *lon)
 {
     *lat = 0;
     *lon = 0;
-    *countryName = "Unknown";
+    *countryName = "unknown";
 
     if (cty.exists())
     {
@@ -744,10 +721,13 @@ void MainWindow::parseCTY(QString callsign, QString *countryName, QString *count
         }
         //qDebug() << countryName << country << *lat << *lon;
         cty.close();
-    }
-    else *countryName = "Missing file cty.dat";
 
-    return;
+        if (*countryName == "unknown") return false;    //No match
+        else return true;
+    }
+    else *countryName = "none"; //cty.dat not found
+
+    return false;
 }
 
 QString MainWindow::versionCTY()
@@ -866,6 +846,12 @@ bool MainWindow::azElInput(QString value, bool lPath, double *azim, double *elev
 
     double dist = 0;
     double tempAz, tempEl;
+    QByteArray qraLocator;
+
+    //Use lineEdit value as callsign and find location in CTY.DAT
+    QString countryName, country;
+    double countryLat,countryLon;
+    char locatorCty[4];
 
     *elev = -91; //Used for no elevation input
 
@@ -887,29 +873,69 @@ bool MainWindow::azElInput(QString value, bool lPath, double *azim, double *elev
         ui->statusbar->clearMessage();
         return true;
     }
-    else if (azCmdLocMatch.hasMatch() && rotCfg.qthLocator != "")   //Locator
+    else if (azCmdLocMatch.hasMatch())   //Locator
     {
-        if (lPath)  //Long Path
+        qraLocator = azCmdLocMatch.captured(0).toLatin1().toUpper();
+        if (rotCfg.qthLocator != "")
         {
-            if (MainWindow::bearingAngleLP(rotCfg.qthLocator.toLatin1(), azCmdLocMatch.captured(0).toLatin1(), &tempAz, &dist))
+            if (lPath)  //Long Path
+            {
+                if (bearingAngleLP(rotCfg.qthLocator.toLatin1(), qraLocator, &tempAz, &dist))
+                {
+                    *azim = tempAz;
+                    ui->statusbar->showMessage("Bearing LP "+qraLocator+", "+QString::number(*azim,'f',1)+" deg, distance "+QString::number(dist,'f',0)+" km");
+                    return true;
+                }
+                else return false;
+            }
+            //Short Path
+            else if (bearingAngle(rotCfg.qthLocator.toLatin1(), qraLocator, &tempAz, &dist))
             {
                 *azim = tempAz;
-                ui->statusbar->showMessage("Bearing LP "+QString::number(*azim,'f',1)+" deg, Distance "+QString::number(dist,'f',0)+" km");
+                ui->statusbar->showMessage("Bearing "+qraLocator+", "+QString::number(*azim,'f',1)+" deg, distance "+QString::number(dist,'f',0)+" km");
+                return true;
+            }
+            else return false;
+        }
+        else
+        {
+            ui->statusbar->showMessage("Please config QTH locator!");
+            return false;
+        }
+    }
+    else if (parseCTY(value,&countryName, &country, &countryLat, &countryLon))
+    {
+        longlat2locator(countryLon, countryLat, locatorCty, 2);
+
+        if (lPath)  //Long Path
+        {
+            if (bearingAngleLP(rotCfg.qthLocator.toLatin1(), locatorCty, &tempAz, &dist))
+            {
+                *azim = tempAz;
+                ui->statusbar->showMessage("Bearing LP "+countryName+" (" + country + ") - "+locatorCty+", "+QString::number(*azim,'f',1)+" deg, distance "+QString::number(dist,'f',0)+" km");
                 return true;
             }
             else return false;
         }
         //Short Path
-        else if (MainWindow::bearingAngle(rotCfg.qthLocator.toLatin1(), azCmdLocMatch.captured(0).toLatin1(), &tempAz, &dist))
+        else if (bearingAngle(rotCfg.qthLocator.toLatin1(), locatorCty, &tempAz, &dist))
         {
             *azim = tempAz;
-            ui->statusbar->showMessage("Bearing SP "+QString::number(*azim,'f',1)+" deg, Distance "+QString::number(dist,'f',0)+" km");
+            ui->statusbar->showMessage("Bearing "+countryName+" (" + country + ") - "+locatorCty+", "+QString::number(*azim,'f',1)+" deg, distance "+QString::number(dist,'f',0)+" km");
             return true;
         }
         else return false;
+
+        //bearingAngle(rotCfg.qthLocator.toLatin1(), locatorCty, &tempAz, &dist);
+        //*azim = tempAz;
+        //ui->statusbar->showMessage("Bearing "+countryName+" (" + country + ") - "+locatorCty+", "+QString::number(*azim,'f',1)+" deg, distance "+QString::number(dist,'f',0)+" km");
+        //return true;
     }
     else
     {
+        if (countryName == "none") ui->statusbar->showMessage("Missing file cty.dat!");
+        if (countryName == "unknown") ui->statusbar->showMessage("Country unknown");
+
         *azim = 0;
         return false;
     }
@@ -1469,7 +1495,7 @@ void MainWindow::on_actionAbout_CatRotator_triggered()
     msgBox.setTextFormat(Qt::RichText);
     QString version = QString::number(VERSION_MAJ)+"."+QString::number(VERSION_MIN)+"."+QString::number(VERSION_MIC);
     msgBox.setText("<b>CatRotator</b> <i>Rotator control software</i><br/>version "+version+" "+RELEASE_DATE);
-    msgBox.setInformativeText("<p>Copyright (C) 2022-2024 Gianfranco Sordetti IZ8EWD<br/>"
+    msgBox.setInformativeText("<p>Copyright (C) 2022-2025 Gianfranco Sordetti IZ8EWD<br/>"
                               "<a href='https://www.pianetaradio.it' style='color: #668fb8'>www.pianetaradio.it</a></p>"
                               "<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.<br/>"
                               "This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.<br/>"

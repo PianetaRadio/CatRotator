@@ -146,7 +146,7 @@
         <item row="0" column="3">
          <widget class="QLineEdit" name="lineEdit_posAz">
           <property name="toolTip">
-           <string>Az (El) angle, QRA loc, Callsign+&lt;enter&gt;</string>
+           <string>Az (El) angle, QRA loc, Callsign</string>
           </property>
           <property name="inputMask">
            <string/>
@@ -239,7 +239,7 @@
         <item row="0" column="3">
          <widget class="QLineEdit" name="lineEdit_posAz_2">
           <property name="toolTip">
-           <string>Az (El) angle, QRA loc, Callsign+&lt;enter&gt;</string>
+           <string>Az (El) angle, QRA loc, Callsign</string>
           </property>
          </widget>
         </item>
@@ -345,7 +345,7 @@
         <item row="0" column="3">
          <widget class="QLineEdit" name="lineEdit_posAz_3">
           <property name="toolTip">
-           <string>Az (El) angle, QRA loc, Callsign+&lt;enter&gt;</string>
+           <string>Az (El) angle, QRA loc, Callsign</string>
           </property>
          </widget>
         </item>
@@ -416,7 +416,7 @@
      <x>0</x>
      <y>0</y>
      <width>478</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuConfig">
