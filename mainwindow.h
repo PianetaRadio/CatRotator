@@ -1,6 +1,6 @@
 /**
  ** This file is part of the CatRotator project.
- ** Copyright 2022-2024 Gianfranco Sordetti IZ8EWD <iz8ewd@pianetaradio.it>.
+ ** Copyright 2022-2025 Gianfranco Sordetti IZ8EWD <iz8ewd@pianetaradio.it>.
  **
  ** This program is free software: you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
@@ -140,14 +140,16 @@ private:
     void presetInit();
     void setPosition(int rot, float azim, float elev);
 
+    bool azElInput(QString value, bool lPath, double *azim, double *elev);  //Convert pointing value input, from format degree or QTH locator, into azimuth bearing angle and elevation
+    bool parseCTY(QString callsign, QString *countryName, QString *country, double *lat, double *lon); //Find Country in CTY.DAT from callsign
+
     void parseWSJTXMoon(double *azim, double *elev);    //Read WSJT-X azel.dat tracking data
     void parseAirScout(double *azim, double *elev); //Read AirScout azel.dat tracking data
 
-    bool azElInput(QString value, bool lPath, double *azim, double *elev);  //Convert pointing value input, from format degree or QTH locator, into azimuth bearing angle and elevation
     bool bearingAngle(const char *locator1, const char *locator2, double *azim, double *dist);  //Calculate Short Path bearing angle and distance between two locators
     bool bearingAngleLP(const char *locator1, const char *locator2, double *azim, double *dist);    //Calculate Long Path bearing angle and distance between two locators
 
-    void parseCTY(QString callsign, QString *countryName, QString *country, double *lat, double *lon); //Find Country in CTY.DAT from callsign
+    bool checkHamlibVersion(int major, int minor, int revision);    //Check hamlib version
 };
 
 #endif // MAINWINDOW_H

@@ -2,6 +2,7 @@ CatRotator
 (+ New, * Updated, - Removed)
 
 1.5.1 - 2025-
+	+ Check hamlib version on startup
 	+ Auto connect option
 	* Display software version in the window title
 	* Improved input field, now can confirm with <enter> or button <go>
