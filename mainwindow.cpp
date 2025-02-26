@@ -67,6 +67,10 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    //display name and version in the window title
+    QString version = QString::number(VERSION_MAJ)+"."+QString::number(VERSION_MIN)+"."+QString::number(VERSION_MIC);
+    this->setWindowTitle("CatRotator v."+version);
+
     QDir::setCurrent(QCoreApplication::applicationDirPath());   //set current path = application path
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)

@@ -3,6 +3,7 @@ CatRotator
 
 1.5.1 - 2025-
 	+ Auto connect option
+	* Display software version in the window title
 	* Improved input field, now can confirm with <enter> or button <go>
 	* Added COM port baud 1200 and 2400
 	* Bug fix: WSJT-X save tracking setting
