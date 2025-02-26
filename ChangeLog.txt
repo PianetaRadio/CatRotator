@@ -1,13 +1,14 @@
 CatRotator
 (+ New, * Updated, - Removed)
 
-1.5.1 - 2025-
+1.5.1 - 2025-02-
 	+ Check hamlib version on startup
 	+ Auto connect option
 	* Display software version in the window title
 	* Improved input field, now can confirm with <enter> or button <go>
 	* Added COM port baud 1200 and 2400
 	* Bug fix: WSJT-X save tracking setting
+	* Updated to library Hamlib 4.6.2
 
 1.5.0 - 2023-12-10
 	+ Antenna offset
