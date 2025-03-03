@@ -601,8 +601,8 @@ void MainWindow::presetInit()
 void MainWindow::setPosition(int rot, float azim, float elev)
 {
     QString posText, azText, elText;
-    azText = QString::number(azim,'f',1);
-    elText = QString::number(elev,'f',1);
+    //azText = QString::number(azim,'f',1);
+    //elText = QString::number(elev,'f',1);
 
     switch (rot)
     {
@@ -618,7 +618,7 @@ void MainWindow::setPosition(int rot, float azim, float elev)
                 rotSet[0].az = 0;
                 rotSet[0].el = elev;
 
-                posText = elText;
+                //posText = elText;
             }
             else //Azimuth or Az/El rotator
             {
@@ -627,16 +627,16 @@ void MainWindow::setPosition(int rot, float azim, float elev)
                 if (elev >= -90 && (my_rot->caps->rot_type == ROT_TYPE_AZEL || my_rot->caps->rot_type == ROT_TYPE_OTHER))
                 {
                     rotSet[0].el = elev;
-                    posText = azText + " " + elText;
+                    //posText = azText + " " + elText;
                 }
                 else        //ROT_TYPE_AZIMUTH
                 {
                     rotSet[0].el = 0;
-                    posText = azText;
+                    //posText = azText;
                 }
             }
             rot_set_position(my_rot, rotSet[0].az, rotSet[0].el);
-            ui->lineEdit_posAz->setText(posText);
+            //ui->lineEdit_posAz->setText(posText);
         }
         break;
     case 1:
@@ -658,16 +658,16 @@ void MainWindow::setPosition(int rot, float azim, float elev)
                 if (elev >= -90 && (my_rot2->caps->rot_type == ROT_TYPE_AZEL || my_rot2->caps->rot_type == ROT_TYPE_OTHER))
                 {
                     rotSet[1].el = elev;
-                    posText = azText + " " + elText;
+                    //posText = azText + " " + elText;
                 }
                 else
                 {
                     rotSet[1].el = 0;
-                    posText = azText;
+                    //posText = azText;
                 }
             }
             rot_set_position(my_rot2, rotSet[1].az, rotSet[1].el);
-            ui->lineEdit_posAz_2->setText(posText);
+            //ui->lineEdit_posAz_2->setText(posText);
         }
         break;
     case 2:
@@ -689,16 +689,16 @@ void MainWindow::setPosition(int rot, float azim, float elev)
                 if (elev >= -90 && (my_rot3->caps->rot_type == ROT_TYPE_AZEL || my_rot3->caps->rot_type == ROT_TYPE_OTHER))
                 {
                     rotSet[2].el = elev;
-                    posText = azText + " " + elText;
+                    //posText = azText + " " + elText;
                 }
                 else
                 {
                     rotSet[2].el = 0;
-                    posText = azText;
+                    //posText = azText;
                 }
             }
             rot_set_position(my_rot3, rotSet[2].az, rotSet[2].el);
-            ui->lineEdit_posAz_3->setText(posText);
+            //ui->lineEdit_posAz_3->setText(posText);
         }
         break;
     }
@@ -1145,14 +1145,14 @@ void MainWindow::on_toolButton_minus_clicked()
     //ui->lineEdit_posAz->setText(QString::number(rotSet[0].az));
 
     double tempAz, tempEl;
-    if (MainWindow::azElInput(ui->lineEdit_posAz->text(), rotSet[0].lPathFlag, &tempAz, &tempEl)) ui->lineEdit_posAz->setText(QString::number(tempAz - rotCfg.incrementAz,'f',1));
+    if (MainWindow::azElInput(ui->lineEdit_posAz->text(), false, &tempAz, &tempEl)) ui->lineEdit_posAz->setText(QString::number(tempAz - rotCfg.incrementAz,'f',1));
 }
 
 
 void MainWindow::on_toolButton_plus_clicked()
 {
     double tempAz, tempEl;
-    if (MainWindow::azElInput(ui->lineEdit_posAz->text(), rotSet[0].lPathFlag, &tempAz, &tempEl)) ui->lineEdit_posAz->setText(QString::number(tempAz + rotCfg.incrementAz,'f',1));
+    if (MainWindow::azElInput(ui->lineEdit_posAz->text(), false, &tempAz, &tempEl)) ui->lineEdit_posAz->setText(QString::number(tempAz + rotCfg.incrementAz,'f',1));
 }
 
 void MainWindow::on_toolButton_pathSL_toggled(bool checked)
@@ -1167,7 +1167,7 @@ void MainWindow::on_toolButton_pathSL_toggled(bool checked)
         ui->toolButton_pathSL->setText("SP");
         rotSet[0].lPathFlag = false;
     }
-    emit ui->pushButton_go->clicked(true);
+    ui->pushButton_go->click();
 }
 
 void MainWindow::on_toolButton_track_toggled(bool checked)
@@ -1260,7 +1260,7 @@ void MainWindow::on_toolButton_pathSL_2_toggled(bool checked)
         ui->toolButton_pathSL_2->setText("SP");
         rotSet[1].lPathFlag = false;
     }
-    emit ui->pushButton_go_2->clicked(true);
+    ui->pushButton_go_2->click();
 }
 
 void MainWindow::on_toolButton_track_2_toggled(bool checked)
@@ -1353,7 +1353,7 @@ void MainWindow::on_toolButton_pathSL_3_toggled(bool checked)
         ui->toolButton_pathSL_3->setText("SP");
         rotSet[2].lPathFlag = false;
     }
-    emit ui->pushButton_go_3->clicked(true);
+    ui->pushButton_go_3->click();
 }
 
 void MainWindow::on_toolButton_track_3_toggled(bool checked)
