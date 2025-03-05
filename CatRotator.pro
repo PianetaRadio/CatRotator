@@ -42,10 +42,13 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 LIBS += -L$$PWD/hamlib/ -lhamlib
 INCLUDEPATH += $$PWD/hamlib
+
+QMAKE_LFLAGS += -Wl,-rpath,\\$\$ORIGIN/hamlib/ #Set runtime shared libraries path to use local hamlib library
+
 RESOURCES += qdarkstyle/dark/darkstyle.qrc
 
 VERSION = 1.5.1
 
 RC_ICONS = catrotator.ico
 
-QMAKE_LFLAGS += -no-pie
+QMAKE_LFLAGS += -no-pie  #No Position Indipendent Executable
