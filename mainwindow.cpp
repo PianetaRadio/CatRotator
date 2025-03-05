@@ -720,7 +720,7 @@ bool MainWindow::parseCTY(QString callsign, QString *countryName, QString *count
         cty.open(QIODevice::ReadOnly);    //Open file CTY.dat
         cty.seek(0);
 
-        QRegularExpression countryRegExp("(?P<countryName>[a-zA-Z0-9 ]+):\\s+(?P<itu>\\d+):\\s+(?P<cq>\\d+):\\s+(?P<cont>\\w\\w):\\s+(?P<lat>[+-]?\\d+.\\d+):\\s+(?P<lon>[+-]?\\d+.\\d+):\\s+(?P<tz>[+-]?\\d+.\\d+):\\s+[*]?(?P<country>[a-zA-Z0-9 ]+):");
+        QRegularExpression countryRegExp("(?P<countryName>[a-zA-Z0-9 ()&.,-]+):\\s+(?P<itu>\\d+):\\s+(?P<cq>\\d+):\\s+(?P<cont>\\w\\w):\\s+(?P<lat>[+-]?\\d+.\\d+):\\s+(?P<lon>[+-]?\\d+.\\d+):\\s+(?P<tz>[+-]?\\d+.\\d+):\\s+[*]?(?P<country>[a-zA-Z0-9/*]+):");
         QRegularExpression prefixRegExp("(?P<prefix>[A-Z0-9/]+)");
 
         while(!cty.atEnd())
@@ -758,7 +758,7 @@ bool MainWindow::parseCTY(QString callsign, QString *countryName, QString *count
                 }
             }
         }
-        //qDebug() << countryName << country << *lat << *lon;
+        //qDebug() << *countryName << *country << *lat << *lon;
         cty.close();
 
         if (*countryName == "unknown") return false;    //No match
@@ -876,9 +876,9 @@ void MainWindow::parseAirScout(double *azim, double *elev)
 
 bool MainWindow::azElInput(QString value, bool lPath, double *azim, double *elev)
 {
-    QRegularExpression azCmdDeg("^-?\\d\\d?\\d?[.]?\\d?");    //Match 0, 00, 000 with or w/o "-" with or w/o decimal
+    QRegularExpression azCmdDeg("^-?\\d{1,3}(\\.\\d+)?$");    //Match 0, 00, 000 with or w/o "-" with or w/o decimal
     QRegularExpressionMatch azCmdDegMatch = azCmdDeg.match(value);
-    QRegularExpression azElCmdDeg("^(-?\\d\\d?\\d?[.]?\\d?) (-?\\d\\d?[.]?\\d?)");
+    QRegularExpression azElCmdDeg("^(-?\\d{1,3}(\\.\\d+)?) (\\d{1,2}(\\.\\d+)?)$");
     QRegularExpressionMatch azElCmdDegMatch = azElCmdDeg.match(value);
     QRegularExpression azCmdLoc("^[a-rA-R][a-rA-R]\\d{2}([a-xA-X][a-xA-X])?(\\d{2})?"); //Match AA00, AA00AA, AA00AA00
     QRegularExpressionMatch azCmdLocMatch = azCmdLoc.match(value);
@@ -890,7 +890,7 @@ bool MainWindow::azElInput(QString value, bool lPath, double *azim, double *elev
     //Use lineEdit value as callsign and find location in CTY.DAT
     QString countryName, country;
     double countryLat,countryLon;
-    char locatorCty[4];
+    char locatorCty[3];
 
     *elev = -91; //Used for no elevation input
 
@@ -899,7 +899,7 @@ bool MainWindow::azElInput(QString value, bool lPath, double *azim, double *elev
         tempAz = azElCmdDegMatch.captured(1).toDouble();
         if (lPath) *azim = azimuth_long_path(tempAz);
         else *azim = tempAz;
-        tempEl = azElCmdDegMatch.captured(2).toDouble();
+        tempEl = azElCmdDegMatch.captured(3).toDouble();
         *elev = tempEl;
         ui->statusbar->clearMessage();
         return true;
@@ -922,7 +922,7 @@ bool MainWindow::azElInput(QString value, bool lPath, double *azim, double *elev
                 if (bearingAngleLP(rotCfg.qthLocator.toLatin1(), qraLocator, &tempAz, &dist))
                 {
                     *azim = tempAz;
-                    ui->statusbar->showMessage("Bearing LP "+qraLocator+", "+QString::number(*azim,'f',1)+" deg, distance "+QString::number(dist,'f',0)+" km");
+                    ui->statusbar->showMessage("LP "+QString::number(*azim,'f',1)+" deg, "+QString::number(dist,'f',0)+" km");
                     return true;
                 }
                 else return false;
@@ -931,7 +931,7 @@ bool MainWindow::azElInput(QString value, bool lPath, double *azim, double *elev
             else if (bearingAngle(rotCfg.qthLocator.toLatin1(), qraLocator, &tempAz, &dist))
             {
                 *azim = tempAz;
-                ui->statusbar->showMessage("Bearing "+qraLocator+", "+QString::number(*azim,'f',1)+" deg, distance "+QString::number(dist,'f',0)+" km");
+                ui->statusbar->showMessage(QString::number(*azim,'f',1)+" deg, "+QString::number(dist,'f',0)+" km");
                 return true;
             }
             else return false;
@@ -951,7 +951,7 @@ bool MainWindow::azElInput(QString value, bool lPath, double *azim, double *elev
             if (bearingAngleLP(rotCfg.qthLocator.toLatin1(), locatorCty, &tempAz, &dist))
             {
                 *azim = tempAz;
-                ui->statusbar->showMessage("Bearing LP "+countryName+" (" + country + ") - "+locatorCty+", "+QString::number(*azim,'f',1)+" deg, distance "+QString::number(dist,'f',0)+" km");
+                ui->statusbar->showMessage(countryName+" (" + country + ") - "+locatorCty+", LP "+QString::number(*azim,'f',1)+" deg, "+QString::number(dist,'f',0)+" km");
                 return true;
             }
             else return false;
@@ -960,7 +960,7 @@ bool MainWindow::azElInput(QString value, bool lPath, double *azim, double *elev
         else if (bearingAngle(rotCfg.qthLocator.toLatin1(), locatorCty, &tempAz, &dist))
         {
             *azim = tempAz;
-            ui->statusbar->showMessage("Bearing "+countryName+" (" + country + ") - "+locatorCty+", "+QString::number(*azim,'f',1)+" deg, distance "+QString::number(dist,'f',0)+" km");
+            ui->statusbar->showMessage(countryName+" (" + country + ") - "+locatorCty+", "+QString::number(*azim,'f',1)+" deg, "+QString::number(dist,'f',0)+" km");
             return true;
         }
         else return false;
