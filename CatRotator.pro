@@ -40,7 +40,7 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-VERSION = 1.5.1
+VERSION = 1.5.2
 
 # Windows
 win32 {

@@ -1,6 +1,6 @@
 /**
  ** This file is part of the CatRotator project.
- ** Copyright 2022-2024 Gianfranco Sordetti IZ8EWD <iz8ewd@pianetaradio.it>.
+ ** Copyright 2022-2025 Gianfranco Sordetti IZ8EWD <iz8ewd@pianetaradio.it>.
  **
  ** This program is free software: you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
@@ -51,6 +51,7 @@ typedef struct {
 typedef struct {
     unsigned rotRefresh;    //GUI refresh interval (ms)
     QString qthLocator; //QTH WW Locator
+    bool distance;  //unit for distance: 0 kilometers, 1 miles
     bool udp;   //UDP enable flag
     QString udpAddress; //UDP address
     quint16 udpPort;    //UDP port

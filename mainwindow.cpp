@@ -123,6 +123,7 @@ MainWindow::MainWindow(QWidget *parent)
     rotCfg.rotRefresh = configFile.value("rotRefresh", 1).toInt();
     rotCfg.incrementAz = configFile.value("rotIncrementAz", 10).toInt();
     rotCfg.qthLocator = configFile.value("qthLocator", "").toString();
+    rotCfg.distance = configFile.value("distance", false).toBool();
     rotCfg.udp = configFile.value("udp", false).toBool();
     rotCfg.udpAddress = configFile.value("udpAddress", "127.0.0.1").toString();
     rotCfg.udpPort = configFile.value("udpPort", 12000).toUInt();   //should be toUShort()
@@ -917,12 +918,15 @@ bool MainWindow::azElInput(QString value, bool lPath, double *azim, double *elev
         qraLocator = azCmdLocMatch.captured(0).toLatin1().toUpper();
         if (rotCfg.qthLocator != "")
         {
+            QString distance;
             if (lPath)  //Long Path
             {
                 if (bearingAngleLP(rotCfg.qthLocator.toLatin1(), qraLocator, &tempAz, &dist))
                 {
                     *azim = tempAz;
-                    ui->statusbar->showMessage("LP "+QString::number(*azim,'f',1)+" deg, "+QString::number(dist,'f',0)+" km");
+                    if (rotCfg.distance) distance = QString::number(dist*0.6214,'f',0)+" mi";   //miles
+                    else distance = QString::number(dist,'f',0)+" km";  //kilometers
+                    ui->statusbar->showMessage("LP "+QString::number(*azim,'f',1)+" deg, "+distance);
                     return true;
                 }
                 else return false;
@@ -931,7 +935,9 @@ bool MainWindow::azElInput(QString value, bool lPath, double *azim, double *elev
             else if (bearingAngle(rotCfg.qthLocator.toLatin1(), qraLocator, &tempAz, &dist))
             {
                 *azim = tempAz;
-                ui->statusbar->showMessage(QString::number(*azim,'f',1)+" deg, "+QString::number(dist,'f',0)+" km");
+                if (rotCfg.distance) distance = QString::number(dist*0.6214,'f',0)+" mi";
+                else distance = QString::number(dist,'f',0)+" km";
+                ui->statusbar->showMessage(QString::number(*azim,'f',1)+" deg, "+distance);
                 return true;
             }
             else return false;
@@ -942,16 +948,19 @@ bool MainWindow::azElInput(QString value, bool lPath, double *azim, double *elev
             return false;
         }
     }
-    else if (parseCTY(value,&countryName, &country, &countryLat, &countryLon))
+    else if (parseCTY(value,&countryName, &country, &countryLat, &countryLon))  //Country
     {
         longlat2locator(countryLon, countryLat, locatorCty, 2);
+        QString distance;
 
         if (lPath)  //Long Path
         {
             if (bearingAngleLP(rotCfg.qthLocator.toLatin1(), locatorCty, &tempAz, &dist))
             {
                 *azim = tempAz;
-                ui->statusbar->showMessage(countryName+" (" + country + ") - "+locatorCty+", LP "+QString::number(*azim,'f',1)+" deg, "+QString::number(dist,'f',0)+" km");
+                if (rotCfg.distance) distance = QString::number(dist*0.6214,'f',0)+" mi";   //miles
+                else distance = QString::number(dist,'f',0)+" km";  //kilometers
+                ui->statusbar->showMessage(countryName+" (" + country + ") - "+locatorCty+", LP "+QString::number(*azim,'f',1)+" deg, "+distance);
                 return true;
             }
             else return false;
@@ -960,7 +969,9 @@ bool MainWindow::azElInput(QString value, bool lPath, double *azim, double *elev
         else if (bearingAngle(rotCfg.qthLocator.toLatin1(), locatorCty, &tempAz, &dist))
         {
             *azim = tempAz;
-            ui->statusbar->showMessage(countryName+" (" + country + ") - "+locatorCty+", "+QString::number(*azim,'f',1)+" deg, "+QString::number(dist,'f',0)+" km");
+            if (rotCfg.distance) distance = QString::number(dist*0.6214,'f',0)+" mi";
+            else distance = QString::number(dist,'f',0)+" km";
+            ui->statusbar->showMessage(countryName+" (" + country + ") - "+locatorCty+", "+QString::number(*azim,'f',1)+" deg, "+distance);
             return true;
         }
         else return false;

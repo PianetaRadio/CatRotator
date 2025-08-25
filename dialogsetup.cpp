@@ -1,6 +1,6 @@
 /**
  ** This file is part of the CatRotator project.
- ** Copyright 2022-2024 Gianfranco Sordetti IZ8EWD <iz8ewd@pianetaradio.it>.
+ ** Copyright 2022-2025 Gianfranco Sordetti IZ8EWD <iz8ewd@pianetaradio.it>.
  **
  ** This program is free software: you can redistribute it and/or modify
  ** it under the terms of the GNU General Public License as published by
@@ -38,6 +38,7 @@ DialogSetup::DialogSetup(QWidget *parent) :
 
     //* Set config
     ui->lineEdit_qthLocator->setText(rotCfg.qthLocator);
+    ui->radioButton_mi->setChecked(rotCfg.distance);
     ui->checkBox_udp->setChecked(rotCfg.udp);
     ui->lineEdit_udpAddress->setText(rotCfg.udpAddress);
     ui->lineEdit_udpPort->setText(QString::number(rotCfg.udpPort));
@@ -105,6 +106,7 @@ void DialogSetup::on_buttonBox_accepted()
 
     //* Load config from dialog
     rotCfg.qthLocator = ui->lineEdit_qthLocator->text();
+    rotCfg.distance = ui->radioButton_mi->isChecked();
     rotCfg.udp = ui->checkBox_udp->isChecked();
     rotCfg.udpAddress = ui->lineEdit_udpAddress->text();
     rotCfg.udpPort = ui->lineEdit_udpPort->text().toUShort();
@@ -118,6 +120,7 @@ void DialogSetup::on_buttonBox_accepted()
     //* Save settings in catrotator.ini
     QSettings configFile(QString("catrotator.ini"), QSettings::IniFormat);
     configFile.setValue("qthLocator", rotCfg.qthLocator);
+    configFile.setValue("distance", rotCfg.distance);
     configFile.setValue("udp", rotCfg.udp);
     configFile.setValue("udpAddress", rotCfg.udpAddress);
     configFile.setValue("udpPort", rotCfg.udpPort);
