@@ -3,6 +3,7 @@ CatRotator
 
 1.5.2 - 2025-08-xx
 	+ Distance in kilometers or miles
+	* Bug fix: Plus/Minus buttons limits
 
 1.5.1 - 2025-03-07
 	+ Check hamlib version on startup
