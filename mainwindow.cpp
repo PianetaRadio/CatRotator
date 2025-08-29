@@ -1260,13 +1260,27 @@ void MainWindow::on_pushButton_go_2_clicked()
 void MainWindow::on_toolButton_minus_2_clicked()
 {
     double tempAz, tempEl;
-    if (MainWindow::azElInput(ui->lineEdit_posAz_2->text(), rotSet[1].lPathFlag, &tempAz, &tempEl)) ui->lineEdit_posAz_2->setText(QString::number(tempAz - rotCfg.incrementAz,'f',1));
+    if (MainWindow::azElInput(ui->lineEdit_posAz_2->text(), false, &tempAz, &tempEl))
+    {
+        tempAz = tempAz - rotCfg.incrementAz;
+        if (tempAz < 0) tempAz = 360.00 + tempAz;
+        ui->lineEdit_posAz_2->setText(QString::number(tempAz,'f',1));
+    }
+
+    //if (MainWindow::azElInput(ui->lineEdit_posAz_2->text(), rotSet[1].lPathFlag, &tempAz, &tempEl)) ui->lineEdit_posAz_2->setText(QString::number(tempAz - rotCfg.incrementAz,'f',1));
 }
 
 void MainWindow::on_toolButton_plus_2_clicked()
 {
     double tempAz, tempEl;
-    if (MainWindow::azElInput(ui->lineEdit_posAz_2->text(), rotSet[1].lPathFlag, &tempAz, &tempEl)) ui->lineEdit_posAz_2->setText(QString::number(tempAz + rotCfg.incrementAz,'f',1));
+    if (MainWindow::azElInput(ui->lineEdit_posAz_2->text(), false, &tempAz, &tempEl))
+    {
+        tempAz = tempAz + rotCfg.incrementAz;
+        if (tempAz >= 360) tempAz = tempAz - 360;
+        ui->lineEdit_posAz_2->setText(QString::number(tempAz,'f',1));
+    }
+
+    //if (MainWindow::azElInput(ui->lineEdit_posAz_2->text(), rotSet[1].lPathFlag, &tempAz, &tempEl)) ui->lineEdit_posAz_2->setText(QString::number(tempAz + rotCfg.incrementAz,'f',1));
 }
 
 void MainWindow::on_toolButton_pathSL_2_toggled(bool checked)
@@ -1353,13 +1367,27 @@ void MainWindow::on_pushButton_go_3_clicked()
 void MainWindow::on_toolButton_minus_3_clicked()
 {
     double tempAz, tempEl;
-    if (MainWindow::azElInput(ui->lineEdit_posAz_3->text(), rotSet[2].lPathFlag, &tempAz, &tempEl)) ui->lineEdit_posAz_3->setText(QString::number(tempAz - rotCfg.incrementAz,'f',1));
+    if (MainWindow::azElInput(ui->lineEdit_posAz_3->text(), false, &tempAz, &tempEl))
+    {
+        tempAz = tempAz - rotCfg.incrementAz;
+        if (tempAz < 0) tempAz = 360.00 + tempAz;
+        ui->lineEdit_posAz_3->setText(QString::number(tempAz,'f',1));
+    }
+
+    //if (MainWindow::azElInput(ui->lineEdit_posAz_3->text(), rotSet[2].lPathFlag, &tempAz, &tempEl)) ui->lineEdit_posAz_3->setText(QString::number(tempAz - rotCfg.incrementAz,'f',1));
 }
 
 void MainWindow::on_toolButton_plus_3_clicked()
 {
     double tempAz, tempEl;
-    if (MainWindow::azElInput(ui->lineEdit_posAz_3->text(), rotSet[2].lPathFlag, &tempAz, &tempEl)) ui->lineEdit_posAz_3->setText(QString::number(tempAz + rotCfg.incrementAz,'f',1));
+    if (MainWindow::azElInput(ui->lineEdit_posAz_3->text(), false, &tempAz, &tempEl))
+    {
+        tempAz = tempAz + rotCfg.incrementAz;
+        if (tempAz >= 360) tempAz = tempAz - 360;
+        ui->lineEdit_posAz_3->setText(QString::number(tempAz,'f',1));
+    }
+
+    //if (MainWindow::azElInput(ui->lineEdit_posAz_3->text(), rotSet[2].lPathFlag, &tempAz, &tempEl)) ui->lineEdit_posAz_3->setText(QString::number(tempAz + rotCfg.incrementAz,'f',1));
 }
 
 void MainWindow::on_toolButton_pathSL_3_toggled(bool checked)
