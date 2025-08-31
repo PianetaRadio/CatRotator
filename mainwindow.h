@@ -28,7 +28,7 @@
 #define RELEASE_DATE __DATE__
 #define VERSION_MAJ 1
 #define VERSION_MIN 5
-#define VERSION_MIC 1
+#define VERSION_MIC 2
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
