@@ -556,21 +556,24 @@ bool MainWindow::checkHamlibVersion(int major, int minor, int revision)
 //* Presets
 void MainWindow::presetGo(int presetNumber)
 {
+    ui->statusbar->showMessage("Preset "+rotCfg.presetLabel[presetNumber]);
+
     switch (ui->tabWidget_rotator->currentIndex())
     {
     case 0:
         rotSet[0].az = rotCfg.presetAz[presetNumber];
         setPosition(0, rotSet[0].az, rotSet[0].el);
-        //ui->lineEdit_posAz->setText(QString::number(rotSet[0].az));
-            //rot_set_position(my_rot, rotSet[0].az, rotSet[0].el);
+        ui->lineEdit_posAz->setText(QString::number(rotSet[0].az));
         break;
     case 1:
         rotSet[1].az = rotCfg.presetAz[presetNumber];
         setPosition(1, rotSet[1].az, rotSet[1].el);
+        ui->lineEdit_posAz_2->setText(QString::number(rotSet[1].az));
         break;
     case 2:
         rotSet[2].az = rotCfg.presetAz[presetNumber];
         setPosition(2, rotSet[2].az, rotSet[2].el);
+        ui->lineEdit_posAz_3->setText(QString::number(rotSet[2].az));
         break;
     }
 }
