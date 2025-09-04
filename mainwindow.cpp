@@ -929,7 +929,7 @@ bool MainWindow::azElInput(QString value, bool lPath, double *azim, double *elev
                     *azim = tempAz;
                     if (rotCfg.distance) distance = QString::number(dist*0.6214,'f',0)+" mi";   //miles
                     else distance = QString::number(dist,'f',0)+" km";  //kilometers
-                    ui->statusbar->showMessage("LP "+QString::number(*azim,'f',1)+" deg, "+distance);
+                    ui->statusbar->showMessage(qraLocator+" - LP "+QString::number(*azim,'f',1)+" deg, "+distance);
                     return true;
                 }
                 else return false;
@@ -940,7 +940,7 @@ bool MainWindow::azElInput(QString value, bool lPath, double *azim, double *elev
                 *azim = tempAz;
                 if (rotCfg.distance) distance = QString::number(dist*0.6214,'f',0)+" mi";
                 else distance = QString::number(dist,'f',0)+" km";
-                ui->statusbar->showMessage(QString::number(*azim,'f',1)+" deg, "+distance);
+                ui->statusbar->showMessage(qraLocator+" - "+QString::number(*azim,'f',1)+" deg, "+distance);
                 return true;
             }
             else return false;
@@ -1137,19 +1137,17 @@ void MainWindow::on_pushButton_go_clicked()
            tempAz = 0;
        }
        else if (tempEl == -91) tempEl = rotGet[0].el;
+       setPosition(0, tempAz, tempEl);  //Move rotator
 
-       setPosition(0, tempAz, tempEl);
-
-       //QString posText;
+       //Update lineEdit field
+       QString posText;
        //if (my_rot->caps->rot_type == ROT_TYPE_AZEL || my_rot->caps->rot_type == ROT_TYPE_OTHER) posText = QString::number(rotSet[0].az,'f',1) + " " + QString::number(rotSet[0].el,'f',1);
        //else if (my_rot->caps->rot_type == ROT_TYPE_ELEVATION) posText = QString::number(rotSet[0].el,'f',1);
        //else posText = QString::number(rotSet[0].az,'f',1);    //ROT_TYPE_AZIMUTH
-
-       //if (my_rot->caps->rot_type == ROT_TYPE_AZEL || my_rot->caps->rot_type == ROT_TYPE_OTHER) posText = QString::number(tempAz,'f',1) + " " + QString::number(tempEl,'f',1);
-       //else if (my_rot->caps->rot_type == ROT_TYPE_ELEVATION) posText = QString::number(tempEl,'f',1);
-       //else posText = QString::number(tempAz,'f',1);    //ROT_TYPE_AZIMUTH
-
-       //ui->lineEdit_posAz->setText(posText);
+       if (my_rot->caps->rot_type == ROT_TYPE_AZEL || my_rot->caps->rot_type == ROT_TYPE_OTHER) posText = QString::number(tempAz,'f',1) + " " + QString::number(tempEl,'f',1);
+       else if (my_rot->caps->rot_type == ROT_TYPE_ELEVATION) posText = QString::number(tempEl,'f',1);
+       else posText = QString::number(tempAz,'f',1);    //ROT_TYPE_AZIMUTH
+       ui->lineEdit_posAz->setText(posText);
    }
 }
 
@@ -1255,8 +1253,13 @@ void MainWindow::on_pushButton_go_2_clicked()
             tempAz = 0;
         }
         else if (tempEl == -91) tempEl = rotGet[1].el;
-
         setPosition(1, tempAz, tempEl);
+
+        QString posText;
+        if (my_rot2->caps->rot_type == ROT_TYPE_AZEL || my_rot2->caps->rot_type == ROT_TYPE_OTHER) posText = QString::number(tempAz,'f',1) + " " + QString::number(tempEl,'f',1);
+        else if (my_rot2->caps->rot_type == ROT_TYPE_ELEVATION) posText = QString::number(tempEl,'f',1);
+        else posText = QString::number(tempAz,'f',1);    //ROT_TYPE_AZIMUTH
+        ui->lineEdit_posAz_2->setText(posText);
     }
 }
 
@@ -1362,8 +1365,13 @@ void MainWindow::on_pushButton_go_3_clicked()
             tempAz = 0;
         }
         else if (tempEl == -91) tempEl = rotGet[2].el;
-
         setPosition(2, tempAz, tempEl);
+
+        QString posText;
+        if (my_rot3->caps->rot_type == ROT_TYPE_AZEL || my_rot3->caps->rot_type == ROT_TYPE_OTHER) posText = QString::number(tempAz,'f',1) + " " + QString::number(tempEl,'f',1);
+        else if (my_rot3->caps->rot_type == ROT_TYPE_ELEVATION) posText = QString::number(tempEl,'f',1);
+        else posText = QString::number(tempAz,'f',1);    //ROT_TYPE_AZIMUTH
+        ui->lineEdit_posAz_3->setText(posText);
     }
 }
 
