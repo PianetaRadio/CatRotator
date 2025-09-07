@@ -5,6 +5,7 @@ CatRotator
 	+ Distance in kilometers or miles
 	* Bug fix: Plus/Minus buttons limits
 	* Bug fix: Presets do not show direction
+	* Updated to library Hamlib 4.6.5
 
 1.5.1 - 2025-03-07
 	+ Check hamlib version on startup
