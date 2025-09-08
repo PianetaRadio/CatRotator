@@ -135,9 +135,11 @@ private:
     QString versionCTY();  //Extract CTY.DAT version
 
     void guiInit();
+    void loadGuiConfig(QString configFileName);
+    void loadRotConfig(QString configFileName);
     void guiUpdate(int rotNumber);
     void presetGo(int presetNumber);
-    void presetInit();
+    void presetInit(QString configFileName);
     void setPosition(int rot, float azim, float elev);
 
     bool azElInput(QString value, bool lPath, double *azim, double *elev);  //Convert pointing value input, from format degree or QTH locator, into azimuth bearing angle and elevation

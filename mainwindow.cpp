@@ -98,41 +98,11 @@ MainWindow::MainWindow(QWidget *parent)
     connect(&statusWsjtxWatch, SIGNAL(fileChanged(QString)), this, SLOT(parseWSJTXStatus()));
 
     //* Load settings from catrotator.ini
-    QSettings configFile(QString("catrotator.ini"), QSettings::IniFormat);
+    loadGuiConfig("catrotator.ini");    //load GUI config
+    loadRotConfig("catrotator.ini");    //load Rotators config
 
-    for (int i = 0; i < 3; i++)
-    {
-        rotCom[i].rotModel = configFile.value("Rotator"+QString::number(i+1)+"/rotModel", 0).toInt();
-        rotCom[i].rotPort = configFile.value("Rotator"+QString::number(i+1)+"/rotPort").toString();
-        rotCom[i].serialSpeed = configFile.value("Rotator"+QString::number(i+1)+"/serialSpeed", 9600).toInt();
-        rotCom[i].netRotctl = configFile.value("Rotator"+QString::number(i+1)+"/netRotctl", false).toBool();
-        if (rotCom[i].rotModel) rotSet[i].enable = true;
-        rotSet[i].nameLabel = configFile.value("Rotator"+QString::number(i+1)+"/nameLabel", "Rotator "+QString::number(i+1)).toString();
-        rotSet[i].azPark = configFile.value("Rotator"+QString::number(i+1)+"/azPark", 0).toInt();
-        rotSet[i].elPark = configFile.value("Rotator"+QString::number(i+1)+"/elPark", 0).toInt();
-        rotSet[i].azOffset = configFile.value("Rotator"+QString::number(i+1)+"/azOffset", 0).toInt();
-        rotSet[i].elOffset = configFile.value("Rotator"+QString::number(i+1)+"/elOffset", 0).toInt();
-        rotSet[i].overlap = configFile.value("Rotator"+QString::number(i+1)+"/overlap", false).toBool();
-        rotSet[i].trackTolerance = configFile.value("Rotator"+QString::number(i+1)+"/trackTolerance", 5.0).toDouble();
-        rotSet[i].trackThreshold = configFile.value("Rotator"+QString::number(i+1)+"/trackThreshold", 0.0).toDouble();
-        rotSet[i].trackPreviSat = configFile.value("Rotator"+QString::number(i+1)+"/trackPreviSat", false).toBool();
-        rotSet[i].trackWSJTX = configFile.value("Rotator"+QString::number(i+1)+"/trackWSJTX", 0).toInt();
-        rotSet[i].trackAirScout = configFile.value("Rotator"+QString::number(i+1)+"/trackAirScout", false).toBool();
-    }
-
-    rotCfg.rotRefresh = configFile.value("rotRefresh", 1).toInt();
-    rotCfg.incrementAz = configFile.value("rotIncrementAz", 10).toInt();
-    rotCfg.qthLocator = configFile.value("qthLocator", "").toString();
-    rotCfg.distance = configFile.value("distance", false).toBool();
-    rotCfg.udp = configFile.value("udp", false).toBool();
-    rotCfg.udpAddress = configFile.value("udpAddress", "127.0.0.1").toString();
-    rotCfg.udpPort = configFile.value("udpPort", 12000).toUInt();   //should be toUShort()
-    rotCfg.pathTrackWSJTXStatus = configFile.value("pathTrackWSJTXStatus", QDir::homePath() + "/AppData/Local/Temp/WSJT-X").toString();  //Rpi /tmp/WSJT-X
-    rotCfg.pathTrackWSJTX = configFile.value("pathTrackWSJTX", QDir::homePath() + "/AppData/Local/WSJT-X").toString();      //RPi /home/pi/.local/share/WSJT-X
-    rotCfg.pathTrackAirScout = configFile.value("pathTrackAirScout", QDir::homePath() + "/AppData/Local/DL2ALF/AirScout/Tmp").toString();
-    rotCfg.darkTheme = configFile.value("darkTheme", false).toBool();
-    rotCfg.autoConnect = configFile.value("autoConnect", false).toBool();
-    rotCfg.debugMode = configFile.value("debugMode", false).toBool();
+    //* Presets
+    presetInit("catrotator.ini");   //load Presets
 
     //* Debug
     if (rotCfg.debugMode) rig_set_debug_level(RIG_DEBUG_VERBOSE); //debug verbose
@@ -142,13 +112,6 @@ MainWindow::MainWindow(QWidget *parent)
     rig_set_debug_time_stamp(true);
     if ((debugFile=fopen("catrotator.log","w+")) == NULL) rig_set_debug_level(RIG_DEBUG_NONE);
     else rig_set_debug_file(debugFile);
-
-    //Presets
-    MainWindow::presetInit();
-
-    //Window settings
-    restoreGeometry(configFile.value("WindowSettings/geometry").toByteArray());
-    restoreState(configFile.value("WindowSettings/state").toByteArray());
 
     //* Style
     //Dark theme
@@ -272,7 +235,7 @@ void MainWindow::guiInit()
 
     if (rotSet[2].enable)
     {
-        ui->tabWidget_rotator->setTabText(2, rotSet[2].nameLabel);
+        //ui->tabWidget_rotator->setTabText(2, rotSet[2].nameLabel);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
         ui->tabWidget_rotator->setTabVisible(2, true);
 #endif
@@ -295,7 +258,7 @@ void MainWindow::guiInit()
 
     if (rotSet[1].enable)
     {
-        ui->tabWidget_rotator->setTabText(1, rotSet[1].nameLabel);
+        //ui->tabWidget_rotator->setTabText(1, rotSet[1].nameLabel);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
         ui->tabWidget_rotator->setTabVisible(1, true);
 #endif
@@ -316,7 +279,7 @@ void MainWindow::guiInit()
 #endif
     }
 
-    ui->tabWidget_rotator->setTabText(0, rotSet[0].nameLabel);
+    //ui->tabWidget_rotator->setTabText(0, rotSet[0].nameLabel);
     if (rotCom[0].connected)
     {
         ui->tabWidget_rotator->setTabEnabled(0, true);
@@ -325,6 +288,60 @@ void MainWindow::guiInit()
     }
     else ui->tabWidget_rotator->setTabEnabled(0, false);
 }
+
+
+void MainWindow::loadGuiConfig(QString configFileName)
+{
+    //Load settings
+    QSettings configFile(configFileName, QSettings::IniFormat);
+
+    rotCfg.rotRefresh = configFile.value("rotRefresh", 1).toInt();
+    rotCfg.incrementAz = configFile.value("rotIncrementAz", 10).toInt();
+    rotCfg.qthLocator = configFile.value("qthLocator", "").toString();
+    rotCfg.distance = configFile.value("distance", false).toBool();
+    rotCfg.udp = configFile.value("udp", false).toBool();
+    rotCfg.udpAddress = configFile.value("udpAddress", "127.0.0.1").toString();
+    rotCfg.udpPort = configFile.value("udpPort", 12000).toUInt();   //should be toUShort()
+    rotCfg.pathTrackWSJTXStatus = configFile.value("pathTrackWSJTXStatus", QDir::homePath() + "/AppData/Local/Temp/WSJT-X").toString();  //Rpi /tmp/WSJT-X
+    rotCfg.pathTrackWSJTX = configFile.value("pathTrackWSJTX", QDir::homePath() + "/AppData/Local/WSJT-X").toString();      //RPi /home/pi/.local/share/WSJT-X
+    rotCfg.pathTrackAirScout = configFile.value("pathTrackAirScout", QDir::homePath() + "/AppData/Local/DL2ALF/AirScout/Tmp").toString();
+    rotCfg.darkTheme = configFile.value("darkTheme", false).toBool();
+    rotCfg.autoConnect = configFile.value("autoConnect", false).toBool();
+    rotCfg.debugMode = configFile.value("debugMode", false).toBool();
+
+    //Window settings
+    restoreGeometry(configFile.value("WindowSettings/geometry").toByteArray());
+    restoreState(configFile.value("WindowSettings/state").toByteArray());
+}
+
+
+void MainWindow::loadRotConfig(QString configFileName)
+{
+    QSettings configFile(configFileName, QSettings::IniFormat);
+
+    for (int i = 0; i < 3; i++)
+    {
+        rotCom[i].rotModel = configFile.value("Rotator"+QString::number(i+1)+"/rotModel", 0).toInt();
+        rotCom[i].rotPort = configFile.value("Rotator"+QString::number(i+1)+"/rotPort").toString();
+        rotCom[i].serialSpeed = configFile.value("Rotator"+QString::number(i+1)+"/serialSpeed", 9600).toInt();
+        rotCom[i].netRotctl = configFile.value("Rotator"+QString::number(i+1)+"/netRotctl", false).toBool();
+        if (rotCom[i].rotModel) rotSet[i].enable = true;
+        rotSet[i].nameLabel = configFile.value("Rotator"+QString::number(i+1)+"/nameLabel", "Rotator "+QString::number(i+1)).toString();
+        rotSet[i].azPark = configFile.value("Rotator"+QString::number(i+1)+"/azPark", 0).toInt();
+        rotSet[i].elPark = configFile.value("Rotator"+QString::number(i+1)+"/elPark", 0).toInt();
+        rotSet[i].azOffset = configFile.value("Rotator"+QString::number(i+1)+"/azOffset", 0).toInt();
+        rotSet[i].elOffset = configFile.value("Rotator"+QString::number(i+1)+"/elOffset", 0).toInt();
+        rotSet[i].overlap = configFile.value("Rotator"+QString::number(i+1)+"/overlap", false).toBool();
+        rotSet[i].trackTolerance = configFile.value("Rotator"+QString::number(i+1)+"/trackTolerance", 5.0).toDouble();
+        rotSet[i].trackThreshold = configFile.value("Rotator"+QString::number(i+1)+"/trackThreshold", 0.0).toDouble();
+        rotSet[i].trackPreviSat = configFile.value("Rotator"+QString::number(i+1)+"/trackPreviSat", false).toBool();
+        rotSet[i].trackWSJTX = configFile.value("Rotator"+QString::number(i+1)+"/trackWSJTX", 0).toInt();
+        rotSet[i].trackAirScout = configFile.value("Rotator"+QString::number(i+1)+"/trackAirScout", false).toBool();
+
+        ui->tabWidget_rotator->setTabText(i, rotSet[i].nameLabel);
+    }
+}
+
 
 //* Update GUI
 void MainWindow::guiUpdate(int rotNumber)
@@ -578,9 +595,9 @@ void MainWindow::presetGo(int presetNumber)
     }
 }
 
-void MainWindow::presetInit()
+void MainWindow::presetInit(QString configFileName)
 {
-    QSettings configFile(QString("catrotator.ini"), QSettings::IniFormat);
+    QSettings configFile(configFileName, QSettings::IniFormat);
 
     configFile.beginReadArray("Preset");
     for (int i = 0; i < 9; i++)
@@ -1573,9 +1590,11 @@ void MainWindow::on_actionSetup_triggered()
 void MainWindow::on_actionPresets_triggered()
 {
     DialogPreset preset;
-    connect(&preset, &DialogPreset::configDone, this, &MainWindow::presetInit);
+    //connect(&preset, &DialogPreset::configDone, this, &MainWindow::presetInit);
     //preset.setModal(true);
     preset.exec();
+
+    presetInit("catrotator.ini");
 }
 
 //* Help
