@@ -101,6 +101,13 @@ MainWindow::MainWindow(QWidget *parent)
     loadGuiConfig("catrotator.ini");    //load GUI config
     loadRotConfig("catrotator.ini");    //load Rotators config
 
+    //Window settings
+    QSettings configFile(QString("catrotator.ini"), QSettings::IniFormat);
+    restoreGeometry(configFile.value("WindowSettings/geometry").toByteArray());
+    restoreState(configFile.value("WindowSettings/state").toByteArray());
+
+    guiInit();
+
     //* Presets
     presetInit("catrotator.ini");   //load Presets
 
@@ -235,7 +242,7 @@ void MainWindow::guiInit()
 
     if (rotSet[2].enable)
     {
-        //ui->tabWidget_rotator->setTabText(2, rotSet[2].nameLabel);
+        ui->tabWidget_rotator->setTabText(2, rotSet[2].nameLabel);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
         ui->tabWidget_rotator->setTabVisible(2, true);
 #endif
@@ -258,7 +265,7 @@ void MainWindow::guiInit()
 
     if (rotSet[1].enable)
     {
-        //ui->tabWidget_rotator->setTabText(1, rotSet[1].nameLabel);
+        ui->tabWidget_rotator->setTabText(1, rotSet[1].nameLabel);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
         ui->tabWidget_rotator->setTabVisible(1, true);
 #endif
@@ -279,7 +286,7 @@ void MainWindow::guiInit()
 #endif
     }
 
-    //ui->tabWidget_rotator->setTabText(0, rotSet[0].nameLabel);
+    ui->tabWidget_rotator->setTabText(0, rotSet[0].nameLabel);
     if (rotCom[0].connected)
     {
         ui->tabWidget_rotator->setTabEnabled(0, true);
@@ -310,8 +317,8 @@ void MainWindow::loadGuiConfig(QString configFileName)
     rotCfg.debugMode = configFile.value("debugMode", false).toBool();
 
     //Window settings
-    restoreGeometry(configFile.value("WindowSettings/geometry").toByteArray());
-    restoreState(configFile.value("WindowSettings/state").toByteArray());
+    //restoreGeometry(configFile.value("WindowSettings/geometry").toByteArray());
+    //restoreState(configFile.value("WindowSettings/state").toByteArray());
 }
 
 
@@ -338,7 +345,7 @@ void MainWindow::loadRotConfig(QString configFileName)
         rotSet[i].trackWSJTX = configFile.value("Rotator"+QString::number(i+1)+"/trackWSJTX", 0).toInt();
         rotSet[i].trackAirScout = configFile.value("Rotator"+QString::number(i+1)+"/trackAirScout", false).toBool();
 
-        ui->tabWidget_rotator->setTabText(i, rotSet[i].nameLabel);
+        //ui->tabWidget_rotator->setTabText(i, rotSet[i].nameLabel);
     }
 }
 
@@ -1079,6 +1086,8 @@ void MainWindow::on_pushButton_connect_toggled(bool checked)
            if (rotCom[0].connected) connectMsg = connectMsg + " " + rotSet[0].nameLabel;
            if (rotCom[1].connected) connectMsg = connectMsg + " " + rotSet[1].nameLabel;
            if (rotCom[2].connected) connectMsg = connectMsg + " " + rotSet[2].nameLabel;
+
+           ui->actionRotator->setEnabled(false);
        }
     }
     else   //Button unchecked
@@ -1103,6 +1112,8 @@ void MainWindow::on_pushButton_connect_toggled(bool checked)
             rotCom[2].connected = 0;
         }
         connectMsg = "Disconnected";
+
+        ui->actionRotator->setEnabled(true);
     }
 
     ui->statusbar->showMessage(connectMsg);
@@ -1576,6 +1587,8 @@ void MainWindow::on_actionRotator_triggered()
     DialogRotator config;
     //config.setModal(true);
     config.exec();
+
+    guiInit();
 }
 
 //Setup
